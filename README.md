@@ -5,9 +5,9 @@ AutoTest & DocGen Manager
 "Intelligent System for Automated Testing and Documentation"
 
 3)Team members:
-Ola Najebah
-Areej NorAldeen
-Kamar Aldiab
+Ola Najebah-
+Areej NorAldee-
+Kamar Aldiab-
 Wiaam Alouni
 
 4)Description of project:
