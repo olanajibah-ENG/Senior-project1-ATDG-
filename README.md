@@ -6,7 +6,7 @@ AutoTest & DocGen Manager
 
 3)Team members:
 Ola Najebah-
-Areej NorAldee-
+Areej NorAldeen-
 Kamar Aldiab-
 Wiaam Alouni
 
