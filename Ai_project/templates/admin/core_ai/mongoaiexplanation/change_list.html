@@ -1,0 +1,254 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static admin_list %}
+
+{% block content_title %}
+    <h1>{{ title }}</h1>
+    <div style="margin-top: 10px;">
+        <button type="button" onclick="showAddForm()" class="button" style="background: #417690; color: white;">
+            ➕ Add New AI Explanation
+        </button>
+    </div>
+{% endblock %}
+
+{% block result_list %}
+    {% if mongodb_error %}
+        <div class="messagelist">
+            <div class="error">{{ mongodb_error }}</div>
+        </div>
+    {% elif has_mongodb_data %}
+        <form id="changelist-form" method="post">
+            {% csrf_token %}
+            <div class="results">
+                <table id="result_list">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <input type="checkbox" id="action-toggle">
+                            </th>
+                            <th scope="col">Analysis ID</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Created At</th>
+                            <th scope="col">Content Preview</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for explanation in mongodb_data %}
+                            <tr class="{% cycle 'row1' 'row2' %}">
+                                <td>
+                                    <input type="checkbox" name="_selected_action" value="{{ explanation.id }}" class="action-select">
+                                </td>
+                                <td>
+                                    {% if explanation.analysis_id %}
+                                        {{ explanation.analysis_id|slice:":8" }}...
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td>{{ explanation.explanation_type|default:"N/A" }}</td>
+                                <td>
+                                    {% if explanation.created_at %}
+                                        {{ explanation.created_at }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if explanation.content %}
+                                        {{ explanation.content|truncatechars:100 }}
+                                    {% else %}
+                                        No content
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="#" onclick="viewContent('{{ explanation.id }}', '{{ explanation.content|escapejs }}')" 
+                                       style="color: #417690; text-decoration: none; margin-right: 10px;">
+                                        👁️ View
+                                    </a>
+                                    <a href="#" onclick="deleteItem('{{ explanation.id }}')" 
+                                       style="color: #dc3545; text-decoration: none;">
+                                        🗑️ Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="6">No explanations found in MongoDB.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Actions dropdown -->
+            <div class="actions">
+                <label>Action: 
+                    <select name="action" required>
+                        <option value="" selected>---------</option>
+                        <option value="delete_selected">Delete selected AI explanations</option>
+                    </select>
+                </label>
+                <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
+            </div>
+        </form>
+
+        <!-- Add Form Modal -->
+        <div id="addModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+            <div style="background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; width: 60%; max-height: 80%; overflow-y: auto;">
+                <span onclick="closeAddModal()" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+                <h2>Add New AI Explanation</h2>
+                <form method="post" id="addForm">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="add_new_item">
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label for="analysis_id" style="display: block; margin-bottom: 5px; font-weight: bold;">Analysis ID:</label>
+                        <input type="text" id="analysis_id" name="analysis_id" required 
+                               style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label for="explanation_type" style="display: block; margin-bottom: 5px; font-weight: bold;">Explanation Type:</label>
+                        <select id="explanation_type" name="explanation_type" 
+                                style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                            <option value="high_level">High Level</option>
+                            <option value="low_level">Low Level</option>
+                            <option value="technical_report">Technical Report</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label for="content" style="display: block; margin-bottom: 5px; font-weight: bold;">Content:</label>
+                        <textarea id="content" name="content" required rows="10"
+                                  style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; resize: vertical;"></textarea>
+                    </div>
+                    
+                    <div style="text-align: right;">
+                        <button type="button" onclick="closeAddModal()" 
+                                style="background: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 4px; margin-right: 10px; cursor: pointer;">
+                            Cancel
+                        </button>
+                        <button type="submit" 
+                                style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                            Add Explanation
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- View Content Modal -->
+        <div id="viewModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+            <div style="background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; width: 70%; max-height: 80%; overflow-y: auto;">
+                <span onclick="closeViewModal()" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+                <h2 id="viewTitle">AI Explanation Content</h2>
+                <pre id="viewContent" style="white-space: pre-wrap; background: #f5f5f5; padding: 15px; border-radius: 5px; max-height: 400px; overflow-y: auto;"></pre>
+            </div>
+        </div>
+    {% else %}
+        <div class="messagelist">
+            <div class="info">No MongoDB data available.</div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block pagination %}
+    {% if has_mongodb_data and mongodb_data|length > 0 %}
+        <p class="paginator">
+            {{ mongodb_data|length }} explanation{{ mongodb_data|length|pluralize }} (showing first 50)
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block search %}
+    <!-- تعطيل البحث للبساطة -->
+{% endblock %}
+
+{% block date_hierarchy %}
+    <!-- تعطيل التسلسل الهرمي للتاريخ -->
+{% endblock %}
+
+{% block filters %}
+    <!-- تعطيل الفلاتر -->
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle all checkboxes
+        const toggleAll = document.getElementById('action-toggle');
+        const checkboxes = document.querySelectorAll('.action-select');
+        
+        if (toggleAll) {
+            toggleAll.addEventListener('change', function() {
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+            });
+        }
+    });
+
+    function showAddForm() {
+        document.getElementById('addModal').style.display = 'block';
+    }
+
+    function closeAddModal() {
+        document.getElementById('addModal').style.display = 'none';
+        document.getElementById('addForm').reset();
+    }
+
+    function viewContent(id, content) {
+        document.getElementById('viewTitle').textContent = 'AI Explanation Content (ID: ' + id.substring(0, 8) + '...)';
+        document.getElementById('viewContent').textContent = content || 'No content available';
+        document.getElementById('viewModal').style.display = 'block';
+    }
+
+    function closeViewModal() {
+        document.getElementById('viewModal').style.display = 'none';
+    }
+
+    function deleteItem(id) {
+        if (confirm('Are you sure you want to delete this AI explanation?')) {
+            // Create a form to submit the delete action
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = window.location.href;
+            
+            const actionInput = document.createElement('input');
+            actionInput.type = 'hidden';
+            actionInput.name = 'action';
+            actionInput.value = 'delete_selected';
+            
+            const idInput = document.createElement('input');
+            idInput.type = 'hidden';
+            idInput.name = '_selected_action';
+            idInput.value = id;
+            
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrfmiddlewaretoken';
+            csrfInput.value = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            
+            form.appendChild(actionInput);
+            form.appendChild(idInput);
+            form.appendChild(csrfInput);
+            
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
+
+    // Close modals when clicking outside
+    window.onclick = function(event) {
+        const addModal = document.getElementById('addModal');
+        const viewModal = document.getElementById('viewModal');
+        if (event.target == addModal) {
+            addModal.style.display = 'none';
+        }
+        if (event.target == viewModal) {
+            viewModal.style.display = 'none';
+        }
+    }
+    </script>
+{% endblock %}
