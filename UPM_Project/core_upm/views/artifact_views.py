@@ -59,7 +59,7 @@ class ArtifactRetrieveUpdateDestroyAPIView(APIView):
         try:
             # Get code information before deletion for notification
             artifact = self.artifact_service.get_artifact_by_id_if_authorized(code_id, request.user)
-            code_name = artifact.code_name or f"Code {artifact.code_id}"
+            code_name = artifact.file_name or f"Code {artifact.code_id}"
 
             # Service layer handles deletion and ownership verification (added in service layer)
             self.artifact_service.delete_artifact(code_id, request.user)
@@ -150,7 +150,7 @@ class ArtifactListCreateAPIView(APIView):
                     NotificationClient.send_code_notification(
                         user_email=request.user.email,
                         action='added',
-                        code_name=artifact.code_name or f"Code {artifact.code_id}",
+                        code_name=artifact.file_name or f"Code {artifact.code_id}",
                         project_name="",  # We may need to get the project name
                         code_id=str(artifact.code_id),
                         user_name=request.user.username

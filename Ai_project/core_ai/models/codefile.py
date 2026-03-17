@@ -2,10 +2,12 @@ from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel, Field
 from bson import ObjectId
+
 try:
     from pydantic.json import ENCODERS_BY_TYPE
 except ImportError:
     from pydantic.v1.json import ENCODERS_BY_TYPE
+
 
 class PyObjectId(ObjectId):
     @classmethod
@@ -13,34 +15,51 @@ class PyObjectId(ObjectId):
         yield cls.validate
 
     @classmethod
-    def validate(cls, value,values,config,field): # عودة إلى توقيع أبسط، حيث أن info لم تعد ضرورية هنا
+    def validate(cls, value, *args, **kwargs):
         if not ObjectId.is_valid(value):
             raise ValueError("Invalid ObjectId")
         return ObjectId(value)
-        
+
     @classmethod
     def modify_schema(cls, field_schema):
         field_schema.update(type="string")
 
-ENCODERS_BY_TYPE[PyObjectId]=str
+
+ENCODERS_BY_TYPE[PyObjectId] = str
+
 
 class CodeFile(BaseModel):
-    id: Optional[PyObjectId] = Field(default=None,alias="_id")
+    id: Optional[PyObjectId] = Field(default=None, alias="_id")
+
+    # ── معلومات الملف الأساسية ─────────────────────────────────────────────
     filename: str
-    file_type: str  # e.g., 'python', 'java', 'javascript'
-    content: str
-    file_hash: Optional[str] = None  # MD5 hash للتحقق من التكرار
+    file_type: str                          # 'python', 'java', 'javascript'...
+    file_hash: Optional[str] = None         # MD5 hash للتحقق من التكرار
+
+    # ── التخزين — GridFS ───────────────────────────────────────────────────
+    # المحتوى يُخزَّن في GridFS، هنا بس نحفظ الـ reference
+    gridfs_id: Optional[str] = None         # ObjectId الملف في GridFS
+    file_size: Optional[int] = None         # حجم الملف بالـ bytes
+
+    # ── الإصدارات — Delta + Content Addressing ────────────────────────────
+    version_number: int = 1                 # رقم الإصدار
+    parent_codefile_id: Optional[PyObjectId] = None  # يشير للإصدار السابق
+    is_delta: bool = False                  # لو True: gridfs_id يحتوي diff مش محتوى كامل
+
+    # ── ربط بالمشروع ──────────────────────────────────────────────────────
+    source_project_id: Optional[str] = None  # UUID للمشروع
+    project_version: Optional[int] = None    # رقم إصدار المشروع اللي ينتمي له
+
+    # ── الحالة ────────────────────────────────────────────────────────────
     uploaded_at: datetime = Field(default_factory=datetime.utcnow)
-    source_project_id: Optional[str] = None  # لربطها بمشروع UPM
-    analysis_status: str = "PENDING"  # PENDING, IN_PROGRESS, COMPLETED, FAILED
-    # 👇 الحقول الجديدة لدعم الإشعارات
-    user_email: Optional[str] = None  # البريد الإلكتروني للمستخدم
-    user_name: Optional[str] = None   # اسم المستخدم
-    project_name: Optional[str] = None  # اسم المشروع (إذا كان متوفراً)
+    analysis_status: str = "PENDING"        # PENDING, IN_PROGRESS, COMPLETED, FAILED
+
+    # ── معلومات المستخدم ──────────────────────────────────────────────────
+    user_email: Optional[str] = None
+    user_name: Optional[str] = None
+    project_name: Optional[str] = None
 
     class Config:
-        allow_population_by_field_name = True # تم تغيير هذا
-        validate_by_name = True # استخدم هذا بدلاً منه
+        validate_by_name = True
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
-
