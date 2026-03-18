@@ -31,6 +31,6 @@ urlpatterns = [
     path('projects/<uuid:project_id>/folders/', FolderListCreateAPIView.as_view(), name='folder-list-create'),
     path('folders/<uuid:folder_id>/', FolderRetrieveUpdateDestroyAPIView.as_view(), name='folder-detail'),
 
-    # Folder Upload — يستقبل الملفات ويرسلها لـ AI service
+    # Folder Upload — مرتبط بالمشروع تلقائياً من الـ URL
     path('projects/<uuid:project_id>/folder-upload/', FolderUploadProxyView.as_view(), name='folder-upload'),
 ]
