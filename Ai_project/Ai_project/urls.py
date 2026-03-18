@@ -13,7 +13,6 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from core_ai.views.folder_upload import FolderUploadView
 
 print("MAIN URLS.PY LOADED!")
 
@@ -29,14 +28,11 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
-# ── Utility views (مسؤولية المشروع الرئيسي) ──────────────────────────────────
-
+# ── Utility views ──────────────────────────────────────────────────────────────
 def health_check(request):
-    """Health check endpoint for Docker healthcheck"""
     return HttpResponse("OK", status=200)
 
 def api_root(request):
-    """API root endpoint"""
     if request.method == 'GET':
         user_email = request.GET.get('user_email', '')
         return JsonResponse({
@@ -56,21 +52,14 @@ def api_root(request):
 
 # ── URL patterns ──────────────────────────────────────────────────────────────
 urlpatterns = [
-    # Admin
     path('admin/', admin.site.urls),
-
-    # ✅ كل مسارات core_ai مفوّضة لملفها الخاص
     path('', include('core_ai.urls')),
-
-    # Utility endpoints (مسؤولية المشروع الرئيسي)
     path('', api_root, name='api-root'),
     path('health/', health_check, name='health_check'),
     path('test/', lambda request: HttpResponse("TEST ENDPOINT WORKS!"), name='test'),
-
-    # Swagger / ReDoc
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/',   schema_view.with_ui('redoc',   cache_timeout=0), name='schema-redoc'),
-    path('folder-upload/', FolderUploadView.as_view(), name='folder-upload'),
+    # تم نقل folder-upload إلى UPM project
 ]
 
 if settings.DEBUG:
