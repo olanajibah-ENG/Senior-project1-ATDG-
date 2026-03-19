@@ -49,11 +49,5 @@ else
     echo "Starting Django Web Server..."
     # Set Django settings module explicitly for Ai_project
     export DJANGO_SETTINGS_MODULE=Ai_project.settings
-exec gunicorn Ai_project.wsgi:application \
-    --bind 0.0.0.0:8000 \
-    --timeout 300 \
-    --keep-alive 75 \
-    --workers 2 \
-    --max-requests 100 \
-    --max-requests-jitter 10
-    fi
+    exec gunicorn Ai_project.wsgi:application --bind 0.0.0.0:8000 --timeout 120 --keep-alive 75
+fi
