@@ -19,6 +19,20 @@ class Repository(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created At")
 
+    # حقول GitHub
+    repo_url = models.URLField(
+        max_length=500, blank=True, null=True,
+        verbose_name="GitHub Repo URL"
+    )
+    branch = models.CharField(
+        max_length=255, blank=True, null=True,
+        default='main', verbose_name="Branch"
+    )
+    last_commit_sha = models.CharField(
+        max_length=40, blank=True, null=True,
+        verbose_name="Last Commit SHA"
+    )
+
     def __str__(self):
         return f"{self.repo_name} ({self.project.project_name})"
 

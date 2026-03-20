@@ -39,4 +39,4 @@ python manage.py migrate --noinput
 # python manage.py collectstatic --noinput
 
 # Execute the main command
-exec gunicorn UPM_Project.wsgi:application --bind 0.0.0.0:8000
+exec gunicorn UPM_Project.wsgi:application --bind 0.0.0.0:8000 --timeout 120 --workers 2

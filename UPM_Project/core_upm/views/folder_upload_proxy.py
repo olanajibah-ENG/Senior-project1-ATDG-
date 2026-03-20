@@ -87,6 +87,7 @@ class FolderUploadProxyView(APIView):
                     'user_email': request.user.email,
                 },
                 files=files_to_forward,
+                headers={'Host': 'localhost'},
                 timeout=300
             )
             ai_response.raise_for_status()

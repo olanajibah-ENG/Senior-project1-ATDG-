@@ -14,7 +14,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-print("MAIN URLS.PY LOADED!")
+from core_ai.views.folder_upload import FolderUploadView
 
 # ── Swagger schema ────────────────────────────────────────────────────────────
 schema_view = get_schema_view(
@@ -59,7 +59,7 @@ urlpatterns = [
     path('test/', lambda request: HttpResponse("TEST ENDPOINT WORKS!"), name='test'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/',   schema_view.with_ui('redoc',   cache_timeout=0), name='schema-redoc'),
-    # تم نقل folder-upload إلى UPM project
+    path('folder-upload/', FolderUploadView.as_view(), name='folder-upload'),
 ]
 
 if settings.DEBUG:
