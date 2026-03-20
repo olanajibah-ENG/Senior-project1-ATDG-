@@ -8,8 +8,19 @@ from core_ai.ai_engine.orchestrator import DocumentationOrchestrator
 from core_ai.models.ai_task import AITask
 from core_ai.repository.ai_task import AITaskRepository
 from core_ai.notification_utils import NotificationClient
+from threading import Thread
 
 logger = logging.getLogger(__name__)
+
+def _trigger_evaluation_background(explanation_id: str):
+    """Run evaluation in background thread after explanation is saved"""
+    try:
+        from core_ai.services.evaluation_service import ExplanationEvaluator
+        evaluator = ExplanationEvaluator()
+        evaluator.evaluate_explanation(explanation_id)
+    except Exception as e:
+        # Never raise — evaluation failure must not affect the main task
+        print(f"[AUTO-EVAL] Failed for explanation {explanation_id}: {str(e)}")
 
 def normalize_explanation_type(exp_type):
     """توحيد نوع الشرح إلى القيم القياسية"""
@@ -49,6 +60,10 @@ def generate_ai_explanation_task(self, analysis_id, exp_type, user_email=None):
         }
 
         task_record.update_status('completed', result=result)
+
+        # Auto-trigger evaluation in background
+        from core_ai.services.auto_trigger import trigger_evaluation_background
+        trigger_evaluation_background(str(explanation_id))
 
         if user_email:
             NotificationClient.send_custom_notification(

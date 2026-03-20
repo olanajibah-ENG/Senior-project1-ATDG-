@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-# Wait for database to be ready
 echo "Waiting for database..."
 python << 'END'
 import sys
@@ -9,7 +8,7 @@ import time
 import os
 import django
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'UPM_Project.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "UPM_Project.settings")
 django.setup()
 
 from django.db import connection
@@ -26,17 +25,28 @@ while attempt < max_attempts:
     except OperationalError:
         attempt += 1
         print(f"Database is unavailable - waiting... ({attempt}/{max_attempts})")
+        import time
         time.sleep(2)
 
 print("Database connection failed after maximum attempts")
 sys.exit(1)
 END
 
+echo "Making migrations..."
+python manage.py makemigrations core_upm --no-input
+
 echo "Running migrations..."
-python manage.py migrate --noinput
+python manage.py migrate
 
-# Collect static files (if needed)
-# python manage.py collectstatic --noinput
+echo "Setting up roles..."
+python manage.py setup_roles
 
-# Execute the main command
+echo "Creating admin account (if not exists)..."
+if [ -z "${ADMIN_PASSWORD}" ]; then
+    echo "ERROR: ADMIN_PASSWORD is not set in environment."
+    exit 1
+fi
+
+python manage.py create_admin --username "${ADMIN_USERNAME:-admin}" --email "${ADMIN_EMAIL:-admin@upm.edu}" --password "${ADMIN_PASSWORD}" --fullname "${ADMIN_FULLNAME:-System Admin}" || echo "Admin already exists - skipped."
+
 exec gunicorn UPM_Project.wsgi:application --bind 0.0.0.0:8000

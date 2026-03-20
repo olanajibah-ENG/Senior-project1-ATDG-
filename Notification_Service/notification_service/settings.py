@@ -52,7 +52,7 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 
 # For development and Docker environment, allow all hosts
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'notification_django', 'notification_django:8000', 'localhost', '127.0.0.1', '172.18.0.6', '172.18.0.6:8000']
 
 # Disable host validation for Docker internal networking
 USE_X_FORWARDED_HOST = False
