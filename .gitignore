@@ -166,3 +166,5 @@ dump.rdb
 # MongoDB
 *.lock
 mongod.lock
+Ai_project/gunicorn.ctl
+UPM_Project/gunicorn.ctl

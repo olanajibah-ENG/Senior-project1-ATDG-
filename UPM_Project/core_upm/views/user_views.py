@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.core.exceptions import ValidationError, PermissionDenied
-from rest_framework_simplejwt.tokens import RefreshToken # لاستخدام نظام التوكن
+from core_upm.tokens import RoleAwareRefreshToken
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 logger = logging.getLogger(__name__)
@@ -94,12 +94,14 @@ class UserLoginAPIView(APIView):
             user = self.user_service.authenticate_user(username, password)
 
             # إنشاء JWT Tokens (إذا كنت تستخدم Django REST Framework Simple JWT)
-            refresh = RefreshToken.for_user(user)
+            refresh = RoleAwareRefreshToken.for_user(user)
 
             logger.info(f"Login successful for user: {username}")
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
+                'role_type': refresh.payload.get('role_type', 'DEVELOPER'),
+                'full_name': refresh.payload.get('full_name', ''),
                 'user': UserSerializer(user).data
             }, status=status.HTTP_200_OK)
 

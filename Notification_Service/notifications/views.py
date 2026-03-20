@@ -222,6 +222,55 @@ def create_system_alert(request):
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def create_reviewer_alert(request):
+    try:
+        data = request.data
+        admin_email = data.get('admin_email')
+        reviewer_name = data.get('reviewer_name')
+        title = data.get('title')
+        message = data.get('message')
+        related_id = data.get('related_id')
+        related_type = data.get('related_type')
+
+        if not all([admin_email, reviewer_name, title, message]):
+            return Response({'error': 'Missing required fields'}, status=status.HTTP_400_BAD_REQUEST)
+
+        notification = Notification.objects.create(
+            user_email=admin_email,
+            user_name='Admin',
+            notification_type='REVIEWER_ALERT',
+            title=title,
+            message=message,
+            related_id=related_id,
+            related_type=related_type,
+            status='PROCESSING'
+        )
+
+        notification_obj = notification_service.SimpleNotification(
+            user_email=admin_email,
+            notification_type='REVIEWER_ALERT',
+            title=title,
+            message=message,
+            user_name='Admin',
+            related_id=related_id,
+            related_type=related_type
+        )
+
+        if notification_obj.send_email():
+            notification.status = 'SENT'
+            notification.save()
+            return Response({'status': 'sent'}, status=status.HTTP_200_OK)
+        else:
+            notification.status = 'FAILED'
+            notification.save()
+            return Response({'status': 'failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_notification_task_status(request):
