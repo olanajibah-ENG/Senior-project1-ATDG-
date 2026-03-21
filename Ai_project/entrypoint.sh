@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-# Wait for MongoDB to be ready (less strict than SQL, but good practice)
 echo "Waiting for MongoDB..."
 /usr/local/bin/python << END
 import sys
@@ -18,7 +17,7 @@ attempt = 0
 while attempt < max_attempts:
     try:
         client = MongoClient(host=mongo_host, port=mongo_port, serverSelectionTimeoutMS=5000)
-        client.admin.command('ping') # Test connection
+        client.admin.command('ping')
         print("MongoDB is ready!")
         sys.exit(0)
     except ConnectionFailure:
@@ -34,26 +33,22 @@ sys.exit(1)
 END
 
 echo "Running Django checks and migrations..."
-# Djongo لا يحتاج migrations بالمعنى التقليدي، لكن Django يتتبع النماذج
-python manage.py makemigrations core_ai --noinput || true # لا يجب أن يفشل إذا لم يكن هناك تغيير
-python manage.py migrate --noinput
+python manage.py makemigrations core_ai || true
+python manage.py migrate
 echo "Collecting static files..."
-python manage.py collectstatic --noinput
+python manage.py collectstatic --no-input
 
-# Execute the main command (e.g., runserver or celery worker)
-# Check if this is a celery worker container
 if [[ "$*" == *"celery"* ]]; then
     echo "Starting Celery Worker..."
     exec "$@"
 else
     echo "Starting Django Web Server..."
-    # Set Django settings module explicitly for Ai_project
     export DJANGO_SETTINGS_MODULE=Ai_project.settings
-exec gunicorn Ai_project.wsgi:application \
-    --bind 0.0.0.0:8000 \
-    --timeout 300 \
-    --keep-alive 75 \
-    --workers 2 \
-    --max-requests 100 \
-    --max-requests-jitter 10
-    fi
+    exec gunicorn Ai_project.wsgi:application \
+        --bind 0.0.0.0:8000 \
+        --timeout 300 \
+        --keep-alive 75 \
+        --workers 2 \
+        --max-requests 100 \
+        --max-requests-jitter 10
+fi
