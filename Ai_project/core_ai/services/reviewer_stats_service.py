@@ -197,56 +197,8 @@ class ReviewerStatsService:
             logger.error(f"Error calculating avg_duration_by_lang: {str(e)}")
             return None
 
-    @cached("stats_agent_breakdown", timeout=60)
-    def get_agent_breakdown(self) -> Optional[Dict[str, Any]]:
-        try:
-            collection = self._get_collection(settings.AI_TASKS_COLLECTION)
-            if collection is None:
-                logger.error("Failed to get ai_tasks collection")
-                return None
-
-            pipeline = [
-                {
-                    "$group": {
-                        "_id": "$exp_type",
-                        "count": {"$sum": 1},
-                        "completed": {
-                            "$sum": {
-                                "$cond": [{"$eq": ["$status", "completed"]}, 1, 0]
-                            }
-                        },
-                        "failed": {
-                            "$sum": {
-                                "$cond": [{"$eq": ["$status", "failed"]}, 1, 0]
-                            }
-                        }
-                    }
-                },
-                {
-                    "$sort": {"_id": 1}
-                }
-            ]
-
-            result = list(collection.aggregate(pipeline))
-            agents = {}
-            for item in result:
-                agent_type = item.get("_id") or "unknown"
-                total = item.get("count", 0)
-                failed = item.get("failed", 0)
-                error_rate = (failed / total * 100) if total > 0 else 0
-                agents[agent_type] = {
-                    "total_tasks": total,
-                    "completed": item.get("completed", 0),
-                    "failed": failed,
-                    "error_rate_percent": round(error_rate, 2)
-                }
-            return {"agent_breakdown": agents}
-        except Exception as e:
-            logger.error(f"Error calculating agent_breakdown: {str(e)}")
-            return None
-
-    @cached("stats_explanation_quality", timeout=60)
-    def get_explanation_quality(self) -> Optional[Dict[str, Any]]:
+    @cached("stats_verifier_stats", timeout=60)
+    def get_verifier_stats(self) -> Optional[Dict[str, Any]]:
         try:
             collection = self._get_collection(settings.AI_EXPLANATIONS_COLLECTION)
             if collection is None:
@@ -256,39 +208,49 @@ class ReviewerStatsService:
             pipeline = [
                 {
                     "$group": {
-                        "_id": "$explanation_type",
-                        "count": {"$sum": 1},
-                        "avg_content_length": {
-                            "$avg": {"$strLenCP": "$content"}
+                        "_id": "$exp_type",
+                        "total": {"$sum": 1},
+                        "verifier_fallbacks": {
+                            "$sum": {"$cond": ["$verifier_fallback", 1, 0]}
                         },
-                        "max_content_length": {
-                            "$max": {"$strLenCP": "$content"}
-                        },
-                        "min_content_length": {
-                            "$min": {"$strLenCP": "$content"}
+                        "verifier_success": {
+                            "$sum": {"$cond": [{"$eq": ["$verifier_fallback", False]}, 1, 0]}
                         }
                     }
                 },
-                {
-                    "$sort": {"_id": 1}
-                }
+                {"$sort": {"_id": 1}}
             ]
 
             result = list(collection.aggregate(pipeline))
-            explanations = {}
+            breakdown = {}
+            total_all = 0
+            fallbacks_all = 0
             for item in result:
                 exp_type = item.get("_id") or "unknown"
-                explanations[exp_type] = {
-                    "count": item.get("count", 0),
-                    "avg_content_length": round(item.get("avg_content_length", 0), 2),
-                    "max_content_length": item.get("max_content_length", 0),
-                    "min_content_length": item.get("min_content_length", 0)
+                total = item.get("total", 0)
+                fallbacks = item.get("verifier_fallbacks", 0)
+                total_all += total
+                fallbacks_all += fallbacks
+                breakdown[exp_type] = {
+                    "total": total,
+                    "verifier_success": item.get("verifier_success", 0),
+                    "verifier_fallbacks": fallbacks,
+                    "fallback_rate_percent": round(fallbacks / total * 100, 2) if total > 0 else 0
                 }
-            return {"explanation_breakdown": explanations}
+
+            return {
+                "by_type": breakdown,
+                "overall": {
+                    "total_explanations": total_all,
+                    "verifier_fallbacks": fallbacks_all,
+                    "fallback_rate_percent": round(fallbacks_all / total_all * 100, 2) if total_all > 0 else 0
+                }
+            }
         except Exception as e:
-            logger.error(f"Error calculating explanation_quality: {str(e)}")
+            logger.error(f"Error calculating verifier_stats: {str(e)}")
             return None
 
+    
     @cached("stats_error_classification", timeout=60)
     def get_error_classification(self) -> Optional[Dict[str, Any]]:
         try:
@@ -306,44 +268,29 @@ class ReviewerStatsService:
                 },
                 {
                     "$group": {
-                        "_id": None,
-                        "total_failed": {"$sum": 1}
+                        "_id": {
+                            "$switch": {
+                                "branches": [
+                                    {"case": {"$regexMatch": {"input": "$error_message", "regex": "syntax", "options": "i"}}, "then": "SyntaxError"},
+                                    {"case": {"$regexMatch": {"input": "$error_message", "regex": "timeout", "options": "i"}}, "then": "TimeoutError"},
+                                    {"case": {"$regexMatch": {"input": "$error_message", "regex": "memory", "options": "i"}}, "then": "MemoryError"},
+                                    {"case": {"$regexMatch": {"input": "$error_message", "regex": "model|ai", "options": "i"}}, "then": "AIModelError"},
+                                ],
+                                "default": "Unknown"
+                            }
+                        },
+                        "count": {"$sum": 1}
                     }
                 }
             ]
 
             result = list(collection.aggregate(pipeline))
-            total_failed = result[0].get("total_failed", 0) if result else 0
-
-            failed_jobs = list(collection.find(
-                {"status": "FAILED", "error_message": {"$exists": True}},
-                {"error_message": 1}
-            ).limit(10000))
-
-            error_patterns = {
-                "SyntaxError": 0,
-                "TimeoutError": 0,
-                "MemoryError": 0,
-                "AIModelError": 0,
-                "Unknown": 0
-            }
-
-            for job in failed_jobs:
-                error_msg = job.get("error_message", "")
-                if "SyntaxError" in error_msg or "syntax" in error_msg.lower():
-                    error_patterns["SyntaxError"] += 1
-                elif "TimeoutError" in error_msg or "timeout" in error_msg.lower():
-                    error_patterns["TimeoutError"] += 1
-                elif "MemoryError" in error_msg or "memory" in error_msg.lower():
-                    error_patterns["MemoryError"] += 1
-                elif "AIModelError" in error_msg or "model" in error_msg.lower():
-                    error_patterns["AIModelError"] += 1
-                else:
-                    error_patterns["Unknown"] += 1
+            error_classification = {item["_id"]: item["count"] for item in result}
+            total_failed = sum(error_classification.values())
 
             return {
                 "total_failed": total_failed,
-                "error_classification": error_patterns
+                "error_classification": error_classification
             }
         except Exception as e:
             logger.error(f"Error calculating error_classification: {str(e)}")
@@ -455,34 +402,26 @@ class ReviewerStatsService:
             logger.error(f"Error calculating generated_files_stats: {str(e)}")
             return None
 
-    @cached("stats_celery_health", timeout=30)
+    @cached("stats_celery_health", timeout=60)
     def get_celery_health(self) -> Optional[Dict[str, Any]]:
         try:
-            inspector = current_app.control.inspect()
+            inspector = current_app.control.inspect(timeout=2.0)
             if inspector is None:
                 logger.error("Failed to get Celery inspector")
                 return None
 
-            active_tasks = inspector.active()
-            reserved_tasks = inspector.reserved()
+            active_tasks = inspector.active() or {}
+            reserved_tasks = inspector.reserved() or {}
 
-            active_count = 0
-            if active_tasks:
-                active_count = sum(len(tasks) for tasks in active_tasks.values())
-
-            reserved_count = 0
-            if reserved_tasks:
-                reserved_count = sum(len(tasks) for tasks in reserved_tasks.values())
+            active_count = sum(len(tasks) for tasks in active_tasks.values())
+            reserved_count = sum(len(tasks) for tasks in reserved_tasks.values())
 
             collection = self._get_collection(settings.AI_TASKS_COLLECTION)
             if collection is None:
                 retry_count = 0
             else:
                 try:
-                    retry_count = collection.count_documents({
-                        "status": "failed",
-                        "retried": True
-                    })
+                    retry_count = collection.count_documents({"status": "failed", "retried": True})
                 except Exception as e:
                     logger.warning(f"Failed to count retried tasks: {str(e)}")
                     retry_count = 0
@@ -502,8 +441,7 @@ class ReviewerStatsService:
             throughput = self.get_throughput_24h()
             queue_time = self.get_avg_queue_time()
             duration_by_lang = self.get_avg_duration_by_lang()
-            agent_breakdown = self.get_agent_breakdown()
-            explanation_quality = self.get_explanation_quality()
+            verifier_stats = self.get_verifier_stats()
             error_classification = self.get_error_classification()
             size_distribution = self.get_size_distribution()
             generated_files = self.get_generated_files_stats()
@@ -518,10 +456,9 @@ class ReviewerStatsService:
                     "status": "ok" if throughput and queue_time else "degraded"
                 },
                 "quality": {
-                    "agent_breakdown": agent_breakdown.get("agent_breakdown") if agent_breakdown else None,
-                    "explanation_breakdown": explanation_quality.get("explanation_breakdown") if explanation_quality else None,
+                    "verifier_stats": verifier_stats if verifier_stats else None,
                     "error_classification": error_classification if error_classification else None,
-                    "status": "ok" if agent_breakdown and explanation_quality else "degraded"
+                    "status": "ok" if verifier_stats else "degraded"
                 },
                 "files": {
                     "size_distribution": size_distribution.get("size_distribution") if size_distribution else None,

@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-
 echo "Waiting for MongoDB..."
 /usr/local/bin/python << END
 import sys
@@ -36,7 +35,7 @@ echo "Running Django checks and migrations..."
 python manage.py makemigrations core_ai || true
 python manage.py migrate
 echo "Collecting static files..."
-python manage.py collectstatic --no-input
+python manage.py collectstatic --noinput
 
 if [[ "$*" == *"celery"* ]]; then
     echo "Starting Celery Worker..."

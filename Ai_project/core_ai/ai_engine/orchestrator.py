@@ -198,14 +198,15 @@ class DocumentationOrchestrator:
         # 6. Save with CORRECT type
         new_doc = {
             "analysis_id": ObjectId(self.analysis_id),
-            "exp_type": normalized_exp_type,  # Use normalized type
-            "explanation_type": normalized_exp_type,  # Legacy field
+            "exp_type": normalized_exp_type,
+            "explanation_type": normalized_exp_type,
             "content": verified_content,
             "created_at": datetime.utcnow(),
             "code_content": code_content,
             "agent_type": "HighLevelAgent" if is_high_level else "LowLevelAgent",
-            "original_request_type": str(exp_type),  # Store what was originally requested
-            "normalized_type": normalized_exp_type    # Store what was actually generated
+            "original_request_type": str(exp_type),
+            "normalized_type": normalized_exp_type,
+            "verifier_fallback": verified_content == raw_content,  # True = verifier failed or was skipped
         }
 
         print(f"🔧 SAVING as: {normalized_exp_type} (requested: '{exp_type}')")

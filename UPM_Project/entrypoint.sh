@@ -25,7 +25,6 @@ while attempt < max_attempts:
     except OperationalError:
         attempt += 1
         print(f"Database is unavailable - waiting... ({attempt}/{max_attempts})")
-        import time
         time.sleep(2)
 
 print("Database connection failed after maximum attempts")
@@ -33,10 +32,10 @@ sys.exit(1)
 END
 
 echo "Making migrations..."
-python manage.py makemigrations core_upm --no-input
+python manage.py makemigrations core_upm --noinput
 
 echo "Running migrations..."
-python manage.py migrate
+python manage.py migrate --noinput
 
 echo "Setting up roles..."
 python manage.py setup_roles

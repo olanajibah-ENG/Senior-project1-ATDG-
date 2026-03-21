@@ -113,52 +113,29 @@ def duration_by_lang_view(request):
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def agent_breakdown_view(request):
+def verifier_stats_view(request):
     """
-    Get agent task breakdown with error rates
+    Get verifier success/fallback rate per explanation type
     """
     try:
         service = ReviewerStatsService()
-        result = service.get_agent_breakdown()
-        
+        result = service.get_verifier_stats()
+
         if result is None:
             return Response(
-                {"detail": "Failed to retrieve agent breakdown"},
+                {"detail": "Failed to retrieve verifier stats"},
                 status=status.HTTP_503_SERVICE_UNAVAILABLE
             )
-        
+
         return Response(result, status=status.HTTP_200_OK)
     except Exception as e:
-        logger.error(f"Error in agent_breakdown_view: {str(e)}")
+        logger.error(f"Error in verifier_stats_view: {str(e)}")
         return Response(
             {"detail": "Internal server error"},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
 
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def explanation_quality_view(request):
-    """
-    Get explanation quality metrics
-    """
-    try:
-        service = ReviewerStatsService()
-        result = service.get_explanation_quality()
-        
-        if result is None:
-            return Response(
-                {"detail": "Failed to retrieve explanation data"},
-                status=status.HTTP_503_SERVICE_UNAVAILABLE
-            )
-        
-        return Response(result, status=status.HTTP_200_OK)
-    except Exception as e:
-        logger.error(f"Error in explanation_quality_view: {str(e)}")
-        return Response(
-            {"detail": "Internal server error"},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
 
 
 @api_view(['GET'])
