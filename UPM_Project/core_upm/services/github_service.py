@@ -13,7 +13,6 @@ import os
 from typing import List, Tuple, Optional
 import requests
 
-
 logger = logging.getLogger(__name__)
 
 # امتدادات الملفات المدعومة
