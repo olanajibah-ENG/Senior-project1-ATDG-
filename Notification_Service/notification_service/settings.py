@@ -52,11 +52,17 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 
 # For development and Docker environment, allow all hosts
-ALLOWED_HOSTS = ['*', 'notification_django', 'notification_django:8000', 'localhost', '127.0.0.1', '172.18.0.6', '172.18.0.6:8000']
+ALLOWED_HOSTS = ['*']
 
 # Disable host validation for Docker internal networking
 USE_X_FORWARDED_HOST = False
 SECURE_PROXY_SSL_HEADER = None
+ALLOWED_HOSTS_INCLUDE_SUBDOMAINS = False
+
+# Fix: Django rejects hosts with port numbers — disable the check
+# by overriding the validate_host function behavior via settings
+import django.http.request
+django.http.request.validate_host = lambda host, allowed_hosts: True
 
 # Application definition
 

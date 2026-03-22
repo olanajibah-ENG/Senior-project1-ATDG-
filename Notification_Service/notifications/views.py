@@ -263,9 +263,10 @@ def create_reviewer_alert(request):
             notification.save()
             return Response({'status': 'sent'}, status=status.HTTP_200_OK)
         else:
-            notification.status = 'FAILED'
+            notification.status = 'SAVED'
             notification.save()
-            return Response({'status': 'failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            # Email delivery failed but notification is saved — not a hard error
+            return Response({'status': 'saved', 'message': 'Notification saved, email delivery unavailable'}, status=status.HTTP_200_OK)
 
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

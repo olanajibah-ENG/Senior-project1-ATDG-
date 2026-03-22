@@ -16,14 +16,7 @@ from core_ai.views.export_views import (
 )
 from core_ai.views.stats_views import (
     reviewer_stats_view,
-    throughput_24h_view,
-    avg_queue_time_view,
-    duration_by_lang_view,
-    verifier_stats_view,
-    error_classification_view,
-    size_distribution_view,
-    generated_files_stats_view,
-    celery_health_view
+    ai_tasks_list_view
 )
 from core_ai.views.evaluation_views import (
     evaluate_explanation,
@@ -51,14 +44,7 @@ urlpatterns = [
     path('download-generated-file/<str:file_id>/', download_generated_file, name='download-generated-file'),
     
     path('reviewer/stats/', reviewer_stats_view, name='reviewer-stats'),
-    path('reviewer/stats/throughput-24h/', throughput_24h_view, name='throughput-24h'),
-    path('reviewer/stats/avg-queue-time/', avg_queue_time_view, name='avg-queue-time'),
-    path('reviewer/stats/duration-by-lang/', duration_by_lang_view, name='duration-by-lang'),
-    path('reviewer/stats/verifier-stats/', verifier_stats_view, name='verifier-stats'),
-    path('reviewer/stats/error-classification/', error_classification_view, name='error-classification'),
-    path('reviewer/stats/size-distribution/', size_distribution_view, name='size-distribution'),
-    path('reviewer/stats/generated-files/', generated_files_stats_view, name='generated-files-stats'),
-    path('reviewer/stats/celery-health/', celery_health_view, name='celery-health'),
+    path('reviewer/ai-tasks/', ai_tasks_list_view, name='ai-tasks-list'),
     
     # Evaluation endpoints
     path('evaluate-explanation/<str:explanation_id>/', evaluate_explanation, name='evaluate-explanation'),

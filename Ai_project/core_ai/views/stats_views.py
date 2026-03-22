@@ -11,228 +11,59 @@ logger = logging.getLogger(__name__)
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def reviewer_stats_view(request):
-    """
-    Get comprehensive reviewer statistics
-    Returns: all_stats including performance, quality, files, and celery metrics
-    """
+    """GET /reviewer/stats/ — returns all stats in one call"""
     try:
         service = ReviewerStatsService()
         stats = service.get_all_stats()
-        
         if stats is None:
-            logger.error("Failed to retrieve stats")
-            return Response(
-                {"detail": "Failed to retrieve statistics"},
-                status=status.HTTP_503_SERVICE_UNAVAILABLE
-            )
-        
-        logger.info("Reviewer stats retrieved successfully")
+            return Response({"detail": "Failed to retrieve statistics"}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
         return Response(stats, status=status.HTTP_200_OK)
     except Exception as e:
         logger.error(f"Error in reviewer_stats_view: {str(e)}")
-        return Response(
-            {"detail": "Internal server error", "error": str(e)},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
+        return Response({"detail": "Internal server error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def throughput_24h_view(request):
+def ai_tasks_list_view(request):
     """
-    Get throughput for last 24 hours
-    """
-    try:
-        service = ReviewerStatsService()
-        result = service.get_throughput_24h()
-        
-        if result is None:
-            return Response(
-                {"detail": "Failed to retrieve throughput data"},
-                status=status.HTTP_503_SERVICE_UNAVAILABLE
-            )
-        
-        return Response(result, status=status.HTTP_200_OK)
-    except Exception as e:
-        logger.error(f"Error in throughput_24h_view: {str(e)}")
-        return Response(
-            {"detail": "Internal server error"},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
-
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def avg_queue_time_view(request):
-    """
-    Get average queue time
+    GET /reviewer/ai-tasks/
+    ?status=completed|failed|processing|pending
+    ?exp_type=high_level|low_level
+    ?limit=100 (max 500)
     """
     try:
-        service = ReviewerStatsService()
-        result = service.get_avg_queue_time()
-        
-        if result is None:
-            return Response(
-                {"detail": "Failed to retrieve queue time data"},
-                status=status.HTTP_503_SERVICE_UNAVAILABLE
-            )
-        
-        return Response(result, status=status.HTTP_200_OK)
+        from django.conf import settings
+        from core_ai.mongo_utils import get_mongo_db
+
+        db = get_mongo_db()
+        if db is None:
+            return Response({"detail": "Database unavailable"}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+
+        collection = db[settings.AI_TASKS_COLLECTION]
+
+        query = {}
+        status_filter = request.GET.get('status')
+        exp_type_filter = request.GET.get('exp_type')
+        if status_filter:
+            query['status'] = status_filter
+        if exp_type_filter:
+            query['exp_type'] = exp_type_filter
+
+        limit = min(int(request.GET.get('limit', 100)), 500)
+        tasks = list(collection.find(query).sort('created_at', -1).limit(limit))
+
+        for t in tasks:
+            t['_id'] = str(t['_id'])
+            if 'analysis_id' in t:
+                t['analysis_id'] = str(t['analysis_id'])
+
+        return Response({
+            "count": len(tasks),
+            "filters": {"status": status_filter, "exp_type": exp_type_filter},
+            "tasks": tasks
+        }, status=status.HTTP_200_OK)
+
     except Exception as e:
-        logger.error(f"Error in avg_queue_time_view: {str(e)}")
-        return Response(
-            {"detail": "Internal server error"},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
-
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def duration_by_lang_view(request):
-    """
-    Get average duration by programming language
-    """
-    try:
-        service = ReviewerStatsService()
-        result = service.get_avg_duration_by_lang()
-        
-        if result is None:
-            return Response(
-                {"detail": "Failed to retrieve duration data"},
-                status=status.HTTP_503_SERVICE_UNAVAILABLE
-            )
-        
-        return Response(result, status=status.HTTP_200_OK)
-    except Exception as e:
-        logger.error(f"Error in duration_by_lang_view: {str(e)}")
-        return Response(
-            {"detail": "Internal server error"},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
-
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def verifier_stats_view(request):
-    """
-    Get verifier success/fallback rate per explanation type
-    """
-    try:
-        service = ReviewerStatsService()
-        result = service.get_verifier_stats()
-
-        if result is None:
-            return Response(
-                {"detail": "Failed to retrieve verifier stats"},
-                status=status.HTTP_503_SERVICE_UNAVAILABLE
-            )
-
-        return Response(result, status=status.HTTP_200_OK)
-    except Exception as e:
-        logger.error(f"Error in verifier_stats_view: {str(e)}")
-        return Response(
-            {"detail": "Internal server error"},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
-
-
-
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def error_classification_view(request):
-    """
-    Get error classification and breakdown
-    """
-    try:
-        service = ReviewerStatsService()
-        result = service.get_error_classification()
-        
-        if result is None:
-            return Response(
-                {"detail": "Failed to retrieve error data"},
-                status=status.HTTP_503_SERVICE_UNAVAILABLE
-            )
-        
-        return Response(result, status=status.HTTP_200_OK)
-    except Exception as e:
-        logger.error(f"Error in error_classification_view: {str(e)}")
-        return Response(
-            {"detail": "Internal server error"},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
-
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def size_distribution_view(request):
-    """
-    Get code file size distribution
-    """
-    try:
-        service = ReviewerStatsService()
-        result = service.get_size_distribution()
-        
-        if result is None:
-            return Response(
-                {"detail": "Failed to retrieve size distribution"},
-                status=status.HTTP_503_SERVICE_UNAVAILABLE
-            )
-        
-        return Response(result, status=status.HTTP_200_OK)
-    except Exception as e:
-        logger.error(f"Error in size_distribution_view: {str(e)}")
-        return Response(
-            {"detail": "Internal server error"},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
-
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def generated_files_stats_view(request):
-    """
-    Get generated files statistics
-    """
-    try:
-        service = ReviewerStatsService()
-        result = service.get_generated_files_stats()
-        
-        if result is None:
-            return Response(
-                {"detail": "Failed to retrieve generated files data"},
-                status=status.HTTP_503_SERVICE_UNAVAILABLE
-            )
-        
-        return Response(result, status=status.HTTP_200_OK)
-    except Exception as e:
-        logger.error(f"Error in generated_files_stats_view: {str(e)}")
-        return Response(
-            {"detail": "Internal server error"},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
-
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def celery_health_view(request):
-    """
-    Get Celery health status
-    """
-    try:
-        service = ReviewerStatsService()
-        result = service.get_celery_health()
-        
-        if result is None:
-            return Response(
-                {"detail": "Failed to retrieve Celery status"},
-                status=status.HTTP_503_SERVICE_UNAVAILABLE
-            )
-        
-        return Response(result, status=status.HTTP_200_OK)
-    except Exception as e:
-        logger.error(f"Error in celery_health_view: {str(e)}")
-        return Response(
-            {"detail": "Internal server error"},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
+        logger.error(f"Error in ai_tasks_list_view: {str(e)}")
+        return Response({"detail": "Internal server error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
