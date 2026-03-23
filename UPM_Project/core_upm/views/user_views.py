@@ -93,6 +93,16 @@ class UserLoginAPIView(APIView):
         try:
             user = self.user_service.authenticate_user(username, password)
 
+            # Update last_seen on login
+            try:
+                from django.utils import timezone
+                profile = user.profile
+                profile.last_seen = timezone.now()
+                profile.is_online = True
+                profile.save(update_fields=['last_seen', 'is_online'])
+            except Exception:
+                pass
+
             # إنشاء JWT Tokens (إذا كنت تستخدم Django REST Framework Simple JWT)
             refresh = RoleAwareRefreshToken.for_user(user)
 
