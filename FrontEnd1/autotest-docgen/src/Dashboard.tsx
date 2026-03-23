@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import {
     LogOut, Home, User, Lock,
     Globe, HelpCircle, Sun, Moon, Plus,
-    Folder, FileDown, ShieldAlert,
-    Menu, X, Edit, Trash2, Download, Eye
+    Folder, ShieldAlert,
+    Menu, X, Edit, Trash2, Download, Eye, FileText
 } from 'lucide-react';
 
 import { type Project, type PaginatedResponse, type UpdateProjectData, formatApiError } from './services/api.service';
 import apiService from './services/api.service';
+import UnifiedApiService from './services/unifiedApiService';
 import { AuthContext } from './context/AuthContext';
 import { useLanguage } from './context/LanguageContext';
 import CodeUploadForm from './compoents/ProjectCutomizationModal/CodeUploadForm';
@@ -392,17 +393,35 @@ const Dashboard: React.FC = () => {
         projectId: string;
         codeName: string;
         fileName: string;
-        language: 'python' | 'java';
+        language: 'auto-detect' | 'python' | 'java' | 'javascript' | 'typescript' | 'csharp' | 'go' | 'php' | 'cpp' | 'rust' | 'ruby' | 'swift' | 'kotlin' | 'scala' | 'dart' | 'r';
         version: string;
         codeText: string;
         file: File | null;
+        files?: File[];
+        zipFile?: File;
+        githubUrl?: string;
     }) => {
         setIsCodeProcessing(true);
         setShowAnalysis(true);
         setCodeError(null);
 
         try {
-            console.log('✅ Code submitted, closing modal and navigating...');
+            console.log('✅ Code submitted, uploading files...');
+
+            // Upload files with project_id
+            if (payload.files && payload.files.length > 0) {
+                await UnifiedApiService.uploadFilesWithProject({
+                    files: payload.files,
+                    project_id: payload.projectId,
+                    language: payload.language,
+                    version: payload.version,
+                    codeName: payload.codeName,
+                    githubUrl: payload.githubUrl,
+                    zipFile: payload.zipFile
+                });
+            }
+
+            console.log('✅ Files uploaded successfully, closing modal and navigating...');
 
             // Close modal immediately
             setShowCodeModal(false);
@@ -450,20 +469,8 @@ const Dashboard: React.FC = () => {
         }
     };
 
-    const handleViewDocuments = async (project: Project) => {
-        setSelectedProject(project);
-        setShowDocumentsModal(true);
-        setIsLoadingDocuments(true);
-
-        try {
-            const documents = await apiService.projects.getDocs(project.id);
-            setProjectDocuments(documents || []);
-        } catch (err) {
-            console.error('Failed to fetch documents:', err);
-            setProjectDocuments([]);
-        } finally {
-            setIsLoadingDocuments(false);
-        }
+    const handleViewProjectFiles = (project: Project) => {
+        navigate(`/dashboard/projects/${project.id}/files`);
     };
 
 
@@ -531,15 +538,17 @@ const Dashboard: React.FC = () => {
                     {/* Hero Section */}
                     <div className="workspace-hero">
                         <div className="hero-content">
-                            <h1 className="hero-title">
-                                {language === 'ar' ? 'مساحة المشاريع' : 'Projects Workspace'}
-                            </h1>
-                            <p className="hero-subtitle">
-                                {language === 'ar'
-                                    ? 'نظم مشاريعك الجامعية وأرفق ملفات الكود البرمجية'
-                                    : 'Organize your university projects and attach code artifacts'
-                                }
-                            </p>
+                            <div className="hero-header-container">
+                                <h1 className="hero-title">
+                                    {language === 'ar' ? 'مساحة المشاريع' : 'Projects Workspace'}
+                                </h1>
+                                <p className="hero-subtitle">
+                                    {language === 'ar'
+                                        ? 'نظم مشاريعك الجامعية وأرفق ملفات الكود البرمجية'
+                                        : 'Organize your university projects and attach code artifacts'
+                                    }
+                                </p>
+                            </div>
                             <button
                                 onClick={handleCreateProject}
                                 className="btn-primary-gradient"

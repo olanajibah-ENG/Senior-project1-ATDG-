@@ -4,45 +4,6 @@
  */
 
 import apiClient from './apiClient';
-import { API_ENDPOINTS } from '../config/api.config';
-
-// Helper function to get auth headers (same as used in DocumentGenerationPage)
-const getAuthHeaders = (url?: string) => {
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-  };
-
-  // Add CSRF token for Django
-  const getCookie = (name: string) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) {
-      return parts.pop()?.split(';').shift();
-    }
-    return null;
-  };
-
-  const csrfToken = getCookie('csrftoken');
-  if (csrfToken) {
-    headers['X-CSRFToken'] = csrfToken;
-  }
-
-  // Always add Authorization for AI endpoints
-  const isAiEndpoint = url?.includes('/api/analysis/ai-explanations/') ||
-    url?.includes('/api/analysis/');
-
-  // Get token from localStorage
-  const token = localStorage.getItem('access_token');
-
-  if (token && (isAiEndpoint || !url?.includes('/login/') && !url?.includes('/signup/') && !url?.includes('/token/'))) {
-    headers['Authorization'] = `Bearer ${token}`;
-    console.log('🔑 getAuthHeaders: Added Authorization header for:', url);
-  } else if (!token) {
-    console.warn('⚠️ getAuthHeaders: No access token found in localStorage for:', url);
-  }
-
-  return headers;
-};
 
 class UnifiedApiService {
   /**
@@ -141,19 +102,6 @@ class UnifiedApiService {
   }
 
   /**
-   * Get generated files list
-   */
-  static async getGeneratedFiles() {
-    try {
-      const response = await apiClient.get('/api/analysis/generated-files/');
-      return response.data;
-    } catch (error) {
-      console.error('❌ Failed to get generated files:', error);
-      throw error;
-    }
-  }
-
-  /**
    * Export analysis result
    */
   static async exportAnalysis(analysisId: string, params: {
@@ -163,9 +111,35 @@ class UnifiedApiService {
   } = {}) {
     try {
       const queryString = new URLSearchParams(params as any).toString();
-      const response = await apiClient.get(`/api/analysis/export/${analysisId}/?${queryString}`, {
+      const url = `/api/analysis/export/${analysisId}/?${queryString}`;
+
+      console.log('🔗 Export URL:', url);
+      console.log('📤 Export params:', params);
+
+      const response = await apiClient.get(url, {
         responseType: 'blob'
       });
+
+      console.log('📡 Response status:', response.status);
+      console.log('📡 Response headers:', response.headers);
+      console.log('📦 Blob type:', response.data.type);
+      console.log('📦 Blob size:', response.data.size);
+
+      // Validate blob for PDF
+      if (params.format === 'pdf') {
+        const arrayBuffer = await response.data.slice(0, 4).arrayBuffer();
+        const uint8Array = new Uint8Array(arrayBuffer);
+        const header = String.fromCharCode.apply(null, Array.from(uint8Array));
+        console.log('🔍 File header:', header);
+
+        if (header !== '%PDF') {
+          console.error('❌ Server did not return a valid PDF file');
+          console.error('❌ File header:', header);
+          console.error('❌ Expected: %PDF');
+          throw new Error('Server returned invalid PDF file. The backend might be returning Python code instead of PDF.');
+        }
+      }
+
       return response.data;
     } catch (error) {
       console.error('❌ Failed to export analysis:', error);
@@ -189,65 +163,66 @@ class UnifiedApiService {
   }
 
   /**
-   * Generate AI Explanation
-   * POST /api/analysis/ai-explanations/generate-explanation/
+   * Upload files with project_id
    */
-  static async generateAIExplanation(analysisId: string, expType: 'high' | 'low') {
+  static async uploadFilesWithProject(data: {
+    files: File[];
+    project_id: string;
+    language: string;
+    version: string;
+    codeName?: string;
+    githubUrl?: string;
+    zipFile?: File;
+  }) {
     try {
-      console.log('🎯 Generating AI explanation with unified API service');
-      console.log(`📁 Analysis ID: ${analysisId}`);
-      console.log(`🎯 Explanation Type: ${expType}`);
+      const formData = new FormData();
 
-      // Use the API config to build the correct URL
-      const url = API_ENDPOINTS.analysis.generateExplanation();
-      console.log('🔗 Using URL:', url);
-
-      const response = await apiClient.post(url, {
-        analysis_id: analysisId,
-        exp_type: expType // backend expects 'high' or 'low'
+      // Add files
+      data.files.forEach((file) => {
+        formData.append(`files`, file);
       });
 
-      console.log('✅ AI explanation generation started:', response.data);
+      // Add other fields
+      formData.append('project_id', data.project_id);
+      formData.append('language', data.language);
+      formData.append('version', data.version);
+
+      if (data.codeName) {
+        formData.append('code_name', data.codeName);
+      }
+
+      if (data.githubUrl) {
+        formData.append('github_url', data.githubUrl);
+      }
+
+      if (data.zipFile) {
+        formData.append('zip_file', data.zipFile);
+      }
+
+      const response = await apiClient.post('/api/analysis/codefiles/', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+
       return response.data;
     } catch (error) {
-      console.error('❌ Failed to generate AI explanation:', error);
+      console.error('❌ Failed to upload files:', error);
       throw error;
     }
   }
 
   /**
-   * Get AI Explanation Task Status
-   * GET /api/analysis/ai-explanations/task-status/?task_id={task_id}
+   * Get generated files for specific project
    */
-  static async getExplanationTaskStatus(taskId: string) {
+  static async getProjectGeneratedFiles(projectId: string) {
     try {
-      console.log('🔍 Checking AI explanation task status:', taskId);
-
-      const response = await apiClient.get(`/api/analysis/ai-explanations/task-status/?task_id=${taskId}`);
-      console.log('✅ Task status response:', response.data);
+      const response = await apiClient.get(`/api/analysis/generated-files/?project_id=${projectId}`);
       return response.data;
     } catch (error) {
-      console.error('❌ Failed to get explanation task status:', error);
+      console.error('❌ Failed to get project generated files:', error);
       throw error;
     }
   }
 
-  /**
-   * Get AI Explanation by ID
-   * GET /api/analysis/ai-explanations/{id}/
-   */
-  static async getAIExplanationById(explanationId: string) {
-    try {
-      console.log('🔍 Fetching AI explanation:', explanationId);
-
-      const response = await apiClient.get(`/api/analysis/ai-explanations/${explanationId}/`);
-      console.log('✅ AI explanation response:', response.data);
-      return response.data;
-    } catch (error) {
-      console.error('❌ Failed to get AI explanation:', error);
-      throw error;
-    }
-  }
 }
 
 export default UnifiedApiService;
