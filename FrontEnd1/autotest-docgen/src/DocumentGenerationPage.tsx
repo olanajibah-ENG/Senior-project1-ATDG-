@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft,
   FileText,
-  BookOpen,
   Download,
   Edit3,
   Save,
@@ -132,7 +131,6 @@ const DocumentGenerationPage = () => {
   const saveTimeoutRef = useRef<number | null>(null);
   const [showDownloadMenu, setShowDownloadMenu] = useState(false);
   const [diagramError, setDiagramError] = useState<string | null>(null);
-  const [explanationError, setExplanationError] = useState<string | null>(null);
 
   // States for zoom and pan
   // Debug state for effect
@@ -885,207 +883,58 @@ const DocumentGenerationPage = () => {
     }
   };
 
-  const generateCodeExplanation = async () => {
-    // Check if user is authenticated
-    if (!isLoggedIn || !user) {
-      console.error('❌ User not authenticated for explanation generation');
-      setExplanationError('Please login first to generate explanations');
+  const generateCodeExplanation = async (): Promise<string | null> => {
+    if (!user) {
+      console.error('Please login first to generate explanations');
       navigate('/signup');
-      return;
+      return null;
     }
 
     // Prevent duplicate requests
     if (isGeneratingRef.current.explanation || isGeneratingExplanation) {
       console.log('⚠️ Code explanation generation already in progress, skipping...');
-      return;
+      return null;
     }
 
     setIsGeneratingExplanation(true);
     isGeneratingRef.current.explanation = true;
-    setExplanationError(null); // Clear previous errors
     try {
-      console.log('🚀 Generating code explanation...');
+      console.log('🚀 Generating code explanation using export endpoint...');
 
-      // Try to get the latest analysis result first
+      // Get the latest analysis result
       const latestResult = await getLatestAnalysisResult();
 
-      let codeFileId: string;
-
-      if (latestResult && latestResult.code_file_id) {
-        console.log('✅ Using existing code file ID from latest analysis:', latestResult.code_file_id);
-        codeFileId = latestResult.code_file_id;
-      } else {
-        // Create a new code file if no existing one found
-        console.log('📤 Creating new code file for explanation...');
-        const codeFileData = {
-          filename: state.fileName || `uploaded_code.${state.language === 'java' ? 'java' : 'py'}`,
-          file_type: state.language,
-          content: state.codeText,
-          source_project_id: state.projectId
-        };
-
-        const codeFileResponse = await fetch(API_ENDPOINTS.analysis.codefiles(), {
-          method: 'POST',
-          headers: getAuthHeaders(API_ENDPOINTS.analysis.codefiles()),
-          credentials: 'include',
-          body: JSON.stringify(codeFileData)
-        });
-
-        if (!codeFileResponse.ok) {
-          throw new Error(`Failed to create code file: ${codeFileResponse.status}`);
-        }
-
-        const codeFileResult = await codeFileResponse.json();
-        codeFileId = codeFileResult.id;
-        if (codeFileResponse.status === 200) {
-          console.log('⚠️ Using existing file for explanation:', codeFileId);
-        } else {
-          console.log('✅ New code file created for explanation:', codeFileId);
-        }
+      if (!latestResult || !latestResult.id) {
+        throw new Error('No analysis found. Please generate a diagram first.');
       }
 
-      // Now request AI explanation using the correct endpoint
-      console.log('📤 Requesting AI explanation with analysis_id:', latestResult?.id, 'code_file_id:', codeFileId, 'exp_type:', explanationLevel);
+      console.log('📤 Exporting explanation with analysis ID:', latestResult.id);
 
-      // If we don't have a latest analysis result, we need to create one first
-      let analysisId = latestResult?.id;
-      if (!analysisId) {
-        console.log('📤 No existing analysis found, creating basic analysis for AI explanation...');
-        const analysisData = {
-          code_file_id: codeFileId,
-          analysis_type: 'class_diagram' // Create basic analysis first
-        };
+      // Use the export endpoint to get markdown explanation
+      const blob = await UnifiedApiService.exportAnalysis(latestResult.id, {
+        format: 'md',
+        type: explanationLevel,
+        mode: 'display'
+      });
 
-        const analysisResponse = await fetch(API_ENDPOINTS.analysis.analyze(), {
-          method: 'POST',
-          headers: getAuthHeaders(API_ENDPOINTS.analysis.analyze()),
-          credentials: 'include',
-          body: JSON.stringify(analysisData)
-        });
-
-        if (!analysisResponse.ok) {
-          throw new Error(`Basic analysis creation failed: ${analysisResponse.status}`);
-        }
-
-        const analysisResult = await analysisResponse.json();
-        analysisId = analysisResult.id;
-        console.log('✅ Basic analysis created for AI explanation:', analysisId);
-      }
-
-      const aiExplanationResponse = await UnifiedApiService.generateAIExplanation(
-        analysisId!, // We know it exists because we throw error if it doesn't
-        explanationLevel
-      );
-
-      console.log('🆔 AI Explanation task started:', aiExplanationResponse);
-      const taskId = aiExplanationResponse.task_id;
-
-      if (!taskId) {
-        throw new Error('No task ID received from AI explanation response');
-      }
-
-      // Poll for results
-      let attempts = 0;
-      const maxAttempts = 60;
-      const pollInterval = 2000;
-
-      // Small delay before starting polling to allow backend to save the task
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      const pollForResult = async (): Promise<any> => {
-        attempts++;
-        console.log(`🔄 Polling for AI explanation ${attempts}/${maxAttempts}...`);
-
-        // Use the AI explanation task status endpoint
-        console.log('🔗 Checking AI explanation task status for:', taskId);
-
-        const taskStatus = await UnifiedApiService.getExplanationTaskStatus(taskId);
-        console.log('📊 AI explanation task status:', taskStatus);
-
-        // Check if the task is completed
-        if (taskStatus.status === 'completed' || taskStatus.status === 'COMPLETED') {
-          console.log('✅ AI explanation completed!');
-
-          // Get the explanation text from the task result
-          let explanationText = '';
-
-          if (taskStatus.result && taskStatus.result.explanation_text) {
-            explanationText = taskStatus.result.explanation_text;
-          } else if (taskStatus.result && typeof taskStatus.result === 'string') {
-            explanationText = taskStatus.result;
-          } else if (taskStatus.result) {
-            explanationText = JSON.stringify(taskStatus.result, null, 2);
-          }
-
-          // Debug if still empty
-          if (!explanationText) {
-            console.warn('⚠️ No explanation text found in task result. Available fields:', Object.keys(taskStatus.result || {}));
-            explanationText = `AI explanation completed but no text found. Task result keys: ${Object.keys(taskStatus.result || {}).join(', ')}`;
-          }
-
-          setCodeExplanation(explanationText);
-          console.log('✅ AI explanation set successfully!');
-
-          // Send notification for explanation generation
-          await sendNotification(user, 'explanation', 'generated', {
-            fileName: state.fileName,
-            explanationLevel: explanationLevel === 'high' ? 'High Level' : 'Low Level'
-          });
-
-          // Emit event to refresh documents list
-          window.dispatchEvent(new CustomEvent('documentGenerated', {
-            detail: { type: 'explanation', projectId: state.projectId }
-          }));
-          return taskStatus;
-        } else if (taskStatus.status === 'failed' || taskStatus.status === 'FAILURE') {
-          throw new Error(`AI explanation failed: ${taskStatus.error || 'Unknown error'}`);
-        }
-        // Task is still processing (pending, processing, etc.)
-        else if (attempts < maxAttempts) {
-          await new Promise(resolve => setTimeout(resolve, pollInterval));
-          return pollForResult();
-        } else {
-          throw new Error('AI explanation timeout');
-        }
-      };
-
-      await pollForResult();
+      const explanationText = await blob.text();
+      setCodeExplanation(explanationText);
+      console.log('✅ Explanation generated successfully!');
+      return explanationText;
 
     } catch (error: any) {
-      console.error('❌ Error generating explanation:', error);
+      console.error('❌ Explanation generation failed:', error);
 
-      // Handle different error types with specific messages
-      let errorMessage = 'Unknown error occurred';
-
-      if (error.response) {
-        const status = error.response.status;
-
-        if (status === 401) {
-          errorMessage = 'Authentication required. Please login to generate explanations.';
-          // Redirect to login page
-          navigate('/signup');
-        } else if (status === 404) {
-          errorMessage = 'AI explanation service not found. Please check if the backend is running.';
-        } else if (status === 400) {
-          errorMessage = 'Invalid request. Please make sure you have completed code analysis first.';
-        } else if (status >= 500) {
-          errorMessage = 'Server error. Please try again later.';
-        } else {
-          errorMessage = `Request failed with status code ${status}.`;
-        }
-      } else if (error.message) {
-        errorMessage = error.message;
-      }
-
-      // Show user-friendly error message
+      let errorMessage = error.message || 'Failed to generate explanation';
       if (errorMessage.includes('timeout')) {
         errorMessage = 'Explanation generation is taking too long. Please try again.';
       } else if (errorMessage.includes('Authentication')) {
         errorMessage = 'Please login first to generate explanations.';
       }
 
-      setExplanationError(errorMessage);
-      alert(errorMessage); // Show popup for immediate feedback
+      console.error('Explanation error:', errorMessage);
+      alert(errorMessage);
+      return null;
     } finally {
       setIsGeneratingExplanation(false);
       isGeneratingRef.current.explanation = false;
@@ -1099,54 +948,43 @@ const DocumentGenerationPage = () => {
       return;
     }
 
+    // Auto-generate explanation first if not already available
+    if (!codeExplanation) {
+      console.log('🔄 No explanation found, auto-generating before document...');
+      const generatedExplanation = await generateCodeExplanation();
+      // If explanation generation failed, stop
+      if (!generatedExplanation) {
+        console.error('❌ Could not generate explanation, aborting document generation');
+        return;
+      }
+    }
+
     setIsGeneratingDocument(true);
     isGeneratingRef.current.document = true;
     try {
-      console.log('🚀 Generating document...');
+      console.log('🚀 Generating document using export endpoint...');
 
-      // Get the latest analysis result to find the code file
+      // Get the latest analysis result to find the analysis ID
       const latestResult = await getLatestAnalysisResult();
 
       if (!latestResult || !latestResult.id) {
         throw new Error('No analysis found. Please generate a diagram first.');
       }
 
-      const documentData = {
-        code_file_id: latestResult.id,
-        document_format: documentFormat,
-        include_diagram: true,
-        include_explanation: true,
-        explanation_level: explanationLevel === 'high' ? 'high_level' : 'low_level',
-        mode: action === 'download' ? 'download' : 'display'
-      };
+      console.log('📤 Exporting document with analysis ID:', latestResult.id);
 
-      console.log('📤 Requesting document generation:', documentData);
-
-      const documentResponse = await fetch(API_ENDPOINTS.analysis.generateDocument(), {
-        method: 'POST',
-        headers: getAuthHeaders(API_ENDPOINTS.analysis.generateDocument()),
-        credentials: 'include',
-        body: JSON.stringify(documentData)
+      // Use the export endpoint directly
+      const blob = await UnifiedApiService.exportAnalysis(latestResult.id, {
+        format: documentFormat === 'markdown' ? 'md' : documentFormat,
+        type: explanationLevel,
+        mode: action
       });
 
-      console.log('📡 Document response status:', documentResponse.status);
-      console.log('📡 Document response headers:', [...documentResponse.headers.entries()]);
-
-      if (!documentResponse.ok) {
-        const errorText = await documentResponse.text();
-        console.error('❌ Document generation failed:', errorText);
-        throw new Error(`Document generation failed: ${documentResponse.status} - ${errorText}`);
-      }
+      console.log('✅ Document exported successfully!');
 
       if (action === 'download') {
         // Handle download
         console.log('📥 Starting download process...');
-        console.log('📡 Response headers:', [...documentResponse.headers.entries()]);
-        console.log('📡 Response status:', documentResponse.status);
-        console.log('📡 Content-Type:', documentResponse.headers.get('content-type'));
-
-        const blob = await documentResponse.blob();
-        console.log('📦 Blob created:', blob);
         console.log('📦 Blob size:', blob.size);
         console.log('📦 Blob type:', blob.type);
 
@@ -1154,23 +992,26 @@ const DocumentGenerationPage = () => {
           throw new Error('Downloaded file is empty');
         }
 
-        // Validate PDF content type
-        if (documentFormat === 'pdf' && !blob.type.includes('pdf') && !blob.type.includes('application/octet-stream')) {
-          console.warn('⚠️ Unexpected blob type for PDF:', blob.type);
-        }
-
-        // For PDF, validate first few bytes to ensure it's a valid PDF
+        // Validate content type for PDF
         if (documentFormat === 'pdf') {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            const arr = new Uint8Array(reader.result as ArrayBuffer);
-            const header = String.fromCharCode.apply(null, Array.from(arr.slice(0, 4)));
-            if (header !== '%PDF') {
-              console.error('❌ Invalid PDF file header:', header);
-              throw new Error('Downloaded file is not a valid PDF');
-            }
-          };
-          reader.readAsArrayBuffer(blob.slice(0, 4));
+          console.log('🔍 Validating PDF content...');
+
+          // Check if it's actually a PDF
+          if (!blob.type.includes('pdf') && !blob.type.includes('application/octet-stream')) {
+            console.warn('⚠️ Unexpected blob type for PDF:', blob.type);
+          }
+
+          // Validate first few bytes to ensure it's a valid PDF
+          const arrayBuffer = await blob.slice(0, 4).arrayBuffer();
+          const uint8Array = new Uint8Array(arrayBuffer);
+          const header = String.fromCharCode.apply(null, Array.from(uint8Array));
+
+          if (header !== '%PDF') {
+            console.error('❌ Invalid PDF file header:', header);
+            console.error('❌ This might be a different file type (like Python code) saved as PDF');
+            throw new Error('Downloaded file is not a valid PDF. The server might have returned the wrong content type.');
+          }
+          console.log('✅ PDF header validation passed');
         }
 
         const url = window.URL.createObjectURL(blob);
@@ -1186,34 +1027,27 @@ const DocumentGenerationPage = () => {
         // Send notification for document download
         await sendNotification(user, 'document', 'downloaded', {
           fileName: `${state.fileName || 'document'}.${documentFormat === 'pdf' ? 'pdf' : 'md'}`,
-          fileType: documentFormat === 'pdf' ? 'PDF' : 'Markdown'
+          fileType: documentFormat,
+          explanationLevel: explanationLevel
         });
 
-        // Emit event to refresh documents list
-        window.dispatchEvent(new CustomEvent('documentGenerated', {
-          detail: { type: 'document', projectId: state.projectId }
-        }));
       } else {
         // Handle display
-        const documentText = await documentResponse.text();
+        const documentText = await blob.text();
         setGeneratedDocument(documentText);
         console.log('✅ Document generated and displayed!');
 
         // Send notification for document generation
         await sendNotification(user, 'document', 'generated', {
           fileName: `${state.fileName || 'document'}.${documentFormat === 'pdf' ? 'pdf' : 'md'}`,
-          fileType: documentFormat === 'pdf' ? 'PDF' : 'Markdown'
+          fileType: documentFormat,
+          explanationLevel: explanationLevel
         });
-
-        // Emit event to refresh documents list
-        window.dispatchEvent(new CustomEvent('documentGenerated', {
-          detail: { type: 'document', projectId: state.projectId }
-        }));
       }
 
-    } catch (error) {
-      console.error('❌ Error generating document:', error);
-      alert(`Failed to generate document: ${(error as Error).message}`);
+    } catch (error: any) {
+      console.error('❌ Document generation failed:', error);
+      alert(`Document generation failed: ${error.message || 'Unknown error'}`);
     } finally {
       setIsGeneratingDocument(false);
       isGeneratingRef.current.document = false;
@@ -1294,7 +1128,7 @@ const DocumentGenerationPage = () => {
 
   return (
     <DiagramErrorBoundary>
-      <div className={`premium-hero ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
+      <div className={`premium-hero ${isDarkMode ? 'dark' : 'light'}`}>
         {/* Animated Background */}
         <div className="animated-bg">
           <div className="floating-particles">
@@ -1336,15 +1170,15 @@ const DocumentGenerationPage = () => {
               : 'text-gray-700 hover:bg-gray-100'
               }`}>
               <ArrowLeft size={18} />
-              {i18n.t('doc.back')}
+              {i18n.t('Back')}
             </button>
             <div className="user-info">
-              <span className={`username ${isDarkMode ? 'text-white' : 'text-gray-800'
+              <span className={`username ${isDarkMode ? 'text-white' : 'text-gray-900'
                 }`}>{user?.username || 'Guest'}</span>
             </div>
           </div>
 
-          <h1 className={`doc-gen-title ${isDarkMode ? 'text-white' : 'text-gray-800'
+          <h1 className={`doc-gen-title ${isDarkMode ? 'text-white' : 'text-gray-900'
             }`}>
             <FileText size={24} />
             {state?.codeName || 'Document Generation'} - {state?.fileName || 'Untitled'}
@@ -1365,7 +1199,7 @@ const DocumentGenerationPage = () => {
             <button
               className={`px-3 py-1.5 rounded-full border text-sm font-medium transition-all duration-300 backdrop-blur-sm ${isDarkMode
                 ? 'bg-white/10 border-white/20 text-white hover:bg-white/20'
-                : 'bg-purple-100/50 border-purple-200/50 text-purple-700 hover:bg-purple-200/50'
+                : 'bg-white/80 border-gray-200/50 text-gray-700 hover:bg-gray-100/50'
                 }`}
               onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
               title={language === 'en' ? 'Switch to Arabic' : 'التبديل للإنجليزية'}
@@ -1384,20 +1218,20 @@ const DocumentGenerationPage = () => {
           <div className="control-group">
             <label className="control-label">
               <Lightbulb size={16} />
-              {i18n.t('doc.explanation.level')}
+              {i18n.t('Explanation level')}
             </label>
             <div className="toggle-switch">
               <button
                 className={`toggle-option ${explanationLevel === 'high' ? 'active' : ''}`}
                 onClick={() => setExplanationLevel('high')}
               >
-                {i18n.t('doc.high.level')}
+                {i18n.t('High level')}
               </button>
               <button
                 className={`toggle-option ${explanationLevel === 'low' ? 'active' : ''}`}
                 onClick={() => setExplanationLevel('low')}
               >
-                {i18n.t('doc.low.level')}
+                {i18n.t('Low level')}
               </button>
             </div>
           </div>
@@ -1405,48 +1239,48 @@ const DocumentGenerationPage = () => {
           <div className="control-group">
             <label className="control-label">
               <FileDown size={16} />
-              {i18n.t('doc.document.format')}
+              {i18n.t('Document format')}
             </label>
             <div className="toggle-switch">
               <button
                 className={`toggle-option ${documentFormat === 'markdown' ? 'active' : ''}`}
                 onClick={() => setDocumentFormat('markdown')}
               >
-                {i18n.t('doc.markdown')}
+                {i18n.t('Markdown')}
               </button>
               <button
                 className={`toggle-option ${documentFormat === 'pdf' ? 'active' : ''}`}
                 onClick={() => setDocumentFormat('pdf')}
               >
-                {i18n.t('doc.pdf')}
+                {i18n.t('PDF')}
               </button>
             </div>
           </div>
 
           <div className="control-actions">
             <button
-              onClick={generateCodeExplanation}
-              disabled={isGeneratingExplanation}
-              className="btn-generate"
-            >
-              <BookOpen size={18} />
-              {isGeneratingExplanation ? i18n.t('doc.generating') : i18n.t('doc.generate.explanation')}
-            </button>
-            <button
               onClick={() => generateDocument('display')}
-              disabled={isGeneratingDocument || !codeExplanation}
+              disabled={isGeneratingDocument || isGeneratingExplanation}
               className="btn-generate-doc"
             >
               <FileText size={18} />
-              {isGeneratingDocument ? i18n.t('doc.creating.document') : i18n.t('doc.generate.document')}
+              {isGeneratingExplanation
+                ? i18n.t('Generating')
+                : isGeneratingDocument
+                  ? i18n.t('Creating document')
+                  : i18n.t('Generate document')}
             </button>
             <button
               onClick={() => generateDocument('download')}
-              disabled={isGeneratingDocument || !codeExplanation}
+              disabled={isGeneratingDocument || isGeneratingExplanation}
               className="btn-download-doc"
             >
               <Download size={18} />
-              {isGeneratingDocument ? i18n.t('doc.downloading') : i18n.t('doc.download.document')}
+              {isGeneratingExplanation
+                ? i18n.t('Generating')
+                : isGeneratingDocument
+                  ? i18n.t('Downloading')
+                  : i18n.t('Download document')}
             </button>
           </div>
         </div>
@@ -1460,7 +1294,7 @@ const DocumentGenerationPage = () => {
             }`}>
             <div className={`section-header mb-6`}>
               <div className="section-title-wrapper">
-                <h2 className={`section-title text-2xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-800'
+                <h2 className={`section-title text-2xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'
                   }`}>
                   <div className={`title-icon w-8 h-8 rounded-lg flex items-center justify-center mb-2 ${isDarkMode
                     ? 'bg-gradient-to-br from-purple-500 to-pink-500 text-white'
@@ -1468,19 +1302,19 @@ const DocumentGenerationPage = () => {
                     }`}>
                     <FileText size={22} />
                   </div>
-                  <span className={`title-text ${isDarkMode ? 'text-white' : 'text-gray-800'
-                    }`}>{i18n.t('doc.class.diagram')}</span>
+                  <span className={`title-text ${isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>{i18n.t('Class Diagram')}</span>
                   <div className={`status-badge auto-generated px-3 py-1 rounded-full text-xs font-medium ${isDarkMode
                     ? 'bg-purple-500/20 text-purple-200 border-purple-400/30'
                     : 'bg-purple-100/50 text-purple-700 border-purple-300/50'
                     }`}>
                     <span className="badge-dot w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                    {i18n.t('doc.auto.generated') || 'Auto-generated'}
+                    {i18n.t('Auto Generated') || 'Auto-generated'}
                   </div>
                 </h2>
                 <p className={`section-description text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'
                   }`}>
-                  {i18n.t('doc.diagram.description') || 'Interactive class diagram visualization with zoom and pan controls'}
+                  {i18n.t('Diagram Description') || 'Interactive class diagram visualization with zoom and pan controls'}
                 </p>
               </div>
               <div className="section-actions">
@@ -1504,7 +1338,7 @@ const DocumentGenerationPage = () => {
                         className="btn-download"
                         disabled={isGeneratingDiagram || !classDiagram}
                       >
-                        <Download size={18} /> {i18n.t('doc.download')}
+                        <Download size={18} /> {i18n.t('Download')}
                       </button>
                       {showDownloadMenu && (
                         <div className="dropdown-menu" style={{
@@ -1535,7 +1369,7 @@ const DocumentGenerationPage = () => {
                               fontSize: '14px'
                             }}
                           >
-                            {i18n.t('doc.download.svg')}
+                            {i18n.t('Download.svg')}
                           </button>
                           <button
                             onClick={() => {
@@ -1553,7 +1387,7 @@ const DocumentGenerationPage = () => {
                               fontSize: '14px'
                             }}
                           >
-                            {i18n.t('doc.download.png')}
+                            {i18n.t('Download.png')}
                           </button>
                         </div>
                       )}
@@ -1566,7 +1400,7 @@ const DocumentGenerationPage = () => {
                       className="btn-edit"
                       disabled={isGeneratingDiagram || !classDiagram}
                     >
-                      <Edit3 size={18} /> {i18n.t('doc.edit')}
+                      <Edit3 size={18} /> {i18n.t('Edit')}
                     </button>
                   </>
                 ) : (
@@ -1576,7 +1410,7 @@ const DocumentGenerationPage = () => {
                       className="btn-save"
                       disabled={isSaving}
                     >
-                      <Save size={18} /> {isSaving ? 'Saving...' : i18n.t('doc.save')}
+                      <Save size={18} /> {isSaving ? 'Saving...' : i18n.t('Save')}
                     </button>
                     <button
                       onClick={() => {
@@ -1585,7 +1419,7 @@ const DocumentGenerationPage = () => {
                       }}
                       className="btn-cancel"
                     >
-                      {i18n.t('doc.cancel')}
+                      {i18n.t('Cancel')}
                     </button>
                   </>
                 )}
@@ -1594,15 +1428,15 @@ const DocumentGenerationPage = () => {
 
             {diagramError && (
               <div style={{
-                background: '#fff5f5',
-                border: '1px solid #fc8181',
+                background: isDarkMode ? 'rgba(239, 68, 68, 0.1)' : '#fff5f5',
+                border: isDarkMode ? '1px solid rgba(239, 68, 68, 0.2)' : '1px solid #fc8181',
                 borderRadius: '8px',
                 padding: '12px 16px',
                 marginBottom: '16px',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '12px',
-                color: '#c53030'
+                color: isDarkMode ? '#fca5a5' : '#c53030'
               }}>
                 <AlertTriangle size={20} />
                 <div>
@@ -1616,7 +1450,7 @@ const DocumentGenerationPage = () => {
                     style={{
                       marginTop: '8px',
                       padding: '6px 12px',
-                      background: '#667eea',
+                      background: isDarkMode ? '#4f46e5' : '#667eea',
                       color: 'white',
                       border: 'none',
                       borderRadius: '6px',
@@ -1714,82 +1548,6 @@ const DocumentGenerationPage = () => {
               </div>
             )}
           </div>
-
-          {/* Code Explanation Section */}
-          {(codeExplanation || explanationError) && (
-            <div className="content-section explanation-section">
-              <div className="section-header">
-                <div className="section-title-wrapper">
-                  <h2 className="section-title">
-                    <div className="title-icon">
-                      <BookOpen size={22} />
-                    </div>
-                    <span className="title-text">{i18n.t('doc.code.explanation')}</span>
-                    <div className="status-badge level-badge">
-                      <span className="badge-dot"></span>
-                      {explanationLevel === 'high' ? (i18n.t('doc.high.level') || 'High Level') : (i18n.t('doc.low.level') || 'Low Level')}
-                    </div>
-                  </h2>
-                  <p className="section-description">
-                    {i18n.t('doc.explanation.description') || `Detailed code analysis and explanation at ${explanationLevel} level`}
-                  </p>
-                </div>
-              </div>
-              {explanationError ? (
-                <div style={{
-                  background: '#fff5f5',
-                  border: '1px solid #fc8181',
-                  borderRadius: '8px',
-                  padding: '16px',
-                  margin: '20px 28px',
-                  color: '#c53030'
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                    <AlertTriangle size={20} />
-                    <strong>Error generating explanation:</strong>
-                  </div>
-                  <p style={{ margin: '0 0 12px 0' }}>{explanationError}</p>
-                  <button
-                    onClick={() => {
-                      setExplanationError(null);
-                      generateCodeExplanation();
-                    }}
-                    style={{
-                      padding: '8px 16px',
-                      background: '#667eea',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '6px',
-                      cursor: 'pointer',
-                      fontSize: '0.9rem'
-                    }}
-                  >
-                    Try Again
-                  </button>
-                </div>
-              ) : (
-                <div className="explanation-content">
-                  <div>
-                    <pre style={{
-                      whiteSpace: 'pre-wrap',
-                      background: '#f8f9fa',
-                      padding: '24px',
-                      borderRadius: '12px',
-                      overflow: 'auto',
-                      maxHeight: '500px',
-                      margin: '0',
-                      border: '1px solid #e2e8f0',
-                      lineHeight: '1.7',
-                      fontSize: '0.95rem',
-                      fontFamily: 'system-ui, -apple-system, sans-serif'
-                    }}>
-                      {codeExplanation}
-                    </pre>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
 
           {/* Generated Document Section */}
           {generatedDocument && (

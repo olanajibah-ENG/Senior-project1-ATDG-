@@ -51,7 +51,7 @@ export class FilesService {
 
             // ✅ Use relative URL to work with apiClient baseURL
             const response = await apiClient.post<CodeFileUploadResponse>(
-                `/upm/projects/${projectId}/artifacts/`,
+                `api/upm/projects/${projectId}/artifacts/`,
                 formData
             );
             return response.data;
@@ -90,7 +90,7 @@ export class FilesService {
     static async getProjectCodeFiles(projectId: string): Promise<CodeFile[]> {
         try {
             const response = await apiClient.get<CodeFile[]>(
-                `/upm/projects/${projectId}/artifacts/`
+                `api/upm/projects/${projectId}/artifacts/`
             );
             return response.data;
         } catch (error) {

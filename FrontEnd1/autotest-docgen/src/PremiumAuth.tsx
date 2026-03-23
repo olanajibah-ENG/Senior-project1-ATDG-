@@ -102,14 +102,13 @@ export default function PremiumAuth() {
   const handleLogin = async (data: LoginFormData) => {
     setIsLoading(true);
     setError('');
-    setSuccess('');
 
     try {
       await login({
         username: data.loginIdentifier.trim(),
         password: data.password,
       });
-      setSuccess(i18n.t('auth.sign_in_success'));
+      // Success message is not needed here since user will be redirected automatically
     } catch (err: unknown) {
       console.error('Login error:', err);
       setError(currentLang === 'EN' ? 'Login failed. Please check your credentials.' : 'فشل تسجيل الدخول. تحقق من بياناتك.');

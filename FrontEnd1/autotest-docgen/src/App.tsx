@@ -1,18 +1,22 @@
 // App.tsx
-// 🚨 إزالة الاستيراد لـ BrowserRouter كـ Router
-import { Routes, Route } from 'react-router-dom'; // 👈 ترك Routes و Route فقط
+// إزالة الاستيراد لـ BrowserRouter كـ Router
+import { Routes, Route } from 'react-router-dom'; // ترك Routes و Route فقط
 import ErrorBoundary from './components/ErrorBoundary';
 import { ToastProvider } from './components/Toast/Toast';
 
 import Home from './Home';
 import PremiumAuth from './PremiumAuth';
 import Dashboard from './Dashboard';
+import AdminDashboard from './components/AdminDashboard';
+import ReviewerDashboard from './components/ReviewerDashboard';
+import RoleGuard from './components/RoleGuard';
 import UsersList from './compoents/ProjectCutomizationModal/UsersList';
 import AnalysisResultPage from './AnalysisResultPage';
 import ClassDiagramPage from './ClassDiagramPage';
 import LogicExplanationResultPage from './LogicExplanationResultPage';
 import DocumentGenerationPage from './DocumentGenerationPage';
 import GeneratedFilesPage from './GeneratedFilesPage';
+import ProjectFilesPage from './ProjectFilesPage';
 // يجب عليك إنشاء وإضافة ملفات الـ contextes هنا إذا كنت تستخدم useAuth
 
 function App() {
@@ -27,12 +31,34 @@ function App() {
 
           {/* الواجهة الثانية: لوحة التحكم وإدارة المشاريع */}
           <Route path="/dashboard" element={<Dashboard />} />
+
+          {/* Admin Dashboard - Protected Route */}
+          <Route
+            path="/admin"
+            element={
+              <RoleGuard allowedRoles={['admin']}>
+                <AdminDashboard />
+              </RoleGuard>
+            }
+          />
+
+          {/* Reviewer Dashboard - Protected Route */}
+          <Route
+            path="/reviewer"
+            element={
+              <RoleGuard allowedRoles={['reviewer']}>
+                <ReviewerDashboard />
+              </RoleGuard>
+            }
+          />
+
           <Route path="/users" element={<UsersList users={[]} isLoading={false} error={null} />} />
           <Route path="/analysis" element={<AnalysisResultPage />} />
           <Route path="/diagram" element={<ClassDiagramPage />} />
           <Route path="/logic-explanation-result" element={<LogicExplanationResultPage />} />
           <Route path="/document-generation" element={<DocumentGenerationPage />} />
           <Route path="/generated-files" element={<GeneratedFilesPage />} />
+          <Route path="/dashboard/projects/:project_id/files" element={<ProjectFilesPage />} />
           {/* يمكن إضافة مسارات أخرى هنا */}
         </Routes>
       </ToastProvider>

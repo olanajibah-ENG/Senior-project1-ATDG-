@@ -2,25 +2,35 @@ import React, { createContext, useState, useContext, type ReactNode, useEffect, 
 import { useNavigate } from 'react-router-dom';
 import apiService, { type LoginData, type AuthResponse, type CurrentUser } from '../services/api.service';
 
-// ----------------------------------------------------
-// تحديد الأنواع (Types)
-// ----------------------------------------------------
+const decodeJWT = (token: string) => {
+  try {
+    const payload = token.split('.')[1];
+    return JSON.parse(atob(payload));
+  } catch {
+    return null;
+  }
+};
 
-// نوع بيانات الـ Context
+const navigateByRole = (roleType: string | undefined, navigate: Function) => {
+  switch (roleType?.toLowerCase()) {
+    case 'admin':    navigate('/admin');     break;
+    case 'reviewer': navigate('/reviewer'); break;
+    default:         navigate('/dashboard'); break;
+  }
+};
+
 interface AuthContextType {
   user: CurrentUser | null;
   isLoggedIn: boolean;
-  // دالة login أصبحت async وتستقبل بيانات الدخول
-  login: (credentials: LoginData) => Promise<void>; 
+  login: (credentials: LoginData) => Promise<void>;
   logout: () => void;
 }
 
-// القيمة الافتراضية للـ Context
 const defaultAuthContext: AuthContextType = {
   user: null,
   isLoggedIn: false,
-  login: () => Promise.resolve(), // يجب أن تكون دالة async افتراضية
-  logout: () => {},
+  login: () => Promise.resolve(),
+  logout: () => { },
 };
 
 export const AuthContext = createContext<AuthContextType>(defaultAuthContext);
@@ -29,22 +39,24 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-// ----------------------------------------------------
-// مكون الموفر (AuthProvider)
-// ----------------------------------------------------
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const navigate = useNavigate(); // لاستخدام التوجيه (Redirection)
+  const navigate = useNavigate();
   const [user, setUser] = useState<CurrentUser | null>(null);
 
-  // دالة تحميل بيانات المستخدم من localStorage
-  const loadUserFromStorage = () => {
+  const loadUserFromStorage = useCallback(() => {
     try {
       const storedUser = localStorage.getItem('user');
       const accessToken = localStorage.getItem('access_token');
-      
+
       if (storedUser && accessToken) {
         const userData: CurrentUser = JSON.parse(storedUser);
         setUser(userData);
+
+        const currentPath = window.location.pathname;
+        if (currentPath === '/' || currentPath === '/auth') {
+          const decoded = decodeJWT(accessToken);
+          navigateByRole(decoded?.role_type, navigate);
+        }
       } else {
         setUser(null);
       }
@@ -52,23 +64,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.error('Error loading user from storage:', error);
       setUser(null);
     }
-  };
+  }, [navigate]);
 
-  // دالة تسجيل الخروج
   const logout = useCallback(() => {
-    // حذف التوكنات وإعادة تعيين المستخدم
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('user');
     setUser(null);
-    navigate('/signup');
+    navigate('/auth');
   }, [navigate]);
 
-  // قراءة المستخدم عند تحميل التطبيق لأول مرة
   useEffect(() => {
     loadUserFromStorage();
 
-    // Listen for logout events from apiClient interceptor
     const handleLogoutEvent = () => {
       logout();
     };
@@ -80,17 +88,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
   }, [logout]);
 
-  // دالة تسجيل الدخول الفعلي (تُستدعى من Signup/Login)
   const login = async (credentials: LoginData) => {
     try {
-      // 1. استدعاء API تسجيل الدخول للحصول على التوكن
-      const response: AuthResponse = await apiService.auth.login(credentials); 
+      const response: AuthResponse = await apiService.auth.login(credentials);
 
-      // 2. حفظ التوكنين في التخزين المحلي
       localStorage.setItem('access_token', response.access);
       localStorage.setItem('refresh_token', response.refresh);
 
-      // 3. حفظ بيانات المستخدم الكاملة في localStorage
       const userData: CurrentUser = {
         id: response.user.id,
         username: response.user.username,
@@ -99,16 +103,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       };
       localStorage.setItem('user', JSON.stringify(userData));
 
-      // 4. تحديث حالة المستخدم
       setUser(userData);
-      
-      // 5. التوجيه إلى لوحة التحكم
-      navigate('/dashboard'); 
+
+      const decoded = decodeJWT(response.access);
+      navigateByRole(decoded?.role_type, navigate);
 
     } catch (error) {
-      console.error("Login failed:", error);
-      // مهم: إعادة طرح الخطأ ليتمكن مكون Signup من معالجته وعرض رسالة الخطأ للمستخدم
-      throw error; 
+      console.error('Login failed:', error);
+      throw error;
     }
   };
 
@@ -122,7 +124,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 };
 
-// دالة Hook لاستخدام الـ Context
 export const useAuth = () => {
   return useContext(AuthContext);
 };
