@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+
 echo "Waiting for MongoDB..."
 /usr/local/bin/python << END
 import sys
