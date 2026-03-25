@@ -1,10 +1,11 @@
+from os import name
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.contrib.auth import authenticate # للاستخدام في منطق تسجيل الدخول
 from core_upm.repositories import UserRepository # استيراد الـ Repository
 from django.contrib.auth.models import User
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(name)
 
 
 class UserService:

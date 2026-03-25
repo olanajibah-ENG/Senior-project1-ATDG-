@@ -71,7 +71,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'core_upm.middleware.OnlineStatusMiddleware',
 ]
 
 ROOT_URLCONF = 'UPM_Project.urls'
