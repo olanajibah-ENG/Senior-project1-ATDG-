@@ -2,7 +2,6 @@
 set -e
 
 echo "Waiting for MongoDB..."
-/usr/local/bin/python << END
 import sys
 import time
 from pymongo import MongoClient
@@ -30,7 +29,6 @@ while attempt < max_attempts:
 
 print("MongoDB connection failed after maximum attempts")
 sys.exit(1)
-END
 
 echo "Running Django checks and migrations..."
 python manage.py makemigrations core_ai || true
@@ -52,3 +50,10 @@ else
         --max-requests 100 \
         --max-requests-jitter 10
 fi
+exec gunicorn Ai_project.wsgi:application \
+    --bind 0.0.0.0:8000 \
+    --timeout 300 \
+    --keep-alive 75 \
+    --workers 2 \
+    --max-requests 100 \
+    --max-requests-jitter 10

@@ -13,6 +13,14 @@ from core_upm.views.folder_views import (
     FolderRetrieveUpdateDestroyAPIView
 )
 from core_upm.views.folder_upload_proxy import FolderUploadProxyView
+<<<<<<< HEAD
+=======
+from core_upm.views.github_views import (
+    GitHubConnectView,
+    GitHubSyncView,
+    GitHubWebhookView
+)
+>>>>>>> feature/github-integration
 
 urlpatterns = [
     # User authentication
@@ -33,4 +41,12 @@ urlpatterns = [
 
     # Folder Upload — مرتبط بالمشروع تلقائياً من الـ URL
     path('projects/<uuid:project_id>/folder-upload/', FolderUploadProxyView.as_view(), name='folder-upload'),
+<<<<<<< HEAD
+=======
+
+    # GitHub Integration
+    path('projects/<uuid:project_id>/github/connect/', GitHubConnectView.as_view(), name='github-connect'),
+    path('projects/<uuid:project_id>/github/sync/', GitHubSyncView.as_view(), name='github-sync'),
+    path('projects/<uuid:project_id>/github/webhook/', GitHubWebhookView.as_view(), name='github-webhook'),
+>>>>>>> feature/github-integration
 ]

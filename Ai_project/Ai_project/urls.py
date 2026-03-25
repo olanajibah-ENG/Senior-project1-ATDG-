@@ -14,7 +14,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-print("MAIN URLS.PY LOADED!")
+from core_ai.views.folder_upload import FolderUploadView
 
 # ── Swagger schema ────────────────────────────────────────────────────────────
 schema_view = get_schema_view(
@@ -32,11 +32,30 @@ schema_view = get_schema_view(
 def health_check(request):
     return HttpResponse("OK", status=200)
 
+def api_root(request):
+    if request.method == 'GET':
+        user_email = request.GET.get('user_email', '')
+        return JsonResponse({
+            'message': 'API Root - Available endpoints',
+            'endpoints': [
+                '/codefiles/',
+                '/analysis-results/',
+                '/analyze/',
+                '/task-status/',
+                '/admin/',
+                '/health/',
+            ],
+            'user_email': user_email if user_email else None,
+        })
+    return JsonResponse({'error': 'Method not allowed'}, status=405)
+
 
 # ── URL patterns ──────────────────────────────────────────────────────────────
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('api/analysis/', include('core_ai.urls')),
+    path('api/analysis/', include('core_ai.urls')),
+    path('', include('core_ai.urls')),
+    path('', api_root, name='api-root'),
     path('health/', health_check, name='health_check'),
     path('test/', lambda request: HttpResponse("TEST ENDPOINT WORKS!"), name='test'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
