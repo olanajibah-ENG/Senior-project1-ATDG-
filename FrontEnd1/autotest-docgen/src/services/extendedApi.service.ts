@@ -99,6 +99,13 @@ export interface OnlineUser {
   last_seen: string;
 }
 
+export interface OnlineUser {
+  id: number;
+  username: string;
+  lastActivity: string;
+  currentSession: string;
+}
+
 export interface CreateReviewerRequest {
   username: string;
   email: string;
