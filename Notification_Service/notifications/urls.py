@@ -11,7 +11,6 @@ urlpatterns = [
     path('api/notifications/system/', views.create_system_alert, name='system-alert'),
     path('api/notifications/custom/', views.create_custom_notification, name='custom-notification'),
     path('api/notifications/create/', views.create_custom_notification, name='create-notification'),  # ✅ Alias
-    path('api/notify/reviewer-alert/', views.create_reviewer_alert, name='reviewer-alert'),
     path('api/notifications/settings/', views.notification_settings, name='notification-settings'),
     
     # ✅ Endpoint جديد للتحقق من حالة Celery Task
