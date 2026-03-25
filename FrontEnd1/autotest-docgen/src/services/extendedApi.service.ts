@@ -83,19 +83,20 @@ export interface AdminUser {
   id: number;
   username: string;
   email: string;
-  first_name: string;
-  last_name: string;
+  full_name: string;
+  role_type: string;
   is_active: boolean;
-  is_staff: boolean;
+  is_online: boolean;
+  last_seen: string;
   date_joined: string;
-  last_login: string;
-  profile: {
-    role: {
-      id: number;
-      role_name: string;
-      description: string;
-    };
-  };
+  project_count: number;
+}
+
+export interface OnlineUser {
+  username: string;
+  full_name: string;
+  role_type: string;
+  last_seen: string;
 }
 
 export interface OnlineUser {
@@ -288,13 +289,8 @@ class ExtendedApiService {
    * Get online users
    */
   static async getOnlineUsers(): Promise<OnlineUser[]> {
-    try {
-      const response = await apiClient.get('/api/upm/users/online/');
-      return response.data;
-    } catch (error) {
-      console.error('❌ Failed to get online users:', error);
-      throw error;
-    }
+    const response = await apiClient.get('/api/upm/users/online/');
+    return response.data.users || [];  // ✅
   }
 }
 
