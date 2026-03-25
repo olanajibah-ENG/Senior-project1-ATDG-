@@ -272,7 +272,13 @@ class LLMClient:
                 "strengths": ["أداء قوي", "فهم جيد", "دقة عالية"],
                 "context": "32K tokens"
             },
-
+            {
+                "model": "deepseek/deepseek-r1-0528:free",
+                "name": "DeepSeek R1",
+                "description": "نموذج DeepSeek الصيني المتقدم - تفكير منطقي ممتاز",
+                "strengths": ["تفكير منطقي", "دقة عالية", "أداء ممتاز"],
+                "context": "64K tokens"
+            },
             {
                 "model": "google/gemma-3-27b-it:free",
                 "name": "Gemma 3 (27B)",
@@ -347,3 +353,4 @@ class LLMClient:
 
         # المودل الافتراضي - تم تغييره إلى Mistral كبديل أفضل عند rate limit
         return "arcee-ai/trinity-large-preview:free"
+
