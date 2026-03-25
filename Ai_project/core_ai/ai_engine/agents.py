@@ -22,6 +22,15 @@ class HighLevelAgent(BaseAgent):
             "## Executive Summary\n"
             "[2-3 sentences overview]\n\n"
             "--- \n\n"
+            "## Application Lifecycle\n"
+            "[1–2 sentences describing how the app initializes, configures dependencies, and serves requests]\n\n"
+            "## Dependencies\n"
+            "- [Dependency 1]\n"
+            "- [Dependency 2]\n"
+            "- [Dependency 3]\n"
+            "## API Routes Overview\n"
+            "- [METHOD] /path — short description\n"
+            "- [METHOD] /path — short description\n"
             "## Purpose & Responsibility\n"
             "[Goal of this code]\n\n"
             "## Key Capabilities\n"
@@ -68,7 +77,23 @@ class LowLevelAgent(BaseAgent):
             "    - NEVER use the word 'Function' or 'Routine' in any header. \n"
             "    - If you are unsure, default to '### Method:'."
             "13. ORDER: Always list the 'Constructor' first at the top of the class, followed by all other 'Methods' in sequential order."
-            
+            "DETAILED APPLICATION CONTEXT (IF APPLICABLE):"
+            "If the code represents a web/API application, you MUST include:"
+            "Structure:\n"
+            "## Application Lifecycle"
+            "Explain how the application initializes, configures dependencies, sets up the database, registers routes, and handles requests."
+
+            "## Dependencies & External Services"
+            "List all imported frameworks and libraries (e.g., Flask, SQLAlchemy, datetime) and explain their role in the system."
+
+            "## API Routes (Full Technical Breakdown)"
+            "For each route:"
+            "- Show the HTTP method (GET, POST, PUT, DELETE)"
+            "- Show the path (/tasks, /tasks/<id>, etc.)"
+            "- Explain what the route does"
+            "- Explain how it interacts with the underlying classes or database"
+            "- Mention validation, error handling, and response structure"
+
             "Structure per Class:\n"
             "## Class: [ClassName]\n\n"
             "**Purpose:** [Description]\n\n"
@@ -99,73 +124,6 @@ class LowLevelAgent(BaseAgent):
         user = f"--- DETAILED ANALYSIS CONTEXT ---\n{detailed_analysis}\n\n--- ACTUAL CODE ---\n{code_content}"
         return self.ask_ai(system, user)
 
-class ProjectHighLevelAgent(BaseAgent):
-    def process(self, code_content, class_name=None, analysis_summary=None, **kwargs):
-        system = (
-            "You are a Senior Software Architect. Provide a HIGH-LEVEL overview of the ENTIRE PROJECT.\n"
-            "IMPORTANT: Focus on WHAT the system does, its main modules, and the big picture. NO technical jargon.\n\n"
-            
-            "MANDATORY FORMATTING RULES:\n"
-            "1. Start with 'Project: [Descriptive Project Name]'.\n"
-            "2. Use '---' EXACTLY ONCE, only after the Executive Summary section.\n"
-            "3. Group the classes by the File they belong to, if known.\n"
-            "4. For each Class, list its key capabilities in simple bullet points.\n"
-            "5. Use '### Component:' for each major class or module to ensure PDF compatibility.\n\n"
-            "Structure:\n"
-            "Project: [PROJECT NAME]\n\n"
-            "## Executive Summary\n"
-            "[2-4 sentences overview of the entire system]\n\n"
-            "--- \n\n"
-            "## System Architecture & Purpose\n"
-            "[Goal of this system and how modules interact]\n\n"
-            "## Key Capabilities\n"
-            "- Feature 1\n\n"
-            "## Component: [ClassName]\n"
-            "- Key Responsibility 1\n"
-            "- Key Responsibility 2\n\n"
-            "DO NOT dive into method-by-method logic unless it's a major system entry point."
-        )
-        
-        context = ""
-        if analysis_summary: context += f"System Summary (Stats & Components):\n{analysis_summary}\n"  
-
-        user = f"{context}Project Context & Overview:\n{code_content}\n\nProvide the high-level system architecture report."
-        return self.ask_ai(system, user)
-
-
-class ProjectLowLevelAgent(BaseAgent):
-    def process(self, code_content, detailed_analysis=None, **kwargs):
-        system = (
-            "You are a Senior Technical Architect. Perform a DEEP SYSTEM-WIDE LOGIC ANALYSIS.\n\n"
-            "CRITICAL: Use the provided 'Detailed Context' to fill in Relationships and Patterns across the entire project.\n"
-            "Highlight cross-file dependencies and data flow.\n\n"
-            
-            "--- FILE NAMING RULE ---\n"
-            "1. Your first line MUST be 'Project: Full Technical Analysis'.\n\n"
-
-            "STRICT FORMATTING RULES:\n"
-            "1. Every Component/Module MUST start with '## Module: Name'.\n"
-            "2. Under each Module, list its classes using '### Class: Name'.\n"
-            "3. Use double new lines between sections to avoid text clumping.\n"
-            "4. Every Module section MUST end with the separator '---' on a new line by itself.\n"
-            "5. Explain how the modules interact based on the provided Cross-File Contexts.\n"
-            "6. Provide a global 'Architectural Recommendations' section at the very end.\n\n"
-            
-            "Structure per Module:\n"
-            "## Module: [Filename or Component Group]\n\n"
-            "**Purpose:** [Description]\n\n"
-            "**Cross-Dependencies:** [List external files/services this module depends on]\n\n"
-            
-            "### Class: [ClassName]\n"
-            "**Role:** [Description]\n"
-            "**Patterns:** [Detected Patterns]\n"
-            "**Key Methods:** [Bullet list of crucial methods and their logic flow]\n\n"
-            
-            "---\n"
-        )
-        user = f"--- DETAILED SYSTEM ANALYSIS CONTEXT ---\n{detailed_analysis}\n\n--- PROJECT CONTEXTS AND EXECUTION FLOW ---\n{code_content}"
-        return self.ask_ai(system, user)
-
 class VerifierAgent(BaseAgent):
     def verify(self, code, explanation, force_verification=False, **kwargs):
         """
@@ -176,6 +134,7 @@ class VerifierAgent(BaseAgent):
         if code_size > 50000 and not force_verification:
             print(f"Warning: Code size too large ({code_size}). Skipping AI Verification.")
             return explanation 
+
         system = (
             "You are a QA Lead and Technical Reviewer. Your task is to verify the accuracy of the technical explanation against the actual code.\n\n"
             "STRICT FORMATTING RULES:\n"
@@ -199,7 +158,8 @@ class VerifierAgent(BaseAgent):
             return self.ask_ai(system, user)
         except Exception as e:
             print(f"AI Verification failed: {e}")
-            return explanation
+            return explanation # Return to original explanation in case AI fails
 
     def verify_async(self, code, explanation, **kwargs):
+        """Direct call version with forced verification enabled"""
         return self.verify(code, explanation, force_verification=True, **kwargs)

@@ -19,46 +19,6 @@ from core_ai.celery_tasks.analyze_task import analyze_code_file_task
 @api_view(['POST'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([AllowAny])
-def analyze_project(request):
-    """
-    تشغيل التحليل لكل ملفات مشروع
-    Body: { "project_id": "proj-123" }
-    """
-    try:
-        project_id = request.data.get('project_id')
-        if not project_id:
-            return Response({"error": "project_id is required"}, status=status.HTTP_400_BAD_REQUEST)
-
-        db = get_mongo_db()
-        if db is None:
-            return Response({"error": "Database connection failed"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-        code_files_collection = db[settings.CODE_FILES_COLLECTION]
-        files = list(code_files_collection.find({"source_project_id": project_id}))
-
-        if not files:
-            return Response({"error": f"No files found for project {project_id}"}, status=status.HTTP_404_NOT_FOUND)
-
-        task_ids = []
-        for f in files:
-            file_id = str(f['_id'])
-            task = analyze_code_file_task.delay(file_id)
-            task_ids.append(task.id)
-            code_files_collection.update_one({"_id": f['_id']}, {"$set": {"analysis_status": "IN_PROGRESS"}})
-
-        return Response({
-            "message": "Analysis started",
-            "project_id": project_id,
-            "task_ids": task_ids,
-        }, status=status.HTTP_202_ACCEPTED)
-
-    except Exception as e:
-        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-@api_view(['POST'])
-@authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([AllowAny])
 def start_analysis(request):
     """
     Start a specific analysis for a code file

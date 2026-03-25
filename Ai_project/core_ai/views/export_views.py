@@ -67,10 +67,6 @@ def handle_export_with_auto_generation(analysis_id, explanation_type, format_typ
                 analysis_obj_id = ObjectId(analysis_id)
             else:
                 analysis_obj_id = analysis_id
-                # Check if it's a project_id string
-                p_doc = db['project_analysis_results'].find_one({"project_id": str(analysis_id)})
-                if p_doc:
-                    analysis_obj_id = p_doc['_id']
         except:
             analysis_obj_id = analysis_id
 
@@ -131,7 +127,7 @@ def handle_export_with_auto_generation(analysis_id, explanation_type, format_typ
             
             tasks_collection = getattr(settings, 'AI_TASKS_COLLECTION', 'ai_tasks')
             task_data = db[tasks_collection].find_one({
-                "analysis_id": analysis_obj_id,
+                "analysis_id": analysis_id,
                 "exp_type": explanation_type,
                 "status": "completed"
             })
@@ -142,7 +138,7 @@ def handle_export_with_auto_generation(analysis_id, explanation_type, format_typ
                     '_id': task_data.get('result', {}).get('explanation_id', 'temp_id'),
                     'content': task_data['result']['content'],
                     'exp_type': explanation_type,
-                    'analysis_id': analysis_obj_id,
+                    'analysis_id': analysis_id,
                     'created_at': task_data.get('created_at')
                 }
             else:
@@ -151,12 +147,6 @@ def handle_export_with_auto_generation(analysis_id, explanation_type, format_typ
                 analysis_collection = getattr(settings, 'ANALYSIS_RESULTS_COLLECTION', 'analysis_results')
                 analysis_data = db[analysis_collection].find_one({"_id": ObjectId(analysis_id) if ObjectId.is_valid(analysis_id) else analysis_id})
                 
-                if not analysis_data:
-                    # Check project_analysis_results if it is a project
-                    p_doc = db['project_analysis_results'].find_one({"project_id": str(analysis_id)}) or db['project_analysis_results'].find_one({"_id": ObjectId(analysis_id) if ObjectId.is_valid(analysis_id) else analysis_id})
-                    if p_doc:
-                        analysis_data = p_doc
-                        
                 if not analysis_data:
                     return JsonResponse({
                         "error": "Analysis not found",

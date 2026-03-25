@@ -518,45 +518,13 @@ class JavaProcessor(ILanguageProcessorStrategy):
             else:
                 reached_root = True
         
-        # ═════ المرحلة 3: توليد العلاقات من الـ Attributes (نهج موثوق) ═════
-        # هذا النهج أكثر موثوقية من الـ AST مباشرة لأنه يستخدم البيانات المستخرجة مسبقاً
-        import re as _re
-        for cls in classes_list:
-            cls_name = cls.get('name', '')
-            for attr in cls.get('attributes', []):
-                attr_type = attr.get('type', '')
-                attr_name = attr.get('name', '')
-                if not attr_type:
-                    continue
-
-                # معالجة الأنواع الـ generic مثل List<Loan>, Set<Book>
-                generic_match = _re.search(r'<([A-Z][A-Za-z0-9]*)>', attr_type)
-                if generic_match:
-                    inner = generic_match.group(1)
-                    if not self._is_primitive_type_java(inner):
-                        all_relationships.append({
-                            'from': cls_name, 'to': inner,
-                            'type': 'aggregation',
-                            'label': attr_name, 'multiplicity': '0..*',
-                            'arrow': '→', 'directed': True
-                        })
-                # معالجة الأنواع البسيطة مثل BookService, Loan, Customer
-                elif (attr_type and attr_type[0].isupper()
-                        and not self._is_primitive_type_java(attr_type)):
-                    all_relationships.append({
-                        'from': cls_name, 'to': attr_type,
-                        'type': 'association',
-                        'label': attr_name, 'multiplicity': '1',
-                        'arrow': '→', 'directed': True
-                    })
-
-        # ═════ المرحلة 4: دمج العلاقات ═════
+        # ═════ المرحلة 3: دمج العلاقات ═════
         merged_relationships = self._merge_relationships_enhanced(all_relationships)
         
-        # ═════ المرحلة 5: كشف العلاقات ثنائية الاتجاه ═════
+        # ═════ المرحلة 4: كشف العلاقات ثنائية الاتجاه ═════
         final_relationships = self._detect_bidirectionals(merged_relationships)
         
-        # ═════ المرحلة 6: تنظيف الأتريبيوتس المكررة ═════
+        # ═════ المرحلة 5: تنظيف الأتريبيوتس المكررة ═════
         cleaned_classes = self._clean_duplicate_attributes(classes_list, final_relationships)
         
         return {
@@ -1150,11 +1118,7 @@ class JavaProcessor(ILanguageProcessorStrategy):
         return interfaces
 
     def _parse_generic_type(self, generic_node) -> tuple:
-        """
-        تحليل Generic Type مثل List<Employee>
-        يستخدم النص المباشر كـ fallback إذا لم يجد type_identifier داخل type_arguments
-        هذا ضروري لأن بعض إصدارات tree-sitter-java لا تعرض type_identifier مباشرة
-        """
+        """تحليل Generic Type مثل List<Employee>"""
         base_type = ""
         inner_type = None
         
@@ -1162,32 +1126,10 @@ class JavaProcessor(ILanguageProcessorStrategy):
             if child.type == 'type_identifier':
                 base_type = child.text.decode('utf-8')
             elif child.type == 'type_arguments':
-                # محاولة 1: البحث عن type_identifier مباشرة
                 for type_arg in child.children:
                     if type_arg.type == 'type_identifier':
                         inner_type = type_arg.text.decode('utf-8')
                         break
-                
-                # محاولة 2: Fallback - قراءة النص مباشرة من <Type> أو <Type, Type>
-                if not inner_type:
-                    raw = child.text.decode('utf-8')  # e.g. "<Loan>" or "<K, V>"
-                    raw = raw.strip('<>').strip()
-                    # خذ أول نوع فقط (قبل أي فاصلة)
-                    first_type = raw.split(',')[0].strip()
-                    # تنظيف أي wildcards أو extends
-                    first_type = first_type.replace('? extends ', '').replace('? super ', '').strip()
-                    if first_type and first_type[0].isupper():
-                        inner_type = first_type
-        
-        # Fallback نهائي: قراءة النص الكامل للـ node مثل "List<Loan>"
-        if not inner_type and not base_type:
-            full_text = generic_node.text.decode('utf-8') if generic_node.text else ""
-            if '<' in full_text and '>' in full_text:
-                base_type = full_text[:full_text.index('<')].strip()
-                inner_raw = full_text[full_text.index('<')+1:full_text.rindex('>')].strip()
-                first_type = inner_raw.split(',')[0].strip()
-                if first_type and first_type[0].isupper():
-                    inner_type = first_type
         
         return base_type, inner_type
 

@@ -6,21 +6,16 @@ from core_upm.views import (
     ProjectListCreateAPIView,
     ProjectRetrieveUpdateDestroyAPIView,
     ArtifactListCreateAPIView,
-    ArtifactRetrieveUpdateDestroyAPIView
+    ArtifactRetrieveUpdateDestroyAPIView,
+    AdminUserListView,
+    AdminCreateReviewerView,
+    AdminToggleUserActiveView,
+    ChangePasswordView,
+    OnlineUsersView,
+    ReviewerNotifyAdminView,
 )
-from core_upm.views.folder_views import (
-    FolderListCreateAPIView,
-    FolderRetrieveUpdateDestroyAPIView
-)
-from core_upm.views.folder_upload_proxy import FolderUploadProxyView
-<<<<<<< HEAD
-=======
-from core_upm.views.github_views import (
-    GitHubConnectView,
-    GitHubSyncView,
-    GitHubWebhookView
-)
->>>>>>> feature/github-integration
+
+
 
 urlpatterns = [
     # User authentication
@@ -35,18 +30,28 @@ urlpatterns = [
     path('projects/<uuid:project_id>/artifacts/', ArtifactListCreateAPIView.as_view(), name='artifact-list-create'),
     path('artifacts/<uuid:code_id>/', ArtifactRetrieveUpdateDestroyAPIView.as_view(), name='artifact-detail'),
 
-    # Folders — CRUD
-    path('projects/<uuid:project_id>/folders/', FolderListCreateAPIView.as_view(), name='folder-list-create'),
-    path('folders/<uuid:folder_id>/', FolderRetrieveUpdateDestroyAPIView.as_view(), name='folder-detail'),
+    # Admin / account endpoints
+    path('admin/users/',
+         AdminUserListView.as_view(),
+         name='admin-user-list'),
 
-    # Folder Upload — مرتبط بالمشروع تلقائياً من الـ URL
-    path('projects/<uuid:project_id>/folder-upload/', FolderUploadProxyView.as_view(), name='folder-upload'),
-<<<<<<< HEAD
-=======
+    path('admin/users/create-reviewer/',
+         AdminCreateReviewerView.as_view(),
+         name='admin-create-reviewer'),
 
-    # GitHub Integration
-    path('projects/<uuid:project_id>/github/connect/', GitHubConnectView.as_view(), name='github-connect'),
-    path('projects/<uuid:project_id>/github/sync/', GitHubSyncView.as_view(), name='github-sync'),
-    path('projects/<uuid:project_id>/github/webhook/', GitHubWebhookView.as_view(), name='github-webhook'),
->>>>>>> feature/github-integration
+    path('admin/users/<int:user_id>/toggle-active/',
+         AdminToggleUserActiveView.as_view(),
+         name='admin-toggle-active'),
+
+    path('account/change-password/',
+         ChangePasswordView.as_view(),
+         name='change-password'),
+
+    path('users/online/',
+         OnlineUsersView.as_view(),
+         name='online-users'),
+
+    path('reviewer/notify-admin/',
+         ReviewerNotifyAdminView.as_view(),
+         name='reviewer-notify-admin'),
 ]

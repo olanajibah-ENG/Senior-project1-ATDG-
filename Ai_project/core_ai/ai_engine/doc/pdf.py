@@ -562,7 +562,7 @@ class PDFGenerator(DocumentationGenerator):
             keys = ['Complexity Level','Security Note','Impact Analysis','Best Practices','Purpose', 
                     'Patterns','Main Components','Purpose & Responsibility','Executive Summary',
                     'Relationships','Logic Flow','Parameters','Returns','Description',
-                    'Key Capabilities','Error Handling', 'Attributes']
+                    'Key Capabilities','Error Handling', 'Attributes','Application Lifecycle','Dependencies','API Routes Overview']
             
             for key in keys:
                 # نمط يلتقط المفتاح حتى لو سبقه أرقام (مثل 1. **Purpose**) ليقوم بتنظيفها
