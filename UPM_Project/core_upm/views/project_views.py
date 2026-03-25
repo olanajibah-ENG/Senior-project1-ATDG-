@@ -108,8 +108,8 @@ class ProjectRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
         project = self.get_object()
         # Map serializer validated_data (title/description) to service expected format (project_name/project_description)
         service_data = {}
-        if 'project_name' in serializer.validated_data:
-            service_data['project_name'] = serializer.validated_data['project_name']
+        if 'project_title' in serializer.validated_data:
+            service_data['project_title'] = serializer.validated_data['project_title']
         if 'project_description' in serializer.validated_data:
             service_data['project_description'] = serializer.validated_data['project_description']
         updated_project = service.update_project(
@@ -195,3 +195,4 @@ class ProjectViewSet(viewsets.ModelViewSet):
                 {"error": f"Failed to send code for analysis: {e}. AI Service might be down or misconfigured."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
