@@ -82,16 +82,20 @@ class AIExplanationViewSet(viewsets.ViewSet):
         """
         توليد شرح جديد باستخدام الذكاء الاصطناعي
         """
-        # ✅ التحقق المسبق من analysis_id باستخدام get_safe_object_id
-        analysis_id = get_safe_object_id(request.data.get('analysis_id'))
-        if not analysis_id:
+        # ✅ التحقق المسبق من analysis_id
+        raw_analysis_id = request.data.get('analysis_id')
+        if not raw_analysis_id:
             return Response({
-                "error": "Invalid analysis_id format",
-                "message": "analysis_id must be a valid MongoDB ObjectId"
+                "error": "Missing analysis_id",
+                "message": "analysis_id is required"
             }, status=400)
-        
-        # تحويل إلى string للاستخدام في الـ task
-        analysis_id_str = str(analysis_id)
+            
+        analysis_id = get_safe_object_id(raw_analysis_id)
+        if not analysis_id:
+            # Assume it's a project UUID string
+            analysis_id_str = str(raw_analysis_id).strip()
+        else:
+            analysis_id_str = str(analysis_id)
         
         # ✅ محاولة الحصول على exp_type من مصادر متعددة
         exp_type = request.data.get('type', '').strip() if request.data.get('type') else None
