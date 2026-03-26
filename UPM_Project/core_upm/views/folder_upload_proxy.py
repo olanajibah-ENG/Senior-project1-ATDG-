@@ -30,12 +30,8 @@ from core_upm.models.artifact import CodeArtifact
 
 logger = logging.getLogger(__name__)
 
-<<<<<<< HEAD
 # تم تغيير endpoint ليتوافق مع مسار خدمة AI الفعلي
 AI_FOLDER_UPLOAD_URL = 'http://ai_django_app:8000/api/analysis/upload-folder/'
-=======
-AI_FOLDER_UPLOAD_URL = 'http://ai_django_app:8000/folder-upload/'
->>>>>>> feature/github-integration
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -84,10 +80,7 @@ class FolderUploadProxyView(APIView):
             )
 
         # 3. إرسال الملفات لـ AI service
-<<<<<<< HEAD
         # ملاحظة: خدمة AI في Ai_project/core_ai/urls.py تستخدم endpoint = /upload-folder/
-=======
->>>>>>> feature/github-integration
         try:
             ai_response = requests.post(
                 AI_FOLDER_UPLOAD_URL,
@@ -96,10 +89,6 @@ class FolderUploadProxyView(APIView):
                     'user_email': request.user.email,
                 },
                 files=files_to_forward,
-<<<<<<< HEAD
-=======
-                headers={'Host': 'localhost'},
->>>>>>> feature/github-integration
                 timeout=300
             )
             ai_response.raise_for_status()

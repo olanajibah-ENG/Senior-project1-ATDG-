@@ -15,6 +15,18 @@ from core_upm.views import (
     ReviewerNotifyAdminView,
 )
 
+from core_upm.views.github_views import (
+    GitHubConnectView,
+    GitHubSyncView,
+    GitHubWebhookView
+)
+
+
+from core_upm.views.folder_views import (
+    FolderListCreateAPIView,
+    FolderRetrieveUpdateDestroyAPIView
+)
+from core_upm.views.folder_upload_proxy import FolderUploadProxyView
 
 
 urlpatterns = [
@@ -54,4 +66,12 @@ urlpatterns = [
     path('reviewer/notify-admin/',
          ReviewerNotifyAdminView.as_view(),
          name='reviewer-notify-admin'),
+    path('projects/<uuid:project_id>/github/connect/', GitHubConnectView.as_view(), name='github-connect'),
+    path('projects/<uuid:project_id>/github/sync/', GitHubSyncView.as_view(), name='github-sync'),
+    path('projects/<uuid:project_id>/github/webhook/', GitHubWebhookView.as_view(), name='github-webhook'),     
+    path('projects/<uuid:project_id>/folders/', FolderListCreateAPIView.as_view(), name='folder-list-create'),
+    path('folders/<uuid:folder_id>/', FolderRetrieveUpdateDestroyAPIView.as_view(), name='folder-detail'),
+
+    # Folder Upload — مرتبط بالمشروع تلقائياً من الـ URL
+    path('projects/<uuid:project_id>/folder-upload/', FolderUploadProxyView.as_view(), name='folder-upload'),
 ]

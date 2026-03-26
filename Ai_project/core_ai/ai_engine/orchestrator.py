@@ -110,17 +110,62 @@ class DocumentationOrchestrator:
             return existing['content'], str(existing['_id'])
 
         # 3. Generate new explanation with STRICT enforcement
+        is_project = False
         analysis_data = self.db[settings.ANALYSIS_RESULTS_COLLECTION].find_one(
             {"_id": ObjectId(self.analysis_id)}
         )
-        if not analysis_data:
-            raise Exception("Analysis record not found.")
 
-        code_content = analysis_data.get('ast_structure', {}).get('code_content', '')
+        if not analysis_data:
+            analysis_data = self.db['project_analysis_results'].find_one(
+                {"_id": ObjectId(self.analysis_id)}
+            )
+            if not analysis_data:
+                raise Exception("Analysis record not found.")
+            is_project = True
         
-        semantic_data = analysis_data.get('semantic_analysis_data', {})
-        extracted_features = analysis_data.get('extracted_features', {})
-        class_diagram_data = analysis_data.get('class_diagram_data', {})
+        if is_project:
+            contexts = analysis_data.get('contexts', {})
+            graph_data = analysis_data.get('graph_data', {})
+            ordered_files = graph_data.get('ordered', [])
+            
+            code_content = "PROJECT ARCHITECTURE OVERVIEW\n\n"
+            code_content += f"Total Files: {len(ordered_files)}\n"
+            code_content += f"Execution Order: {' -> '.join(ordered_files)}\n\n"
+            
+            for f_id, f_context in contexts.items():
+                code_content += f"--- Context for File: {f_id} ---\n"
+                code_content += f"{f_context}\n\n"
+            
+            aggregated_classes = []
+            analysis_ids = analysis_data.get('analysis_ids', [])
+            for a_id in analysis_ids:
+                try:
+                    f_analysis = self.db[settings.ANALYSIS_RESULTS_COLLECTION].find_one({"_id": ObjectId(a_id)})
+                    if f_analysis:
+                        f_diagram = f_analysis.get('class_diagram_data', {})
+                        f_clss = f_diagram.get('classes', [])
+                        for cls in f_clss:
+                            # Add filename info to class
+                            cf_id = f_analysis.get('code_file_id')
+                            if cf_id:
+                                cf = self.db['code_files'].find_one({"_id": cf_id})
+                                if cf:
+                                    cls['filepath'] = cf.get('filepath', cf.get('filename', ''))
+                            aggregated_classes.append(cls)
+                except Exception:
+                    pass
+            
+            semantic_data = {'classes': aggregated_classes}
+            class_diagram_data = {'classes': aggregated_classes}
+            extracted_features = {
+                'lines_of_code': sum(len(c.get('methods', [])) * 10 for c in aggregated_classes), 
+                'functions': sum(len(c.get('methods', [])) for c in aggregated_classes)
+            }
+        else:
+            code_content = analysis_data.get('ast_structure', {}).get('code_content', '')
+            semantic_data = analysis_data.get('semantic_analysis_data', {})
+            extracted_features = analysis_data.get('extracted_features', {})
+            class_diagram_data = analysis_data.get('class_diagram_data', {})
         
         # 4. CRITICAL: Strict type enforcement for generation
         if is_high_level:
@@ -161,18 +206,19 @@ class DocumentationOrchestrator:
         else:
             print(f"🟡🟡🟡 STRICT ENFORCEMENT: Generating LOW LEVEL explanation (requested: '{exp_type}') 🟡🟡🟡")
             
-            agent = LowLevelAgent()
+            from .agents import ProjectLowLevelAgent
+            agent = ProjectLowLevelAgent() if is_project else LowLevelAgent()
             detailed_analysis = self._prepare_low_level_analysis(semantic_data, class_diagram_data, extracted_features)
             
             try:
                 raw_content = agent.process(code_content, detailed_analysis=detailed_analysis)
                 print(f"DEBUG: Low level agent generated content length: {len(raw_content)}")
                 
-                # Verify it's actually low level (should have technical details)
-                if not any(term in raw_content.lower() for term in ['## class:', '### method:', 'constructor:']):
+                # Verify it's actually low level
+                if not any(term in raw_content.lower() for term in ['## class', '### method', 'constructor:']):
                     print("⚠️ WARNING: Low level content missing technical structure! Adding template...")
-                    # Add technical structure
-                    raw_content = "File: TestCodeAnalysis\n\n" + raw_content
+                    prefix = "Project: Full System Analysis\n\n" if is_project else "File: Technical Analysis\n\n"
+                    raw_content = prefix + raw_content
                     
             except Exception as agent_error:
                 error_msg = str(agent_error)
@@ -182,7 +228,6 @@ class DocumentationOrchestrator:
         # 5. Verification with level enforcement
         code_size = len(code_content) + len(raw_content)
         verifier = VerifierAgent()
-        
         # Pass the CORRECT explanation_level to verifier
         try:
             verified_content = verifier.verify(

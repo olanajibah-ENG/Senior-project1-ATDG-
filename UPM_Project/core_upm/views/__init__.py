@@ -9,3 +9,6 @@ from .account_views import (
     OnlineUsersView,
 )
 from .reviewer_views import ReviewerNotifyAdminView
+from .github_views import GitHubWebhookView
+from .folder_upload_proxy import FolderUploadProxyView
+from .folder_views import FolderListCreateAPIView, FolderRetrieveUpdateDestroyAPIView

@@ -25,6 +25,11 @@ from core_ai.views.evaluation_views import (
     submit_human_review
 )
 
+from core_ai.views.folder_upload import FolderUploadView
+from core_ai.views.dependency_graph_view import dependency_graph_view
+from core_ai.views.context_view import cross_file_context_view
+from core_ai.views.project_analysis_view import AnalyzeProjectView, ProjectClassDiagramView
+
 print("CORE_AI URLS.PY LOADED!")
 print("UNIFIED EXPORT ENDPOINTS LOADED!")
 
@@ -51,4 +56,11 @@ urlpatterns = [
     path('evaluation-history/<str:explanation_id>/', get_evaluation_history, name='evaluation-history'),
     path('evaluation-stats/', get_evaluation_stats, name='evaluation-stats'),
     path('submit-human-review/<str:explanation_id>/', submit_human_review, name='submit-human-review'),
+
+    path('analyze-project/', AnalyzeProjectView.as_view(), name='analyze-project'),
+    path('project-class-diagram/<str:project_id>/', ProjectClassDiagramView.as_view(), name='project-class-diagram'),
+    path('dependency-graph/', dependency_graph_view, name='dependency-graph'),
+    path('cross-file-context/', cross_file_context_view, name='cross-file-context'),
+    path('upload-folder/', FolderUploadView.as_view(), name='upload-folder'),
+    
 ]
