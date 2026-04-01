@@ -43,10 +43,16 @@ def generate_ai_explanation_task(self, analysis_id, exp_type, user_email=None):
     try:
         task_record.save()
         db = get_mongo_db()
+        # Look in regular analysis results first
         analysis = db[settings.ANALYSIS_RESULTS_COLLECTION].find_one({"_id": ObjectId(analysis_id)})
         
-        if not analysis or analysis.get('status') != 'COMPLETED':
-            raise ValueError("Analysis not found or not completed yet.")
+        # If not found, look in project analysis results
+        if not analysis:
+            analysis = db['project_analysis_results'].find_one({"_id": ObjectId(analysis_id)})
+            
+        if not analysis or analysis.get('status') not in ['COMPLETED', 'COMPLETED_WITH_ERRORS']:
+            status = analysis.get('status') if analysis else 'NOT_FOUND'
+            raise ValueError(f"Analysis record not found or not completed (Status: {status}).")
 
         # تشغيل الأوركستريتور
         orchestrator = DocumentationOrchestrator(analysis_id)

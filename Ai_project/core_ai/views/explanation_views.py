@@ -20,8 +20,12 @@ def get_safe_object_id(id_str):
     دالة آمنة للتحقق من وتحويل ObjectId
     تمنع الأخطاء 500 عند إدخال قيم خاطئة
     """
-    if id_str and ObjectId.is_valid(str(id_str).strip()):
-        return ObjectId(str(id_str).strip())
+    if not id_str:
+        return None
+    
+    clean_id = str(id_str).strip()
+    if ObjectId.is_valid(clean_id):
+        return ObjectId(clean_id)
     return None
 
 
@@ -83,11 +87,36 @@ class AIExplanationViewSet(viewsets.ViewSet):
         توليد شرح جديد باستخدام الذكاء الاصطناعي
         """
         # ✅ التحقق المسبق من analysis_id باستخدام get_safe_object_id
-        analysis_id = get_safe_object_id(request.data.get('analysis_id'))
+        raw_analysis_id = request.data.get('analysis_id')
+        analysis_id = get_safe_object_id(raw_analysis_id)
+        
+        # 🆕 دعم الـ UUID الخاص بالمشروع (Project ID Support)
+        if not analysis_id and raw_analysis_id:
+            import re
+            uuid_regex = re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', re.I)
+            if uuid_regex.match(str(raw_analysis_id).strip()):
+                try:
+                    db = get_mongo_db()
+                    project_res = db['project_analysis_results'].find_one(
+                        {"project_id": str(raw_analysis_id).strip()},
+                        sort=[("created_at", -1)]
+                    )
+                    if project_res:
+                        analysis_id = project_res['_id']
+                        print(f"!!! RESOLVED Project UUID {raw_analysis_id} to ObjectId {analysis_id} !!!")
+                        logger.info(f"--- Resolved Project UUID {raw_analysis_id} to ObjectId {analysis_id} ---")
+                    else:
+                        return Response({
+                            "error": "Project analysis not found",
+                            "message": "Please run project analysis first using /api/analysis/analyze-project/"
+                        }, status=404)
+                except Exception as e:
+                    logger.error(f"Error resolving project UUID: {str(e)}")
+
         if not analysis_id:
             return Response({
                 "error": "Invalid analysis_id format",
-                "message": "analysis_id must be a valid MongoDB ObjectId"
+                "message": "analysis_id must be a valid MongoDB ObjectId or a Project UUID"
             }, status=400)
         
         # تحويل إلى string للاستخدام في الـ task
@@ -102,9 +131,10 @@ class AIExplanationViewSet(viewsets.ViewSet):
         if not exp_type:
             exp_type = request.data.get('explanation_level', '').strip() if request.data.get('explanation_level') else None
             
-        logger.info(f"🔍 [GenerateExplanation] DEBUG - Full request data: {request.data}")
-        logger.info(f"🔍 [GenerateExplanation] DEBUG - analysis_id: {analysis_id_str}")
-        logger.info(f"🔍 [GenerateExplanation] DEBUG - exp_type BEFORE normalization: '{exp_type}'")
+        print(f"!!! generate_explanation CALLED with analysis_id: {analysis_id_str} !!!")
+        logger.info(f"--- [GenerateExplanation] DEBUG - Full request data: {request.data}")
+        logger.info(f"--- [GenerateExplanation] DEBUG - analysis_id: {analysis_id_str}")
+        logger.info(f"--- [GenerateExplanation] DEBUG - exp_type BEFORE normalization: '{exp_type}'")
         
         # ============================================================
         # ✅ توحيد exp_type - دعم جميع الصيغ المحتملة

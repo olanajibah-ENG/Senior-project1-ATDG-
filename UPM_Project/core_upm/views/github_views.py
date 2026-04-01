@@ -28,6 +28,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
+from core_upm.permissions import IsDeveloperRole
 from core_upm.models.project import Project
 from core_upm.models.repository import Repository
 from core_upm.models.folder import Folder
@@ -74,7 +75,7 @@ class GitHubConnectView(APIView):
             "version_number": 1
         }
     """
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,IsDeveloperRole]
 
     def post(self, request, project_id):
         # 1. جلب المشروع والتحقق من الملكية
@@ -319,7 +320,7 @@ class GitHubSyncView(APIView):
             "version_number": 2
         }
     """
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,IsDeveloperRole]
 
     def post(self, request, project_id):
         project = get_object_or_404(Project, project_id=project_id)
