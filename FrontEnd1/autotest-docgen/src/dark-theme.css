@@ -1,0 +1,544 @@
+/* Modern Charcoal Mid-Dark Theme - 2025/2026 Professional Standards */
+.dark {
+    color-scheme: dark;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.dark body {
+    background-color: #111827 !important; /* slate-900 - softer than pure black */
+    color: #f8fafc !important; /* slate-50 - very light text for maximum contrast */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Light Theme Styles */
+.light {
+    color-scheme: light;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.light body {
+    background-color: #ffffff !important;
+    color: #111827 !important;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Main Background */
+.dark .main-content {
+    background-color: #111827 !important;
+}
+
+/* Sidebar */
+.dark .sidebar {
+    background-color: #17202e !important; /* slate-900 variant */
+    border-color: #334155 !important; /* slate-700 */
+}
+
+.dark .sidebar-nav a {
+    color: #f8fafc !important; /* slate-50 - very light */
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.dark .sidebar-nav a:hover {
+    background-color: #2d3748 !important; /* soft hover */
+}
+
+.dark .sidebar-nav a.active {
+    background-color: #1f2937 !important; /* gray-800 */
+    border-left: 3px solid #6366f1 !important; /* indigo-500 */
+    color: #f8fafc !important;
+    font-weight: 600;
+}
+
+.dark .sidebar-user {
+    background-color: #17202e !important;
+    border-color: #334155 !important;
+}
+
+.dark .sidebar-user-info {
+    color: #f8fafc !important;
+}
+
+.dark .user-name {
+    color: #f8fafc !important;
+    font-weight: 600;
+}
+
+.dark .user-email {
+    color: #cbd5e1 !important; /* slate-300 */
+}
+
+.dark .user-role {
+    color: #94a3b8 !important; /* slate-400 */
+}
+
+/* Header */
+.dark .dashboard-header {
+    background-color: #17202e !important; /* slate-900 variant */
+    border-color: #334155 !important;
+}
+
+.dark .header {
+    background-color: #17202e !important; /* slate-900 variant */
+    border-color: #334155 !important;
+}
+
+/* Cards and Tables */
+.dark .project-card,
+.dark .document-card,
+.dark .card,
+.dark [class*="card"] {
+    background-color: #1f2937 !important; /* gray-800 */
+    border-color: #334155 !important; /* slate-700 */
+    color: #f8fafc !important;
+    transition: all 0.2s ease;
+}
+
+.dark .project-card:hover,
+.dark .document-card:hover,
+.dark .card:hover {
+    background-color: #2d3748 !important; /* soft hover with opacity */
+}
+
+/* Tables */
+.dark table {
+    background-color: transparent !important;
+    color: #f8fafc !important;
+}
+
+.dark th {
+    background-color: #1e293b !important; /* slate-800 */
+    color: #cbd5e1 !important; /* slate-300 */
+    border-color: #334155 !important;
+    font-weight: 600;
+}
+
+.dark td {
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+    font-weight: 500;
+}
+
+.dark tr:hover {
+    background-color: #2d3748 !important; /* soft hover */
+}
+
+/* Buttons */
+.dark .btn-primary,
+.dark button[class*="primary"] {
+    background-color: #6366f1 !important; /* indigo-500 */
+    color: #ffffff !important;
+    border-color: #6366f1 !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.dark .btn-primary:hover,
+.dark button[class*="primary"]:hover {
+    background-color: #818cf8 !important; /* indigo-400 */
+    border-color: #818cf8 !important;
+}
+
+.dark .btn-secondary,
+.dark button[class*="secondary"] {
+    background-color: #334155 !important; /* slate-700 */
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.dark .btn-secondary:hover,
+.dark button[class*="secondary"]:hover {
+    background-color: #475569 !important;
+}
+
+.dark .btn-success,
+.dark button[class*="success"],
+.dark .success {
+    background-color: #10b981 !important; /* emerald-500 */
+    color: #ffffff !important;
+}
+
+.dark .btn-warning,
+.dark button[class*="warning"],
+.dark .warning {
+    background-color: #fbbf24 !important; /* amber-500 */
+    color: #000000 !important;
+}
+
+.dark .btn-danger,
+.dark button[class*="danger"],
+.dark .danger {
+    background-color: #ef4444 !important; /* red-500 */
+    color: #ffffff !important;
+}
+
+/* Forms and Inputs */
+.dark .form-group input,
+.dark .form-group select,
+.dark .form-group textarea,
+.dark input,
+.dark select,
+.dark textarea {
+    background-color: #1e293b !important; /* slate-800 */
+    border-color: #475569 !important; /* slate-600 */
+    color: #f8fafc !important;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.dark .form-group input:focus,
+.dark .form-group select:focus,
+.dark .form-group textarea:focus,
+.dark input:focus,
+.dark select:focus,
+.dark textarea:focus {
+    border-color: #6366f1 !important; /* indigo-500 */
+    background-color: #2d3748 !important; /* soft focus background */
+}
+
+.dark .form-group label {
+    color: #e2e8f0 !important; /* slate-200 - very light */
+    font-weight: 600;
+}
+
+/* Dropdowns and Modals */
+.dark .dropdown-menu,
+.dark .dropdown-item-card,
+.dark .settings-dropdown-menu,
+.dark .language-dropdown-menu,
+.dark .theme-dropdown-menu,
+.dark .modal-content {
+    background-color: #1f2937 !important; /* gray-800 */
+    border-color: #475569 !important; /* slate-600 */
+    color: #f8fafc !important;
+}
+
+.dark .dropdown-item-card:hover {
+    background-color: #2d3748 !important; /* soft hover */
+}
+
+.dark .dropdown-header-card {
+    background-color: #1f2937 !important;
+    border-color: #475569 !important;
+}
+
+.dark .dropdown-divider,
+.dark .dropdown-divider-thick {
+    background-color: #334155 !important; /* slate-700 */
+}
+
+/* Language and Theme Dropdowns */
+.dark .language-dropdown-trigger,
+.dark .theme-dropdown-trigger {
+    background-color: #334155 !important; /* slate-700 */
+    border-color: #475569 !important; /* slate-600 */
+    color: #f8fafc !important;
+    font-weight: 500;
+}
+
+.dark .language-dropdown-trigger:hover,
+.dark .theme-dropdown-trigger:hover {
+    background-color: #475569 !important;
+}
+
+.dark .language-dropdown-menu {
+    background-color: #1f2937 !important; /* gray-800 */
+    border-color: #475569 !important; /* slate-600 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark .language-option,
+.dark .theme-option {
+    color: #f8fafc !important;
+    border-bottom-color: #334155 !important;
+    font-weight: 500;
+}
+
+.dark .language-option:hover,
+.dark .theme-option:hover {
+    background-color: #2d3748 !important; /* soft hover */
+    color: #f8fafc !important;
+}
+
+.dark .language-option.active,
+.dark .theme-option.active {
+    background-color: #6366f1 !important; /* indigo-500 */
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+/* Notifications Badge */
+.dark .notification-badge,
+.dark .badge {
+    background-color: #ef4444 !important; /* red-500 */
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+/* Icons */
+.dark svg,
+.dark .icon {
+    color: #cbd5e1 !important; /* slate-300 */
+    stroke: #cbd5e1 !important;
+}
+
+.dark .sidebar-nav svg {
+    color: #94a3b8 !important; /* slate-400 */
+}
+
+.dark .sidebar-nav a.active svg {
+    color: #6366f1 !important; /* indigo-500 */
+}
+
+/* Text Colors - Maximum Contrast */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: #f8fafc !important; /* slate-50 - very light */
+    font-weight: 600;
+}
+
+.dark .text-primary,
+.dark .font-semibold {
+    color: #f8fafc !important; /* slate-50 - very light */
+    font-weight: 600;
+}
+
+.dark .text-secondary,
+.dark .text-muted,
+.dark .text-gray-500,
+.dark .text-gray-600 {
+    color: #cbd5e1 !important; /* slate-300 - still very readable */
+}
+
+.dark .text-gray-900 {
+    color: #f8fafc !important; /* slate-50 - very light */
+}
+
+/* Borders and Dividers */
+.dark * {
+    border-color: #334155 !important; /* slate-700 */
+}
+
+.dark .border-gray-200,
+.dark .border-gray-300 {
+    border-color: #475569 !important; /* slate-600 */
+}
+
+/* Modals */
+.dark .modal-overlay {
+    background-color: rgba(17, 24, 39, 0.8) !important; /* slate-900 with opacity */
+}
+
+.dark .modal-content {
+    background-color: #1f2937 !important; /* gray-800 */
+    border: 1px solid #475569 !important; /* slate-600 */
+    color: #f8fafc !important;
+}
+
+.dark .profile-modal-header,
+.dark .change-password-header {
+    border-bottom-color: #334155 !important;
+}
+
+.dark .profile-modal-header h2,
+.dark .change-password-header h2 {
+    color: #f8fafc !important;
+    font-weight: 600;
+}
+
+/* Search */
+.dark .search-input {
+    background-color: #1e293b !important; /* slate-800 */
+    border-color: #475569 !important; /* slate-600 */
+    color: #f8fafc !important;
+    font-weight: 500;
+}
+
+.dark .search-input:focus {
+    border-color: #6366f1 !important; /* indigo-500 */
+    background-color: #2d3748 !important; /* soft focus background */
+}
+
+/* Settings Dropdown */
+.dark .settings-dropdown-trigger {
+    background-color: #334155 !important; /* slate-700 */
+    color: #f8fafc !important;
+}
+
+.dark .settings-dropdown-trigger:hover {
+    background-color: #475569 !important;
+}
+
+/* Scrollbars */
+.dark ::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+    background: #1e293b; /* slate-800 */
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #475569; /* slate-600 */
+    border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #64748b; /* slate-500 */
+}
+
+/* Theme Icon Changes */
+.dark .theme-icon-light {
+    display: none;
+}
+
+.dark .theme-icon-dark {
+    display: block;
+}
+
+.light .theme-icon-light {
+    display: block;
+}
+
+.light .theme-icon-dark {
+    display: none;
+}
+
+/* Additional Elements */
+.dark .empty-state {
+    background-color: #1f2937 !important;
+    color: #f8fafc !important;
+}
+
+.dark .code-editor-area {
+    background-color: #1f2937 !important;
+    border-color: #334155 !important;
+}
+
+.dark .code-display-panel,
+.dark .issues-panel {
+    background-color: #1f2937 !important;
+}
+
+.dark .status-badge {
+    background-color: #10b981 !important; /* emerald-500 */
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+.dark .alert {
+    background-color: #1f2937 !important;
+    border-color: #475569 !important;
+    color: #f8fafc !important;
+}
+
+.dark .loading-state {
+    background-color: #1f2937 !important;
+    color: #f8fafc !important;
+}
+
+.dark .error-state {
+    background-color: #7f1d1d !important;
+    color: #fca5a5 !important;
+}
+
+/* Toggle Switch */
+.dark .toggle-slider {
+    background-color: #ffffff !important;
+}
+
+.dark .toggle-switch.small .toggle-slider {
+    background-color: #ffffff !important;
+}
+
+/* File Items */
+.dark .file-item-simple,
+.dark .project-documents-item {
+    background-color: #1f2937 !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+}
+
+.dark .file-item-simple:hover {
+    background-color: #2d3748 !important; /* soft hover */
+}
+
+.dark .file-name {
+    color: #f8fafc !important;
+    font-weight: 600;
+}
+
+.dark .file-type {
+    color: #cbd5e1 !important; /* slate-300 */
+}
+
+.dark .project-name {
+    color: #f8fafc !important;
+    font-weight: 600;
+}
+
+.dark .no-files {
+    color: #cbd5e1 !important; /* slate-300 */
+}
+
+/* Action Buttons */
+.dark .btn-edit:hover {
+    background-color: #6366f1 !important; /* indigo-500 */
+    color: #ffffff !important;
+}
+
+.dark .btn-attach:hover {
+    background-color: #10b981 !important; /* emerald-500 */
+    color: #ffffff !important;
+}
+
+.dark .btn-delete:hover {
+    background-color: #ef4444 !important; /* red-500 */
+    color: #ffffff !important;
+}
+
+/* Download Buttons */
+.dark .download-btn-simple.pdf:hover {
+    background-color: #ef4444 !important;
+    color: #ffffff !important;
+}
+
+.dark .download-btn-simple.markdown:hover {
+    background-color: #10b981 !important;
+    color: #ffffff !important;
+}
+
+/* Preview and Retry */
+.dark .preview-btn {
+    background-color: #334155 !important;
+    color: #f8fafc !important;
+    font-weight: 500;
+}
+
+.dark .retry-btn {
+    background-color: #6366f1 !important;
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+/* Delete Account Modal */
+.dark .delete-account-modal {
+    background-color: #1f2937 !important;
+    color: #f8fafc !important;
+    border: 1px solid #475569 !important;
+}
+
+/* Override any remaining white backgrounds */
+.dark [style*="background: white"], 
+.dark [style*="background: #fff"], 
+.dark [style*="background: #ffffff"] {
+    background: #1f2937 !important;
+}
+
+/* Override any remaining black text */
+.dark [style*="color: black"], 
+.dark [style*="color: #000"], 
+.dark [style*="color: #000000"] {
+    color: #f8fafc !important;
+}
