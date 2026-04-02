@@ -30,6 +30,9 @@ from core_ai.views.dependency_graph_view import dependency_graph_view
 from core_ai.views.context_view import cross_file_context_view
 from core_ai.views.project_analysis_view import AnalyzeProjectView, ProjectClassDiagramView
 
+# ← جديد: استيراد view شجرة المشروع ومحتوى الملف
+from core_ai.views.project_tree_view import ProjectTreeView, FileContentView
+
 print("CORE_AI URLS.PY LOADED!")
 print("UNIFIED EXPORT ENDPOINTS LOADED!")
 
@@ -62,5 +65,8 @@ urlpatterns = [
     path('dependency-graph/', dependency_graph_view, name='dependency-graph'),
     path('cross-file-context/', cross_file_context_view, name='cross-file-context'),
     path('upload-folder/', FolderUploadView.as_view(), name='upload-folder'),
-    
+
+    # ← جديد: شجرة المشروع ومحتوى الملف
+    path('project-tree/<str:upm_project_id>/', ProjectTreeView.as_view(), name='project-tree'),
+    path('file-content/<str:file_id>/', FileContentView.as_view(), name='file-content'),
 ]
