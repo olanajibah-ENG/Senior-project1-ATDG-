@@ -22,7 +22,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
-
+from core_upm.permissions import IsDeveloperRole
 from core_upm.models.project import Project
 from core_upm.models.folder import Folder
 from core_upm.models.version import Version
@@ -54,7 +54,7 @@ class FolderUploadProxyView(APIView):
             "mysql_saved"   : { "version": 1, "folders": 2, "artifacts": 5 }
         }
     """
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,IsDeveloperRole]
     parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request, project_id):
@@ -82,6 +82,7 @@ class FolderUploadProxyView(APIView):
         # 3. إرسال الملفات لـ AI service
         # ملاحظة: خدمة AI في Ai_project/core_ai/urls.py تستخدم endpoint = /upload-folder/
         try:
+            headers = {'Host': 'localhost'}  # Fix for DisallowedHost error
             ai_response = requests.post(
                 AI_FOLDER_UPLOAD_URL,
                 data={
@@ -89,6 +90,7 @@ class FolderUploadProxyView(APIView):
                     'user_email': request.user.email,
                 },
                 files=files_to_forward,
+                headers=headers,
                 timeout=300
             )
             ai_response.raise_for_status()

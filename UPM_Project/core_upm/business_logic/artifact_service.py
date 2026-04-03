@@ -34,7 +34,6 @@ class ArtifactService:
             project=project,
             file_name=file_name,
             code_language=code_language,
-            code_version=artifact_data.get('code_version', None),
             storage_reference=storage_ref 
         )
         return artifact
