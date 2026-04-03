@@ -181,7 +181,19 @@ class CodeFileViewSet(viewsets.ViewSet):
     def analyze(self, request, pk=None):
         try:
             collection = self.get_collection()
-            code_file_data = collection.find_one({"_id": ObjectId(pk)})
+            
+            # Try to convert pk to ObjectId, if fails, search by source_project_id instead
+            try:
+                object_id = ObjectId(pk)
+                code_file_data = collection.find_one({"_id": object_id})
+                code_file_id_for_analysis = object_id
+            except:
+                # pk is not a valid ObjectId, treat it as source_project_id (UUID)
+                code_file_data = collection.find_one({"source_project_id": pk})
+                if code_file_data and "_id" in code_file_data:
+                    code_file_id_for_analysis = code_file_data["_id"]
+                else:
+                    return Response({"error": f"Code file not found for project_id: {pk}"}, status=status.HTTP_404_NOT_FOUND)
             if not code_file_data:
                 return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -189,7 +201,7 @@ class CodeFileViewSet(viewsets.ViewSet):
             db = get_mongo_db()
             analysis_collection = db[settings.ANALYSIS_RESULTS_COLLECTION]
             existing_analysis = analysis_collection.find_one({
-                "code_file_id": ObjectId(pk), 
+                "code_file_id": code_file_id_for_analysis, 
                 "status": "COMPLETED"
             })
             
@@ -202,7 +214,7 @@ class CodeFileViewSet(viewsets.ViewSet):
 
             # التحقق من وجود تحليل قيد التنفيذ
             in_progress_analysis = analysis_collection.find_one({
-                "code_file_id": ObjectId(pk), 
+                "code_file_id": code_file_id_for_analysis, 
                 "status": "IN_PROGRESS"
             })
             
@@ -213,11 +225,11 @@ class CodeFileViewSet(viewsets.ViewSet):
                 }, status=status.HTTP_202_ACCEPTED)
 
             collection.update_one(
-                {"_id": ObjectId(pk)}, 
+                {"_id": code_file_id_for_analysis}, 
                 {"$set": {"analysis_status": "IN_PROGRESS"}}
             )
 
-            analyze_code_file_task.delay(pk)  # ✅ استخدام الجديد
+            analyze_code_file_task.delay(str(code_file_id_for_analysis))  # ✅ استخدام الجديد
             
             return Response({
                 "message": f"Analysis for CodeFile {pk} started."

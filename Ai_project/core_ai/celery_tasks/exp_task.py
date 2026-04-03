@@ -32,21 +32,39 @@ def normalize_explanation_type(exp_type):
 
 @app.task(bind=True)
 def generate_ai_explanation_task(self, analysis_id, exp_type, user_email=None):
-    """توليد شرح AI بناءً على تحليل موجود مسبقاً"""
+    """توليد شرح AI بناءً على تحليل موجود مسبقاً - يدعم ObjectId (ملفات) و UUID (مشاريع)"""
     normalized_exp_type = normalize_explanation_type(exp_type)
     
+    # تحديد إذا كان الـ ID هو ObjectId أم UUID (مشروع)
+    is_valid_object_id = ObjectId.is_valid(analysis_id)
+    
     # سجل تتبع المهمة
-    task_model = AITask(task_id=self.request.id, analysis_id=ObjectId(analysis_id), 
+    task_analysis_id = ObjectId(analysis_id) if is_valid_object_id else str(analysis_id)
+    task_model = AITask(task_id=self.request.id, analysis_id=task_analysis_id, 
                         exp_type=normalized_exp_type, status='processing')
     task_record = AITaskRepository(task_model)
 
     try:
         task_record.save()
         db = get_mongo_db()
-        analysis = db[settings.ANALYSIS_RESULTS_COLLECTION].find_one({"_id": ObjectId(analysis_id)})
+        analysis = None
         
-        if not analysis or analysis.get('status') != 'COMPLETED':
-            raise ValueError("Analysis not found or not completed yet.")
+        if is_valid_object_id:
+            # البحث بـ ObjectId في نتائج التحليل العادية
+            analysis = db[settings.ANALYSIS_RESULTS_COLLECTION].find_one({"_id": ObjectId(analysis_id)})
+            # إذا لم يُوجد، ابحث في نتائج تحليل المشاريع
+            if not analysis:
+                analysis = db['project_analysis_results'].find_one({"_id": ObjectId(analysis_id)})
+        else:
+            # البحث بـ UUID (project_id) في نتائج تحليل المشاريع
+            analysis = db['project_analysis_results'].find_one({"project_id": str(analysis_id)})
+            if not analysis:
+                # محاولة ثانية: البحث كـ string في _id
+                analysis = db['project_analysis_results'].find_one({"_id": str(analysis_id)})
+            
+        if not analysis or analysis.get('status') not in ['COMPLETED', 'COMPLETED_WITH_ERRORS']:
+            status = analysis.get('status') if analysis else 'NOT_FOUND'
+            raise ValueError(f"Analysis record not found or not completed (Status: {status}).")
 
         # تشغيل الأوركستريتور
         orchestrator = DocumentationOrchestrator(analysis_id)
@@ -62,8 +80,11 @@ def generate_ai_explanation_task(self, analysis_id, exp_type, user_email=None):
         task_record.update_status('completed', result=result)
 
         # Auto-trigger evaluation in background
-        from core_ai.services.auto_trigger import trigger_evaluation_background
-        trigger_evaluation_background(str(explanation_id))
+        try:
+            from core_ai.services.auto_trigger import trigger_evaluation_background
+            trigger_evaluation_background(str(explanation_id))
+        except Exception as eval_err:
+            logger.warning(f"[AUTO-EVAL] Skipped: {eval_err}")
 
         if user_email:
             NotificationClient.send_custom_notification(

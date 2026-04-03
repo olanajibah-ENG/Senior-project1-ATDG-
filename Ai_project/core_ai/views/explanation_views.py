@@ -20,8 +20,12 @@ def get_safe_object_id(id_str):
     دالة آمنة للتحقق من وتحويل ObjectId
     تمنع الأخطاء 500 عند إدخال قيم خاطئة
     """
-    if id_str and ObjectId.is_valid(str(id_str).strip()):
-        return ObjectId(str(id_str).strip())
+    if not id_str:
+        return None
+    
+    clean_id = str(id_str).strip()
+    if ObjectId.is_valid(clean_id):
+        return ObjectId(clean_id)
     return None
 
 
@@ -82,16 +86,49 @@ class AIExplanationViewSet(viewsets.ViewSet):
         """
         توليد شرح جديد باستخدام الذكاء الاصطناعي
         """
-        # ✅ التحقق المسبق من analysis_id باستخدام get_safe_object_id
-        analysis_id = get_safe_object_id(request.data.get('analysis_id'))
-        if not analysis_id:
+        # ✅ التحقق المسبق من analysis_id
+        raw_analysis_id = request.data.get('analysis_id')
+        if not raw_analysis_id:
+            return Response({
+                "error": "analysis_id is required"
+            }, status=400)
+
+        raw_analysis_id = str(raw_analysis_id).strip()
+
+        # تحديد نوع الـ ID: ObjectId (ملف) أم UUID (مشروع)
+        import re
+        uuid_regex = re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', re.I)
+        is_project_uuid = uuid_regex.match(raw_analysis_id) is not None
+
+        if is_project_uuid:
+            # UUID مشروع: تحقق من وجود تحليل للمشروع
+            try:
+                db = get_mongo_db()
+                project_res = db['project_analysis_results'].find_one(
+                    {"project_id": raw_analysis_id},
+                    sort=[("created_at", -1)]
+                )
+                if not project_res:
+                    return Response({
+                        "error": "Project analysis not found",
+                        "message": "Please run project analysis first using /api/analysis/analyze-project/"
+                    }, status=404)
+                # ✅ نُبقي على الـ UUID الأصلي ونرسله مباشرة للـ task
+                analysis_id_str = raw_analysis_id
+                logger.info(f"--- [GenerateExplanation] Project UUID confirmed: {analysis_id_str} ---")
+            except Exception as e:
+                logger.error(f"Error checking project UUID: {str(e)}")
+                return Response({"error": f"Database error: {str(e)}"}, status=500)
+
+        elif get_safe_object_id(raw_analysis_id):
+            # ObjectId عادي (ملف واحد)
+            analysis_id_str = str(get_safe_object_id(raw_analysis_id))
+            logger.info(f"--- [GenerateExplanation] File ObjectId confirmed: {analysis_id_str} ---")
+        else:
             return Response({
                 "error": "Invalid analysis_id format",
-                "message": "analysis_id must be a valid MongoDB ObjectId"
+                "message": "analysis_id must be a valid MongoDB ObjectId (24-char hex) or a Project UUID (8-4-4-4-12 format)"
             }, status=400)
-        
-        # تحويل إلى string للاستخدام في الـ task
-        analysis_id_str = str(analysis_id)
         
         # ✅ محاولة الحصول على exp_type من مصادر متعددة
         exp_type = request.data.get('type', '').strip() if request.data.get('type') else None
@@ -102,9 +139,10 @@ class AIExplanationViewSet(viewsets.ViewSet):
         if not exp_type:
             exp_type = request.data.get('explanation_level', '').strip() if request.data.get('explanation_level') else None
             
-        logger.info(f"🔍 [GenerateExplanation] DEBUG - Full request data: {request.data}")
-        logger.info(f"🔍 [GenerateExplanation] DEBUG - analysis_id: {analysis_id_str}")
-        logger.info(f"🔍 [GenerateExplanation] DEBUG - exp_type BEFORE normalization: '{exp_type}'")
+        print(f"!!! generate_explanation CALLED with analysis_id: {analysis_id_str} !!!")
+        logger.info(f"--- [GenerateExplanation] DEBUG - Full request data: {request.data}")
+        logger.info(f"--- [GenerateExplanation] DEBUG - analysis_id: {analysis_id_str}")
+        logger.info(f"--- [GenerateExplanation] DEBUG - exp_type BEFORE normalization: '{exp_type}'")
         
         # ============================================================
         # ✅ توحيد exp_type - دعم جميع الصيغ المحتملة

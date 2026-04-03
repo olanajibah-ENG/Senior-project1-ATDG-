@@ -37,11 +37,19 @@ class ExplanationEvaluator:
             raise Exception(f"Explanation with ID {explanation_id} not found")
         
         # Get analysis
-        analysis_collection = self.db["analysis_results"]
-        analysis = analysis_collection.find_one({"_id": ObjectId(explanation["analysis_id"])})
+        from core_ai.views.explanation_views import get_safe_object_id
+        analysis_id = str(explanation.get("analysis_id"))
         
+        if ObjectId.is_valid(analysis_id):
+            analysis = self.db["analysis_results"].find_one({"_id": ObjectId(analysis_id)})
+            if not analysis:
+                analysis = self.db["project_analysis_results"].find_one({"_id": ObjectId(analysis_id)})
+        else:
+            # UUID for project
+            analysis = self.db["project_analysis_results"].find_one({"project_id": analysis_id})
+            
         if analysis is None:
-            raise Exception(f"Analysis with ID {explanation['analysis_id']} not found")
+            raise Exception(f"Analysis with ID {analysis_id} not found")
         
         # Check for existing evaluation
         if not force_reevaluate:

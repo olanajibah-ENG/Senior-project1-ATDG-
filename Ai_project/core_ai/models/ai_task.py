@@ -1,4 +1,4 @@
-from typing import Optional, Any
+from typing import Optional, Any, Union
 from datetime import datetime
 from pydantic import BaseModel, Field
 from bson import ObjectId
@@ -12,7 +12,7 @@ class AITask(BaseModel):
     """
     id: Optional[PyObjectId] = Field(default=None, alias="_id")
     task_id: str               # معرف المهمة الفريد من Celery
-    analysis_id: PyObjectId    # ربط بـ AnalysisResult
+    analysis_id: Union[PyObjectId, str]    # ربط بـ AnalysisResult او Project
     exp_type: str              # نوع التحليل ('class_diagram', 'explanation')
     explain_level: Optional[str] = Field(default=None)  # مستوى الشرح ('high_level', 'low_level')
     status: str = Field(default="pending")  # pending, processing, completed, failed
