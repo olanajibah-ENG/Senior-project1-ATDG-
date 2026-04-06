@@ -38,7 +38,8 @@ from core_upm.services.github_service import GitHubService
 
 logger = logging.getLogger(__name__)
 
-AI_FOLDER_UPLOAD_URL = 'http://ai_django_app:8000/folder-upload/'
+AI_FOLDER_UPLOAD_URL = 'http://ai_django_app:8000/api/analysis/upload-folder/'
+
 
 # ── التعديل 1: Timeouts مرفوعة ─────────────────────────────────────────────
 SHA_THREAD_TIMEOUT   = 60    # ثانية — كان 30

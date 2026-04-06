@@ -1,15 +1,11 @@
 """
-views/project_tree_view.py  ← جديد
+views/project_tree_view.py  ← معدّل
 ==========================
-ملف جديد كلياً — يوفر endpointين:
-
-    1. GET /api/analysis/project-tree/<upm_project_id>/
-       يرجع شجرة المجلدات والملفات للمشروع لرسمها في الفرونت
-       (شبيه بالـ sidebar في VS Code)
-
-    2. GET /api/analysis/file-content/<file_id>/
-       يرجع محتوى ملف كود واحد من GridFS
-       (شبيه بفتح ملف في VS Code)
+التغييرات عن النسخة القديمة:
+    1. أُضيف ProjectVersionsView — يرجع كل الإصدارات الموجودة للمشروع
+       قبل ما المستخدم يختار إصدار ويطلب شجرته
+    2. ProjectTreeView بقي كما هو (يرجع شجرة إصدار محدد أو آخر إصدار)
+    3. FileContentView بقي كما هو
 """
 
 import logging
@@ -29,79 +25,145 @@ logger = logging.getLogger(__name__)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class ProjectTreeView(APIView):
+class ProjectVersionsView(APIView):
     """
-    GET /api/analysis/project-tree/<upm_project_id>/
+    GET /api/analysis/project-versions/<upm_project_id>/
 
-    Query params (اختياري):
-        version : int — رقم الإصدار المطلوب (لو ما ذُكر يرجع آخر إصدار)
+    يرجع كل الإصدارات الموجودة للمشروع مرتبة من الأحدث للأقدم.
+    الفرونت يعرضها للمستخدم يختار منها قبل ما يطلب الشجرة.
 
     Response:
     {
-        "project_id"    : "uuid",
-        "project_name"  : "my_project",
-        "version_number": 2,
-        "tree"          : {
-            "my_project": {
-                "type": "folder",
-                "children": {
-                    "src": {
-                        "type": "folder",
-                        "children": {
-                            "utils.py": {
-                                "type": "file",
-                                "file_id": "mongo_id",
-                                "file_type": "python",
-                                "filepath": "my_project/src/utils.py"
-                            }
-                        }
-                    },
-                    "main.py": {
-                        "type": "file",
-                        "file_id": "mongo_id",
-                        "file_type": "python",
-                        "filepath": "my_project/main.py"
-                    }
-                }
-            }
-        },
-        "flat_files": [
+        "project_id"  : "uuid",
+        "project_name": "MyProject",
+        "versions": [
             {
-                "file_id"  : "mongo_id",
-                "filename" : "utils.py",
-                "filepath" : "my_project/src/utils.py",
-                "file_type": "python"
+                "version_number": 3,
+                "total_files"   : 12,
+                "created_at"    : "2024-01-15T10:30:00Z"
             },
-            ...
+            {
+                "version_number": 2,
+                "total_files"   : 8,
+                "created_at"    : "2024-01-10T09:00:00Z"
+            },
+            {
+                "version_number": 1,
+                "total_files"   : 5,
+                "created_at"    : "2024-01-05T08:00:00Z"
+            }
         ]
     }
     """
-
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [AllowAny]
 
     def get(self, request, upm_project_id):
         db = get_mongo_db()
         if db is None:
-            return Response({"error": "Database connection failed"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(
+                {"error": "Database connection failed"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+        versions_collection = db['project_versions']
+
+        version_docs = list(versions_collection.find(
+            {"project_id": upm_project_id},
+            sort=[("version_number", -1)]
+        ))
+
+        if not version_docs:
+            return Response(
+                {"error": f"No versions found for project {upm_project_id}"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        project_name = version_docs[0].get("project_name", "")
+
+        versions = []
+        for doc in version_docs:
+            created_at = doc.get("created_at")
+            versions.append({
+                "version_number": doc["version_number"],
+                "total_files":    doc.get("total_files", len(doc.get("file_ids", []))),
+                "created_at":     created_at.isoformat() if created_at else None,
+            })
+
+        return Response({
+            "project_id":   upm_project_id,
+            "project_name": project_name,
+            "versions":     versions,
+        })
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class ProjectTreeView(APIView):
+    """
+    GET /api/analysis/project-tree/<upm_project_id>/
+    GET /api/analysis/project-tree/<upm_project_id>/?version=2
+
+    يرجع شجرة الملفات والمجلدات لإصدار محدد.
+    لو ما ذُكر version → يرجع آخر إصدار.
+
+    Response:
+    {
+        "project_id"    : "uuid",
+        "project_name"  : "MyProject",
+        "version_number": 2,
+        "tree": {
+            "MyProject": {
+                "type": "folder",
+                "children": {
+                    "src": {
+                        "type": "folder",
+                        "children": {
+                            "utils.py": {
+                                "type"    : "file",
+                                "file_id" : "mongo_id",
+                                "file_type": "python",
+                                "filepath": "MyProject/src/utils.py"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "flat_files": [
+            {"file_id": "...", "filename": "utils.py", "filepath": "...", "file_type": "python"},
+            ...
+        ]
+    }
+    """
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [AllowAny]
+
+    def get(self, request, upm_project_id):
+        db = get_mongo_db()
+        if db is None:
+            return Response(
+                {"error": "Database connection failed"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
         collection = db[settings.CODE_FILES_COLLECTION]
         versions_collection = db['project_versions']
 
-        # تحديد الإصدار المطلوب
         requested_version = request.query_params.get('version')
 
         if requested_version:
             try:
                 requested_version = int(requested_version)
             except ValueError:
-                return Response({"error": "version must be an integer"}, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    {"error": "version must be an integer"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
             version_doc = versions_collection.find_one({
-                "project_id": upm_project_id,
-                "version_number": requested_version
+                "project_id":     upm_project_id,
+                "version_number": requested_version,
             })
         else:
-            # آخر إصدار
             version_doc = versions_collection.find_one(
                 {"project_id": upm_project_id},
                 sort=[("version_number", -1)]
@@ -114,10 +176,9 @@ class ProjectTreeView(APIView):
             )
 
         version_number = version_doc["version_number"]
-        project_name = version_doc.get("project_name", "")
-        file_ids = version_doc.get("file_ids", [])
+        project_name   = version_doc.get("project_name", "")
+        file_ids       = version_doc.get("file_ids", [])
 
-        # جلب الملفات بالـ file_ids المخزنة في الإصدار
         object_ids = []
         for fid in file_ids:
             try:
@@ -125,17 +186,14 @@ class ProjectTreeView(APIView):
             except Exception:
                 pass
 
-        files_cursor = collection.find({"_id": {"$in": object_ids}})
-        files = list(files_cursor)
+        files = list(collection.find({"_id": {"$in": object_ids}}))
 
         if not files:
-            # fallback: ابحث بـ source_project_id و version_number
             files = list(collection.find({
                 "source_project_id": upm_project_id,
-                "version_number": version_number
+                "version_number":    version_number,
             }))
 
-        # بناء الـ flat_files list
         flat_files = []
         for f in files:
             filepath = f.get('filepath', f.get('filename', ''))
@@ -146,7 +204,6 @@ class ProjectTreeView(APIView):
                 "file_type": f.get('file_type', 'unknown'),
             })
 
-        # بناء شجرة المجلدات
         tree = self._build_tree(flat_files)
 
         return Response({
@@ -158,26 +215,18 @@ class ProjectTreeView(APIView):
         })
 
     def _build_tree(self, flat_files):
-        """
-        يحول قائمة الملفات المسطّحة لشجرة متداخلة.
-        مثال:
-            flat: [{"filepath": "proj/src/utils.py", "file_id": "abc"}, ...]
-            tree: {"proj": {"type": "folder", "children": {"src": {"type": "folder", "children": {"utils.py": {"type": "file", ...}}}}}}
-        """
         tree = {}
-
         for file_info in flat_files:
             filepath = file_info.get('filepath', file_info.get('filename', ''))
-            parts = filepath.replace('\\', '/').split('/')
+            parts    = filepath.replace('\\', '/').split('/')
+            current  = tree
 
-            current = tree
             for i, part in enumerate(parts):
                 if not part:
                     continue
                 is_last = (i == len(parts) - 1)
 
                 if is_last:
-                    # ملف
                     current[part] = {
                         "type":      "file",
                         "file_id":   file_info["file_id"],
@@ -185,7 +234,6 @@ class ProjectTreeView(APIView):
                         "filepath":  filepath,
                     }
                 else:
-                    # مجلد
                     if part not in current:
                         current[part] = {"type": "folder", "children": {}}
                     elif current[part].get("type") != "folder":
@@ -200,46 +248,48 @@ class FileContentView(APIView):
     """
     GET /api/analysis/file-content/<file_id>/
 
-    يرجع محتوى ملف كود واحد من GridFS.
+    يرجع محتوى ملف واحد من GridFS.
 
     Response:
     {
         "file_id"  : "mongo_id",
         "filename" : "utils.py",
-        "filepath" : "my_project/src/utils.py",
+        "filepath" : "MyProject/src/utils.py",
         "file_type": "python",
-        "content"  : "def hello():\n    print('hello')\n"
+        "content"  : "def hello(): ..."
     }
     """
-
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [AllowAny]
 
     def get(self, request, file_id):
         db = get_mongo_db()
         if db is None:
-            return Response({"error": "Database connection failed"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(
+                {"error": "Database connection failed"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
         collection = db[settings.CODE_FILES_COLLECTION]
 
-        # جلب معلومات الملف من MongoDB
         try:
             file_doc = collection.find_one({"_id": ObjectId(file_id)})
         except Exception:
-            return Response({"error": "Invalid file_id format"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"error": "Invalid file_id format"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         if not file_doc:
             return Response({"error": "File not found"}, status=status.HTTP_404_NOT_FOUND)
 
         gridfs_id = file_doc.get('gridfs_id')
 
-        # جلب المحتوى من GridFS
         if gridfs_id:
             try:
                 content = read_from_gridfs(gridfs_id)
             except Exception as e:
                 logger.error(f"[FILE-CONTENT] GridFS read error for {file_id}: {e}")
-                # fallback: لو في content مخزن مباشرة في الـ document (الطريقة القديمة)
                 content = file_doc.get('content', '')
                 if not content:
                     return Response(
@@ -247,11 +297,10 @@ class FileContentView(APIView):
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR
                     )
         else:
-            # الطريقة القديمة — المحتوى مخزن مباشرة في MongoDB
             content = file_doc.get('content', '')
             if not content:
                 return Response(
-                    {"error": "File has no content (no gridfs_id and no inline content)"},
+                    {"error": "File has no content"},
                     status=status.HTTP_404_NOT_FOUND
                 )
 

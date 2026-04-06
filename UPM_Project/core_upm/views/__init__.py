@@ -11,4 +11,4 @@ from .reviewer_views import ReviewerNotifyAdminView
 from .github_views import GitHubWebhookView
 from .folder_upload_proxy import FolderUploadProxyView
 from .folder_views import FolderListCreateAPIView, FolderRetrieveUpdateDestroyAPIView
-from .project_tree_proxy import ProjectTreeProxyView, FileContentProxyView
+from .project_tree_proxy import ProjectVersionsProxyView, ProjectTreeProxyView, FileContentProxyView

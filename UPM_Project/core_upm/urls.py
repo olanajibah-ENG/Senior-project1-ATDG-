@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from core_upm.views import (
     UserRegistrationAPIView,
     UserLoginAPIView,
@@ -14,14 +14,18 @@ from core_upm.views import (
 from core_upm.views.github_views import (
     GitHubConnectView,
     GitHubSyncView,
-    GitHubWebhookView
+    GitHubWebhookView,
 )
 from core_upm.views.folder_views import (
     FolderListCreateAPIView,
-    FolderRetrieveUpdateDestroyAPIView
+    FolderRetrieveUpdateDestroyAPIView,
 )
 from core_upm.views.folder_upload_proxy import FolderUploadProxyView
-from core_upm.views.project_tree_proxy import ProjectTreeProxyView, FileContentProxyView
+from core_upm.views.project_tree_proxy import (
+    ProjectVersionsProxyView,
+    ProjectTreeProxyView,
+    FileContentProxyView,
+)
 
 urlpatterns = [
 
@@ -38,25 +42,25 @@ urlpatterns = [
          name='project-detail'),
 
     # ── رفع الملفات (ملف واحد / ملفات متعددة / ZIP / مجلد كامل) ─────────────
-    # POST  → يرفع الملفات ويحفظها في MongoDB/GridFS ويرجع الـ filepaths
     path('projects/<uuid:project_id>/folder-upload/',
          FolderUploadProxyView.as_view(),
          name='folder-upload'),
 
-    # ── شجرة المشروع ──────────────────────────────────────────────────────────
-    # GET → يرجع شجرة المجلدات والملفات لرسم الـ sidebar في الفرونت
-    # ?version=N → إصدار محدد (بدونه يرجع آخر إصدار)
+    # ── الإصدارات والشجرة ─────────────────────────────────────────────────────
+    # الخطوة 1: جيب كل الإصدارات المتاحة (dropdown للمستخدم)
+    path('projects/<uuid:project_id>/versions/',
+         ProjectVersionsProxyView.as_view(),
+         name='project-versions'),
+    # الخطوة 2: جيب شجرة إصدار محدد — ?version=N أو بدونه لآخر إصدار
     path('projects/<uuid:project_id>/tree/',
          ProjectTreeProxyView.as_view(),
          name='project-tree'),
-
-    # ── محتوى ملف واحد ────────────────────────────────────────────────────────
-    # GET → يرجع محتوى الملف من GridFS (الـ file_id من response الشجرة)
+    # الخطوة 3: جيب محتوى ملف واحد (لما المستخدم يكبس على ملف في الشجرة)
     path('projects/<uuid:project_id>/files/<str:file_id>/content/',
          FileContentProxyView.as_view(),
          name='file-content'),
 
-    # ── Folders (إدارة المجلدات يدوياً) ───────────────────────────────────────
+    # ── Folders ───────────────────────────────────────────────────────────────
     path('projects/<uuid:project_id>/folders/',
          FolderListCreateAPIView.as_view(),
          name='folder-list-create'),
