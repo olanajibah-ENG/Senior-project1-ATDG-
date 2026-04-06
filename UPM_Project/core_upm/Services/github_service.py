@@ -1,15 +1,12 @@
 """
-github_service.py
+github_service.py  ← معدّل
 =================
-يتعامل مع GitHub API لجلب الكود من الـ public repos.
-
-التعديلات:
-- ThreadPoolExecutor لجلب الملفات بالتوازي (10 threads)
-- فلترة الملفات الأكبر من 500KB
-- timeouts مرفوعة لكل العمليات
-- [جديد] معالجة truncated tree للـ repos الكبيرة
-  → لما tree?recursive=1 يرجع truncated:true
-  → ننتقل لـ Contents API ونمشي على المجلدات recursively
+التغييرات عن النسخة القديمة:
+    1. أُضيفت دالة get_latest_commit_sha() — كانت مستخدمة في github_views لكن غير موجودة
+    2. أُضيفت دالة get_changed_files()     — كانت مستخدمة في github_views لكن غير موجودة
+    3. عُدّل توقيع get_all_files() ليقبل repo_url كاملاً (مثل https://github.com/user/repo)
+       بدل owner و repo منفصلين — لأن github_views بيمرر repo_url مباشرة
+    4. أُضيفت دالة مساعدة _parse_repo_url() تحلّل الـ URL لـ owner و repo
 """
 
 import logging
@@ -26,37 +23,54 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 logger = logging.getLogger(__name__)
 
 EXTENSION_MAP = {
-    '.py':   'python',
-    '.java': 'java',
-    '.js':   'javascript',
-    '.ts':   'typescript',
-    '.cpp':  'cpp',
-    '.c':    'c',
-    '.h':    'c',
-    '.hpp':  'cpp',
-    '.cs':   'csharp',
-    '.php':  'php',
-    '.rb':   'ruby',
-    '.go':   'go',
-    '.rs':   'rust',
+    '.py':    'python',
+    '.java':  'java',
+    '.js':    'javascript',
+    '.ts':    'typescript',
+    '.cpp':   'cpp',
+    '.c':     'c',
+    '.h':     'c',
+    '.hpp':   'cpp',
+    '.cs':    'csharp',
+    '.php':   'php',
+    '.rb':    'ruby',
+    '.go':    'go',
+    '.rs':    'rust',
     '.swift': 'swift',
-    '.kt':   'kotlin',
+    '.kt':    'kotlin',
     '.scala': 'scala',
-    '.html': 'html',
-    '.css':  'css',
-    '.sql':  'sql',
-    '.sh':   'shell',
-    '.json': 'json',
-    '.xml':  'xml',
-    '.yaml': 'yaml',
-    '.yml':  'yaml',
-    '.md':   'markdown',
-    '.txt':  'text',
+    '.html':  'html',
+    '.css':   'css',
+    '.sql':   'sql',
+    '.sh':    'shell',
+    '.json':  'json',
+    '.xml':   'xml',
+    '.yaml':  'yaml',
+    '.yml':   'yaml',
+    '.md':    'markdown',
+    '.txt':   'text',
 }
 
+IGNORED_DIRS = (
+    'node_modules/', '.git/', '__pycache__/',
+    '.vscode/', '.idea/', 'venv/', 'env/',
+    'dist/', 'build/', '.pytest_cache/',
+)
+
+IGNORED_EXTENSIONS = (
+    '.pyc', '.pyo', '.pyd',
+    '.jpg', '.jpeg', '.png', '.gif', '.bmp',
+    '.mp3', '.wav', '.mp4', '.avi',
+    '.zip', '.tar', '.gz', '.rar',
+    '.exe', '.dll', '.so', '.dylib',
+)
+
+MAX_FILE_SIZE = 500 * 1024  # 500 KB
+
+
 class GitHubService:
-    """خدمة للتعامل مع GitHub API وجلب الكود"""
-    
+    """خدمة للتعامل مع GitHub API"""
+
     def __init__(self, token: Optional[str] = None):
         self.token = token
         self.session = requests.Session()
@@ -64,152 +78,270 @@ class GitHubService:
             self.session.headers.update({'Authorization': f'token {self.token}'})
         self.session.headers.update({
             'Accept': 'application/vnd.github.v3+json',
-            'User-Agent': 'Code-Analyzer-App/1.0'
+            'User-Agent': 'Code-Analyzer-App/1.0',
         })
-    
-    def get_repo_info(self, owner: str, repo: str) -> dict:
-        """جلب معلومات الأساسية عن الريبو"""
-        url = f'https://api.github.com/repos/{owner}/{repo}'
+
+    # ── دالة مساعدة ────────────────────────────────────────────────────────────
+    def _parse_repo_url(self, repo_url: str) -> Tuple[str, str]:
+        """
+        يحلّل repo_url الكامل ويرجع (owner, repo).
+        مثال: 'https://github.com/octocat/Hello-World' → ('octocat', 'Hello-World')
+        """
+        clean = repo_url.rstrip('/').replace('https://github.com/', '')
+        parts = clean.split('/')
+        if len(parts) < 2:
+            raise ValueError(f"Invalid GitHub repo URL: {repo_url}")
+        return parts[0], parts[1]
+
+    # ── 1. آخر commit SHA ──────────────────────────────────────────────────────
+    def get_latest_commit_sha(self, repo_url: str, branch: str = 'main') -> str:
+        """
+        يرجع SHA لآخر commit على الـ branch المحدد.
+        مُضافة جديداً — كانت مستخدمة في github_views لكن غير موجودة.
+        """
+        owner, repo = self._parse_repo_url(repo_url)
+        url = f'https://api.github.com/repos/{owner}/{repo}/commits/{branch}'
         try:
             response = self.session.get(url, timeout=30)
             response.raise_for_status()
-            return response.json()
+            sha = response.json().get('sha', '')
+            if not sha:
+                raise ValueError("Could not retrieve commit SHA from GitHub.")
+            logger.info(f"[GITHUB] Latest SHA for {repo_url}@{branch}: {sha[:7]}")
+            return sha
+        except requests.exceptions.HTTPError as e:
+            if response.status_code == 404:
+                raise ValueError(f"Branch '{branch}' not found in repo '{repo_url}'.")
+            raise ValueError(f"GitHub API error: {str(e)}")
         except Exception as e:
-            logger.error(f"Error fetching repo info: {e}")
-            return {}
-    
-    def get_all_files(self, owner: str, repo: str, path: str = '', max_files: int = 100) -> List[dict]:
+            logger.error(f"[GITHUB] get_latest_commit_sha error: {e}")
+            raise
+
+    # ── 2. الملفات المتغيرة بين commitين ───────────────────────────────────────
+    def get_changed_files(
+        self,
+        repo_url: str,
+        branch: str,
+        old_sha: str,
+        new_sha: str,
+    ) -> List[Tuple[str, str, str]]:
         """
-        جلب كل الملفات من الريبو بشكل متكرر
-        يدعم معالجة الريPOS الكبيرة اللي تسبب truncated tree
+        يرجع الملفات المتغيرة بين old_sha و new_sha.
+        يرجع: List of (filepath, content, file_type)
+        مُضافة جديداً — كانت مستخدمة في github_views لكن غير موجودة.
         """
-        all_files = []
-        processed_paths = set()
-        
-        def process_directory(path: str):
-            """معالجة مجلد واحد وجلب محتوياته"""
-            if path in processed_paths:
-                return []
-            
-            processed_paths.add(path)
-            files_in_dir = []
-            
-            try:
-                # جلب محتويات المجلد
-                url = f'https://api.github.com/repos/{owner}/{repo}/contents/{path}'
-                response = self.session.get(url, timeout=30)
-                response.raise_for_status()
-                items = response.json()
-                
-                if not isinstance(items, list):
-                    return []
-                
-                for item in items:
-                    if item.get('type') == 'file':
-                        # فلترة الملفات حسب الحجم والنوع
-                        if item.get('size', 0) > 500 * 1024:  # 500KB
-                            continue
-                        
-                        file_path = item.get('path', '')
-                        if self._should_include_file(file_path):
-                            files_in_dir.append(item)
-                    
-                    elif item.get('type') == 'dir':
-                        # معالجة المجلدات الفرعية بشكل متوازي
-                        sub_path = item.get('path', '')
-                        if len(all_files) + len(files_in_dir) < max_files:
-                            sub_files = process_directory(sub_path)
-                            files_in_dir.extend(sub_files)
-                
-                return files_in_dir
-                
-            except Exception as e:
-                logger.error(f"Error processing directory {path}: {e}")
-                return []
-        
-        # استخدام ThreadPoolExecutor للمعالجة المتوازية
-        with ThreadPoolExecutor(max_workers=10) as executor:
-            future_to_path = {executor.submit(process_directory, ''): ''}
-            
-            for future in as_completed(future_to_path):
-                try:
-                    files = future.result(timeout=60)
-                    all_files.extend(files)
-                    if len(all_files) >= max_files:
-                        break
-                except Exception as e:
-                    logger.error(f"Error in parallel processing: {e}")
-        
-        return all_files[:max_files]
-    
-    def _should_include_file(self, file_path: str) -> bool:
-        """تحديد ما إذا كان يجب تضمين الملف"""
-        # استبعاد الملفات والمجلدات غير المرغوبة
-        exclude_patterns = [
-            'node_modules/', '.git/', '__pycache__/', 
-            '.vscode/', '.idea/', 'venv/', 'env/',
-            'dist/', 'build/', '.pytest_cache/',
-            '*.pyc', '*.pyo', '*.pyd',
-            '*.jpg', '*.jpeg', '*.png', '*.gif', '*.bmp',
-            '*.mp3', '*.wav', '*.mp4', '*.avi',
-            '*.zip', '*.tar', '*.gz', '*.rar',
-            '*.exe', '*.dll', '*.so', '*.dylib'
-        ]
-        
-        file_path_lower = file_path.lower()
-        for pattern in exclude_patterns:
-            if pattern in file_path_lower or file_path_lower.endswith(pattern.replace('*', '')):
-                return False
-        
-        return True
-    
-    def get_file_content(self, owner: str, repo: str, path: str) -> Optional[str]:
-        """جلب محتوى ملف معين"""
-        url = f'https://api.github.com/repos/{owner}/{repo}/contents/{path}'
+        owner, repo = self._parse_repo_url(repo_url)
+
+        # لو ما في old_sha (أول مرة) → رجع كل الملفات
+        if not old_sha:
+            logger.info(f"[GITHUB] No old SHA — fetching all files")
+            return self.get_all_files(repo_url, branch)
+
+        # جلب الـ diff بين الـ SHAين
+        url = f'https://api.github.com/repos/{owner}/{repo}/compare/{old_sha}...{new_sha}'
         try:
             response = self.session.get(url, timeout=30)
             response.raise_for_status()
-            data = response.json()
-            
-            if data.get('encoding') == 'base64':
-                content = base64.b64decode(data.get('content', '')).decode('utf-8', errors='ignore')
-                return content
-            else:
-                return data.get('content', '')
-                
+            compare_data = response.json()
         except Exception as e:
-            logger.error(f"Error fetching file content for {path}: {e}")
-            return None
-    
-    def get_file_type(self, filename: str) -> str:
-        """تحديد نوع الملف من الامتداد"""
-        _, ext = os.path.splitext(filename.lower())
-        return EXTENSION_MAP.get(ext, 'text')
-    
-    def download_files_parallel(self, owner: str, repo: str, files: List[dict]) -> List[Tuple[str, str, str]]:
-        """
-        تحميل الملفات بشكل متوازي
-        Returns: List of (file_path, file_content, file_type)
-        """
+            logger.error(f"[GITHUB] get_changed_files compare error: {e}")
+            raise ValueError(f"Failed to compare commits: {str(e)}")
+
+        changed = compare_data.get('files', [])
+        if not changed:
+            logger.info(f"[GITHUB] No changed files between {old_sha[:7]} and {new_sha[:7]}")
+            return []
+
+        # فلترة الملفات المحذوفة + غير المدعومة + الكبيرة
+        files_to_fetch = []
+        for f in changed:
+            filepath = f.get('filename', '')
+            file_status = f.get('status', '')
+            if file_status == 'removed':
+                continue
+            if not self._should_include_file(filepath):
+                continue
+            if f.get('size', 0) > MAX_FILE_SIZE:
+                continue
+            files_to_fetch.append(filepath)
+
+        if not files_to_fetch:
+            return []
+
+        logger.info(f"[GITHUB] {len(files_to_fetch)} changed files to fetch")
+
+        # جلب محتوى كل ملف بالتوازي
         results = []
-        
-        def download_file(file_info):
-            file_path = file_info.get('path', '')
-            content = self.get_file_content(owner, repo, file_path)
+
+        def fetch_one(filepath):
+            content = self._get_file_content(owner, repo, filepath, new_sha)
             if content:
-                file_type = self.get_file_type(file_path)
-                return (file_path, content, file_type)
+                ext = os.path.splitext(filepath)[1].lower()
+                file_type = EXTENSION_MAP.get(ext, 'text')
+                return (filepath, content, file_type)
             return None
-        
+
         with ThreadPoolExecutor(max_workers=10) as executor:
-            future_to_file = {executor.submit(download_file, file_info): file_info for file_info in files}
-            
-            for future in as_completed(future_to_file):
+            futures = {executor.submit(fetch_one, fp): fp for fp in files_to_fetch}
+            for future in as_completed(futures):
                 try:
                     result = future.result(timeout=60)
                     if result:
                         results.append(result)
                 except Exception as e:
-                    logger.error(f"Error downloading file: {e}")
-        
+                    logger.warning(f"[GITHUB] Failed to fetch {futures[future]}: {e}")
+
+        logger.info(f"[GITHUB] get_changed_files done — {len(results)} files")
         return results
+
+    # ── 3. كل ملفات الـ repo ───────────────────────────────────────────────────
+    def get_all_files(self, repo_url: str, branch: str = 'main') -> List[Tuple[str, str, str]]:
+        """
+        يجيب كل الملفات من الـ repo.
+        يرجع: List of (filepath, content, file_type)
+
+        التغيير: يقبل الآن repo_url كامل (https://github.com/user/repo)
+        بدل owner و repo منفصلين — لأن github_views بيمرره هيك.
+        """
+        owner, repo = self._parse_repo_url(repo_url)
+
+        logger.info(f"[GITHUB] Fetching all files from {owner}/{repo}@{branch}")
+
+        # أولاً: جرب Git Trees API (أسرع للـ repos الكبيرة)
+        tree_files = self._get_files_via_tree_api(owner, repo, branch)
+
+        if tree_files is not None:
+            logger.info(f"[GITHUB] Tree API returned {len(tree_files)} files")
+            return self._download_files(owner, repo, tree_files, branch)
+
+        # fallback: Contents API (للـ repos اللي tree مشانها truncated)
+        logger.info(f"[GITHUB] Tree API truncated — falling back to Contents API")
+        return self._get_files_via_contents_api(owner, repo, branch)
+
+    def _get_files_via_tree_api(
+        self, owner: str, repo: str, branch: str
+    ) -> Optional[List[str]]:
+        """
+        يجيب قائمة الـ filepaths عبر Git Trees API.
+        يرجع None لو كان الـ tree مـ truncated (repo كبير جداً).
+        """
+        url = f'https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=1'
+        try:
+            response = self.session.get(url, timeout=60)
+            response.raise_for_status()
+            data = response.json()
+        except Exception as e:
+            logger.error(f"[GITHUB] Tree API error: {e}")
+            return None
+
+        if data.get('truncated'):
+            return None
+
+        filepaths = []
+        for item in data.get('tree', []):
+            if item.get('type') != 'blob':
+                continue
+            filepath = item.get('path', '')
+            size = item.get('size', 0)
+            if size > MAX_FILE_SIZE:
+                continue
+            if not self._should_include_file(filepath):
+                continue
+            filepaths.append(filepath)
+
+        return filepaths
+
+    def _get_files_via_contents_api(
+        self, owner: str, repo: str, branch: str, path: str = ''
+    ) -> List[Tuple[str, str, str]]:
+        """يمشي على المجلدات recursively عبر Contents API."""
+        results = []
+        processed = set()
+
+        def process_dir(dir_path):
+            if dir_path in processed:
+                return
+            processed.add(dir_path)
+
+            url = f'https://api.github.com/repos/{owner}/{repo}/contents/{dir_path}'
+            params = {'ref': branch}
+            try:
+                r = self.session.get(url, params=params, timeout=30)
+                r.raise_for_status()
+                items = r.json()
+                if not isinstance(items, list):
+                    return
+            except Exception as e:
+                logger.warning(f"[GITHUB] Contents API error at {dir_path}: {e}")
+                return
+
+            for item in items:
+                if item['type'] == 'file':
+                    fp = item['path']
+                    if item.get('size', 0) > MAX_FILE_SIZE:
+                        continue
+                    if self._should_include_file(fp):
+                        content = self._get_file_content(owner, repo, fp, branch)
+                        if content:
+                            ext = os.path.splitext(fp)[1].lower()
+                            results.append((fp, content, EXTENSION_MAP.get(ext, 'text')))
+                elif item['type'] == 'dir':
+                    process_dir(item['path'])
+
+        process_dir(path)
+        return results
+
+    def _download_files(
+        self, owner: str, repo: str, filepaths: List[str], ref: str
+    ) -> List[Tuple[str, str, str]]:
+        """يحمّل محتوى قائمة ملفات بالتوازي."""
+        results = []
+
+        def fetch(fp):
+            content = self._get_file_content(owner, repo, fp, ref)
+            if content:
+                ext = os.path.splitext(fp)[1].lower()
+                return (fp, content, EXTENSION_MAP.get(ext, 'text'))
+            return None
+
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            futures = {executor.submit(fetch, fp): fp for fp in filepaths}
+            for future in as_completed(futures):
+                try:
+                    r = future.result(timeout=60)
+                    if r:
+                        results.append(r)
+                except Exception as e:
+                    logger.warning(f"[GITHUB] Download error {futures[future]}: {e}")
+
+        logger.info(f"[GITHUB] Downloaded {len(results)}/{len(filepaths)} files")
+        return results
+
+    # ── دوال مساعدة ────────────────────────────────────────────────────────────
+    def _get_file_content(
+        self, owner: str, repo: str, path: str, ref: str = 'main'
+    ) -> Optional[str]:
+        """يجيب محتوى ملف واحد من GitHub."""
+        url = f'https://api.github.com/repos/{owner}/{repo}/contents/{path}'
+        try:
+            r = self.session.get(url, params={'ref': ref}, timeout=30)
+            r.raise_for_status()
+            data = r.json()
+            if data.get('encoding') == 'base64':
+                return base64.b64decode(data['content']).decode('utf-8', errors='ignore')
+            return data.get('content', '')
+        except Exception as e:
+            logger.warning(f"[GITHUB] _get_file_content error {path}: {e}")
+            return None
+
+    def _should_include_file(self, filepath: str) -> bool:
+        """يتحقق إذا الملف يجب تضمينه بناءً على المسار والامتداد."""
+        lower = filepath.lower()
+        for d in IGNORED_DIRS:
+            if d in lower:
+                return False
+        ext = os.path.splitext(lower)[1]
+        if ext in IGNORED_EXTENSIONS:
+            return False
+        return True
+    
