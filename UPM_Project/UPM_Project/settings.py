@@ -1,4 +1,3 @@
-
 from pathlib import Path
 from datetime import timedelta
 import os
@@ -308,3 +307,14 @@ else:
     additional_origins = os.environ.get('CSRF_TRUSTED_ORIGINS', '')
     if additional_origins:
         CSRF_TRUSTED_ORIGINS.extend(additional_origins.split(','))
+# ── Celery (Message Broker) ────────────────────────────────────────────────────
+# Redis المشترك بين UPM وAI (channel رقم 2 — مختلف عن Redis الخاص بـ AI)
+CELERY_BROKER_URL    = os.environ.get('CELERY_BROKER_URL', 'redis://shared_redis:6379/2')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://shared_redis:6379/2')
+CELERY_ACCEPT_CONTENT  = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+
+# مفتاح داخلي بين UPM وCelery tasks (للـ /internal/upload-complete/ endpoint)
+INTERNAL_SERVICE_KEY = os.environ.get('INTERNAL_SERVICE_KEY', 'dev-internal-key-change-in-prod')
