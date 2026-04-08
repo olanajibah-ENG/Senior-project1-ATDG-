@@ -1,23 +1,11 @@
 """
-folder_upload_proxy.py  ← معدّل بالكامل لـ Message Broker
-======================
-الفرق عن النسخة القديمة:
-    قبل: UPM يبعث HTTP لـ AI وينتظر حتى يخلص (300 ثانية timeout)
-    بعد: UPM يقرأ الملفات → يحطها في Redis كرسالة → يرجع task_id فوراً
-         AI Celery worker يشيل الرسالة ويشتغل في الخلفية
-
-شو اتحذف؟
-    - كل كود requests.post() للـ AI
-    - _save_to_mysql() من هون — انتقل لـ InternalUploadCompleteView
-    - timeout المشاكل
-
-شو أُضيف؟
-    - قراءة محتوى الملفات وتحويلها لـ list قابل للتخزين في Redis
-    - استدعاء process_upload_task.delay() بدل HTTP
-    - رجوع task_id فوراً للفرونت
+folder_upload_proxy.py ← تعديل إضافي: إصلاح ZIP
+إضافة _read_zip() — يفك الـ ZIP ويقرأ محتوياته كـ text files
 """
 
 import os
+import io
+import zipfile
 import logging
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
@@ -39,27 +27,16 @@ SUPPORTED_EXTENSIONS = (
     '.cpp', '.c', '.rb', '.go', '.kt',
 )
 
+IGNORED_PREFIXES = ('__MACOSX', '.', '__pycache__')
+IGNORED_EXTENSIONS = ('.pyc', '.class', '.exe', '.dll', '.so', '.o')
+
 
 @method_decorator(csrf_exempt, name='dispatch')
 class FolderUploadProxyView(APIView):
     """
     POST /api/upm/projects/<project_id>/folder-upload/
-
-    قبل: كان ينتظر AI يخلص → timeout خطر
-    بعد: يرجع task_id فوراً → AI يشتغل في الخلفية
-
-    Body (multipart/form-data):
-        files : File[] — ملفات متعددة
-        file  : File   — ملف واحد أو ZIP
-
-    Response (فوري):
-        {
-            "task_id"     : "celery-task-uuid",
-            "status"      : "processing",
-            "message"     : "3 files queued for processing",
-            "project_id"  : "uuid",
-            "check_status": "/api/upm/tasks/celery-task-uuid/"
-        }
+    يقبل: ملف واحد / ملفات متعددة / ZIP
+    يرجع: task_id فوراً
     """
     permission_classes = [IsAuthenticated, IsDeveloperRole]
     parser_classes = [MultiPartParser, FormParser]
@@ -67,35 +44,27 @@ class FolderUploadProxyView(APIView):
     def post(self, request, project_id):
         logger.info(f"[FOLDER-UPLOAD] Request from:{request.user.username}, project:{project_id}")
 
-        # 1. التحقق من المشروع والملكية
         project = get_object_or_404(Project, project_id=project_id)
         if project.user != request.user:
             return Response({"error": "Permission denied."}, status=status.HTTP_403_FORBIDDEN)
 
-        # 2. قراءة الملفات وتحويلها لـ list يتخزن في Redis
-        # ليش نحول؟ لأن Celery يخزن الرسائل كـ JSON — الملفات الثنائية ما تنمشي كـ JSON
-        # الحل: نقرأ محتوى كل ملف كـ text ونخزنه كـ string
         files_data = []
 
+        # ملفات متعددة
         for f in request.FILES.getlist('files'):
-            file_info = self._read_file(f)
-            if file_info:
-                files_data.append(file_info)
+            files_data.extend(self._process_uploaded_file(f))
 
+        # ملف واحد (أو ZIP)
         single = request.FILES.get('file')
         if single:
-            file_info = self._read_file(single)
-            if file_info:
-                files_data.append(file_info)
+            files_data.extend(self._process_uploaded_file(single))
 
         if not files_data:
             return Response(
-                {"error": "No supported files. Supported: .py .java .js .ts .cs .cpp .rb .go .kt"},
+                {"error": "No supported files found. Supported: .py .java .js .ts .cs .cpp .rb .go .kt"},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # 3. بعث الرسالة لـ Redis — هاد السطر هو جوهر Message Broker
-        # .delay() = ضع الرسالة في Redis وارجع فوراً بدون انتظار
         task = process_upload_task.delay(
             project_id   = str(project_id),
             project_name = project.project_name,
@@ -105,7 +74,6 @@ class FolderUploadProxyView(APIView):
 
         logger.info(f"[FOLDER-UPLOAD] Queued — task_id:{task.id}, files:{len(files_data)}")
 
-        # 4. رجوع فوري بـ task_id — الفرونت يتابع الحالة منه
         return Response({
             "task_id":      task.id,
             "status":       "processing",
@@ -114,11 +82,61 @@ class FolderUploadProxyView(APIView):
             "check_status": f"/api/upm/tasks/{task.id}/",
         }, status=status.HTTP_202_ACCEPTED)
 
+    def _process_uploaded_file(self, uploaded_file):
+        """
+        يحدد نوع الملف ويعالجه:
+        - ZIP → يفكه ويرجع كل الملفات داخله
+        - ملف عادي مدعوم → يقرأه مباشرة
+        - ملف غير مدعوم → يتجاهله
+        """
+        if uploaded_file.name.lower().endswith('.zip'):
+            return self._read_zip(uploaded_file)
+        else:
+            result = self._read_file(uploaded_file)
+            return [result] if result else []
+
+    def _read_zip(self, uploaded_file):
+        """
+        يفك الـ ZIP ويرجع list من dicts لكل ملف مدعوم.
+        ZIP هو ملف binary — ما ينقرأ كـ text مباشرة.
+        نقرأه كـ bytes ثم نفكه بـ zipfile ونقرأ محتوى كل ملف.
+        """
+        results = []
+        try:
+            raw = uploaded_file.read()
+            with zipfile.ZipFile(io.BytesIO(raw)) as zf:
+                for entry in zf.namelist():
+                    # تجاهل المجلدات
+                    if entry.endswith('/'):
+                        continue
+                    basename = os.path.basename(entry)
+                    # تجاهل الملفات المخفية و __MACOSX
+                    if not basename or any(basename.startswith(p) for p in IGNORED_PREFIXES):
+                        continue
+                    ext = os.path.splitext(entry)[1].lower()
+                    # تجاهل الامتدادات غير المدعومة
+                    if ext in IGNORED_EXTENSIONS or ext not in SUPPORTED_EXTENSIONS:
+                        continue
+                    try:
+                        content = zf.read(entry).decode('utf-8', errors='ignore')
+                        results.append({
+                            'filename':     entry,   # نحتفظ بالمسار الكامل داخل الـ ZIP
+                            'content':      content,
+                            'content_type': 'text/plain',
+                        })
+                    except Exception as e:
+                        logger.warning(f"[FOLDER-UPLOAD] Skipping ZIP entry {entry}: {e}")
+
+            logger.info(f"[FOLDER-UPLOAD] Extracted {len(results)} files from ZIP: {uploaded_file.name}")
+        except zipfile.BadZipFile:
+            logger.error(f"[FOLDER-UPLOAD] Invalid ZIP: {uploaded_file.name}")
+        except Exception as e:
+            logger.error(f"[FOLDER-UPLOAD] ZIP read error {uploaded_file.name}: {e}")
+
+        return results
+
     def _read_file(self, uploaded_file):
-        """
-        يقرأ محتوى ملف واحد ويرجعه كـ dict.
-        يتجاهل الملفات غير المدعومة.
-        """
+        """يقرأ ملف واحد عادي ويرجعه كـ dict."""
         ext = os.path.splitext(uploaded_file.name)[1].lower()
         if ext not in SUPPORTED_EXTENSIONS:
             return None

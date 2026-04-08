@@ -264,7 +264,7 @@ services:
     build: ./UPM_Project
     container_name: upm_celery_worker
     restart: unless-stopped
-    command: celery -A UPM_Project.celery_app worker -l INFO -Q uploads
+    command: celery -A UPM_Project.celery_app worker -l INFO
     volumes:
       - ./UPM_Project:/app
     env_file:
