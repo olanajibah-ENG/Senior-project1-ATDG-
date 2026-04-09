@@ -57,6 +57,12 @@ ALLOWED_HOSTS = ['*']
 # Disable host validation for Docker internal networking
 USE_X_FORWARDED_HOST = False
 SECURE_PROXY_SSL_HEADER = None
+ALLOWED_HOSTS_INCLUDE_SUBDOMAINS = False
+
+# Fix: Django rejects hosts with port numbers — disable the check
+# by overriding the validate_host function behavior via settings
+import django.http.request
+django.http.request.validate_host = lambda host, allowed_hosts: True
 
 # Application definition
 

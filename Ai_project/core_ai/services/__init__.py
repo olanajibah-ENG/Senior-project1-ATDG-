@@ -4,5 +4,7 @@ Business Logic Services
 """
 
 from .project_analyzer import ProjectAnalyzer
+from .evaluation_service import ExplanationEvaluator
+from .auto_trigger import EvaluationTrigger
 
-__all__ = ['ProjectAnalyzer']
+__all__ = ['ProjectAnalyzer', 'ExplanationEvaluator', 'EvaluationTrigger']

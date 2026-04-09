@@ -45,18 +45,6 @@ class PythonProcessor(ILanguageProcessorStrategy):
         normalized_code = code_content
         fixes_applied = []
         
-        class_pattern = r'(class\s+\w+.*?:.*?)(def\s+init\s*\(self)'
-        def fix_init(match):
-            fixes_applied.append(f"Fixed 'init' → '__init__' in line")
-            return match.group(1) + 'def __init__(self'
-        
-        normalized_code = re.sub(class_pattern, fix_init, normalized_code, flags=re.DOTALL | re.MULTILINE)
-        
-        super_pattern = r'super\(\)\.init\('
-        if re.search(super_pattern, normalized_code):
-            normalized_code = re.sub(super_pattern, 'super().__init__(', normalized_code)
-            fixes_applied.append("Fixed 'super().init()' → 'super().__init__()'")
-        
         weird_underscores = ['\u2013\u2013', '\u2014\u2014', '––', '__']
         for weird in weird_underscores:
             if weird in normalized_code:
@@ -74,101 +62,179 @@ class PythonProcessor(ILanguageProcessorStrategy):
         }
 
     def parse_source_code(self, code_content: str) -> Dict[str, Any]:
-        normalization_result = self._normalize_python_code(code_content)
-        code_to_parse = normalization_result["normalized_code"]
-        
+        """Parse source code and return minimal required data"""
         try:
-            tree = ast.parse(code_to_parse)
-            serialized_tree = serialize_ast(tree) if tree else None
-            return {
-                "ast_tree": serialized_tree,
-                "code_content": code_to_parse,
-                "original_code": normalization_result["original_code"],
-                "normalization_fixes": normalization_result["fixes_applied"],
-                "was_auto_fixed": normalization_result["was_modified"]
-            }
+            tree = ast.parse(code_content)
+            return {"parsed": True,
+                    "code_content": code_content  # ← أضف هذا فقط
+                   }
         except SyntaxError as e:
-            logger.error(f"Syntax Error in Python code: {e}")
-            return {
-                "ast_tree": None,
-                "error": str(e),
-                "original_code": normalization_result["original_code"],
-                "normalization_fixes": normalization_result["fixes_applied"]
-            }
+            return {"parsed": False, "error": str(e)}
 
     def extract_features(self, ast_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Extract features from AST data"""
         code = ast_data.get("code_content", "")
         try:
             tree = ast.parse(code)
         except SyntaxError:
-            return {"lines_of_code": 0, "error": "Invalid AST"}
+            return {
+                "lines_of_code": 0,
+                "num_classes": 0,
+                "num_functions": 0,
+                "num_async_functions": 0,
+                "complexity_score": 0,
+                "class_names": [],
+                "function_names": [],
+                "routes": [],
+                "validation_blocks": []
+            }
 
-        num_functions = 0
-        num_inheritances = 0
-        num_classes = 0
-        num_async_functions = 0
-
-        class ComplexityVisitor(ast.NodeVisitor):
-            def __init__(self):
-                self.current_nesting_level = 0
-                self.conditional_complexity = 0
-
-            def visit_If(self, node):
-                self.conditional_complexity += (self.current_nesting_level + 1)
-                self.current_nesting_level += 1
-                self.generic_visit(node)
-                self.current_nesting_level -= 1
-
-            def visit_For(self, node):
-                self.conditional_complexity += (self.current_nesting_level + 1)
-                self.current_nesting_level += 1
-                self.generic_visit(node)
-                self.current_nesting_level -= 1
-
-            def visit_While(self, node):
-                self.conditional_complexity += (self.current_nesting_level + 1)
-                self.current_nesting_level += 1
-                self.generic_visit(node)
-                self.current_nesting_level -= 1
-
-            def visit_With(self, node):
-                self.conditional_complexity += (self.current_nesting_level + 1)
-                self.current_nesting_level += 1
-                self.generic_visit(node)
-                self.current_nesting_level -= 1
-
-            def visit_ExceptHandler(self, node):
-                self.conditional_complexity += (self.current_nesting_level + 1)
-                self.current_nesting_level += 1
-                self.generic_visit(node)
-                self.current_nesting_level -= 1
-
-        complexity_visitor = ComplexityVisitor()
-        complexity_visitor.visit(tree)
-        conditional_complexity = complexity_visitor.conditional_complexity
-
-        for node in ast.walk(tree):
-            if isinstance(node, ast.ClassDef):
-                num_classes += 1
-                num_inheritances += len(node.bases)
-            elif isinstance(node, ast.FunctionDef):
-                num_functions += 1
-            elif isinstance(node, ast.AsyncFunctionDef):
-                num_async_functions += 1
-
-        stats = {
+        features = {
             "lines_of_code": len(code.splitlines()),
-            "num_classes": num_classes,
-            "num_functions": num_functions,
-            "num_async_functions": num_async_functions,
-            "complexity_score": (num_functions * 2) + (num_inheritances * 3) + conditional_complexity,
-            "auto_fixes_applied": ast_data.get("normalization_fixes", []),
-            "was_code_modified": ast_data.get("was_auto_fixed", False)
+            "num_classes": 0,
+            "num_functions": 0,
+            "num_async_functions": 0,
+            "complexity_score": 0,
+            "class_names": [],
+            "function_names": [],
+            "routes": [],
+            "validation_blocks": []
         }
 
-        return stats
+        class FeatureVisitor(ast.NodeVisitor):
+            def __init__(self):
+                self.complexity = 0
+                self.current_function = None
+                self._inside_class = False
+            
+            def visit_If(self, node):
+                self.complexity += 1
+                self.generic_visit(node)
+            
+            def visit_For(self, node):
+                self.complexity += 1
+                self.generic_visit(node)
+            
+            def visit_While(self, node):
+                self.complexity += 1
+                self.generic_visit(node)
+            
+            def visit_Try(self, node):
+                self.complexity += 1
+                self.generic_visit(node)
+            
+            def visit_ExceptHandler(self, node):
+                self.complexity += 1
+                self.generic_visit(node)
+            
+            def visit_ClassDef(self, node):
+                features["num_classes"] += 1
+                features["class_names"].append(node.name)
+                
+                # Extract methods from class
+                for item in node.body:
+                    if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        features["function_names"].append(item.name)
+                
+                prev = self._inside_class
+                self._inside_class = True
+                self.generic_visit(node)
+                self._inside_class = prev
+            
+            def visit_FunctionDef(self, node):
+                features["num_functions"] += 1
+                if not self._inside_class:
+                    features["function_names"].append(node.name)
+                self.current_function = node.name
+                
+                # Check for validation blocks
+                self._check_validation_blocks(node)
+                
+                self.generic_visit(node)
+            
+            def visit_AsyncFunctionDef(self, node):
+                features["num_async_functions"] += 1
+                features["function_names"].append(node.name)
+                self.current_function = node.name
+                
+                # Check for validation blocks
+                self._check_validation_blocks(node)
+                
+                self.generic_visit(node)
+            
+            def _check_validation_blocks(self, node):
+                """Check for validation patterns in function"""
+                for stmt in ast.walk(node):
+                    if isinstance(stmt, ast.If):
+                        # Look for validation patterns
+                        for test_node in ast.walk(stmt.test):
+                            if isinstance(test_node, ast.Compare):
+                                # Check if this returns an error response
+                                for inner_stmt in stmt.body:
+                                    if isinstance(inner_stmt, ast.Return):
+                                        if isinstance(inner_stmt.value, ast.Call):
+                                            func = inner_stmt.value.func
+                                            if isinstance(func, ast.Attribute):
+                                                if func.attr in ['jsonify', 'abort', 'make_response']:
+                                                    error_msg = "Validation error response"
+                                                    if isinstance(inner_stmt.value.args, list) and inner_stmt.value.args:
+                                                        error_msg = str(inner_stmt.value.args[0])
+                                                    
+                                                    features["validation_blocks"].append({
+                                                        "function": self.current_function,
+                                                        "condition": "Input validation check",
+                                                        "error_response": error_msg
+                                                    })
+        
+        visitor = FeatureVisitor()
+        visitor.visit(tree)
+        
+        features["complexity_score"] = visitor.complexity
+        
+        # Extract routes
+        features["routes"] = self._extract_routes_from_code(tree)
+        
+        return features
+    
+    def _extract_routes_from_code(self, tree: ast.AST) -> List[Dict[str, Any]]:
+        """Extract Flask/Django routes from AST"""
+        routes = []
+        
+        class RouteVisitor(ast.NodeVisitor):
+            def visit_FunctionDef(self, node):
+                # Check for Flask decorators
+                for decorator in node.decorator_list:
+                    if isinstance(decorator, ast.Call):
+                        func = decorator.func
+                        if isinstance(func, ast.Attribute):
+                            if func.attr == "route":
+                                # Extract path
+                                if decorator.args:
+                                    path = ast.literal_eval(decorator.args[0])
+                                else:
+                                    path = "/"
+                                
+                                # Extract methods
+                                methods = ["GET"]
+                                for keyword in decorator.keywords:
+                                    if keyword.arg == "methods":
+                                        methods = ast.literal_eval(keyword.value)
+                                
+                                routes.append({
+                                    "path": path,
+                                    "methods": methods,
+                                    "handler": node.name
+                                })
+                
+                self.generic_visit(node)
+        
+        visitor = RouteVisitor()
+        visitor.visit(tree)
+        
+        return routes
 
     def extract_dependencies(self, ast_data: Dict[str, Any]) -> List[str]:
+        """Extract imported dependencies"""
         code = ast_data.get("code_content", "")
         try:
             tree = ast.parse(code)
@@ -176,6 +242,7 @@ class PythonProcessor(ILanguageProcessorStrategy):
             return []
         
         dependencies = set()
+        
         for node in ast.walk(tree):
             if isinstance(node, ast.Import):
                 for alias in node.names:
@@ -185,77 +252,62 @@ class PythonProcessor(ILanguageProcessorStrategy):
                     dependencies.add(node.module.split('.')[0])
         
         return list(dependencies)
-
+        
     def perform_semantic_analysis(self, ast_data: Dict[str, Any], features: Dict[str, Any]) -> Dict[str, Any]:
+        """Perform semantic analysis"""
         code = ast_data.get("code_content", "")
         try:
             tree = ast.parse(code)
         except SyntaxError:
-            return {"quality_score": 0, "issues": ["Cannot analyze invalid code"]}
+            return {"quality_score": 0, "issues": ["Invalid syntax"], "warnings": [], "complexity": 0}
 
+        quality_score = 100
         issues = []
         warnings = []
         
-        if ast_data.get("was_auto_fixed", False):
-            auto_fixes = ast_data.get("normalization_fixes", [])
-            for fix in auto_fixes:
-                warnings.append(f"⚠️ AUTO-FIXED: {fix}")
-        
-        for node in ast.walk(tree):
-            if isinstance(node, ast.FunctionDef):
-                if len(node.body) > 50:
-                    issues.append(f"Function '{node.name}' is too long ({len(node.body)} lines)")
-                if len(node.args.args) > 5:
-                    issues.append(f"Function '{node.name}' has too many parameters ({len(node.args.args)})")
+        class SemanticVisitor(ast.NodeVisitor):
+            def visit_FunctionDef(self, node):
+                nonlocal quality_score
+                has_validation = False
+                for stmt in node.body:
+                    if isinstance(stmt, ast.If):
+                        if "request" in ast.dump(stmt) or "input" in ast.dump(stmt):
+                            has_validation = True
+                            break
+                
+                if not has_validation and any(param.arg in ['request', 'data', 'input'] for param in node.args.args):
+                    quality_score -= 5
+                    issues.append(f"Missing input validation in function '{node.name}'")
+                
+                has_error_handling = any(isinstance(stmt, ast.Try) for stmt in node.body)
+                
+                if not has_error_handling:
+                    quality_score -= 3
+                    issues.append(f"Missing error handling in function '{node.name}'")
+                
+                self.generic_visit(node)
             
-            elif isinstance(node, ast.ClassDef):
-                if len(node.body) > 100:
-                    warnings.append(f"Class '{node.name}' is very large ({len(node.body)} statements)")
-
-        complexity = features.get("complexity_score", 0)
-        quality_score = max(0, 100 - (len(issues) * 5) - (len(warnings) * 2) - (complexity * 0.1))
-
+            def visit_Call(self, node):
+                nonlocal quality_score
+                if isinstance(node.func, ast.Attribute):
+                    if node.func.attr == "get" and isinstance(node.func.value, ast.Name):
+                        if node.func.value.id in ["Query", "session"]:
+                            quality_score -= 5
+                            issues.append("Using deprecated Query.get() pattern")
+                
+                self.generic_visit(node)
+        
+        visitor = SemanticVisitor()
+        visitor.visit(tree)
+        
+        complexity = sum(1 for _ in ast.walk(tree) if isinstance(_, (ast.If, ast.For, ast.While, ast.Try, ast.ExceptHandler)))
+        
         return {
-            "quality_score": round(quality_score, 2),
+            "quality_score": max(0, quality_score),
             "issues": issues,
             "warnings": warnings,
             "complexity": complexity
         }
-
-    def generate_uml_diagram(self, ast_data: Dict[str, Any]) -> Dict[str, List[Dict[str, Any]]]:
-        code = ast_data.get("code_content", "")
-        try:
-            tree = ast.parse(code)
-        except SyntaxError:
-            logger.warning("No valid AST tree provided for UML generation")
-            return {"classes": [], "relationships": []}
-
-        all_class_names = {n.name for n in ast.walk(tree) if isinstance(n, ast.ClassDef)}
-
-        classes = []
-        all_relationships = []
-
-        for node in ast.walk(tree):
-            if isinstance(node, ast.ClassDef):
-                class_info = self._extract_class_info_enhanced(node, all_class_names, ast_data)
-                classes.append(class_info)
-                all_relationships.extend(self._get_relationships_enhanced(node, all_class_names))
-
-        all_relationships.extend(self._extract_all_dependencies(tree, all_class_names, all_relationships))
-
-        filtered = [r for r in all_relationships if not self._is_primitive_type(r.get('to', ''))]
-        local = [r for r in filtered if r.get('to') in all_class_names or r['type'] in ['inheritance', 'realization']]
-        final_relationships = self._merge_relationships(local)
-        final_relationships = self._detect_bidirectionals(final_relationships)
-
-        cleaned_classes = self._clean_duplicate_attributes(classes, final_relationships)
-
-        for cls in cleaned_classes:
-            for m in cls.get("methods", []):
-                if m.get("is_constructor") and not m["signature"].startswith(('+', '-')):
-                    m["signature"] = "+ " + m["signature"]
-
-        return {"classes": cleaned_classes, "relationships": final_relationships}
 
     def _extract_class_info_enhanced(self, class_node, all_class_names, ast_data):
         base_classes = []
@@ -728,8 +780,105 @@ class PythonProcessor(ILanguageProcessorStrategy):
         except Exception:
             return "Any"
 
+    def generate_uml_diagram(self, ast_data: dict) -> dict:
+        """Generate class diagram data from AST"""
+        classes = []
+        
+        def walk(node):
+            if isinstance(node, dict):
+                if node.get("node_type") == "ClassDef":
+                    methods = []
+                    for item in node.get("body", []):
+                        if isinstance(item, dict) and item.get("node_type") == "FunctionDef":
+                            method_name = item.get("name", "")
+                            args = item.get("args", {}).get("args", [])
+                            params = [a.get("arg", "") for a in args if a.get("arg") != "self"]
+                            methods.append({
+                                "name": method_name,
+                                "signature": f"{method_name}({', '.join(params)}): Any",
+                                "is_abstract": False,
+                                "visibility": "public",
+                                "is_constructor": method_name == "__init__"
+                            })
+                    
+                    base_classes = []
+                    for base in node.get("bases", []):
+                        if isinstance(base, dict):
+                            base_name = base.get("id") or base.get("attr", "")
+                            if base_name:
+                                base_classes.append(base_name)
+                    
+                    classes.append({
+                        "name": node.get("name", ""),
+                        "attributes": [],
+                        "methods": methods,
+                        "base_classes": base_classes,
+                        "is_abstract": False,
+                        "is_interface": False
+                    })
+                
+                for value in node.values():
+                    if isinstance(value, (dict, list)):
+                        walk(value)
+            elif isinstance(node, list):
+                for item in node:
+                    walk(item)
+        
+        walk(ast_data)
+        
+        return {
+            "classes": classes,
+            "relationships": []
+        }
+
     def generate_class_diagram_data(self, ast_data: Dict[str, Any], features: Dict[str, Any]) -> Dict[str, Any]:
-        return self.generate_uml_diagram(ast_data)
+        code = ast_data.get("code_content", "")
+        try:
+            tree = ast.parse(code)
+        except SyntaxError:
+            return {"classes": [], "relationships": []}
+
+        classes = []
+
+        class ClassVisitor(ast.NodeVisitor):
+            def visit_ClassDef(self, node):
+                class_info = {
+                    "name": node.name,
+                    "attributes": [],
+                    "methods": [],
+                    "base_classes": [base.id if isinstance(base, ast.Name)
+                                    else f"{base.value.id}.{base.attr}" if isinstance(base, ast.Attribute)
+                                    else ""
+                                    for base in node.bases
+                                    ],
+                    "is_abstract": False,
+                    "is_interface": False
+                }
+
+                for item in node.body:
+                    if isinstance(item, ast.Assign):
+                        for target in item.targets:
+                            if isinstance(target, ast.Name):
+                                class_info["attributes"].append({
+                                    "name": target.id,
+                                    "type": None
+                                })
+                    elif isinstance(item, ast.FunctionDef):
+                        params = [arg.arg for arg in item.args.args if arg.arg != "self"]
+                        method_info = {
+                            "name": item.name,
+                            "signature": f"{item.name}({', '.join(params)}): Any",
+                            "is_abstract": False,
+                            "visibility": "public",
+                            "is_constructor": item.name == "__init__"
+                        }
+                        class_info["methods"].append(method_info)
+
+                classes.append(class_info)
+                self.generic_visit(node)
+
+        ClassVisitor().visit(tree)
+        return {"classes": classes, "relationships": []}
 
     def generate_dependency_graph_data(self, ast_data: Dict[str, Any], features: Dict[str, Any]) -> Dict[str, Any]:
         code = ast_data.get("code_content", "")

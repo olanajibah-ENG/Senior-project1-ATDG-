@@ -30,7 +30,8 @@ from core_upm.models.artifact import CodeArtifact
 
 logger = logging.getLogger(__name__)
 
-AI_FOLDER_UPLOAD_URL = 'http://ai_django_app:8000/folder-upload/'
+# تم تغيير endpoint ليتوافق مع مسار خدمة AI الفعلي
+AI_FOLDER_UPLOAD_URL = 'http://ai_django_app:8000/api/analysis/upload-folder/'
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -79,6 +80,7 @@ class FolderUploadProxyView(APIView):
             )
 
         # 3. إرسال الملفات لـ AI service
+        # ملاحظة: خدمة AI في Ai_project/core_ai/urls.py تستخدم endpoint = /upload-folder/
         try:
             ai_response = requests.post(
                 AI_FOLDER_UPLOAD_URL,
@@ -87,7 +89,6 @@ class FolderUploadProxyView(APIView):
                     'user_email': request.user.email,
                 },
                 files=files_to_forward,
-                headers={'Host': 'localhost'},
                 timeout=300
             )
             ai_response.raise_for_status()

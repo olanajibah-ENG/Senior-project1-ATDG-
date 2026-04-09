@@ -14,6 +14,21 @@ from core_ai.views.export_views import (
     list_generated_files_view,
     download_generated_file
 )
+from core_ai.views.stats_views import (
+    reviewer_stats_view,
+    ai_tasks_list_view
+)
+from core_ai.views.evaluation_views import (
+    evaluate_explanation,
+    get_evaluation_history,
+    get_evaluation_stats,
+    submit_human_review
+)
+
+from core_ai.views.folder_upload import FolderUploadView
+from core_ai.views.dependency_graph_view import dependency_graph_view
+from core_ai.views.context_view import cross_file_context_view
+from core_ai.views.project_analysis_view import AnalyzeProjectView, ProjectClassDiagramView
 
 print("CORE_AI URLS.PY LOADED!")
 print("UNIFIED EXPORT ENDPOINTS LOADED!")
@@ -32,4 +47,20 @@ urlpatterns = [
     path('generate-document/', generate_document, name='generate-document'),
     path('generated-files/', list_generated_files_view, name='list-files'),
     path('download-generated-file/<str:file_id>/', download_generated_file, name='download-generated-file'),
+    
+    path('reviewer/stats/', reviewer_stats_view, name='reviewer-stats'),
+    path('reviewer/ai-tasks/', ai_tasks_list_view, name='ai-tasks-list'),
+    
+    # Evaluation endpoints
+    path('evaluate-explanation/<str:explanation_id>/', evaluate_explanation, name='evaluate-explanation'),
+    path('evaluation-history/<str:explanation_id>/', get_evaluation_history, name='evaluation-history'),
+    path('evaluation-stats/', get_evaluation_stats, name='evaluation-stats'),
+    path('submit-human-review/<str:explanation_id>/', submit_human_review, name='submit-human-review'),
+
+    path('analyze-project/', AnalyzeProjectView.as_view(), name='analyze-project'),
+    path('project-class-diagram/<str:project_id>/', ProjectClassDiagramView.as_view(), name='project-class-diagram'),
+    path('dependency-graph/', dependency_graph_view, name='dependency-graph'),
+    path('cross-file-context/', cross_file_context_view, name='cross-file-context'),
+    path('upload-folder/', FolderUploadView.as_view(), name='upload-folder'),
+    
 ]

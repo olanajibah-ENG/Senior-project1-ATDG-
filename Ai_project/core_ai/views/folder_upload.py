@@ -154,8 +154,9 @@ class FolderUploadView(APIView):
             {
                 "project_id":     project_id,
                 "project_name":   project_name,
-                "version_number": version_number,
+                "version":        version_number,
                 "file_count":     len(file_ids_list),
+                "file_ids":       [f["file_id"] for f in file_ids_list],
                 "files":          file_ids_list,
                 "skipped":        skipped,
             },
@@ -215,25 +216,36 @@ class FolderUploadView(APIView):
         ترجع list من tuples: [(filepath, content), ...]
         filepath = المسار الكامل مثل src/utils.py
         """
-        # ── الطريقة 2: ZIP مضغوط ──────────────────────────────────────────────
-        single_file = request.FILES.get('file')
-        if single_file:
-            name_lower = single_file.name.lower()
-            if name_lower.endswith('.rar'):
-                raise ValueError("RAR format is not supported. Please upload a ZIP file instead.")
-            if name_lower.endswith('.zip'):
-                logger.info(f"[FOLDER-UPLOAD] Processing ZIP: {single_file.name}")
-                return self._extract_from_zip(single_file)
+        # ── جمع كل الملفات من أي field ────────────────────────────────────────
+        all_single = list(request.FILES.getlist('file'))
+        all_multi  = list(request.FILES.getlist('files')) + list(request.FILES.getlist('folder'))
+        all_files  = all_single + all_multi
 
-        # ── الطريقة 1 و 3: ملفات متعددة أو مجلد كامل ─────────────────────────
-        files = request.FILES.getlist('files') or request.FILES.getlist('folder')
-        if files:
-            logger.info(f"[FOLDER-UPLOAD] Processing {len(files)} files")
-            return self._extract_from_files(files)
+        if not all_files:
+            raise ValueError(
+                "No files received. Send 'files' (multiple files) or 'file' (ZIP/RAR archive)."
+            )
 
-        raise ValueError(
-            "No files received. Send 'files' (multiple files) or 'file' (ZIP archive)."
-        )
+        # ── لو ملف واحد مضغوط (ZIP) ──────────────────────────────────────────
+        if len(all_files) == 1:
+            f = all_files[0]
+            if f.name.lower().endswith('.zip'):
+                logger.info(f"[FOLDER-UPLOAD] Processing ZIP: {f.name}")
+                return self._extract_from_zip(f)
+
+        # ── لو أكثر من ملف: تحقق لو كلهم ZIP ─────────────────────────────────
+        archives = [f for f in all_files if f.name.lower().endswith('.zip')]
+        if archives:
+            result = []
+            for f in archives:
+                logger.info(f"[FOLDER-UPLOAD] Processing ZIP: {f.name}")
+                result.extend(self._extract_from_zip(f))
+            if result:
+                return result
+
+        # ── ملفات عادية متعددة ─────────────────────────────────────────────────
+        logger.info(f"[FOLDER-UPLOAD] Processing {len(all_files)} files")
+        return self._extract_from_files(all_files)
 
     def _extract_from_zip(self, uploaded_file):
         """فك ZIP وإرجاع (filepath, content) للملفات المدعومة."""

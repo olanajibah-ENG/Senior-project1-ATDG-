@@ -30,6 +30,7 @@ RUN apt-get update \
         libjpeg-dev \
         libopenjp2-7-dev \
         libtiff-dev \
+        unrar-free \
     && rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip and install wheel first

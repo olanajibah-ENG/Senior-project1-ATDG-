@@ -23,6 +23,7 @@ class Notification(models.Model):
         ('PASSWORD_CHANGED', 'Password Changed'),
         ('CODE_ANALYZED', 'Code Analyzed'),
         ('CUSTOM', 'Custom Notification'),
+        ('REVIEWER_ALERT', 'Reviewer Alert'),
     ]
     
     PRIORITY_LEVELS = [

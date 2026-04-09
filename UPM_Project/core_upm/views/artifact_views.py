@@ -60,7 +60,6 @@ class ArtifactRetrieveUpdateDestroyAPIView(APIView):
             # Get code information before deletion for notification
             artifact = self.artifact_service.get_artifact_by_id_if_authorized(code_id, request.user)
             code_name = artifact.file_name or f"Code {artifact.code_id}"
-
             # Service layer handles deletion and ownership verification (added in service layer)
             self.artifact_service.delete_artifact(code_id, request.user)
 
