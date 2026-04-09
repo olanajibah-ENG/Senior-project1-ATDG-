@@ -48,4 +48,10 @@ fi
 
 python manage.py create_admin --username "${ADMIN_USERNAME:-admin}" --email "${ADMIN_EMAIL:-admin@upm.edu}" --password "${ADMIN_PASSWORD}" --fullname "${ADMIN_FULLNAME:-System Admin}" || echo "Admin already exists - skipped."
 
-exec gunicorn UPM_Project.wsgi:application --bind 0.0.0.0:8000 --timeout 120 --workers 2
+if [ -n "$CELERY_WORKER" ]; then
+    echo "Starting Celery worker..."
+    exec celery -A UPM_Project.celery_app worker --loglevel=info
+else
+    echo "Starting server..."
+    exec gunicorn UPM_Project.wsgi:application --bind 0.0.0.0:8000 --timeout 120 --workers 2
+fi

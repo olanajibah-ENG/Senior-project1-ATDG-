@@ -52,24 +52,22 @@ services:
     networks:
       - upm_network
     healthcheck:
-      # Healthcheck محسّن وموثوق
       test: [ "CMD-SHELL", "curl -f http://localhost:8000/health/ || exit 1" ]
       interval: 15s
       timeout: 10s
       retries: 3
       start_period: 40s
 
-  # خدمة MongoDB لميكروسيرفس تحليل الكود (Ai_project)
   mongodb:
     image: mongo:latest
     container_name: ai_mongodb
     restart: unless-stopped
     ports:
-      - "27017:27017" # المنفذ الافتراضي لـ MongoDB
+      - "27017:27017"
     volumes:
       - mongodb_data:/data/db
     networks:
-      - upm_network # في نفس الشبكة لتسهيل التواصل
+      - upm_network
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 10s
@@ -77,7 +75,6 @@ services:
       retries: 5
       start_period: 10s
 
-    # خدمة الويب لميكروسيرفس تحليل الكود (Ai_project)
   ai_web:
     build: ./Ai_project
     container_name: ai_django_app
@@ -85,40 +82,36 @@ services:
     command: /bin/bash /app/entrypoint.sh
     volumes:
       - ./Ai_project:/app
-      - ai_static_data:/app/staticfiles # 👈 التعديل 2: لمشاركة الـ CSS مع Nginx
+      - ai_static_data:/app/staticfiles
     ports:
-      - "${AI_DJANGO_PORT:-8002}:8000" # منفذ جديد 8002 على المضيف
+      - "${AI_DJANGO_PORT:-8002}:8000"
     env_file:
       - .env
     environment:
-      - DJANGO_SETTINGS_MODULE=Ai_project.settings # 👈 إضافة هذا السطر المهم!
-      - MONGO_HOST=mongodb # اسم خدمة MongoDB في Docker Compose
+      - DJANGO_SETTINGS_MODULE=Ai_project.settings
+      - MONGO_HOST=mongodb
       - MONGO_PORT=27017
       - MONGO_DB_NAME=${MONGO_DB_NAME:-ai_mongodb_db}
       - SECRET_KEY=${AI_DJANGO_SECRET_KEY}
       - DEBUG=${AI_DJANGO_DEBUG}
       - ALLOWED_HOSTS=${AI_DJANGO_ALLOWED_HOSTS}
-      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY} # 👈 التعديل 3
-      # لإعداد Celery (المعالج الخلفي)
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
       - CELERY_BROKER_URL=${CELERY_BROKER_URL:-redis://ai_redis:6379/0}
       - CELERY_RESULT_BACKEND=${CELERY_RESULT_BACKEND:-redis://ai_redis:6379/0}
     depends_on:
       mongodb:
-        condition: service_healthy # تغيير من service_healthy إلى service_started
+        condition: service_healthy
       redis:
         condition: service_started
     networks:
       - upm_network
-
     healthcheck:
-      # Healthcheck محسّن وموثوق
       test: [ "CMD-SHELL", "curl -f http://localhost:8000/health/ || exit 1" ]
       interval: 15s
       timeout: 10s
       retries: 3
       start_period: 40s
 
-  # خدمة Redis لـ Celery (معالج المهام الخلفية)
   redis:
     image: redis:latest
     container_name: ai_redis
@@ -132,8 +125,6 @@ services:
       interval: 5s
       timeout: 3s
       retries: 5  
-
-  # خدمة Celery Worker لميكروسيرفس تحليل الكود
 
   celery_worker:
     build: ./Ai_project
@@ -164,13 +155,12 @@ services:
     networks:
       - upm_network
 
-  # خدمة Redis للإشعارات
   notification_redis:
     image: redis:7
     container_name: notification_redis
     restart: unless-stopped
     ports:
-      - "6380:6379" # منفذ مختلف عن Redis الرئيسي (6379)
+      - "6380:6379"
     networks:
       - upm_network
     healthcheck:
@@ -179,7 +169,6 @@ services:
       timeout: 3s
       retries: 5
 
-  # خدمة الإشعارات
   notification_service:
     build: ./Notification_Service
     container_name: notification_django
@@ -199,7 +188,6 @@ services:
       - DEBUG=${NOTIFICATION_DJANGO_DEBUG:-True}
       - NOTIFICATION_DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,notification_django,notification_service,web,upm_backend,upm_api_gateway,nginx,upm_django_app,ai_django_app,notification_redis
       - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,notification_django,notification_service,web,upm_backend,upm_api_gateway,nginx,upm_django_app,ai_django_app,notification_redis
-      # إعدادات البريد الإلكتروني
       - EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
       - EMAIL_HOST=${EMAIL_HOST:-smtp.gmail.com}
       - EMAIL_PORT=${EMAIL_PORT:-587}
@@ -219,12 +207,10 @@ services:
       retries: 3
       start_period: 40s
 
-      # خدمة Celery Worker لميكروسيرفس الإشعارات (إضافة جديدة)
   notification_worker:
     build: ./Notification_Service
     container_name: notification_worker
     restart: unless-stopped
-    # أمر التشغيل للتاسكات الخاصة بالإشعارات
     command: celery -A notification_service worker -l info
     volumes:
       - ./Notification_Service:/app
@@ -232,7 +218,6 @@ services:
       - DJANGO_SETTINGS_MODULE=notification_service.settings
       - CELERY_BROKER_URL=redis://notification_redis:6379/0
       - CELERY_RESULT_BACKEND=redis://notification_redis:6379/0
-      # يجب التأكد من تمرير إعدادات الإيميل هنا أيضاً لكي يستطيع الـ Worker الإرسال
       - EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
       - EMAIL_HOST=${EMAIL_HOST}
       - EMAIL_PORT=${EMAIL_PORT}
@@ -244,7 +229,7 @@ services:
       - notification_service
     networks:
       - upm_network
-  # Redis مشترك بين UPM وAI للـ Message Broker
+
   shared_redis:
     image: redis:latest
     container_name: shared_redis
@@ -259,7 +244,6 @@ services:
       timeout: 3s
       retries: 5
 
-  # UPM Celery Worker — يشيل رسائل الرفع من Redis ويعالجها
   upm_celery_worker:
     build: ./UPM_Project
     container_name: upm_celery_worker
@@ -270,6 +254,7 @@ services:
     env_file:
       - .env
     environment:
+      - CELERY_WORKER=true
       - DJANGO_SETTINGS_MODULE=UPM_Project.settings
       - DB_HOST=db
       - DB_NAME=${MYSQL_DATABASE:-upm_mysql_db}
@@ -296,10 +281,10 @@ services:
     container_name: upm_api_gateway
     restart: unless-stopped
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf # ملف إعداد Nginx
-      - ai_static_data:/app/staticfiles:ro # 👈 إصلاح: Nginx يقرأ الـ CSS من المجلد الصحيح
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ai_static_data:/app/staticfiles:ro
     ports:
-      - "80:80" # منفذ 80 على المضيف يذهب للـ Gateway
+      - "80:80"
     depends_on:
       web:
         condition: service_healthy
