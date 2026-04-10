@@ -26,6 +26,7 @@
                                 <input type="checkbox" id="action-toggle">
                             </th>
                             <th scope="col">Analysis ID</th>
+                            <th scope="col">Scope</th>
                             <th scope="col">Type</th>
                             <th scope="col">Created At</th>
                             <th scope="col">Content Preview</th>
@@ -39,10 +40,10 @@
                                     <input type="checkbox" name="_selected_action" value="{{ explanation.id }}" class="action-select">
                                 </td>
                                 <td>
-                                    {% if explanation.analysis_id %}
-                                        {{ explanation.analysis_id|slice:":8" }}...
+                                    {% if explanation.is_project %}
+                                        <span style="background: #673ab7; color: white; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: bold;">🏢 PROJECT</span>
                                     {% else %}
-                                        N/A
+                                        <span style="background: #607d8b; color: white; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: bold;">📄 FILE</span>
                                     {% endif %}
                                 </td>
                                 <td>{{ explanation.explanation_type|default:"N/A" }}</td>

@@ -78,6 +78,7 @@ def analyze_project_task(self, project_id: str):
     analysis_ids = [f['analysis_id'] for f in project_files if f.get('analysis_id')]
 
     service.save_result(
+        project_files=project_files,
         graph_data=graph_data,
         contexts=contexts,
         analysis_ids=analysis_ids,

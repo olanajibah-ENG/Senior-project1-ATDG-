@@ -1,0 +1,184 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static admin_list %}
+
+{% block content_title %}
+    <h1 style="color: #673ab7;">🏢 {{ title }}</h1>
+    <p style="color: #666; font-size: 13px; margin-top: -5px;">
+        ملفات التوثيق المولّدة على مستوى المشروع بالكامل (High-Level / Low-Level)
+    </p>
+{% endblock %}
+
+{% block result_list %}
+    {% if mongodb_error %}
+        <div class="messagelist">
+            <div class="error">{{ mongodb_error }}</div>
+        </div>
+    {% elif has_mongodb_data %}
+        <form id="changelist-form" method="post">
+            {% csrf_token %}
+            <div class="results">
+                <table id="result_list">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <input type="checkbox" id="action-toggle">
+                            </th>
+                            <th scope="col">📄 File Name</th>
+                            <th scope="col">Format</th>
+                            <th scope="col">Level</th>
+                            <th scope="col">Analysis ID</th>
+                            <th scope="col">Size</th>
+                            <th scope="col">Downloads</th>
+                            <th scope="col">Created At</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for file in mongodb_data %}
+                            <tr class="{% cycle 'row1' 'row2' %}">
+                                <td>
+                                    <input type="checkbox" name="_selected_action" value="{{ file.id }}" class="action-select">
+                                </td>
+                                <td>
+                                    <strong style="color: #673ab7;">{{ file.filename|default:"Unknown" }}</strong>
+                                </td>
+                                <td>
+                                    {% if file.file_type == 'pdf' %}
+                                        <span style="background: #e53935; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px;">📄 PDF</span>
+                                    {% elif file.file_type == 'markdown' %}
+                                        <span style="background: #43a047; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px;">📝 Markdown</span>
+                                    {% else %}
+                                        <span style="background: #757575; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px;">{{ file.file_type|default:"FILE"|upper }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if 'high_level' in file.filename|lower %}
+                                        <span style="color: #d32f2f; font-weight: bold;">🔴 High Level</span>
+                                    {% elif 'low_level' in file.filename|lower %}
+                                        <span style="color: #388e3c; font-weight: bold;">🟢 Low Level</span>
+                                    {% else %}
+                                        <span style="color: #999;">N/A</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if file.analysis_id %}
+                                        <code style="background: #ede7f6; padding: 2px 6px; border-radius: 3px; font-size: 11px; color: #673ab7;">
+                                            {{ file.analysis_id|truncatechars:12 }}
+                                        </code>
+                                    {% else %}
+                                        <span style="color: #999;">N/A</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if file.file_size %}
+                                        {{ file.file_size|filesizeformat }}
+                                    {% else %}
+                                        <span style="color: #999;">Unknown</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <span style="background: #e8f5e8; padding: 2px 6px; border-radius: 3px; font-size: 11px;">
+                                        {{ file.downloaded_count|default:0 }} downloads
+                                    </span>
+                                </td>
+                                <td>{{ file.created_at|default:"N/A" }}</td>
+                                <td>
+                                    {% if file.id %}
+                                        <a href="/api/analysis/download-generated-file/{{ file.id }}/" target="_blank"
+                                           style="background: #1976d2; color: white; padding: 4px 10px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 12px;">
+                                            📥 Download
+                                        </a>
+                                        <br>
+                                        <a href="#" onclick="viewProjectDoc('{{ file.id }}', '{{ file.filename }}', '{{ file.file_type }}')"
+                                           style="color: #ff9800; text-decoration: none; font-size: 11px; font-weight: bold;">
+                                            👁️ View Content
+                                        </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="9" style="text-align: center; padding: 30px; color: #999;">
+                                    <div style="font-size: 40px; margin-bottom: 10px;">📁</div>
+                                    <p>لا توجد ملفات مولّدة للمشروع بعد.</p>
+                                    <p style="font-size: 12px;">اذهب إلى "Project Analysis Results" واضغط على زر 🤖 High-Level أو ⚙️ Low-Level لتوليد شرح المشروع، ثم قم بتصديره كملف.</p>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Actions dropdown -->
+            <div class="actions">
+                <label>Action: 
+                    <select name="action" required>
+                        <option value="" selected>---------</option>
+                        <option value="delete_selected">Delete selected project documents</option>
+                    </select>
+                </label>
+                <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
+            </div>
+        </form>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleAll = document.getElementById('action-toggle');
+            const checkboxes = document.querySelectorAll('.action-select');
+            if (toggleAll) {
+                toggleAll.addEventListener('change', function() {
+                    checkboxes.forEach(cb => cb.checked = this.checked);
+                });
+            }
+        });
+
+        function viewProjectDoc(fileId, filename, fileType) {
+            var win = window.open('', '_blank', 'width=900,height=700,scrollbars=yes,resizable=yes');
+            win.document.write('<html><head><title>' + filename + '</title>');
+            win.document.write('<style>body{font-family: "Segoe UI", sans-serif; padding: 20px; background: #f5f5f5;} pre{white-space: pre-wrap; background: white; padding: 20px; border-radius: 8px; border: 1px solid #ddd; line-height: 1.6;} .header{background: linear-gradient(135deg, #673ab7, #9c27b0); color: white; padding: 15px 20px; margin: -20px -20px 20px -20px; border-radius: 0 0 8px 8px;} .header h2{margin:0;} .header p{margin:5px 0 0; opacity: 0.8; font-size: 13px;}</style>');
+            win.document.write('</head><body>');
+            win.document.write('<div class="header"><h2>🏢 ' + filename + '</h2><p>Project-Level Document (' + fileType.toUpperCase() + ')</p></div>');
+            win.document.write('<div id="content" style="text-align:center; padding: 40px; color: #999;">⏳ جاري تحميل المحتوى...</div>');
+            win.document.write('</body></html>');
+
+            fetch('/api/analysis/download-generated-file/' + fileId + '/')
+                .then(response => {
+                    if (fileType === 'pdf') return response.blob();
+                    return response.text();
+                })
+                .then(data => {
+                    var contentDiv = win.document.getElementById('content');
+                    if (fileType === 'pdf') {
+                        var url = URL.createObjectURL(data);
+                        contentDiv.innerHTML = '<embed src="' + url + '" width="100%" height="600px" type="application/pdf">';
+                    } else {
+                        contentDiv.innerHTML = '<pre>' + data + '</pre>';
+                    }
+                })
+                .catch(error => {
+                    win.document.getElementById('content').innerHTML = '<div style="color: red; padding: 20px;">❌ خطأ: ' + error.message + '</div>';
+                });
+        }
+        </script>
+    {% else %}
+        <div class="messagelist">
+            <div class="info" style="text-align: center; padding: 30px;">
+                <div style="font-size: 40px; margin-bottom: 10px;">📁</div>
+                <p>لا توجد ملفات مولّدة للمشروع بعد.</p>
+                <p style="font-size: 12px; color: #999;">اذهب إلى "Project Analysis Results" واضغط على زر 🤖 High-Level أو ⚙️ Low-Level لتوليد شرح المشروع، ثم قم بتصديره كملف PDF أو Markdown.</p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block pagination %}
+    {% if has_mongodb_data and mongodb_data|length > 0 %}
+        <p class="paginator">
+            {{ mongodb_data|length }} project document{{ mongodb_data|length|pluralize }} (showing first 100)
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block search %}{% endblock %}
+{% block date_hierarchy %}{% endblock %}
+{% block filters %}{% endblock %}

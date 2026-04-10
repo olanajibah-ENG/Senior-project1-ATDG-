@@ -20,6 +20,9 @@ class DocumentationOrchestrator:
         self.analysis_id = analysis_id
         self.db = get_mongo_db()
         self.collection = self.db[getattr(settings, 'AI_EXPLANATIONS_COLLECTION', 'ai_explanations')]
+        # تحديد نوع الـ ID: ObjectId أو UUID
+        self._is_object_id = ObjectId.is_valid(analysis_id)
+        self._query_id = ObjectId(analysis_id) if self._is_object_id else str(analysis_id)
 
     def get_or_generate_explanation(self, exp_type):
         print(f"🔥🔥🔥 ORCHESTRATOR ENTRY - exp_type parameter: '{exp_type}' (type: {type(exp_type)})")
@@ -73,29 +76,31 @@ class DocumentationOrchestrator:
         
         # 2. Search with ALL possible field names and variations
         search_queries = [
-            # Try with normalized_exp_type in exp_type field
-            {"analysis_id": ObjectId(self.analysis_id), "exp_type": normalized_exp_type},
-            # Try with normalized_exp_type in explanation_type field (legacy)
-            {"analysis_id": ObjectId(self.analysis_id), "explanation_type": normalized_exp_type},
-            # Try with original exp_type in both fields
-            {"analysis_id": ObjectId(self.analysis_id), "exp_type": exp_type},
-            {"analysis_id": ObjectId(self.analysis_id), "explanation_type": exp_type},
+            {"analysis_id": self._query_id, "exp_type": normalized_exp_type},
+            {"analysis_id": self._query_id, "explanation_type": normalized_exp_type},
+            {"analysis_id": self._query_id, "exp_type": exp_type},
+            {"analysis_id": self._query_id, "explanation_type": exp_type},
         ]
         
-        # Also try variations of the original type
-        # Also try variations of the original type with EXACT word matching (avoid substring conflicts)
+        # إذا كان UUID، ابحث أيضاً بالـ string
+        if not self._is_object_id:
+            search_queries.extend([
+                {"analysis_id": str(self.analysis_id), "exp_type": normalized_exp_type},
+                {"analysis_id": str(self.analysis_id), "explanation_type": normalized_exp_type},
+            ])
+        
         high_keywords = ['high', 'executive', 'business']
         low_keywords = ['low', 'technical', 'detailed']
 
-        et_words = et.split('_')  # Split into words: 'high_level' → ['high', 'level']
+        et_words = et.split('_')
 
         if any(word in et_words for word in high_keywords):
-            search_queries.append({"analysis_id": ObjectId(self.analysis_id), "exp_type": "high_level"})
-            search_queries.append({"analysis_id": ObjectId(self.analysis_id), "explanation_type": "high_level"})
+            search_queries.append({"analysis_id": self._query_id, "exp_type": "high_level"})
+            search_queries.append({"analysis_id": self._query_id, "explanation_type": "high_level"})
 
         if any(word in et_words for word in low_keywords):
-            search_queries.append({"analysis_id": ObjectId(self.analysis_id), "exp_type": "low_level"})
-            search_queries.append({"analysis_id": ObjectId(self.analysis_id), "explanation_type": "low_level"})
+            search_queries.append({"analysis_id": self._query_id, "exp_type": "low_level"})
+            search_queries.append({"analysis_id": self._query_id, "explanation_type": "low_level"})
         
         # Search for existing explanation
         existing = None
@@ -111,56 +116,46 @@ class DocumentationOrchestrator:
 
         # 3. Generate new explanation with STRICT enforcement
         is_project = False
-        analysis_data = self.db[settings.ANALYSIS_RESULTS_COLLECTION].find_one(
-            {"_id": ObjectId(self.analysis_id)}
-        )
-
-        if not analysis_data:
-            analysis_data = self.db['project_analysis_results'].find_one(
+        analysis_data = None
+        
+        if self._is_object_id:
+            analysis_data = self.db[settings.ANALYSIS_RESULTS_COLLECTION].find_one(
                 {"_id": ObjectId(self.analysis_id)}
             )
             if not analysis_data:
-                raise Exception("Analysis record not found.")
-            is_project = True
+                analysis_data = self.db['project_analysis_results'].find_one(
+                    {"_id": ObjectId(self.analysis_id)}
+                )
+                if analysis_data:
+                    is_project = True
+        else:
+            # UUID → بحث في المشاريع بـ project_id
+            analysis_data = self.db['project_analysis_results'].find_one(
+                {"project_id": str(self.analysis_id)}
+            )
+            if analysis_data:
+                is_project = True
+        
+        if not analysis_data:
+            raise Exception("Analysis record not found.")
         
         if is_project:
             contexts = analysis_data.get('contexts', {})
-            graph_data = analysis_data.get('graph_data', {})
-            ordered_files = graph_data.get('ordered', [])
+            ordered_files = analysis_data.get('dependency_order', [])
             
             code_content = "PROJECT ARCHITECTURE OVERVIEW\n\n"
             code_content += f"Total Files: {len(ordered_files)}\n"
             code_content += f"Execution Order: {' -> '.join(ordered_files)}\n\n"
             
             for f_id, f_context in contexts.items():
-                code_content += f"--- Context for File: {f_id} ---\n"
                 code_content += f"{f_context}\n\n"
+                
+            code_content += "\n=== PROJECT CODE CONTENT ===\n"
+            code_content += analysis_data.get('ast_structure', {}).get('code_content', '')
             
-            aggregated_classes = []
-            analysis_ids = analysis_data.get('analysis_ids', [])
-            for a_id in analysis_ids:
-                try:
-                    f_analysis = self.db[settings.ANALYSIS_RESULTS_COLLECTION].find_one({"_id": ObjectId(a_id)})
-                    if f_analysis:
-                        f_diagram = f_analysis.get('class_diagram_data', {})
-                        f_clss = f_diagram.get('classes', [])
-                        for cls in f_clss:
-                            # Add filename info to class
-                            cf_id = f_analysis.get('code_file_id')
-                            if cf_id:
-                                cf = self.db['code_files'].find_one({"_id": cf_id})
-                                if cf:
-                                    cls['filepath'] = cf.get('filepath', cf.get('filename', ''))
-                            aggregated_classes.append(cls)
-                except Exception:
-                    pass
-            
-            semantic_data = {'classes': aggregated_classes}
-            class_diagram_data = {'classes': aggregated_classes}
-            extracted_features = {
-                'lines_of_code': sum(len(c.get('methods', [])) * 10 for c in aggregated_classes), 
-                'functions': sum(len(c.get('methods', [])) for c in aggregated_classes)
-            }
+            semantic_data = analysis_data.get('semantic_analysis_data', {})
+            class_diagram_data = analysis_data.get('class_diagram_data', {})
+            extracted_features = analysis_data.get('extracted_features', {})
         else:
             code_content = analysis_data.get('ast_structure', {}).get('code_content', '')
             semantic_data = analysis_data.get('semantic_analysis_data', {})
@@ -171,8 +166,10 @@ class DocumentationOrchestrator:
         if is_high_level:
             print(f"🔵🔵🔵 STRICT ENFORCEMENT: Generating HIGH LEVEL explanation (requested: '{exp_type}') 🔵🔵🔵")
             
-            # Force high level agent
-            agent = HighLevelAgent()
+            # Select appropriate high level agent based on whether it is a project or single file
+            from .agents import ProjectHighLevelAgent
+            agent = ProjectHighLevelAgent() if is_project else HighLevelAgent()
+            
             classes = class_diagram_data.get('classes', [])
             if classes:
                 class_name = classes[0].get('name', 'Unknown')
@@ -187,16 +184,9 @@ class DocumentationOrchestrator:
                     class_name=class_name,
                     analysis_summary=analysis_summary
                 )
+                # Skip strict filtering to let the hardened agent prompt handle formatting
+                # This prevents mangling the output when the agent slightly deviates from technical constraints
                 print(f"DEBUG: High level agent generated content length: {len(raw_content)}")
-                
-                # Verify it's actually high level
-                if any(term in raw_content.lower() for term in ['## class:', '### method:', 'constructor:', 'parameters:', 'returns:']):
-                    print("⚠️ WARNING: High level content contains technical terms! Filtering...")
-                    # Filter out technical sections
-                    lines = raw_content.split('\n')
-                    filtered_lines = [line for line in lines if not any(term in line.lower() for term in 
-                        ['## class:', '### ', 'method:', 'constructor:', 'parameters', 'returns', 'logic flow'])]
-                    raw_content = '\n'.join(filtered_lines)
                     
             except Exception as agent_error:
                 error_msg = str(agent_error)
@@ -225,33 +215,24 @@ class DocumentationOrchestrator:
                 print(f"ERROR: Low level agent failed: {error_msg}")
                 raise Exception(f"Failed to generate Low Level explanation: {error_msg}")
 
-        # 5. Verification with level enforcement
-        code_size = len(code_content) + len(raw_content)
-        verifier = VerifierAgent()
-        # Pass the CORRECT explanation_level to verifier
-        try:
-            verified_content = verifier.verify(
-                code=code_content, 
-                explanation=raw_content,
-                explanation_level=normalized_exp_type  # Use normalized type
-            )
-            print(f"DEBUG: Verification successful for {normalized_exp_type}")
-        except Exception as verify_error:
-            print(f"DEBUG: Verification failed: {verify_error}")
-            verified_content = raw_content  # Use unverified content
+        # 5. Verification skipped to avoid latency/errors from free models
+        # We rely on the hardened prompt logic in the primary Agents
+        verified_content = raw_content
+        print(f"DEBUG: Skipping verification for {normalized_exp_type} to ensure consistency")
 
         # 6. Save with CORRECT type
         new_doc = {
-            "analysis_id": ObjectId(self.analysis_id),
+            "analysis_id": self._query_id,
             "exp_type": normalized_exp_type,
             "explanation_type": normalized_exp_type,
             "content": verified_content,
             "created_at": datetime.utcnow(),
             "code_content": code_content,
-            "agent_type": "HighLevelAgent" if is_high_level else "LowLevelAgent",
+            "agent_type": ("ProjectHighLevelAgent" if is_project else "HighLevelAgent") if is_high_level else ("ProjectLowLevelAgent" if is_project else "LowLevelAgent"),
             "original_request_type": str(exp_type),
             "normalized_type": normalized_exp_type,
             "verifier_fallback": verified_content == raw_content,  # True = verifier failed or was skipped
+            "is_project": is_project,
         }
 
         print(f"🔧 SAVING as: {normalized_exp_type} (requested: '{exp_type}')")

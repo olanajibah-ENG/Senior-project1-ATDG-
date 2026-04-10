@@ -26,6 +26,23 @@ class MongoAIExplanation(models.Model):
         return f"AI Explanation {self.analysis_id}"
 
 
+class MongoProjectAIExplanation(models.Model):
+    analysis_id = models.CharField(max_length=255, blank=True, null=True)
+    explanation_type = models.CharField(max_length=100, blank=True, null=True)
+    content = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Project AI Explanation (MongoDB)"
+        verbose_name_plural = "Project AI Explanations (MongoDB)"
+        managed = False
+        app_label = 'core_ai'
+        db_table = 'fake_project_ai_explanations'
+
+    def __str__(self):
+        return f"Project AI Explanation {self.analysis_id}"
+
+
 class MongoCodeFile(models.Model):
     filename = models.CharField(max_length=255, blank=True, null=True)
     file_type = models.CharField(max_length=50, blank=True, null=True)
@@ -97,6 +114,42 @@ class MongoAITask(models.Model):
         return f"AI Task {self.task_id}"
 
 
+
+class MongoProjectAnalysisResult(models.Model):
+    project_id = models.CharField(max_length=255, blank=True, null=True)
+    status = models.CharField(max_length=50, blank=True, null=True)
+    analysis_ids = models.TextField(blank=True, null=True)  # Store as stringified list
+    created_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Project Analysis Result (MongoDB)"
+        verbose_name_plural = "Project Analysis Results (MongoDB)"
+        managed = False
+        app_label = 'core_ai'
+        db_table = 'fake_project_analysis_results'
+
+    def __str__(self):
+        return f"Project Analysis {self.project_id}"
+
+
+class MongoProjectDocument(models.Model):
+    filename = models.CharField(max_length=255, blank=True, null=True)
+    file_type = models.CharField(max_length=50, blank=True, null=True)
+    explanation_id = models.CharField(max_length=255, blank=True, null=True)
+    file_size = models.IntegerField(blank=True, null=True)
+    created_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Project Document (MongoDB)"
+        verbose_name_plural = "Project Documents (MongoDB)"
+        managed = False
+        app_label = 'core_ai'
+        db_table = 'fake_project_documents'
+
+    def __str__(self):
+        return f"Project Doc: {self.filename}"
+
+
 class BaseMongoAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return self.model.objects.none()
@@ -135,10 +188,17 @@ class BaseMongoAdmin(admin.ModelAdmin):
 
 class AIExplanationAdmin(BaseMongoAdmin):
     change_list_template = 'admin/core_ai/mongoaiexplanation/change_list.html'
-    list_display = ('analysis_id_display', 'explanation_type', 'created_at_display', 'content_preview')
+    list_display = ('analysis_id_display', 'analysis_type_display', 'explanation_type', 'created_at_display', 'content_preview')
     list_filter = ('explanation_type',)
     search_fields = ('analysis_id',)
     ordering = ('-created_at',)
+
+    def analysis_type_display(self, obj):
+        is_project = obj.get('is_project', False) if hasattr(obj, 'get') else getattr(obj, 'is_project', False)
+        if is_project:
+            return format_html('<span style="background: #673ab7; color: white; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: bold;">🏢 PROJECT</span>')
+        return format_html('<span style="background: #607d8b; color: white; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: bold;">📄 FILE</span>')
+    analysis_type_display.short_description = 'Scope'
 
     def analysis_id_display(self, obj):
         analysis_id = obj.get('analysis_id', 'N/A') if hasattr(obj, 'get') else getattr(obj, 'analysis_id', 'N/A')
@@ -192,6 +252,15 @@ class AIExplanationAdmin(BaseMongoAdmin):
                     if '_id' in item:
                         item['id'] = str(item['_id'])  # إضافة id للـ template
                         item['_id'] = str(item['_id'])
+                    
+                    # 🆕 تتبع المصدر (Project vs File)
+                    analysis_id = item.get('analysis_id', '')
+                    item['is_project'] = item.get('agent_type', '').startswith('Project')
+                    
+                    # ⚠️ FILTER: Keep ONLY File Explanations in this view
+                    if item['is_project']:
+                        continue
+                    
                     for key, value in item.items():
                         if hasattr(value, '__class__') and 'ObjectId' in str(value.__class__):
                             item[key] = str(value)
@@ -206,7 +275,63 @@ class AIExplanationAdmin(BaseMongoAdmin):
                 extra_context['mongodb_error'] = f'Error loading AI explanations: {str(e)}'
                 print(f"Debug - AI Explanations error: {e}")
         
-        return super().changelist_view(request, extra_context=extra_context)
+        return super(BaseMongoAdmin, self).changelist_view(request, extra_context=extra_context)
+
+class ProjectAIExplanationAdmin(AIExplanationAdmin):
+    def changelist_view(self, request, extra_context=None):
+        if request.method == 'POST':
+            action = request.POST.get('action')
+            if action == 'delete_selected':
+                selected_ids = request.POST.getlist('_selected_action')
+                if selected_ids:
+                    deleted_count = self._delete_selected_items(selected_ids)
+                    if deleted_count > 0:
+                        self.message_user(request, f'Successfully deleted {deleted_count} project AI explanation(s).')
+                    else:
+                        self.message_user(request, 'No items were deleted.', level='warning')
+        
+        extra_context = extra_context or {}
+        db = get_mongo_db()
+        
+        if db is None:
+            extra_context['title'] = 'Project AI Explanations - MongoDB Not Available'
+            extra_context['mongodb_error'] = 'MongoDB connection failed. Please check database configuration.'
+        else:
+            try:
+                data = list(db[settings.AI_EXPLANATIONS_COLLECTION].find().sort('_id', -1).limit(100))
+                
+                processed_data = []
+                for item in data:
+                    analysis_id = item.get('analysis_id', '')
+                    item['is_project'] = item.get('is_project', False) or item.get('agent_type', '').startswith('Project')
+                    if not item['is_project'] and analysis_id:
+                        try:
+                            from bson import ObjectId
+                            if not ObjectId.is_valid(str(analysis_id)):
+                                item['is_project'] = True
+                        except:
+                            item['is_project'] = True
+                    # ⚠️ FILTER: Keep ONLY Project Explanations
+                    if not item['is_project']:
+                        continue
+                        
+                    if '_id' in item:
+                        item['id'] = str(item['_id'])
+                        item['_id'] = str(item['_id'])
+                    for key, value in item.items():
+                        if hasattr(value, '__class__') and 'ObjectId' in str(value.__class__):
+                            item[key] = str(value)
+                    processed_data.append(item)
+                
+                extra_context['title'] = f'Project AI Explanations ({len(processed_data)} records)'
+                extra_context['mongodb_data'] = processed_data
+                extra_context['has_mongodb_data'] = True
+                
+            except Exception as e:
+                extra_context['title'] = 'Project AI Explanations - Error'
+                extra_context['mongodb_error'] = f'Error loading explanations: {str(e)}'
+        
+        return super(BaseMongoAdmin, self).changelist_view(request, extra_context=extra_context)
 
     def _handle_add_item(self, request):
         """معالجة إضافة عنصر جديد"""
@@ -888,7 +1013,7 @@ class MongoDocumentationFile(models.Model):
 
 class GeneratedFileAdmin(BaseMongoAdmin):
     change_list_template = 'admin/core_ai/mongogeneratedfile/change_list.html'
-    list_display = ('filename_display', 'file_type', 'explanation_type_display', 'analysis_id_display',
+    list_display = ('filename_display', 'file_type', 'scope_display', 'explanation_type_display', 'analysis_id_display',
                    'file_size_display', 'created_at_display', 'downloaded_count', 'download_link', 'view_content_link')
     readonly_fields = ('filename', 'file_type', 'explanation_id', 'file_size', 'created_at', 'downloaded_count')
     list_filter = ('file_type',)
@@ -902,6 +1027,17 @@ class GeneratedFileAdmin(BaseMongoAdmin):
             filename = getattr(obj, 'filename', 'N/A')
         return filename
     filename_display.short_description = 'File Name'
+
+    def scope_display(self, obj):
+        if hasattr(obj, 'get') and callable(obj.get):
+            is_proj = obj.get('is_project', False)
+        else:
+            is_proj = getattr(obj, 'is_project', False)
+            
+        if is_proj:
+            return format_html('<span style="background: #673ab7; color: white; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: bold;">🏢 PROJECT</span>')
+        return format_html('<span style="background: #607d8b; color: white; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: bold;">📄 FILE</span>')
+    scope_display.short_description = 'Scope'
 
     def explanation_id_display(self, obj):
         if hasattr(obj, 'get') and callable(obj.get):
@@ -1029,6 +1165,19 @@ class GeneratedFileAdmin(BaseMongoAdmin):
                     if '_id' in item:
                         item['id'] = str(item['_id'])  # إضافة id للـ template
                         item['_id'] = str(item['_id'])
+                        
+                    is_project_flag = item.get('is_project', False)
+                    if 'is_project' not in item and 'explanation_id' in item and item['explanation_id']:
+                        try:
+                            from bson import ObjectId
+                            exp_id = item['explanation_id']
+                            exp_id_obj = ObjectId(exp_id) if len(str(exp_id)) == 24 else str(exp_id)
+                            exp = db[settings.AI_EXPLANATIONS_COLLECTION].find_one({'_id': exp_id_obj})
+                            if exp:
+                                is_project_flag = exp.get('agent_type', '').startswith('Project')
+                        except:
+                            pass
+                    item['is_project'] = is_project_flag
                     for key, value in item.items():
                         if hasattr(value, '__class__') and 'ObjectId' in str(value.__class__):
                             item[key] = str(value)
@@ -1101,6 +1250,114 @@ class GeneratedFileAdmin(BaseMongoAdmin):
 
         except Exception as e:
             print(f"Error deleting generated files: {e}")
+            return 0
+
+
+class ProjectDocumentAdmin(BaseMongoAdmin):
+    change_list_template = 'admin/core_ai/mongoprojectdocument/change_list.html'
+    list_display = ('filename_display', 'file_type', 'explanation_type_display', 'file_size_display', 'created_at_display', 'download_link')
+    list_filter = ('file_type',)
+    search_fields = ('filename',)
+    ordering = ('-created_at',)
+
+    def filename_display(self, obj):
+        filename = obj.get('filename', 'N/A') if hasattr(obj, 'get') else getattr(obj, 'filename', 'N/A')
+        return filename
+    filename_display.short_description = 'File Name'
+
+    def explanation_type_display(self, obj):
+        filename = obj.get('filename', '') if hasattr(obj, 'get') else getattr(obj, 'filename', '')
+        if 'high_level' in filename.lower():
+            return format_html('<span style="color: #d32f2f; font-weight: bold;">🔴 High Level</span>')
+        elif 'low_level' in filename.lower():
+            return format_html('<span style="color: #388e3c; font-weight: bold;">🟢 Low Level</span>')
+        return 'N/A'
+    explanation_type_display.short_description = 'Level'
+
+    def file_size_display(self, obj):
+        size = obj.get('file_size', 0) if hasattr(obj, 'get') else getattr(obj, 'file_size', 0)
+        if size:
+            if size > 1024 * 1024:
+                return f"{size / (1024 * 1024):.1f} MB"
+            elif size > 1024:
+                return f"{size / 1024:.1f} KB"
+            return f"{size} bytes"
+        return '0 bytes'
+    file_size_display.short_description = 'Size'
+
+    def created_at_display(self, obj):
+        return self._format_datetime(obj, 'created_at')
+    created_at_display.short_description = 'Created At'
+
+    def download_link(self, obj):
+        file_id = obj.get('_id', '') if hasattr(obj, 'get') else getattr(obj, '_id', '')
+        if file_id:
+            url = f"/api/analysis/download-generated-file/{file_id}/"
+            return format_html('<a href="{}" target="_blank" style="background: #1976d2; color: white; padding: 4px 10px; text-decoration: none; border-radius: 4px; font-weight: bold;">📥 Download</a>', url)
+        return 'N/A'
+    download_link.short_description = 'Download'
+
+    def changelist_view(self, request, extra_context=None):
+        if request.method == 'POST' and 'action' in request.POST:
+            action = request.POST.get('action')
+            if action == 'delete_selected':
+                selected_ids = request.POST.getlist('_selected_action')
+                if selected_ids:
+                    deleted_count = self._delete_selected_items(selected_ids)
+                    if deleted_count > 0:
+                        self.message_user(request, f'Successfully deleted {deleted_count} project document(s).')
+                    else:
+                        self.message_user(request, 'No items were deleted.', level='warning')
+
+        extra_context = extra_context or {}
+        db = get_mongo_db()
+
+        if db is None:
+            extra_context['title'] = 'Project Documents - MongoDB Not Available'
+            extra_context['mongodb_error'] = 'MongoDB connection failed.'
+        else:
+            try:
+                # جلب فقط الملفات المولّدة للمشاريع
+                data = list(db[settings.GENERATED_FILES_COLLECTION].find(
+                    {'is_project': True}
+                ).sort('_id', -1).limit(100))
+
+                processed_data = []
+                for item in data:
+                    if '_id' in item:
+                        item['id'] = str(item['_id'])
+                        item['_id'] = str(item['_id'])
+                    for key, value in item.items():
+                        if hasattr(value, '__class__') and 'ObjectId' in str(value.__class__):
+                            item[key] = str(value)
+                    processed_data.append(item)
+
+                extra_context['title'] = f'Project Documents ({len(processed_data)} files)'
+                extra_context['mongodb_data'] = processed_data
+                extra_context['has_mongodb_data'] = len(processed_data) > 0
+
+            except Exception as e:
+                extra_context['title'] = 'Project Documents - Error'
+                extra_context['mongodb_error'] = f'Error: {str(e)}'
+
+        return super(BaseMongoAdmin, self).changelist_view(request, extra_context=extra_context)
+
+    def _delete_selected_items(self, selected_ids):
+        try:
+            db = get_mongo_db()
+            if db is None:
+                return 0
+            from bson import ObjectId
+            object_ids = []
+            for id_str in selected_ids:
+                try:
+                    object_ids.append(ObjectId(id_str))
+                except:
+                    object_ids.append(id_str)
+            result = db[settings.GENERATED_FILES_COLLECTION].delete_many({"_id": {"$in": object_ids}})
+            return result.deleted_count
+        except Exception as e:
+            print(f"Error deleting project documents: {e}")
             return 0
 
 
@@ -1421,6 +1678,50 @@ class DocumentationFileAdmin(BaseMongoAdmin):
             print(f"Debug - Error in documentation _update_priority: {e}")
             return 0
 
+class ProjectAnalysisResultAdmin(BaseMongoAdmin):
+    change_list_template = 'admin/core_ai/mongoprojectanalysisresult/change_list.html'
+    list_display = ('project_id_display', 'status_badge', 'files_count', 'classes_count', 'created_at_display')
+    list_filter = ('status',)
+    search_fields = ('project_id',)
+    
+    def status_badge(self, obj):
+        status = obj.get('status', 'N/A')
+        color = "#ff9800" # Pending
+        if status == 'COMPLETED': color = "#4caf50"
+        elif status == 'FAILED': color = "#f44336"
+        return format_html('<span style="background: {}; color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px;">{}</span>', color, status)
+    status_badge.short_description = 'Status'
+
+    def project_id_display(self, obj):
+        pid = obj.get('project_id', 'N/A')
+        return format_html('<strong style="color: #2196f3;">{}</strong>', pid[:8] + "..." if len(pid) > 8 else pid)
+    project_id_display.short_description = 'Project UUID'
+
+    def files_count(self, obj):
+        ids = obj.get('analysis_ids', [])
+        return len(ids) if isinstance(ids, list) else 0
+    files_count.short_description = 'Files'
+
+    def classes_count(self, obj):
+        # Could potentially aggregate from sub-analyses but for now show summary if exists
+        summary = obj.get('dependency_graph', {})
+        if isinstance(summary, dict) and 'nodes' in summary:
+            return len(summary['nodes'])
+        return "N/A"
+    classes_count.short_description = 'Nodes/Classes'
+
+    def created_at_display(self, obj):
+        return self._format_datetime(obj, 'created_at')
+    created_at_display.short_description = 'Analysis Date'
+
+    def changelist_view(self, request, extra_context=None):
+        return self._mongo_changelist_view_impl(
+            request, 
+            extra_context, 
+            settings.PROJECT_ANALYSIS_RESULTS_COLLECTION, 
+            "Project Analysis Results"
+        )
+
 
 admin.site.register(MongoAIExplanation, AIExplanationAdmin)
 admin.site.register(MongoCodeFile, CodeFileAdmin)
@@ -1429,6 +1730,9 @@ admin.site.register(MongoAnalysisJob, AnalysisJobAdmin)
 admin.site.register(MongoAITask, AITaskAdmin)
 admin.site.register(MongoGeneratedFile, GeneratedFileAdmin)  # تم تفعيل عرض الملفات المولدة
 admin.site.register(MongoDocumentationFile, DocumentationFileAdmin)
+admin.site.register(MongoProjectAnalysisResult, ProjectAnalysisResultAdmin)
+admin.site.register(MongoProjectAIExplanation, ProjectAIExplanationAdmin)
+admin.site.register(MongoProjectDocument, ProjectDocumentAdmin)
 
 admin.site.site_header = "AI Project Administration"
 admin.site.site_title = "AI Project Admin"
