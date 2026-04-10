@@ -86,41 +86,49 @@ class AIExplanationViewSet(viewsets.ViewSet):
         """
         توليد شرح جديد باستخدام الذكاء الاصطناعي
         """
-        # ✅ التحقق المسبق من analysis_id باستخدام get_safe_object_id
+        # ✅ التحقق المسبق من analysis_id
         raw_analysis_id = request.data.get('analysis_id')
-        analysis_id = get_safe_object_id(raw_analysis_id)
-        
-        # 🆕 دعم الـ UUID الخاص بالمشروع (Project ID Support)
-        if not analysis_id and raw_analysis_id:
-            import re
-            uuid_regex = re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', re.I)
-            if uuid_regex.match(str(raw_analysis_id).strip()):
-                try:
-                    db = get_mongo_db()
-                    project_res = db['project_analysis_results'].find_one(
-                        {"project_id": str(raw_analysis_id).strip()},
-                        sort=[("created_at", -1)]
-                    )
-                    if project_res:
-                        analysis_id = project_res['_id']
-                        print(f"!!! RESOLVED Project UUID {raw_analysis_id} to ObjectId {analysis_id} !!!")
-                        logger.info(f"--- Resolved Project UUID {raw_analysis_id} to ObjectId {analysis_id} ---")
-                    else:
-                        return Response({
-                            "error": "Project analysis not found",
-                            "message": "Please run project analysis first using /api/analysis/analyze-project/"
-                        }, status=404)
-                except Exception as e:
-                    logger.error(f"Error resolving project UUID: {str(e)}")
+        if not raw_analysis_id:
+            return Response({
+                "error": "analysis_id is required"
+            }, status=400)
 
-        if not analysis_id:
+        raw_analysis_id = str(raw_analysis_id).strip()
+
+        # تحديد نوع الـ ID: ObjectId (ملف) أم UUID (مشروع)
+        import re
+        uuid_regex = re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', re.I)
+        is_project_uuid = uuid_regex.match(raw_analysis_id) is not None
+
+        if is_project_uuid:
+            # UUID مشروع: تحقق من وجود تحليل للمشروع
+            try:
+                db = get_mongo_db()
+                project_res = db['project_analysis_results'].find_one(
+                    {"project_id": raw_analysis_id},
+                    sort=[("created_at", -1)]
+                )
+                if not project_res:
+                    return Response({
+                        "error": "Project analysis not found",
+                        "message": "Please run project analysis first using /api/analysis/analyze-project/"
+                    }, status=404)
+                # ✅ نُبقي على الـ UUID الأصلي ونرسله مباشرة للـ task
+                analysis_id_str = raw_analysis_id
+                logger.info(f"--- [GenerateExplanation] Project UUID confirmed: {analysis_id_str} ---")
+            except Exception as e:
+                logger.error(f"Error checking project UUID: {str(e)}")
+                return Response({"error": f"Database error: {str(e)}"}, status=500)
+
+        elif get_safe_object_id(raw_analysis_id):
+            # ObjectId عادي (ملف واحد)
+            analysis_id_str = str(get_safe_object_id(raw_analysis_id))
+            logger.info(f"--- [GenerateExplanation] File ObjectId confirmed: {analysis_id_str} ---")
+        else:
             return Response({
                 "error": "Invalid analysis_id format",
-                "message": "analysis_id must be a valid MongoDB ObjectId or a Project UUID"
+                "message": "analysis_id must be a valid MongoDB ObjectId (24-char hex) or a Project UUID (8-4-4-4-12 format)"
             }, status=400)
-        
-        # تحويل إلى string للاستخدام في الـ task
-        analysis_id_str = str(analysis_id)
         
         # ✅ محاولة الحصول على exp_type من مصادر متعددة
         exp_type = request.data.get('type', '').strip() if request.data.get('type') else None

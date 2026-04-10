@@ -62,32 +62,38 @@ def handle_export_with_auto_generation(analysis_id, explanation_type, format_typ
 
         collection_name = getattr(settings, 'AI_EXPLANATIONS_COLLECTION', 'ai_explanations')
         
-        try:
-            if ObjectId.is_valid(analysis_id):
-                analysis_obj_id = ObjectId(analysis_id)
-            else:
-                analysis_obj_id = analysis_id
-                # Check if it's a project_id string
+        # تحديد نوع الـ ID وبناء قائمة بكل الشكل الممكنة للبحث
+        search_ids = []
+        if ObjectId.is_valid(analysis_id):
+            search_ids.append(ObjectId(analysis_id))
+            search_ids.append(str(analysis_id))
+        else:
+            # UUID مشروع - أضف الـ string مباشرة
+            search_ids.append(str(analysis_id))
+            # أيضاً حاول إيجاد ObjectId الداخلي للمشروع كـ fallback قديم
+            try:
                 p_doc = db['project_analysis_results'].find_one({"project_id": str(analysis_id)})
                 if p_doc:
-                    analysis_obj_id = p_doc['_id']
-        except:
-            analysis_obj_id = analysis_id
+                    search_ids.append(p_doc['_id'])
+            except:
+                pass
 
-        logger.info(f"--- [ExportHandler] Searching for explanation with analysis_id: {analysis_obj_id}, type: {explanation_type} ---")
+        logger.info(f"--- [ExportHandler] Searching for explanation with ids: {search_ids}, type: {explanation_type} ---")
 
-        # Try searching by explanation_type first (new format)
-        search_criteria_new = {
-            "analysis_id": analysis_obj_id,
-            "explanation_type": explanation_type
-        }
-        logger.info(f"--- [ExportHandler] Searching with criteria: {search_criteria_new} ---")
-        data = db[collection_name].find_one(search_criteria_new)
-        logger.info(f"--- [ExportHandler] Search result (explanation_type): {data is not None} ---")
+        data = None
+        for sid in search_ids:
+            # Try explanation_type field first
+            data = db[collection_name].find_one({"analysis_id": sid, "explanation_type": explanation_type})
+            if data:
+                break
+            # Fallback to exp_type field
+            data = db[collection_name].find_one({"analysis_id": sid, "exp_type": explanation_type})
+            if data:
+                break
 
         if data is not None:
             if not isinstance(data, dict):
-                logger.warning(f"--- [ExportHandler] Invalid data type from new search: {type(data)} ---")
+                logger.warning(f"--- [ExportHandler] Invalid data type: {type(data)} ---")
                 data = None
             else:
                 if '_id' in data and hasattr(data['_id'], '__class__') and 'ObjectId' in str(data['_id'].__class__):
@@ -96,28 +102,8 @@ def handle_export_with_auto_generation(analysis_id, explanation_type, format_typ
                     if hasattr(value, '__class__') and 'ObjectId' in str(value.__class__):
                         data[key] = str(value)
 
-        if not data:
-            # Fallback to exp_type (old format)
-            search_criteria_old = {
-                "analysis_id": analysis_obj_id,
-                "exp_type": explanation_type
-            }
-            logger.info(f"--- [ExportHandler] Fallback search with criteria: {search_criteria_old} ---")
-            data = db[collection_name].find_one(search_criteria_old)
-            logger.info(f"--- [ExportHandler] Search result (exp_type): {data is not None} ---")
-
-            if data is not None:
-                if not isinstance(data, dict):
-                    logger.warning(f"--- [ExportHandler] Invalid data type from old search: {type(data)} ---")
-                    data = None
-                else:
-                    if '_id' in data and hasattr(data['_id'], '__class__') and 'ObjectId' in str(data['_id'].__class__):
-                        data['_id'] = str(data['_id'])
-                    for key, value in data.items():
-                        if hasattr(value, '__class__') and 'ObjectId' in str(value.__class__):
-                            data[key] = str(value)
-
         logger.info(f"--- [ExportHandler] Search result: {data is not None} ---")
+
         
         if data:
             logger.info(f"--- [ExportHandler] Data type: {type(data)} ---")
@@ -130,11 +116,15 @@ def handle_export_with_auto_generation(analysis_id, explanation_type, format_typ
             logger.info(f"--- [ExportHandler] Explanation not found in main collection, checking task status ---")
             
             tasks_collection = getattr(settings, 'AI_TASKS_COLLECTION', 'ai_tasks')
-            task_data = db[tasks_collection].find_one({
-                "analysis_id": analysis_obj_id,
-                "exp_type": explanation_type,
-                "status": "completed"
-            })
+            task_data = None
+            for sid in search_ids:
+                task_data = db[tasks_collection].find_one({
+                    "analysis_id": sid,
+                    "exp_type": explanation_type,
+                    "status": "completed"
+                })
+                if task_data:
+                    break
             
             if task_data and isinstance(task_data, dict) and task_data.get('result', {}).get('content'):
                 logger.info(f"--- [ExportHandler] Found completed task with content ---")
@@ -142,7 +132,7 @@ def handle_export_with_auto_generation(analysis_id, explanation_type, format_typ
                     '_id': task_data.get('result', {}).get('explanation_id', 'temp_id'),
                     'content': task_data['result']['content'],
                     'exp_type': explanation_type,
-                    'analysis_id': analysis_obj_id,
+                    'analysis_id': analysis_id,
                     'created_at': task_data.get('created_at')
                 }
             else:
@@ -231,19 +221,23 @@ def handle_export_with_auto_generation(analysis_id, explanation_type, format_typ
                 # الحصول على اسم الملف من البيانات إن أمكن
                 original_filename = data.get('filename', '')
                 if not original_filename:
-                    # محاولة استخراج اسم الملف من المحتوى
-                    filename_match = re.search(r'File[:\s]+([^\s\n]+)', str(data.get('content', '')))
-                    if filename_match:
-                        original_filename = filename_match.group(1).strip()
+                    content_str = str(data.get('content', ''))
+                    # أولوية لـ Project: (للشرح project-level)
+                    project_match = re.search(r'Project[:\s]+([^\n]+)', content_str)
+                    if project_match:
+                        original_filename = project_match.group(1).strip()
+                    else:
+                        # fallback لـ File:
+                        file_match = re.search(r'File[:\s]+([^\s\n]+)', content_str)
+                        if file_match:
+                            original_filename = file_match.group(1).strip()
                 
                 # تنظيف اسم الملف
                 safe_name = slugify(original_filename) if original_filename else "technical_report"
-                safe_explanation_type = slugify(explanation_type)
                 safe_analysis_id = slugify(analysis_id[:8])
                 
-                # بناء اسم الملف النهائي مع التأكد من وجود .pdf
-                # إزالة أي امتداد موجود مسبقاً
-                base_name = f"{safe_name}_{safe_explanation_type}_{safe_analysis_id}"
+                # بناء اسم الملف: safe_name_explanation_type_id
+                base_name = f"{safe_name}_{explanation_type}_{safe_analysis_id}"
                 # إزالة أي امتداد موجود (.pdf, .txt, إلخ)
                 base_name = re.sub(r'\.[^.]+$', '', base_name)
                 # إضافة .pdf في النهاية
@@ -257,19 +251,23 @@ def handle_export_with_auto_generation(analysis_id, explanation_type, format_typ
                 # الحصول على اسم الملف من البيانات إن أمكن
                 original_filename = data.get('filename', '')
                 if not original_filename:
-                    # محاولة استخراج اسم الملف من المحتوى
-                    filename_match = re.search(r'File[:\s]+([^\s\n]+)', str(data.get('content', '')))
-                    if filename_match:
-                        original_filename = filename_match.group(1).strip()
+                    content_str = str(data.get('content', ''))
+                    # أولوية لـ Project: (للشرح project-level)
+                    project_match = re.search(r'Project[:\s]+([^\n]+)', content_str)
+                    if project_match:
+                        original_filename = project_match.group(1).strip()
+                    else:
+                        # fallback لـ File:
+                        file_match = re.search(r'File[:\s]+([^\s\n]+)', content_str)
+                        if file_match:
+                            original_filename = file_match.group(1).strip()
                 
                 # تنظيف اسم الملف
                 safe_name = slugify(original_filename) if original_filename else "technical_report"
-                safe_explanation_type = slugify(explanation_type)
                 safe_analysis_id = slugify(analysis_id[:8])
                 
-                # بناء اسم الملف النهائي مع التأكد من وجود .md
-                # إزالة أي امتداد موجود مسبقاً
-                base_name = f"{safe_name}_{safe_explanation_type}_{safe_analysis_id}"
+                # بناء اسم الملف: safe_name_explanation_type_id
+                base_name = f"{safe_name}_{explanation_type}_{safe_analysis_id}"
                 # إزالة أي امتداد موجود (.md, .txt, إلخ)
                 base_name = re.sub(r'\.[^.]+$', '', base_name)
                 # إضافة .md في النهاية
@@ -353,7 +351,8 @@ def handle_export_with_auto_generation(analysis_id, explanation_type, format_typ
                     'file_content': file_content,
                     'file_size': len(file_content),
                     'created_at': datetime.utcnow(),
-                    'downloaded_count': 1
+                    'downloaded_count': 1,
+                    'is_project': data.get('is_project', False) or str(data.get('agent_type', '')).startswith('Project') or not ObjectId.is_valid(str(analysis_id)) if isinstance(data, dict) else False
                 }
                 result = db[settings.GENERATED_FILES_COLLECTION].insert_one(file_record)
                 logger.info(f"--- [ExportHandler] File saved to database with ID: {result.inserted_id} ---")
