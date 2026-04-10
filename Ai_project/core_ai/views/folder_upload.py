@@ -1,11 +1,12 @@
 """
-views/folder_upload.py  ← معدّل
-======================
-التغييرات عن النسخة القديمة:
-    1. ملف واحد عادي → يُحفظ داخل مجلد اسمه project_name تلقائياً (مش يُعامل كملف بدون مجلد)
-    2. ملفات متعددة بدون مسار → تُحفظ داخل مجلد project_name
-    3. الـ versioning يعتمد على upm_project_id (UUID من MySQL) مش project_name فقط
-    4. response يرجع filepath لكل ملف لدعم رسم الشجرة في الفرونت
+folder_upload.py ← معدّل
+التغييرات:
+    1. _save_project_version() الآن يجمع كل ملفات الإصدار السابق + الجديدة
+       ويضع إشارة على كل ملف: "new" / "modified" / "unchanged"
+    2. project_versions document بات يحتوي:
+       - file_ids       : كل الـ IDs (قديمة + جديدة) — للـ tree
+       - file_changes   : تفاصيل كل ملف مع إشارة التغيير — للـ UI
+    3. لا شي اتحذف من منطق الـ content addressing
 """
 
 import io, os, uuid, hashlib, zipfile, logging
@@ -50,10 +51,9 @@ class FolderUploadView(APIView):
         if not project_name:
             return Response({"error": "project_name is required"}, status=status.HTTP_400_BAD_REQUEST)
 
-        # upm_project_id هو UUID المشروع الحقيقي من MySQL — هو الأساس للـ versioning
         upm_project_id = request.data.get('upm_project_id', '').strip()
         if not upm_project_id:
-            upm_project_id = project_name  # fallback للتوافق
+            upm_project_id = project_name
             logger.warning("[FOLDER-UPLOAD] upm_project_id not provided, falling back to project_name")
 
         try:
@@ -74,18 +74,21 @@ class FolderUploadView(APIView):
         if db is None:
             return Response({"error": "Database connection failed"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        # حساب رقم الإصدار بناءً على upm_project_id الحقيقي
-        version_number = self._get_next_version(db, upm_project_id)
-        logger.info(f"[FOLDER-UPLOAD] project_id={upm_project_id}, version={version_number}")
+        version_number, prev_file_ids = self._get_next_version(db, upm_project_id)
+        logger.info(f"[FOLDER-UPLOAD] project_id={upm_project_id}, version={version_number}, prev_files={len(prev_file_ids)}")
 
         try:
-            file_ids_list, skipped = self._save_files(db, files_data, upm_project_id, project_name, version_number, request)
+            file_ids_list, skipped = self._save_files(
+                db, files_data, upm_project_id, project_name, version_number, request
+            )
         except Exception as e:
             logger.error(f"[FOLDER-UPLOAD] Save error: {e}")
             return Response({"error": f"Failed to save files: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        file_ids = [f["file_id"] for f in file_ids_list]
-        self._save_project_version(db, upm_project_id, project_name, version_number, file_ids, request)
+        self._save_project_version(
+            db, upm_project_id, project_name, version_number,
+            file_ids_list, prev_file_ids, request
+        )
 
         logger.info(f"[FOLDER-UPLOAD] Done — version={version_number}, saved={len(file_ids_list)}, skipped={skipped}")
 
@@ -94,58 +97,141 @@ class FolderUploadView(APIView):
             "project_name":   project_name,
             "version_number": version_number,
             "file_count":     len(file_ids_list),
-            "file_ids":       file_ids,
+            "file_ids":       [f["file_id"] for f in file_ids_list],
             "files":          file_ids_list,
             "skipped":        skipped,
         }, status=status.HTTP_201_CREATED)
 
+    # ── Versioning ─────────────────────────────────────────────────────────────
     def _get_next_version(self, db, upm_project_id):
-        """يحسب رقم الإصدار القادم بناءً على upm_project_id — مش project_name."""
-        collection = db[PROJECT_VERSIONS_COLLECTION]
+        """
+        يرجع (version_number, prev_file_ids).
+        prev_file_ids = كل file_ids من آخر إصدار سابق (لنضمها لاحقاً).
+        """
+        collection   = db[PROJECT_VERSIONS_COLLECTION]
         last_version = collection.find_one(
             {"project_id": upm_project_id},
             sort=[("version_number", -1)]
         )
         if last_version:
-            v = last_version["version_number"] + 1
-            logger.info(f"[FOLDER-UPLOAD] Existing project, new version: {v}")
-            return v
-        logger.info("[FOLDER-UPLOAD] New project: version 1")
-        return 1
+            v            = last_version["version_number"] + 1
+            prev_ids     = last_version.get("file_ids", [])
+            logger.info(f"[FOLDER-UPLOAD] Existing project → version {v}")
+            return v, prev_ids
+        logger.info("[FOLDER-UPLOAD] New project → version 1")
+        return 1, []
 
-    def _save_project_version(self, db, project_id, project_name, version_number, file_ids, request):
+    def _save_project_version(self, db, project_id, project_name,
+                               version_number, new_files_list, prev_file_ids, request):
+        """
+        يحفظ project_version document بـ:
+          - file_ids    : كل IDs (قديمة + جديدة/معدّلة) — للـ tree
+          - file_changes: تفاصيل كل ملف + إشارة التغيير — للـ UI
+
+        منطق الدمج:
+          1. الملفات الجديدة/المعدّلة (file_ids_list من الرفع الحالي)
+             → status = "new" أو "modified"
+          2. الملفات القديمة من prev_file_ids اللي مش موجودة في الرفع الحالي
+             → status = "unchanged"
+        """
         collection = db[PROJECT_VERSIONS_COLLECTION]
-        user_email = request.user.email if request.user.is_authenticated else request.data.get('user_email')
+        code_files  = db[settings.CODE_FILES_COLLECTION]
+        user_email  = request.user.email if request.user.is_authenticated else request.data.get('user_email')
+
+        # الـ file_ids الجديدة/المعدّلة من الرفع الحالي
+        current_ids  = {f["file_id"] for f in new_files_list}
+
+        # ── بناء file_changes ───────────────────────────────────────────────
+        file_changes = []
+
+        # 1. الملفات الجديدة أو المعدّلة
+        for f in new_files_list:
+            # إذا كان الـ version_number في الملف يساوي الإصدار الحالي → جديد أو معدّل
+            # لو version_number أقل → unchanged (ملف قديم ما اتغيّر، جاء من content addressing)
+            if f.get("version_number") == version_number:
+                # ملف جديد أو معدّل — نحدد بالبحث في prev_file_ids
+                if f["file_id"] in set(str(x) for x in prev_file_ids):
+                    change_status = "modified"  # كان موجود بنفس الـ ID → ما يصير، لكن احتياطاً
+                else:
+                    change_status = "new" if version_number == 1 else "new_or_modified"
+            else:
+                # content addressing رجّع ملف قديم → unchanged
+                change_status = "unchanged"
+
+            file_changes.append({
+                "file_id"       : f["file_id"],
+                "filename"      : f["filename"],
+                "filepath"      : f["filepath"],
+                "file_type"     : f["file_type"],
+                "version_number": f.get("version_number", version_number),
+                "status"        : change_status,
+            })
+
+        # 2. الملفات من الإصدار السابق اللي مش في الرفع الحالي → unchanged
+        #    (ملفات ما رُفعت هاي المرة — بس لازم تظهر في الإصدار الجديد)
+        prev_ids_not_in_current = [
+            pid for pid in prev_file_ids
+            if str(pid) not in current_ids
+        ]
+
+        if prev_ids_not_in_current:
+            prev_obj_ids = []
+            for pid in prev_ids_not_in_current:
+                try:
+                    prev_obj_ids.append(ObjectId(str(pid)))
+                except:
+                    pass
+
+            unchanged_docs = list(code_files.find(
+                {"_id": {"$in": prev_obj_ids}},
+                {"_id": 1, "filename": 1, "filepath": 1, "file_type": 1, "version_number": 1}
+            ))
+
+            for doc in unchanged_docs:
+                file_changes.append({
+                    "file_id"       : str(doc["_id"]),
+                    "filename"      : doc.get("filename", ""),
+                    "filepath"      : doc.get("filepath", doc.get("filename", "")),
+                    "file_type"     : doc.get("file_type", "unknown"),
+                    "version_number": doc.get("version_number", 1),
+                    "status"        : "unchanged",
+                })
+
+        # كل الـ file_ids المجمّعة (جديدة + قديمة)
+        all_file_ids = list(current_ids) + [
+            str(pid) for pid in prev_file_ids if str(pid) not in current_ids
+        ]
+
         collection.insert_one({
             "project_id":     project_id,
             "project_name":   project_name,
             "version_number": version_number,
-            "file_ids":       file_ids,
-            "total_files":    len(file_ids),
+            "file_ids":       all_file_ids,      # كل الملفات
+            "file_changes":   file_changes,       # مع إشارة التغيير
+            "total_files":    len(all_file_ids),
+            "new_files":      sum(1 for f in file_changes if f["status"] != "unchanged"),
+            "unchanged_files": sum(1 for f in file_changes if f["status"] == "unchanged"),
             "user_email":     user_email,
             "created_at":     datetime.utcnow(),
         })
-        logger.info(f"[FOLDER-UPLOAD] ProjectVersion saved: v{version_number}")
+        logger.info(
+            f"[FOLDER-UPLOAD] Version {version_number} saved: "
+            f"total={len(all_file_ids)}, "
+            f"new/modified={sum(1 for f in file_changes if f['status'] != 'unchanged')}, "
+            f"unchanged={sum(1 for f in file_changes if f['status'] == 'unchanged')}"
+        )
 
+    # ── File Extraction ────────────────────────────────────────────────────────
     def _extract_files(self, request, project_name):
-        """
-        القاعدة الجديدة:
-            - ملف واحد أو ملفات بدون مسار → filepath = project_name/filename
-            - ملفات مع مسار (folder upload من المتصفح) → يُحافظ على المسار
-            - ZIP → يُفكّ مع الحفاظ على بنية المجلدات
-        """
         all_files = (
             list(request.FILES.getlist('file')) +
             list(request.FILES.getlist('files')) +
             list(request.FILES.getlist('folder'))
         )
-
         if not all_files:
             raise ValueError("No files received. Send 'files' (multiple) or 'file' (single/ZIP).")
 
-        # ZIP
         if len(all_files) == 1 and all_files[0].name.lower().endswith('.zip'):
-            logger.info(f"[FOLDER-UPLOAD] Processing ZIP: {all_files[0].name}")
             return self._extract_from_zip(all_files[0])
 
         archives = [f for f in all_files if f.name.lower().endswith('.zip')]
@@ -156,7 +242,6 @@ class FolderUploadView(APIView):
             if result:
                 return result
 
-        logger.info(f"[FOLDER-UPLOAD] Processing {len(all_files)} file(s)")
         return self._extract_from_files(all_files, project_name)
 
     def _extract_from_zip(self, uploaded_file):
@@ -184,10 +269,6 @@ class FolderUploadView(APIView):
         return result
 
     def _extract_from_files(self, files, project_name):
-        """
-        لو f.name فيه مسار (src/utils.py) → نستخدمه كما هو
-        لو f.name هو اسم الملف فقط (utils.py) → project_name/utils.py
-        """
         result = []
         for f in files:
             ext = os.path.splitext(f.name)[1].lower()
@@ -198,24 +279,20 @@ class FolderUploadView(APIView):
                 continue
             try:
                 content = f.read().decode('utf-8', errors='ignore')
-                if os.path.dirname(f.name):
-                    filepath = f.name
-                else:
-                    # ملف واحد أو ملفات بدون مسار → تحت مجلد المشروع
-                    filepath = f"{project_name}/{f.name}"
+                filepath = f.name if os.path.dirname(f.name) else f"{project_name}/{f.name}"
                 result.append((filepath, content))
             except Exception as e:
                 logger.warning(f"[FOLDER-UPLOAD] Skipping {f.name}: {e}")
-        logger.info(f"[FOLDER-UPLOAD] Read {len(result)} file(s)")
         return result
 
+    # ── Save Files ─────────────────────────────────────────────────────────────
     def _save_files(self, db, files_data, project_id, project_name, version_number, request):
-        collection = db[settings.CODE_FILES_COLLECTION]
+        collection          = db[settings.CODE_FILES_COLLECTION]
         analysis_collection = db[settings.ANALYSIS_RESULTS_COLLECTION]
-        files_list = []
-        skipped = 0
+        files_list          = []
+        skipped             = 0
         user_email = request.user.email if request.user.is_authenticated else request.data.get('user_email')
-        user_name = request.user.username if request.user.is_authenticated else None
+        user_name  = request.user.username if request.user.is_authenticated else None
 
         for filepath, file_content in files_data:
             try:
@@ -233,28 +310,38 @@ class FolderUploadView(APIView):
 
     def _save_single_file(self, collection, analysis_collection, filepath, content,
                           project_id, project_name, version_number, user_email, user_name):
+        """
+        Content Addressing:
+        - لو الملف موجود بنفس hash ونفس المشروع → يرجع نفس الـ id (unchanged)
+          مع version_number القديم (ما يتحدث) — هيك نعرف إنه unchanged
+        - لو hash جديد → يُحفظ كـ document جديد بـ version_number الحالي
+        """
         file_hash = hashlib.md5(content.encode()).hexdigest()
 
         existing = collection.find_one({'file_hash': file_hash, 'source_project_id': project_id})
         if existing:
-            logger.info(f"[FOLDER-UPLOAD] Reusing: {filepath} (id={existing['_id']})")
+            logger.info(f"[FOLDER-UPLOAD] Reusing (unchanged): {filepath}")
             return {
                 "file_id":        str(existing['_id']),
                 "filename":       os.path.basename(filepath),
                 "filepath":       filepath,
                 "file_type":      existing.get('file_type', 'unknown'),
-                "version_number": existing.get('version_number', version_number),
+                "version_number": existing.get('version_number', 1),  # الإصدار القديم الأصلي
             }
 
-        ext = os.path.splitext(filepath)[1].lower()
+        # ملف جديد أو معدّل → يُحفظ بـ version_number الحالي
+        ext       = os.path.splitext(filepath)[1].lower()
         file_type = EXTENSION_MAP.get(ext, 'unknown')
-        basename = os.path.basename(filepath)
+        basename  = os.path.basename(filepath)
 
         gridfs_id = save_to_gridfs(
             content=content,
             filename=basename,
-            metadata={'project_id': project_id, 'filepath': filepath, 'file_type': file_type,
-                      'file_hash': file_hash, 'version': version_number}
+            metadata={
+                'project_id': project_id, 'filepath': filepath,
+                'file_type':  file_type,  'file_hash': file_hash,
+                'version':    version_number,
+            }
         )
 
         code_file = CodeFile(
@@ -270,9 +357,9 @@ class FolderUploadView(APIView):
         if '_id' in data_to_insert and data_to_insert['_id'] is None:
             del data_to_insert['_id']
 
-        result = collection.insert_one(data_to_insert)
+        result  = collection.insert_one(data_to_insert)
         file_id = str(result.inserted_id)
-        logger.info(f"[FOLDER-UPLOAD] Saved: {filepath} → GridFS:{gridfs_id}, Mongo:{file_id}")
+        logger.info(f"[FOLDER-UPLOAD] Saved new/modified: {filepath} v{version_number}")
 
         analyze_code_file_task.delay(file_id)
 
@@ -281,5 +368,5 @@ class FolderUploadView(APIView):
             "filename":       basename,
             "filepath":       filepath,
             "file_type":      file_type,
-            "version_number": version_number,
+            "version_number": version_number,  # الإصدار الحالي
         }
