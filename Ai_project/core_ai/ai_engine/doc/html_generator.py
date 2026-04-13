@@ -1,11 +1,6 @@
 """
-html_generator.py  ← جديد كلياً
-=================
-HTMLGenerator — يولّد ملف HTML قابل للعرض في المتصفح مباشرة.
-
-يرث من DocumentationGenerator ويطبّق:
-    _format_output() → يبني HTML كامل مع CSS مدمج
-    _export()        → يرجع HTML كـ UTF-8 bytes
+html_generator.py ← معدّل
+نفس تنسيق وألوان PDF بالضبط — CSS مستخرج من pdf.py مباشرة
 """
 
 import re
@@ -19,279 +14,386 @@ logger = logging.getLogger(__name__)
 class HTMLGenerator(DocumentationGenerator):
 
     def _format_output(self, content: str, data: dict) -> str:
-        """
-        يبني صفحة HTML كاملة مع CSS مدمج.
-        المحتوى (Markdown) يتحول لـ HTML داخل الصفحة.
-        """
         content_str = str(content) if content else ""
+        image_url   = data.get('image_url', '') if data else ''
 
-        # نوع الشرح
-        explanation_type = data.get('explanation_type') if data else None
-        exp_type_display = "Executive Overview" if explanation_type == 'high_level' else "Technical Documentation"
+        # اسم الملف — نفس منطق PDF
+        filename = "Analysis Report"
+        filename_match = re.search(r'File[:\s]+([^\s\n]+)', content_str)
+        if filename_match:
+            filename = filename_match.group(1).strip()
+        safe_filename = filename.replace('<', '&lt;').replace('>', '&gt;')
 
-        created_at = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+        generation_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 
-        # اسم الملف
-        filename = "DOCUMENTATION"
-        if data:
-            if data.get('filename'):
-                filename = data.get('filename').upper()
-            elif data.get('original_filename'):
-                filename = data.get('original_filename').upper()
-        if filename == "DOCUMENTATION":
-            file_match = re.search(r'File:\s*([^\s\n]+)', content_str)
-            if file_match:
-                filename = file_match.group(1).upper()
+        # نفس دالة تحويل النص لـ HTML المستخدمة في PDF
+        main_content_html = self._convert_text_to_enhanced_html(content_str)
 
-        # تحويل Markdown → HTML
-        html_body = self._markdown_to_html(content_str)
-
-        # diagram
-        image_url = data.get('image_url', '') if data else ''
         diagram_html = ""
         if image_url:
-            diagram_html = f"""
-            <div class="diagram-section">
-                <h2>📊 Architecture Visualization</h2>
-                <img src="{image_url}" alt="Class Diagram" style="max-width:100%;"/>
-            </div>
-            <hr/>"""
+            diagram_html = f'<div style="text-align:center;margin-bottom:20px;"><h3>Architecture Visualization</h3><img src="{image_url}" style="width:100%;border:1px solid #ddd;border-radius:10px;"></div>'
 
-        html = f"""<!DOCTYPE html>
+        code_section_html = ""
+        if data and data.get('code_content'):
+            code = data['code_content'].replace('<', '&lt;').replace('>', '&gt;')
+            code_section_html = f"""
+            <div class="code-section">
+                <h3>Source Code Analysis</h3>
+                <h4>{safe_filename}</h4>
+                <pre class="source-code">{code[:1000000]}</pre>
+            </div>"""
+
+        return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>{filename} — {exp_type_display}</title>
+    <title>Technical Analysis Report - {safe_filename}</title>
     <style>
-        * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+        * {{ box-sizing: border-box; }}
+
         body {{
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #f4f6f9;
-            color: #2c3e50;
-            line-height: 1.7;
-            padding: 0 0 40px;
-        }}
-        header {{
-            background: linear-gradient(135deg, #1a237e, #283593);
-            color: white;
-            padding: 32px 48px;
-        }}
-        header h1 {{ font-size: 2rem; letter-spacing: 1px; }}
-        header .meta {{
-            margin-top: 10px;
-            font-size: 0.9rem;
-            opacity: 0.85;
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-        }}
-        header .badge {{
-            background: rgba(255,255,255,0.15);
-            border-radius: 12px;
-            padding: 3px 12px;
-        }}
-        .container {{
-            max-width: 960px;
-            margin: 40px auto;
-            padding: 0 24px;
-        }}
-        .content-card {{
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-        }}
-        h1, h2, h3, h4 {{
-            color: #1a237e;
-            margin: 28px 0 12px;
-            line-height: 1.3;
-        }}
-        h1 {{ font-size: 1.8rem; border-bottom: 3px solid #1a237e; padding-bottom: 8px; }}
-        h2 {{ font-size: 1.4rem; border-left: 4px solid #3949ab; padding-left: 12px; }}
-        h3 {{ font-size: 1.15rem; color: #283593; }}
-        p {{ margin: 12px 0; }}
-        code {{
-            background: #f0f4ff;
-            color: #c0392b;
-            padding: 2px 7px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-        }}
-        pre {{
-            background: #1e1e2e;
-            color: #cdd6f4;
-            padding: 20px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 16px 0;
-            font-size: 0.88em;
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: #2d3436;
             line-height: 1.6;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
         }}
-        pre code {{ background: none; color: inherit; padding: 0; }}
-        table {{
-            width: 100%;
-            border-collapse: collapse;
-            margin: 16px 0;
-            font-size: 0.95em;
+
+        /* ── Cover Page ── */
+        .header-centered {{
+            text-align: center;
+            background: #ffffff;
+            padding: 80px 40px 60px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
         }}
-        th {{
-            background: #1a237e;
-            color: white;
-            padding: 10px 14px;
-            text-align: left;
+        .logo {{
+            color: #5a3d9a;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.15);
         }}
-        td {{ padding: 9px 14px; border-bottom: 1px solid #e8ecf0; }}
-        tr:nth-child(even) td {{ background: #f8f9ff; }}
-        ul, ol {{ padding-left: 24px; margin: 12px 0; }}
-        li {{ margin: 6px 0; }}
-        blockquote {{
-            border-left: 4px solid #3949ab;
-            background: #f0f4ff;
+        .logo-accent {{ color: #8e44ad; font-weight: 800; }}
+        .subtitle {{
+            color: #636e72;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 300;
+            margin-top: 8px;
+        }}
+        .project-title {{
+            font-size: 26px;
+            color: #2d3436;
+            margin-top: 16px;
+            font-weight: 500;
+        }}
+        .generation-date {{
+            font-size: 12px;
+            color: #b2bec3;
+            margin-top: 10px;
+            font-weight: 300;
+        }}
+
+        /* ── Content wrapper ── */
+        .content {{
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+            background: #ffffff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }}
+
+        /* ── Typography ── */
+        p {{
+            margin-bottom: 14px;
+            text-align: justify;
+            word-wrap: break-word;
+        }}
+
+        /* ── High-level section heading ── */
+        .high-level-section {{
+            color: #2c3e50;
+            font-size: 22px;
+            border-bottom: 3px solid #5a3d9a;
+            padding-bottom: 10px;
+            padding-left: 15px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+        }}
+        .high-level-section::before {{
+            content: "";
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            border-radius: 2px;
+            background: #5a3d9a;
+        }}
+
+        /* ── Class card ── */
+        .class-card {{
+            margin-top: 50px;
+            page-break-inside: avoid;
+        }}
+        .class-header {{
+            background: linear-gradient(135deg, #4834d4 0%, #341f97 100%);
+            padding: 13px 22px;
+            display: inline-block;
+            border-radius: 0 10px 10px 0;
+            margin-top: 20px;
+            font-size: 20px;
+            color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(72,52,212,0.3);
+        }}
+        .class-content-wrapper {{
+            margin-left: 30px;
+            padding-left: 25px;
+            margin-top: 15px;
+        }}
+
+        /* ── Method container ── */
+        .method-container {{
+            border: 1px solid #e8eaf6;
+            border-left: 5px solid #6c5ce7;
+            border-radius: 8px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            background: #fbfbff;
+            box-shadow: 0 4px 10px rgba(108,92,231,0.08);
+            overflow: hidden;
+        }}
+        .method-title {{
+            color: #ffffff;
             padding: 12px 20px;
-            margin: 16px 0;
-            border-radius: 0 8px 8px 0;
-            color: #455a64;
+            font-size: 15px;
+            margin: 0;
+            font-weight: 600;
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            border-radius: 6px 6px 0 0;
         }}
-        hr {{ border: none; border-top: 1px solid #e0e6ef; margin: 28px 0; }}
-        .diagram-section {{ margin: 24px 0; }}
+        .method-description-area {{
+            padding: 20px;
+            background: transparent;
+        }}
+
+        /* ── Detail key ── */
+        .detail-key {{
+            color: #2980b9;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 11px;
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            border-left: 3px solid #3498db;
+            padding: 2px 8px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 0 6px 6px 0;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(33,150,243,0.1);
+        }}
+        .key-group {{ margin-top: 15px; margin-bottom: 10px; display: block; }}
+        .key-content {{ margin-left: 5px; display: block; }}
+
+        /* ── Highlighted & inline code ── */
+        .highlighted-text {{
+            color: #a29bfe;
+            font-weight: 600;
+            background: rgba(162,155,254,0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }}
+        .inline-code {{
+            background: rgba(162,155,254,0.15);
+            color: #6c5ce7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 90%;
+            font-weight: 500;
+            border: 1px solid rgba(162,155,254,0.3);
+        }}
+        code {{
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2c3e50;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 90%;
+            border: 1px solid #e1e8ed;
+        }}
+
+        /* ── Source code block ── */
+        .source-code {{
+            background: #f8f9fa;
+            color: #2c3e50;
+            padding: 25px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            border: 1px solid #dee2e6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }}
+        .code-section {{
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }}
+        .code-section h3 {{ color: #2c3e50; font-size: 20px; margin-bottom: 10px; }}
+        .code-section h4 {{ color: #7f8c8d; font-size: 13px; margin-bottom: 14px; font-weight: 400; }}
+
+        /* ── Recommendation box ── */
+        .recommendation-box {{
+            background: #f3f0ff;
+            border-left: 5px solid #6c5ce7;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            color: #4834d4;
+            box-shadow: 0 2px 8px rgba(108,92,231,0.1);
+        }}
+
+        /* ── Lists ── */
+        ul {{ margin: 12px 0; padding-left: 25px; }}
+        li {{ margin-bottom: 8px; line-height: 1.6; }}
+        .logic-list {{ margin: 10px 0; padding-left: 0; list-style-type: none; }}
+        .logic-item {{ margin-bottom: 8px; display: block; line-height: 1.5; }}
+
+        /* ── Images ── */
+        img {{ max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin: 20px 0; }}
+
+        /* ── Footer ── */
         footer {{
             text-align: center;
+            padding: 20px;
+            font-size: 11px;
+            color: #95a5a6;
+            border-top: 1px solid #e0e0e0;
             margin-top: 40px;
-            font-size: 0.82rem;
-            color: #90a4ae;
         }}
     </style>
 </head>
 <body>
-<header>
-    <h1>📜 {filename}</h1>
-    <div class="meta">
-        <span class="badge">✅ VERIFIED</span>
-        <span class="badge">📅 {created_at}</span>
-        <span class="badge">🏷 {exp_type_display}</span>
-        <span class="badge">🤖 AutoTest &amp; DocGen</span>
-    </div>
-</header>
-<div class="container">
-    <div class="content-card">
-        {diagram_html}
-        {html_body}
-    </div>
+
+<div class="header-centered">
+    <div class="logo">&lt;/&gt; Docs<span class="logo-accent">Gen</span></div>
+    <div class="subtitle">Technical Intelligence Report</div>
+    <div class="project-title">{safe_filename}</div>
+    <div class="generation-date">Generated on: {generation_date}</div>
 </div>
+
+<div class="content">
+    {diagram_html}
+    {main_content_html}
+    {code_section_html}
+</div>
+
 <footer>
-    Generated by <strong>AutoTest &amp; DocGen</strong> — Technical Intelligence Unit<br/>
-    Last Updated: {created_at}
+    AutoTest &amp; DocGen — Technical Intelligence Unit &nbsp;|&nbsp; {generation_date}
 </footer>
+
 </body>
 </html>"""
-        return html
 
     def _export(self, formatted_output: str, data: dict) -> bytes:
-        """يرجع HTML كـ UTF-8 bytes."""
         return formatted_output.encode('utf-8')
 
-    # ── تحويل Markdown → HTML ──────────────────────────────────────────────────
-    def _markdown_to_html(self, content: str) -> str:
-        """يحوّل Markdown بسيط لـ HTML."""
+    # ── نفس دالة PDF بالضبط ──────────────────────────────────────────────────
+    def _convert_text_to_enhanced_html(self, content):
+        content = content.replace("\\'", "'").replace('\\"', '"')
+        content = re.sub(r'^File[:\s]+.*?\n', '', content, flags=re.MULTILINE)
+        content = content.replace('---', '')
 
-        # code blocks أولاً (قبل ما نلمس أي شي تاني)
-        content = re.sub(
-            r'```(?:\w+)?\n(.*?)```',
-            lambda m: f'<pre><code>{self._escape_html(m.group(1))}</code></pre>',
-            content, flags=re.DOTALL
-        )
+        sections = re.split(r'(?=## Class:)', content)
+        html_output = ""
 
-        # tables
-        content = self._process_tables(content)
+        for section in sections:
+            if not section.strip():
+                continue
 
-        lines = content.split('\n')
-        html_lines = []
-        in_ul = False
-        in_ol = False
-
-        for line in lines:
-            # headings
-            if line.startswith('#### '):
-                line = self._close_lists(in_ul, in_ol) + f'<h4>{line[5:]}</h4>'
-                in_ul = in_ol = False
-            elif line.startswith('### '):
-                line = self._close_lists(in_ul, in_ol) + f'<h3>{line[4:]}</h3>'
-                in_ul = in_ol = False
-            elif line.startswith('## '):
-                line = self._close_lists(in_ul, in_ol) + f'<h2>{line[3:]}</h2>'
-                in_ul = in_ol = False
-            elif line.startswith('# '):
-                line = self._close_lists(in_ul, in_ol) + f'<h1>{line[2:]}</h1>'
-                in_ul = in_ol = False
-            # hr
-            elif re.match(r'^---+$', line.strip()):
-                line = self._close_lists(in_ul, in_ol) + '<hr/>'
-                in_ul = in_ol = False
-            # blockquote
-            elif line.startswith('> '):
-                line = self._close_lists(in_ul, in_ol) + f'<blockquote>{line[2:]}</blockquote>'
-                in_ul = in_ol = False
-            # unordered list
-            elif re.match(r'^[\*\-\+] ', line):
-                if not in_ul:
-                    line = '<ul><li>' + line[2:] + '</li>'
-                    in_ul = True
-                else:
-                    line = '<li>' + line[2:] + '</li>'
-            # ordered list
-            elif re.match(r'^\d+\. ', line):
-                if not in_ol:
-                    line = '<ol><li>' + re.sub(r'^\d+\. ', '', line) + '</li>'
-                    in_ol = True
-                else:
-                    line = '<li>' + re.sub(r'^\d+\. ', '', line) + '</li>'
-            # empty line
-            elif line.strip() == '':
-                close = self._close_lists(in_ul, in_ol)
-                in_ul = in_ol = False
-                line = close + '<br/>'
-            # paragraph
+            is_class = '## Class:' in section
+            if is_class:
+                class_name_match = re.search(r'## Class:\s*([^\n\(\\:]+)', section)
+                class_name = class_name_match.group(1).strip() if class_name_match else "Unknown Class"
+                section = re.sub(
+                    r'## Class:.*?\n',
+                    f'<div class="class-card"><h2 class="class-header">Class: {class_name}</h2><div class="class-content-wrapper">',
+                    section, count=1
+                )
             else:
-                close = self._close_lists(in_ul, in_ol)
-                in_ul = in_ol = False
-                line = close + '<p>' + line + '</p>'
+                section = re.sub(r'^##\s+(.+)$', r'<h2 class="high-level-section">\1</h2>', section, flags=re.MULTILINE)
 
-            html_lines.append(line)
+            section = section.replace('### Function:', '### Method:')
 
-        closing = self._close_lists(in_ul, in_ol)
-        result = '\n'.join(html_lines) + closing
+            if '### ' in section:
+                parts = re.split(r'(?=### )', section)
+                header_part = parts[0]
+                methods_combined = ""
+                for i in range(1, len(parts)):
+                    m_sec = parts[i]
+                    def clean_method_header(match):
+                        full_line = match.group(1).strip()
+                        if "init" in full_line.lower() or "Constructor" in full_line:
+                            display_label = "Constructor"
+                        else:
+                            display_label = "Method"
+                        clean_name = full_line.replace("Method:", "").replace("Constructor:", "").replace("`", "").replace("*", "").strip()
+                        return f'<div class="method-container"><h3 class="method-title">{display_label}: {clean_name}</h3><div class="method-description-area">'
+                    m_sec = re.sub(r'###\s*(.*)', clean_method_header, m_sec, count=1)
+                    methods_combined += m_sec + "</div></div>"
+                section = header_part + methods_combined
 
-        # inline formatting
-        result = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', result)
-        result = re.sub(r'\*(.*?)\*', r'<em>\1</em>', result)
-        result = re.sub(r'`(.*?)`', r'<code>\1</code>', result)
-        result = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', result)
+            keys = ['Complexity Level','Security Note','Impact Analysis','Best Practices','Purpose',
+                    'Patterns','Main Components','Purpose & Responsibility','Executive Summary',
+                    'Relationships','Logic Flow','Parameters','Returns','Description',
+                    'Key Capabilities','Error Handling','Attributes','Application Lifecycle',
+                    'Dependencies','API Routes Overview']
+            for key in keys:
+                pattern = rf'(?:\d+\.\s*)?\*\*{re.escape(key)}:\*\*\s*(.*)'
+                section = re.sub(
+                    pattern,
+                    lambda m, k=key: f'<div class="key-group"><span class="detail-key">{k}:</span><div class="key-content">{m.group(1).strip()}</div></div>',
+                    section, flags=re.IGNORECASE
+                )
 
-        return result
+            section = re.sub(
+                r"Architectural Recommendations:\s*(.+?)(?=(?:<div|###|##|$))",
+                r'<div class="recommendation-box"><strong>Architectural Recommendations:</strong><br>\1</div>',
+                section, flags=re.DOTALL
+            )
 
-    def _close_lists(self, in_ul: bool, in_ol: bool) -> str:
-        if in_ul:
-            return '</ul>'
-        if in_ol:
-            return '</ol>'
-        return ''
+            section = re.sub(r'^\s*(?:\d+\.)?(\d+\.\d+\.\s*.*)$', r'<li class="logic-item">\1</li>', section, flags=re.MULTILINE)
+            section = re.sub(r'^\s*(\d+\.\s*.*)$', lambda m: f'<li class="logic-item">{m.group(1).strip()}</li>' if '<div' not in m.group(0) else m.group(0), section, flags=re.MULTILINE)
+            section = re.sub(r'^\s*(-\s+.*)$', lambda m: f'<li class="logic-item">{m.group(1).strip()}</li>', section, flags=re.MULTILINE)
+            section = re.sub(r'((?:<li class="logic-item">.*?</li>\s*)+)', r'<ul class="logic-list">\1</ul>', section, flags=re.DOTALL)
 
-    def _escape_html(self, text: str) -> str:
-        return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+            def apply_beauty(text):
+                text = re.sub(r"['`]([^'`\n]+)['`]", r'<span class="inline-code">\1</span>', text)
+                text = re.sub(r'\*\*([^*]+)\*\*', r'<span class="highlighted-text">\1</span>', text)
+                return text
 
-    def _process_tables(self, content: str) -> str:
-        table_pattern = r'(\|[^\n]+\|\n\|[-\s|:]+\|\n(?:\|[^\n]+\|\n?)*)'
-        def table_repl(match):
-            rows = match.group(1).strip().split('\n')
-            html = ['<table>']
-            for i, row in enumerate(rows):
-                if i == 1:
-                    continue
-                tag = 'th' if i == 0 else 'td'
-                cells = [c.strip() for c in row.split('|')[1:-1]]
-                html.append('<tr>' + ''.join(f'<{tag}>{c}</{tag}>' for c in cells) + '</tr>')
-            html.append('</table>')
-            return '\n'.join(html)
-        return re.sub(table_pattern, table_repl, content)
+            parts = re.split(r'(<[^>]+>)', section)
+            for j in range(len(parts)):
+                if not parts[j].startswith('<'):
+                    if j > 0 and ('class="method-title"' in parts[j-1] or 'class="class-header"' in parts[j-1]):
+                        continue
+                    parts[j] = apply_beauty(parts[j])
+            section = "".join(parts).replace('**', '')
+
+            if is_class:
+                section += "</div></div>"
+
+            html_output += section
+
+        return html_output
