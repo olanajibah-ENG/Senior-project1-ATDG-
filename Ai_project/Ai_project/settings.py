@@ -46,7 +46,7 @@ else:
 NOTIFICATION_SERVICE_URL = os.environ.get('NOTIFICATION_SERVICE_URL', 'http://notification_django:8000') 
 
 # دائماً استخدم ['*'] في التطوير لتجنب مشاكل Host
-ALLOWED_HOSTS = ['*', 'ai_web', 'localhost', '127.0.0.1', '0.0.0.0', 'ai_django_app', '172.18.0.10', 'upm_api_gateway'] 
+ALLOWED_HOSTS = ['*'] 
     
 
 INSTALLED_APPS = [
@@ -70,8 +70,6 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # Disable CSRF for API requests
-    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -118,7 +116,7 @@ AI_EXPLANATIONS_COLLECTION = 'ai_explanations'
 AI_TASKS_COLLECTION = 'ai_tasks'
 DOCUMENTATION_FILES_COLLECTION = 'documentation_files'
 GENERATED_FILES_COLLECTION = 'generated_files'
-
+PROJECT_ANALYSIS_RESULTS_COLLECTION = 'project_analysis_results'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

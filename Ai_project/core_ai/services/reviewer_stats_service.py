@@ -306,8 +306,24 @@ class ReviewerStatsService:
 
             pipeline = [
                 {
+                    # استخدم file_size مباشرة إذا موجود، وإلا احسب من content إذا موجود
                     "$addFields": {
-                        "content_length": {"$strLenCP": "$content"}
+                        "content_length": {
+                            "$cond": {
+                                "if": {"$gt": ["$file_size", None]},
+                                "then": "$file_size",
+                                "else": {
+                                    "$cond": {
+                                        "if": {"$and": [
+                                            {"$gt": ["$content", None]},
+                                            {"$eq": [{"$type": "$content"}, "string"]}
+                                        ]},
+                                        "then": {"$strLenCP": "$content"},
+                                        "else": 0
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 {

@@ -1,6 +1,22 @@
+"""
+java_processor.py
+=================
+معالج Java المحسّن باستخدام Tree-sitter.
+
+✅ تحليل شامل: Features + Dependencies + Semantic + UML
+✅ يعتمد على code_content مباشرة (لا يحفظ AST ضخم)
+✅ معالجة Generic Types: List<Employee>, Set<Book>
+✅ استخراج العلاقات من Fields + Constructors
+✅ دمج العلاقات بالأولوية (composition > aggregation > ...)
+✅ كشف العلاقات ثنائية الاتجاه
+✅ دعم Abstract Classes و Interfaces
+✅ توافق كامل مع ILanguageProcessorStrategy
+"""
+
 from .base_processor import ILanguageProcessorStrategy
 from typing import Dict, Any, List, Set
 import logging
+import re
 from tree_sitter import Parser
 
 try:
@@ -486,7 +502,7 @@ class JavaProcessor(ILanguageProcessorStrategy):
             else:
                 reached_root = True
         
-        logger.info(f"Found {len(all_class_names)} classes/interfaces: {all_class_names}")
+        logger.info(f"[JavaProcessor] Found {len(all_class_names)} classes/interfaces: {all_class_names}")
         
         # ═════ المرحلة 2: استخراج التفاصيل والعلاقات ═════
         classes_list = []
@@ -518,19 +534,49 @@ class JavaProcessor(ILanguageProcessorStrategy):
             else:
                 reached_root = True
         
-        # ═════ المرحلة 3: دمج العلاقات ═════
+        # ═════ المرحلة 3: توليد العلاقات من الـ Attributes (نهج موثوق) ═════
+        # هذا النهج أكثر موثوقية من الـ AST مباشرة لأنه يستخدم البيانات المستخرجة مسبقاً
+        for cls in classes_list:
+            cls_name = cls.get('name', '')
+            for attr in cls.get('attributes', []):
+                attr_type = attr.get('type', '')
+                attr_name = attr.get('name', '')
+                if not attr_type:
+                    continue
+
+                # معالجة الأنواع الـ generic مثل List<Loan>, Set<Book>
+                generic_match = re.search(r'<([A-Z][A-Za-z0-9]*)>', attr_type)
+                if generic_match:
+                    inner = generic_match.group(1)
+                    if not self._is_primitive_type_java(inner):
+                        all_relationships.append({
+                            'from': cls_name, 'to': inner,
+                            'type': 'aggregation',
+                            'label': attr_name, 'multiplicity': '0..*',
+                            'arrow': '→', 'directed': True
+                        })
+                # معالجة الأنواع البسيطة مثل BookService, Loan, Customer
+                elif (attr_type and attr_type[0].isupper()
+                        and not self._is_primitive_type_java(attr_type)):
+                    all_relationships.append({
+                        'from': cls_name, 'to': attr_type,
+                        'type': 'association',
+                        'label': attr_name, 'multiplicity': '1',
+                        'arrow': '→', 'directed': True
+                    })
+
+        # ═════ المرحلة 4: دمج العلاقات ═════
         merged_relationships = self._merge_relationships_enhanced(all_relationships)
         
-        # ═════ المرحلة 4: كشف العلاقات ثنائية الاتجاه ═════
+        # ═════ المرحلة 5: كشف العلاقات ثنائية الاتجاه ═════
         final_relationships = self._detect_bidirectionals(merged_relationships)
         
-        # ═════ المرحلة 5: تنظيف الأتريبيوتس المكررة ═════
+        # ═════ المرحلة 6: تنظيف الأتريبيوتس المكررة ═════
         cleaned_classes = self._clean_duplicate_attributes(classes_list, final_relationships)
         
-        return {
-            "classes": cleaned_classes,
-            "relationships": final_relationships
-        }
+        result = {"classes": cleaned_classes, "relationships": final_relationships}
+        logger.info(f"[JavaProcessor] UML done — classes={len(cleaned_classes)}, relationships={len(final_relationships)}")
+        return result
 
     # ═══════════════════════════════════════════════════════
     # 🔥 استخراج معلومات الكلاس (محسّن)
@@ -999,7 +1045,7 @@ class JavaProcessor(ILanguageProcessorStrategy):
                 
                 # نحتفظ بالعلاقة الأقوى
                 if new_priority < current_priority:
-                    logger.info(f"Merged: {rel['from']} → {rel['to']}: kept {rel['type']} over {merged[key]['type']}")
+                    logger.debug(f"[JavaProcessor] Merge: {rel['from']}→{rel['to']}: {merged[key]['type']} → {rel['type']}")
                     merged[key] = rel
         
         return list(merged.values())
@@ -1026,7 +1072,7 @@ class JavaProcessor(ILanguageProcessorStrategy):
                 rel["directed"] = False
                 rel["bidirectional"] = True
                 
-                logger.info(f"Detected bidirectional: {rel['from']} ↔ {rel['to']}")
+                logger.debug(f"[JavaProcessor] Bidirectional: {rel['from']} ↔ {rel['to']}")
             
             seen[key] = rel
             enhanced.append(rel)
@@ -1064,7 +1110,7 @@ class JavaProcessor(ILanguageProcessorStrategy):
                 if attr_name not in relationship_attributes:
                     filtered_attributes.append(attr)
                 else:
-                    logger.info(f"Removed duplicate attribute '{attr_name}' from '{class_name}'")
+                    logger.debug(f"[JavaProcessor] Removed duplicate attr '{attr_name}' from '{class_name}'")
             
             cleaned_class = class_data.copy()
             cleaned_class['attributes'] = filtered_attributes
@@ -1118,7 +1164,11 @@ class JavaProcessor(ILanguageProcessorStrategy):
         return interfaces
 
     def _parse_generic_type(self, generic_node) -> tuple:
-        """تحليل Generic Type مثل List<Employee>"""
+        """
+        تحليل Generic Type مثل List<Employee>
+        يستخدم النص المباشر كـ fallback إذا لم يجد type_identifier داخل type_arguments
+        هذا ضروري لأن بعض إصدارات tree-sitter-java لا تعرض type_identifier مباشرة
+        """
         base_type = ""
         inner_type = None
         
@@ -1126,10 +1176,32 @@ class JavaProcessor(ILanguageProcessorStrategy):
             if child.type == 'type_identifier':
                 base_type = child.text.decode('utf-8')
             elif child.type == 'type_arguments':
+                # محاولة 1: البحث عن type_identifier مباشرة
                 for type_arg in child.children:
                     if type_arg.type == 'type_identifier':
                         inner_type = type_arg.text.decode('utf-8')
                         break
+                
+                # محاولة 2: Fallback - قراءة النص مباشرة من <Type> أو <Type, Type>
+                if not inner_type:
+                    raw = child.text.decode('utf-8')  # e.g. "<Loan>" or "<K, V>"
+                    raw = raw.strip('<>').strip()
+                    # خذ أول نوع فقط (قبل أي فاصلة)
+                    first_type = raw.split(',')[0].strip()
+                    # تنظيف أي wildcards أو extends
+                    first_type = first_type.replace('? extends ', '').replace('? super ', '').strip()
+                    if first_type and first_type[0].isupper():
+                        inner_type = first_type
+        
+        # Fallback نهائي: قراءة النص الكامل للـ node مثل "List<Loan>"
+        if not inner_type and not base_type:
+            full_text = generic_node.text.decode('utf-8') if generic_node.text else ""
+            if '<' in full_text and '>' in full_text:
+                base_type = full_text[:full_text.index('<')].strip()
+                inner_raw = full_text[full_text.index('<')+1:full_text.rindex('>')].strip()
+                first_type = inner_raw.split(',')[0].strip()
+                if first_type and first_type[0].isupper():
+                    inner_type = first_type
         
         return base_type, inner_type
 

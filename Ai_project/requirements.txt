@@ -15,6 +15,7 @@ setuptools
 wheel
 pydantic==1.10.13
 gunicorn
+whitenoise
 requests
 python-dotenv
 weasyprint>=60.0

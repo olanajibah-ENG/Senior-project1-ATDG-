@@ -1,5 +1,8 @@
 from rest_framework import serializers
 from core_ai.models.codefile import CodeFile, PyObjectId
+from core_ai.mongo_utils import get_mongo_db
+from django.conf import settings
+from bson import ObjectId
 
 class ObjectIdField(serializers.Field):
     """
@@ -24,6 +27,43 @@ class CodeFileSerializer(serializers.Serializer):
     source_project_id = serializers.CharField(max_length=255, required=False, allow_null=True)
     analysis_status = serializers.CharField(read_only=True)
     uploaded_file = serializers.FileField(required=False, write_only=True)
+    # الحقل الجديد الذي استدعيناه
+    analysis_id = serializers.SerializerMethodField()
+
+    def get_analysis_id(self, obj):
+        try:
+            # التحقق من وجود المعرف
+            file_id = getattr(obj, 'id', None)
+            if not file_id:
+                if isinstance(obj, dict):
+                    file_id = obj.get('id') or obj.get('_id')
+            
+            if not file_id:
+                return None
+
+            db = get_mongo_db()
+            if db is not None:
+                collection_name = getattr(settings, 'ANALYSIS_RESULTS_COLLECTION', 'analysis_results')
+                collection = db[collection_name]
+                
+                # البحث عن النتيجة التي ترتبط بهذا الملف
+                # code_file_id قد يكون ObjectId أو String، نأخذ الحالتين بالاعتبار
+                result = collection.find_one({
+                    "$or": [
+                        {"code_file_id": ObjectId(file_id)},
+                        {"code_file_id": str(file_id)}
+                    ]
+                })
+                
+                if result and '_id' in result:
+                    return str(result['_id'])
+                    
+        except Exception as e:
+            # في حال حدوث أي خطأ، نعيد null
+            print(f"Error fetching analysis_id in CodeFileSerializer: {str(e)}")
+            return None
+            
+        return None
 
     def validate(self, data):
         """
@@ -60,4 +100,3 @@ class CodeFileSerializer(serializers.Serializer):
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         return instance
-

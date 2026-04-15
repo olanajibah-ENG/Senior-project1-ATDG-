@@ -20,8 +20,12 @@ def get_safe_object_id(id_str):
     دالة آمنة للتحقق من وتحويل ObjectId
     تمنع الأخطاء 500 عند إدخال قيم خاطئة
     """
-    if id_str and ObjectId.is_valid(str(id_str).strip()):
-        return ObjectId(str(id_str).strip())
+    if not id_str:
+        return None
+    
+    clean_id = str(id_str).strip()
+    if ObjectId.is_valid(clean_id):
+        return ObjectId(clean_id)
     return None
 
 
@@ -77,21 +81,105 @@ class AIExplanationViewSet(viewsets.ViewSet):
                 "message": f"An error occurred while fetching explanations list: {str(e)}"
             }, status=500)
 
+    @action(detail=False, methods=['get'], url_path='by-analysis',
+            permission_classes=[AllowAny], authentication_classes=[])
+    def get_by_analysis(self, request):
+        """
+        جلب الشرح الكامل (مع content) بالـ analysis_id و type.
+        URL: /api/analysis/ai-explanations/by-analysis/?analysis_id={ID}&type=high_level
+        """
+        from bson import ObjectId
+        raw_id   = request.GET.get('analysis_id', '').strip()
+        exp_type = request.GET.get('type', 'high_level').strip()
+
+        if not raw_id:
+            return Response({"error": "analysis_id is required"}, status=400)
+
+        try:
+            db = get_mongo_db()
+            if db is None:
+                return Response({"error": "Database connection error"}, status=500)
+
+            collection = db[getattr(settings, 'AI_EXPLANATIONS_COLLECTION', 'ai_explanations')]
+
+            # حاول بـ ObjectId أولاً
+            query_ids = [raw_id]
+            if ObjectId.is_valid(raw_id):
+                query_ids.append(ObjectId(raw_id))
+
+            doc = None
+            for qid in query_ids:
+                doc = collection.find_one({
+                    "analysis_id": qid,
+                    "$or": [{"explanation_type": exp_type}, {"exp_type": exp_type}]
+                })
+                if doc:
+                    break
+
+            if not doc:
+                return Response({
+                    "error": "Explanation not found",
+                    "message": f"No {exp_type} explanation found for analysis_id={raw_id}"
+                }, status=404)
+
+            # تحويل ObjectIds لـ strings
+            doc['_id']         = str(doc['_id'])
+            doc['analysis_id'] = str(doc.get('analysis_id', ''))
+
+            return Response(doc)
+
+        except Exception as e:
+            logger.error(f"--- [GetByAnalysis] Error: {e} ---")
+            return Response({"error": str(e)}, status=500)
+
     @action(detail=False, methods=['post'], url_path='generate-explanation')
     def generate_explanation(self, request):
         """
         توليد شرح جديد باستخدام الذكاء الاصطناعي
         """
         # ✅ التحقق المسبق من analysis_id باستخدام get_safe_object_id
-        analysis_id = get_safe_object_id(request.data.get('analysis_id'))
-        if not analysis_id:
+        raw_analysis_id = request.data.get('analysis_id')
+        if not raw_analysis_id:
+            return Response({
+                "error": "analysis_id is required"
+            }, status=400)
+
+        raw_analysis_id = str(raw_analysis_id).strip()
+
+        # تحديد نوع الـ ID: ObjectId (ملف) أم UUID (مشروع)
+        import re
+        uuid_regex = re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', re.I)
+        is_project_uuid = uuid_regex.match(raw_analysis_id) is not None
+
+        if is_project_uuid:
+            # UUID مشروع: تحقق من وجود تحليل للمشروع
+            try:
+                db = get_mongo_db()
+                project_res = db['project_analysis_results'].find_one(
+                    {"project_id": raw_analysis_id},
+                    sort=[("created_at", -1)]
+                )
+                if not project_res:
+                    return Response({
+                        "error": "Project analysis not found",
+                        "message": "Please run project analysis first using /api/analysis/analyze-project/"
+                    }, status=404)
+                # ✅ نُبقي على الـ UUID الأصلي ونرسله مباشرة للـ task
+                analysis_id_str = raw_analysis_id
+                logger.info(f"--- [GenerateExplanation] Project UUID confirmed: {analysis_id_str} ---")
+            except Exception as e:
+                logger.error(f"Error checking project UUID: {str(e)}")
+                return Response({"error": f"Database error: {str(e)}"}, status=500)
+
+        elif get_safe_object_id(raw_analysis_id):
+            # ObjectId عادي (ملف واحد)
+            analysis_id_str = str(get_safe_object_id(raw_analysis_id))
+            logger.info(f"--- [GenerateExplanation] File ObjectId confirmed: {analysis_id_str} ---")
+        else:
             return Response({
                 "error": "Invalid analysis_id format",
-                "message": "analysis_id must be a valid MongoDB ObjectId"
+                "message": "analysis_id must be a valid MongoDB ObjectId (24-char hex) or a Project UUID (8-4-4-4-12 format)"
             }, status=400)
-        
-        # تحويل إلى string للاستخدام في الـ task
-        analysis_id_str = str(analysis_id)
         
         # ✅ محاولة الحصول على exp_type من مصادر متعددة
         exp_type = request.data.get('type', '').strip() if request.data.get('type') else None
@@ -102,9 +190,10 @@ class AIExplanationViewSet(viewsets.ViewSet):
         if not exp_type:
             exp_type = request.data.get('explanation_level', '').strip() if request.data.get('explanation_level') else None
             
-        logger.info(f"🔍 [GenerateExplanation] DEBUG - Full request data: {request.data}")
-        logger.info(f"🔍 [GenerateExplanation] DEBUG - analysis_id: {analysis_id_str}")
-        logger.info(f"🔍 [GenerateExplanation] DEBUG - exp_type BEFORE normalization: '{exp_type}'")
+        print(f"!!! generate_explanation CALLED with analysis_id: {analysis_id_str} !!!")
+        logger.info(f"--- [GenerateExplanation] DEBUG - Full request data: {request.data}")
+        logger.info(f"--- [GenerateExplanation] DEBUG - analysis_id: {analysis_id_str}")
+        logger.info(f"--- [GenerateExplanation] DEBUG - exp_type BEFORE normalization: '{exp_type}'")
         
         # ============================================================
         # ✅ توحيد exp_type - دعم جميع الصيغ المحتملة
@@ -333,40 +422,47 @@ class AIExplanationViewSet(viewsets.ViewSet):
                 "message": str(e)
             }, status=500)
 
-    @action(detail=False, methods=['get'], url_path='export-legacy')
+    @action(detail=False, methods=['get'], url_path='export-legacy',
+            permission_classes=[AllowAny], authentication_classes=[])
     def export_file_legacy(self, request):
         """
         دعم الرابط القديم للتوافق الخلفي
-        URL: /api/analysis/ai-explanations/export-legacy/?id={ID}&format=pdf
+        URL: /api/analysis/ai-explanations/export-legacy/?id={ID}&format=pdf|md|html|xml&type=high_level|low_level
         """
         logger.info("--- [ExportFileLegacy] Started ---")
 
         try:
-            # ✅ استخدام get_safe_object_id للتحقق الآمن
-            explanation_id = get_safe_object_id(request.GET.get('id'))
-            if not explanation_id:
-                logger.warning("--- [ExportFileLegacy] Missing or invalid ID parameter ---")
-                return Response({
-                    "error": "Invalid explanation ID",
-                    "message": "Explanation ID must be a valid MongoDB ObjectId"
-                }, status=400)
+            raw_id = request.GET.get('id', '').strip()
+            if not raw_id:
+                return Response({"error": "id parameter is required"}, status=400)
 
             format_type = request.GET.get('format', 'md').lower()
-            if format_type not in ['pdf', 'md']:
-                logger.warning(f"--- [ExportFileLegacy] Unsupported format: {format_type} ---")
+            # normalize markdown → md
+            if format_type == 'markdown':
+                format_type = 'md'
+            if format_type not in ['pdf', 'md', 'html', 'xml']:
                 return Response({
-                    "error": "Unsupported file format",
-                    "message": "Supported formats are: pdf, md"
+                    "error": "Unsupported format",
+                    "message": "Supported formats: pdf, md, html, xml"
                 }, status=400)
 
-            logger.info(f"--- [ExportFileLegacy] Processing ID: {str(explanation_id)}, Format: {format_type} ---")
+            exp_type_raw = request.GET.get('type', 'high_level').lower()
+            high_vars = ['high', 'high_level', 'executive', 'business']
+            low_vars  = ['low',  'low_level',  'technical', 'detailed']
+            if any(v in exp_type_raw for v in high_vars):
+                exp_type = 'high_level'
+            elif any(v in exp_type_raw for v in low_vars):
+                exp_type = 'low_level'
+            else:
+                exp_type = 'high_level'
 
-            from .export_views import handle_export_request
-            return handle_export_request(str(explanation_id), format_type)
+            mode = request.GET.get('mode', 'download')
+
+            logger.info(f"--- [ExportFileLegacy] id={raw_id}, format={format_type}, type={exp_type}, mode={mode} ---")
+
+            from .export_views import handle_export_with_auto_generation
+            return handle_export_with_auto_generation(raw_id, exp_type, format_type, mode=mode)
 
         except Exception as e:
             logger.error(f"--- [ExportFileLegacy] Unexpected error: {str(e)} ---")
-            return Response({
-                "error": "Unexpected error",
-                "message": "An unexpected error occurred in the system"
-            }, status=500)
+            return Response({"error": "Unexpected error", "message": str(e)}, status=500)

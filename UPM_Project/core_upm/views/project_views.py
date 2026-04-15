@@ -36,11 +36,19 @@ class ProjectListCreateAPIView(ListCreateAPIView):
 
     def get_queryset(self):
         """
-        Filter projects to show only the current user's projects.
-        Filter projects to show only the current user's projects.
+        Admins see all projects; other users see only their own.
         """
+        user = self.request.user
+        try:
+            is_admin = user.profile.role_type == 'ADMIN'
+        except Exception:
+            is_admin = False
+
+        if is_admin:
+            return Project.objects.all().order_by('-creation_date')
+
         service = ProjectService()
-        return service.get_user_projects(user=self.request.user)
+        return service.get_user_projects(user=user)
 
     def get_serializer_class(self):
         # Local import of Serializer to avoid circular dependency

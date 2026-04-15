@@ -13,6 +13,12 @@ from django.conf import settings
 from bson.objectid import ObjectId
 import logging
 
+try:
+    from core_ai.analysis.language_detector import detect_language
+    LANGUAGE_DETECTOR_AVAILABLE = True
+except ImportError:
+    LANGUAGE_DETECTOR_AVAILABLE = False
+
 logger = logging.getLogger(__name__)
 
 
@@ -54,6 +60,12 @@ class CodeFileViewSet(viewsets.ViewSet):
                 file_content = uploaded_file.read().decode('utf-8')
                 validated_data['content'] = file_content
                 logger.info(f"--- [CF-CREATE] File content loaded, size: {len(file_content)} chars ---")
+
+                # ✅ Auto-detect language from filename + content (override client-sent value)
+                if LANGUAGE_DETECTOR_AVAILABLE:
+                    detected_lang = detect_language(file_content, uploaded_file.name)
+                    validated_data['file_type'] = detected_lang
+                    logger.info(f"--- [CF-CREATE] Language auto-detected: {detected_lang} ---")
             except Exception as e:
                 logger.error(f"--- [CF-CREATE] Failed to read file content: {e} ---")
                 return Response({"error": f"Failed to read file content: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
@@ -181,7 +193,19 @@ class CodeFileViewSet(viewsets.ViewSet):
     def analyze(self, request, pk=None):
         try:
             collection = self.get_collection()
-            code_file_data = collection.find_one({"_id": ObjectId(pk)})
+            
+            # Try to convert pk to ObjectId, if fails, search by source_project_id instead
+            try:
+                object_id = ObjectId(pk)
+                code_file_data = collection.find_one({"_id": object_id})
+                code_file_id_for_analysis = object_id
+            except:
+                # pk is not a valid ObjectId, treat it as source_project_id (UUID)
+                code_file_data = collection.find_one({"source_project_id": pk})
+                if code_file_data and "_id" in code_file_data:
+                    code_file_id_for_analysis = code_file_data["_id"]
+                else:
+                    return Response({"error": f"Code file not found for project_id: {pk}"}, status=status.HTTP_404_NOT_FOUND)
             if not code_file_data:
                 return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -189,7 +213,7 @@ class CodeFileViewSet(viewsets.ViewSet):
             db = get_mongo_db()
             analysis_collection = db[settings.ANALYSIS_RESULTS_COLLECTION]
             existing_analysis = analysis_collection.find_one({
-                "code_file_id": ObjectId(pk), 
+                "code_file_id": code_file_id_for_analysis, 
                 "status": "COMPLETED"
             })
             
@@ -202,7 +226,7 @@ class CodeFileViewSet(viewsets.ViewSet):
 
             # التحقق من وجود تحليل قيد التنفيذ
             in_progress_analysis = analysis_collection.find_one({
-                "code_file_id": ObjectId(pk), 
+                "code_file_id": code_file_id_for_analysis, 
                 "status": "IN_PROGRESS"
             })
             
@@ -213,11 +237,11 @@ class CodeFileViewSet(viewsets.ViewSet):
                 }, status=status.HTTP_202_ACCEPTED)
 
             collection.update_one(
-                {"_id": ObjectId(pk)}, 
+                {"_id": code_file_id_for_analysis}, 
                 {"$set": {"analysis_status": "IN_PROGRESS"}}
             )
 
-            analyze_code_file_task.delay(pk)  # ✅ استخدام الجديد
+            analyze_code_file_task.delay(str(code_file_id_for_analysis))  # ✅ استخدام الجديد
             
             return Response({
                 "message": f"Analysis for CodeFile {pk} started."

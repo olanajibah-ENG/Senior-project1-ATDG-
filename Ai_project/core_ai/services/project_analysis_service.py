@@ -38,6 +38,9 @@ class ProjectAnalysisService:
                     "file_type":          cf.get('file_type', 'python'),
                     "dependencies":       result.get('dependencies', []),
                     "class_diagram_data": result.get('class_diagram_data', {}),
+                    "extracted_features": result.get('extracted_features', {}),
+                    "semantic_analysis_data": result.get('semantic_analysis_data', {}),
+                    "ast_structure":      result.get('ast_structure', {}),
                     "analysis_id":        str(result['_id'])
                 })
         return project_files
@@ -48,7 +51,7 @@ class ProjectAnalysisService:
 
     # ③ بناء الـ Contexts
     def build_contexts(self, files: list, ordered: list) -> dict:
-        # ابني map: filename → class_diagram_data
+        # ابني map: filename → file_data
         file_map = {f['filename']: f for f in files}
         contexts = {}
 
@@ -58,30 +61,46 @@ class ProjectAnalysisService:
             current = file_map[filename]
             raw_deps = current.get('dependencies', [])
 
-            # جيبي محتوى التبعيات من class_diagram_data
-            dep_content = {}
+            context_blocks = []
             for dep in raw_deps:
-                # جرب المطابقة المباشرة أو مع امتداد
                 matched = None
+                
+                # 1. المطابقة المباشرة
                 if dep in file_map:
                     matched = dep
                 else:
+                    # 2. المطابقة مع امتدادات الملفات
                     for ext in ['.py', '.java', '.js', '.ts']:
                         if dep + ext in file_map:
                             matched = dep + ext
                             break
+                            
+                # 3. المطابقة بجزء الاسم الأخير (مثال: core.product -> product)
+                if not matched:
+                    last_part = dep.split('.')[-1]
+                    for ext in ['.py', '.java', '.js', '.ts', '']:
+                        if last_part + ext in file_map:
+                            matched = last_part + ext
+                            break
+                            
+                # 4. مطابقة جزئية Endswith
+                if not matched:
+                    for f_name in file_map.keys():
+                        base = f_name.split('/')[-1] if '/' in f_name else f_name
+                        if base.startswith(dep.split('.')[-1]) or f_name.endswith(dep):
+                            matched = f_name
+                            break
+
                 if matched:
                     diagram = file_map[matched].get('class_diagram_data', {})
-                    # حوّل class_diagram_data لنص signatures
                     sigs = self._diagram_to_signatures(diagram)
                     if sigs:
-                        dep_content[matched] = sigs
+                        # تنسيق واضح وصريح كما طُلب
+                        context_blocks.append(f"--- Context from: {matched} ---\n{sigs}")
 
-            if dep_content:
-                builder = CrossFileContextBuilder()
-                ctx = builder.build_llm_context(dep_content)
-                if ctx:
-                    contexts[filename] = ctx
+            # إذا وجدنا أي signatures، نضيفها للملف
+            if context_blocks:
+                contexts[filename] = "\n\n".join(context_blocks)
 
         return contexts
 
@@ -114,20 +133,178 @@ class ProjectAnalysisService:
 
         return "\n".join(summary)
 
+    def aggregate_project_data(self, files: list, graph_data: dict) -> dict:
+        total_loc = 0
+        total_classes = 0
+        total_functions = 0
+        total_async_functions = 0
+        total_complexity = 0
+        all_warnings = []
+        all_issues = []
+        
+        unified_classes = []
+        unified_relationships = []
+        seen_classes = set()
+        
+        all_potential_relationships = []
+        
+        all_ast_bodies = []
+        all_code_content = []
+        all_original_code = []
+        all_normalization_fixes = []
+        was_auto_fixed = False
+
+        for f in files:
+            # Aggregate features
+            features = f.get('extracted_features', {})
+            total_loc += features.get('lines_of_code', 0)
+            total_classes += features.get('num_classes', 0)
+            total_functions += features.get('num_functions', 0)
+            total_async_functions += features.get('num_async_functions', 0)
+            total_complexity += features.get('complexity_score', 0)
+
+            # Aggregate semantic analysis
+            semantic = f.get('semantic_analysis_data', {})
+            if isinstance(semantic, dict):
+                for w in semantic.get('warnings', []):
+                    all_warnings.append(f"[{f['filename']}] {w}")
+                for i in semantic.get('issues', []):
+                    all_issues.append(f"[{f['filename']}] {i}")
+            
+            # Aggregate class diagram
+            diagram = f.get('class_diagram_data', {})
+            if isinstance(diagram, dict):
+                for cls in diagram.get('classes', []):
+                    cls_name = cls.get('name', '')
+                    if cls_name and cls_name not in seen_classes:
+                        cls_copy = dict(cls)
+                        if 'filepath' not in cls_copy:
+                            cls_copy['filepath'] = f['filepath']
+                        unified_classes.append(cls_copy)
+                        seen_classes.add(cls_name)
+
+                for rel in diagram.get('relationships', []):
+                    all_potential_relationships.append(rel)
+
+            # Aggregate AST structure
+            ast = f.get('ast_structure', {})
+            if isinstance(ast, dict):
+                tree = ast.get('ast_tree', {})
+                if isinstance(tree, dict) and 'body' in tree:
+                    all_ast_bodies.extend(tree['body'])
+                
+                content = ast.get('code_content', '')
+                if content:
+                    all_code_content.append(f"# --- {f['filename']} ---\n{content}")
+                
+                original = ast.get('original_code', '')
+                if original:
+                    all_original_code.append(f"# --- {f['filename']} ---\n{original}")
+                
+                fixes = ast.get('normalization_fixes', [])
+                if fixes:
+                    all_normalization_fixes.extend([f"[{f['filename']}] {fix}" for fix in fixes])
+                
+                if ast.get('was_auto_fixed'):
+                    was_auto_fixed = True
+
+        # Filter relationships to keep only those within seen_classes or standard types
+        for rel in all_potential_relationships:
+            target = rel.get('to', '')
+            if target in seen_classes or target in ['ABC', 'object', 'Exception']:
+                if rel not in unified_relationships:
+                    unified_relationships.append(rel)
+
+        # Calculate average quality score (simplistic aggregation)
+        avg_quality = 100.0
+        if all_issues:
+            avg_quality -= len(all_issues) * 5
+        if all_warnings:
+            avg_quality -= len(all_warnings) * 1
+        avg_quality = max(0.0, min(100.0, avg_quality))
+
+        # Reformat dependency graph from graph_data['graph'] which is {filename: [deps]}
+        # to {nodes: [...], edges: [...]} so it matches single file output
+        dep_nodes = []
+        dep_edges = []
+        for f in files:
+            dep_nodes.append({
+                "id": f['filename'],
+                "label": f['filename'],
+                "type": "module"
+            })
+        
+        graph_dict = graph_data.get('graph', {})
+        for node, edges in graph_dict.items():
+            for target in edges:
+                dep_edges.append({
+                    "from": node,
+                    "to": target,
+                    "label": "imports",
+                    "arrow": "→"
+                })
+
+        project_ast = {
+            "ast_tree": {
+                "body": all_ast_bodies,
+                "type_ignores": [],
+                "node_type": "Module"
+            },
+            "code_content": "\n".join(all_code_content),
+            "original_code": "\n".join(all_original_code),
+            "normalization_fixes": all_normalization_fixes,
+            "was_auto_fixed": was_auto_fixed
+        }
+
+        return {
+            "extracted_features": {
+                "lines_of_code": total_loc,
+                "num_classes": total_classes,
+                "num_functions": total_functions,
+                "num_async_functions": total_async_functions,
+                "complexity_score": total_complexity,
+                "was_code_modified": False
+            },
+            "class_diagram_data": {
+                "classes": unified_classes,
+                "relationships": unified_relationships
+            },
+            "semantic_analysis_data": {
+                "quality_score": avg_quality,
+                "issues": all_issues,
+                "warnings": all_warnings,
+                "complexity": total_complexity
+            },
+            "dependency_graph": {
+                "nodes": dep_nodes,
+                "edges": dep_edges
+            },
+            "ast_structure": project_ast
+        }
+
     # ④ احفظي النتيجة
-    def save_result(self, graph_data: dict, contexts: dict, analysis_ids: list, existing_record_id: str = None) -> str:
+    def save_result(self, project_files: list, graph_data: dict, contexts: dict, analysis_ids: list, existing_record_id: str = None) -> str:
         project_summary = self._build_project_summary(graph_data, contexts)
+        aggregated_data = self.aggregate_project_data(project_files, graph_data)
 
         doc = {
             "project_id":       self.project_id,
+            "status":           "COMPLETED",
+            "message":          "Analysis completed successfully",
+            
+            "extracted_features":       aggregated_data['extracted_features'],
+            "class_diagram_data":       aggregated_data['class_diagram_data'],
+            "semantic_analysis_data":   aggregated_data['semantic_analysis_data'],
+            "dependency_graph":         aggregated_data['dependency_graph'],
+            "ast_structure":            aggregated_data['ast_structure'],
+            
             "dependency_order": graph_data['ordered'],
-            "dependency_graph": graph_data['graph'],
             "contexts":         contexts,
             "analysis_ids":     analysis_ids,
             "project_summary":  project_summary,
-            "status":           "COMPLETED",
             "completed_at":     datetime.utcnow(),
-            "created_at":       datetime.utcnow()
+            "created_at":       datetime.utcnow(),
+            "updated_at":       datetime.utcnow()
         }
 
         if existing_record_id:

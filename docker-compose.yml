@@ -41,9 +41,14 @@ services:
       - DEBUG=${DJANGO_DEBUG}
       - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,web,upm_backend,upm_api_gateway,nginx,upm_django_app
       - NOTIFICATION_SERVICE_URL=http://172.18.0.6:8000
+      - CELERY_BROKER_URL=redis://shared_redis:6379/2
+      - CELERY_RESULT_BACKEND=redis://shared_redis:6379/2
+      - INTERNAL_SERVICE_KEY=${INTERNAL_SERVICE_KEY:-dev-internal-key-change-in-prod}
     depends_on:
       db:
         condition: service_healthy
+      shared_redis:
+        condition: service_started
     networks:
       - upm_network
     healthcheck:
@@ -239,6 +244,54 @@ services:
       - notification_service
     networks:
       - upm_network
+  # Redis مشترك بين UPM وAI للـ Message Broker
+  shared_redis:
+    image: redis:latest
+    container_name: shared_redis
+    restart: unless-stopped
+    ports:
+      - "6381:6379"
+    networks:
+      - upm_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # UPM Celery Worker — يشيل رسائل الرفع من Redis ويعالجها
+  upm_celery_worker:
+    build: ./UPM_Project
+    container_name: upm_celery_worker
+    restart: unless-stopped
+    command: celery -A UPM_Project.celery_app worker -l INFO -Q uploads
+    volumes:
+      - ./UPM_Project:/app
+    env_file:
+      - .env
+    environment:
+      - CELERY_WORKER=true
+      - DJANGO_SETTINGS_MODULE=UPM_Project.settings
+      - DB_HOST=db
+      - DB_NAME=${MYSQL_DATABASE:-upm_mysql_db}
+      - DB_USER=${MYSQL_USER:-admin3}
+      - DB_PASSWORD=${MYSQL_PASSWORD:-admin3}
+      - DB_PORT=3306
+      - SECRET_KEY=${UPM_DJANGO_SECRET_KEY}
+      - DEBUG=${DJANGO_DEBUG}
+      - CELERY_BROKER_URL=redis://shared_redis:6379/2
+      - CELERY_RESULT_BACKEND=redis://shared_redis:6379/2
+      - INTERNAL_SERVICE_KEY=${INTERNAL_SERVICE_KEY:-dev-internal-key-change-in-prod}
+    depends_on:
+      db:
+        condition: service_healthy
+      shared_redis:
+        condition: service_started
+      web:
+        condition: service_healthy
+    networks:
+      - upm_network
+
   api_gateway:
     image: nginx:latest
     container_name: upm_api_gateway

@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
+from core_upm.permissions import IsDeveloperRole
 from core_upm.models.folder import Folder
 from core_upm.models.project import Project
 from core_upm.serializers.folder_serializer import FolderSerializer
@@ -18,7 +19,7 @@ class FolderListCreateAPIView(APIView):
     GET  /projects/<project_id>/folders/  — قائمة كل الـ folders في مشروع
     POST /projects/<project_id>/folders/  — إنشاء folder جديد
     """
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,IsDeveloperRole]
 
     def get(self, request, project_id):
         # التحقق إن المشروع موجود وتابع للمستخدم
@@ -54,7 +55,7 @@ class FolderRetrieveUpdateDestroyAPIView(APIView):
     PUT    /folders/<folder_id>/  — تعديل folder
     DELETE /folders/<folder_id>/  — حذف folder
     """
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,IsDeveloperRole]
 
     def _get_folder(self, folder_id, user):
         """جلب الـ folder والتحقق من الصلاحية."""
