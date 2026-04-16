@@ -38,6 +38,46 @@ const IconFile = ({ size = 14 }: { size?: number }) => (
   </svg>
 );
 
+const IconPdf = () => (
+  <svg viewBox="0 0 24 24" style={{ width: 20, height: 20 }}>
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="#ef4444" />
+    <path d="M8 12h8v2H8zm0-4h8v2H8z" fill="white" />
+    <polyline points="14 2 14 8 20 8" stroke="#ef4444" strokeWidth="2" fill="none" />
+  </svg>
+);
+
+const IconHtml = () => (
+  <svg viewBox="0 0 24 24" style={{ width: 20, height: 20 }}>
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" fill="#f97316" />
+    <polyline points="13 2 13 9 20 9" stroke="#f97316" strokeWidth="2" fill="none" />
+    <text x="12" y="16" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold" fontFamily="monospace">&lt;/&gt;</text>
+  </svg>
+);
+
+const IconXml = () => (
+  <svg viewBox="0 0 24 24" style={{ width: 20, height: 20 }}>
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" fill="#a855f7" />
+    <polyline points="13 2 13 9 20 9" stroke="#a855f7" strokeWidth="2" fill="none" />
+    <text x="12" y="16" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold" fontFamily="monospace">XML</text>
+  </svg>
+);
+
+const IconMd = () => (
+  <svg viewBox="0 0 24 24" style={{ width: 20, height: 20 }}>
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" fill="#3b82f6" />
+    <polyline points="13 2 13 9 20 9" stroke="#3b82f6" strokeWidth="2" fill="none" />
+    <text x="12" y="16" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold" fontFamily="monospace">MD</text>
+  </svg>
+);
+
+const IconCodeFile = () => (
+  <svg viewBox="0 0 24 24" style={{ width: 20, height: 20 }}>
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" fill="#22c55e" />
+    <polyline points="13 2 13 9 20 9" stroke="#22c55e" strokeWidth="2" fill="none" />
+    <text x="12" y="16" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold" fontFamily="monospace">&lt;/&gt;</text>
+  </svg>
+);
+
 const IconEye = ({ size = 12 }: { size?: number }) => (
   <svg viewBox="0 0 24 24" style={{ width: size, height: size }}>
     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
@@ -154,32 +194,38 @@ interface FileActionsProps {
 
 const GridFileItem: React.FC<FileActionsProps> = ({ file, onView, onDownload, date }) => {
   const iconClass = getFileIconClass(file.file_type, file.filename);
-  const iconLabel = getFileIconLabel(file.file_type, file.filename);
+  const getFileIcon = () => {
+    const ext = (file.filename || '').split('.').pop()?.toLowerCase() || '';
+    if (ext === 'pdf') return <IconPdf />;
+    if (ext === 'html' || ext === 'htm') return <IconHtml />;
+    if (ext === 'xml') return <IconXml />;
+    if (ext === 'md') return <IconMd />;
+    return <IconCodeFile />;
+  };
+  
   return (
-  <div className="gfp-file-item">
-    <div className="file-top">
-      <div className={`gfp-file-icon ${iconClass}`}>
-        <span style={{ fontFamily: 'monospace', fontWeight: 800, fontSize: '0.65rem', letterSpacing: '0.02em' }}>
-          {iconLabel}
-        </span>
+    <div className="gfp-file-item">
+      <div className="file-top">
+        <div className={`gfp-file-icon ${iconClass}`}>
+          {getFileIcon()}
+        </div>
+        <div className="file-details">
+          <div className="gfp-file-name" title={file.filename}>{file.filename}</div>
+          <div className="gfp-file-meta">{formatFileSize(file.file_size)} · .{getFileExt(file.file_type, file.filename)}</div>
+        </div>
       </div>
-      <div className="file-details">
-        <div className="gfp-file-name" title={file.filename}>{file.filename}</div>
-        <div className="gfp-file-meta">{formatFileSize(file.file_size)} · .{getFileExt(file.file_type, file.filename)}</div>
+      <div className="gfp-file-actions">
+        <span className="gfp-file-date">{date}</span>
+        <div className="action-buttons">
+          <button className="btn-sm btn-view" onClick={() => onView(file)}>
+            <IconEye /> View
+          </button>
+          <button className="btn-sm btn-download" onClick={() => onDownload(file)}>
+            <IconDownload /> Save
+          </button>
+        </div>
       </div>
     </div>
-    <div className="gfp-file-actions">
-      <span className="gfp-file-date">{date}</span>
-      <div className="action-buttons">
-        <button className="btn-sm btn-view" onClick={() => onView(file)}>
-          <IconEye /> View
-        </button>
-        <button className="btn-sm btn-download" onClick={() => onDownload(file)}>
-          <IconDownload /> Save
-        </button>
-      </div>
-    </div>
-  </div>
   );
 };
 
@@ -258,9 +304,14 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({ projectName, projectDat
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <div className={`list-file-icon ${getFileIconClass(file.file_type, file.filename)}`}>
-                        <span style={{ fontFamily: 'monospace', fontWeight: 800, fontSize: '0.55rem' }}>
-                          {getFileIconLabel(file.file_type, file.filename)}
-                        </span>
+                        {(() => {
+                          const ext = (file.filename || '').split('.').pop()?.toLowerCase() || '';
+                          if (ext === 'pdf') return <IconPdf />;
+                          if (ext === 'html' || ext === 'htm') return <IconHtml />;
+                          if (ext === 'xml') return <IconXml />;
+                          if (ext === 'md') return <IconMd />;
+                          return <IconCodeFile />;
+                        })()}
                       </div>
                       {file.filename}
                     </div>

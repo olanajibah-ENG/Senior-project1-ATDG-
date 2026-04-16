@@ -3,6 +3,7 @@ import './LoadingSpinner.css';
 
 interface AnalysisOverlayProps {
   message?: string;
+  isDarkMode?: boolean;
 }
 
 const steps = [
@@ -13,7 +14,7 @@ const steps = [
   { icon: '✅', label: 'Finalizing results...' },
 ];
 
-const AnalysisOverlay: React.FC<AnalysisOverlayProps> = ({ message }) => {
+const AnalysisOverlay: React.FC<AnalysisOverlayProps> = ({ message, isDarkMode = true }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
 
@@ -35,29 +36,35 @@ const AnalysisOverlay: React.FC<AnalysisOverlayProps> = ({ message }) => {
   }, []);
 
   return (
-    <div className="analysis-overlay">
-      <div className="analysis-overlay-content" style={{ minWidth: 360, maxWidth: 480 }}>
+    <div className={`analysis-overlay ${isDarkMode ? 'dark' : 'light'}`}>
+      <div className={`analysis-overlay-content ${isDarkMode ? 'dark' : 'light'}`} style={{ minWidth: 360, maxWidth: 480 }}>
 
         {/* Animated rings */}
         <div style={{ position: 'relative', width: 90, height: 90, margin: '0 auto 24px' }}>
-          <div style={{
-            position: 'absolute', inset: 0, borderRadius: '50%',
-            border: '3px solid rgba(118,75,162,0.15)',
-            animation: 'ultraSpin 3s linear infinite reverse',
-          }} />
-          <div style={{
-            position: 'absolute', inset: 8, borderRadius: '50%',
-            border: '3px solid transparent',
-            borderTop: '3px solid #c084fc',
-            borderRight: '3px solid #667eea',
-            animation: 'ultraSpin 1.2s linear infinite',
-          }} />
-          <div style={{
-            position: 'absolute', inset: 18, borderRadius: '50%',
-            border: '3px solid transparent',
-            borderTop: '3px solid #f093fb',
-            animation: 'ultraSpin 0.8s linear infinite reverse',
-          }} />
+          <div 
+            className="ring-outer"
+            style={{
+              position: 'absolute', inset: 0, borderRadius: '50%',
+              border: `3px solid ${isDarkMode ? 'rgba(118,75,162,0.15)' : 'rgba(102,126,234,0.15)'}`,
+            }} 
+          />
+          <div 
+            className="ring-middle"
+            style={{
+              position: 'absolute', inset: 8, borderRadius: '50%',
+              border: '3px solid transparent',
+              borderTop: isDarkMode ? '#c084fc' : '#667eea',
+              borderRight: isDarkMode ? '#667eea' : '#764ba2',
+            }} 
+          />
+          <div 
+            className="ring-inner"
+            style={{
+              position: 'absolute', inset: 18, borderRadius: '50%',
+              border: '3px solid transparent',
+              borderTop: isDarkMode ? '#f093fb' : '#764ba2',
+            }} 
+          />
           {/* Center icon */}
           <div style={{
             position: 'absolute', inset: 0,
@@ -71,7 +78,9 @@ const AnalysisOverlay: React.FC<AnalysisOverlayProps> = ({ message }) => {
         {/* Title */}
         <h3 style={{
           margin: '0 0 8px',
-          background: 'linear-gradient(135deg,#667eea,#764ba2,#f093fb)',
+          background: isDarkMode 
+            ? 'linear-gradient(135deg,#667eea,#764ba2,#f093fb)'
+            : 'linear-gradient(135deg,#667eea,#764ba2)',
           WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
           backgroundClip: 'text', fontSize: '1.3rem', fontWeight: 700,
         }}>
@@ -80,7 +89,8 @@ const AnalysisOverlay: React.FC<AnalysisOverlayProps> = ({ message }) => {
 
         {/* Current step label */}
         <p style={{
-          margin: '0 0 20px', color: '#a78bca',
+          margin: '0 0 20px', 
+          color: isDarkMode ? '#a78bca' : '#667eea',
           fontSize: '0.95rem', fontWeight: 500,
           minHeight: 22, transition: 'all 0.4s ease',
         }}>
@@ -90,12 +100,14 @@ const AnalysisOverlay: React.FC<AnalysisOverlayProps> = ({ message }) => {
         {/* Progress bar */}
         <div style={{
           width: '100%', height: 6,
-          background: 'rgba(118,75,162,0.15)',
+          background: isDarkMode ? 'rgba(118,75,162,0.15)' : 'rgba(102,126,234,0.15)',
           borderRadius: 3, overflow: 'hidden', marginBottom: 20,
         }}>
           <div style={{
             height: '100%', borderRadius: 3,
-            background: 'linear-gradient(90deg,#667eea,#764ba2,#f093fb)',
+            background: isDarkMode 
+              ? 'linear-gradient(90deg,#667eea,#764ba2,#f093fb)'
+              : 'linear-gradient(90deg,#667eea,#764ba2)',
             width: `${progress}%`,
             transition: 'width 0.3s ease',
             position: 'relative',
@@ -115,8 +127,12 @@ const AnalysisOverlay: React.FC<AnalysisOverlayProps> = ({ message }) => {
               width: i === currentStep ? 20 : 8,
               height: 8, borderRadius: 4,
               background: i <= currentStep
-                ? 'linear-gradient(90deg,#667eea,#764ba2)'
-                : 'rgba(118,75,162,0.20)',
+                ? (isDarkMode 
+                  ? 'linear-gradient(90deg,#667eea,#764ba2)'
+                  : 'linear-gradient(90deg,#667eea,#764ba2)')
+                : (isDarkMode 
+                  ? 'rgba(118,75,162,0.20)'
+                  : 'rgba(102,126,234,0.20)'),
               transition: 'all 0.4s ease',
             }} />
           ))}
@@ -126,7 +142,8 @@ const AnalysisOverlay: React.FC<AnalysisOverlayProps> = ({ message }) => {
         {message && message !== 'Processing code, please wait...' && (
           <p style={{
             marginTop: 16, fontSize: '0.85rem',
-            color: 'rgba(167,139,202,0.7)', fontStyle: 'italic',
+            color: isDarkMode ? 'rgba(167,139,202,0.7)' : 'rgba(102,126,234,0.7)', 
+            fontStyle: 'italic',
           }}>
             {message}
           </p>

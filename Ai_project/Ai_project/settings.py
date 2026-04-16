@@ -46,7 +46,7 @@ else:
 NOTIFICATION_SERVICE_URL = os.environ.get('NOTIFICATION_SERVICE_URL', 'http://notification_django:8000') 
 
 # دائماً استخدم ['*'] في التطوير لتجنب مشاكل Host
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ['*', 'ai_django_app:8000', 'localhost', '127.0.0.1'] 
     
 
 INSTALLED_APPS = [

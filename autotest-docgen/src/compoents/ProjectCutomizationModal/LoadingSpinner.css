@@ -403,7 +403,85 @@
     }
 }
 
-/* Dark Mode Support */
+/* Light Theme Support */
+.analysis-overlay.light {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    animation: overlayFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.analysis-overlay.light .analysis-overlay-content {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 249, 250, 0.97));
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    color: #2d3748;
+    animation: contentSlideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.analysis-overlay.light .analysis-overlay-content h3 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+.analysis-overlay.light .analysis-overlay-content p {
+    color: #4a5568;
+}
+
+/* Ensure spinning rings work in light theme */
+.analysis-overlay.light .ring-outer {
+    animation: ultraSpin 3s linear infinite reverse !important;
+}
+
+.analysis-overlay.light .ring-middle {
+    animation: ultraSpin 1.2s linear infinite !important;
+}
+
+.analysis-overlay.light .ring-inner {
+    animation: ultraSpin 0.8s linear infinite reverse !important;
+}
+
+/* Dark Theme Support (existing styles) */
+.analysis-overlay.dark {
+    background: rgba(10, 6, 20, 0.75);
+    backdrop-filter: blur(10px);
+    animation: overlayFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.analysis-overlay.dark .analysis-overlay-content {
+    background: linear-gradient(135deg, rgba(26,16,53,0.98), rgba(15,10,30,0.97));
+    border: 1px solid rgba(118, 75, 162, 0.35);
+    color: #e0e0e0;
+    animation: contentSlideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.analysis-overlay.dark .analysis-overlay-content h3 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+.analysis-overlay.dark .analysis-overlay-content p {
+    color: #a78bca;
+}
+
+/* Ensure spinning rings work in dark theme */
+.analysis-overlay.dark .ring-outer {
+    animation: ultraSpin 3s linear infinite reverse !important;
+}
+
+.analysis-overlay.dark .ring-middle {
+    animation: ultraSpin 1.2s linear infinite !important;
+}
+
+.analysis-overlay.dark .ring-inner {
+    animation: ultraSpin 0.8s linear infinite reverse !important;
+}
+
+/* Dark Mode Support (media query fallback) */
 @media (prefers-color-scheme: dark) {
     .spinner-container {
         background: rgba(45, 45, 45, 0.05);
@@ -417,24 +495,24 @@
         color: #e0e0e0;
     }
 
-    .analysis-overlay {
+    .analysis-overlay:not(.light) {
         background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(102, 126, 234, 0.5) 100%);
     }
 
-    .analysis-overlay-content {
+    .analysis-overlay:not(.light) .analysis-overlay-content {
         background: linear-gradient(135deg, rgba(45, 45, 45, 0.98), rgba(26, 26, 26, 0.95));
         border-color: rgba(255, 255, 255, 0.1);
         color: #e0e0e0;
     }
 
-    .analysis-overlay-content h3 {
+    .analysis-overlay:not(.light) .analysis-overlay-content h3 {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
     }
 
-    .analysis-overlay-content p {
+    .analysis-overlay:not(.light) .analysis-overlay-content p {
         color: #adb5bd;
     }
 }

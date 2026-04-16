@@ -10,8 +10,8 @@ from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
-AI_UPLOAD_URL        = 'http://ai_django_app:8000/api/analysis/upload-folder/'
-UPM_MYSQL_CALLBACK_URL = 'http://upm_django_app:8000/api/upm/internal/upload-complete/'
+AI_UPLOAD_URL        = 'http://172.18.0.10:8000/api/analysis/upload-folder/'
+UPM_MYSQL_CALLBACK_URL = 'http://172.18.0.9:8000/api/upm/internal/upload-complete/'
 
 
 def _build_files_to_forward(files_data):
@@ -57,7 +57,6 @@ def process_upload_task(self, project_id, project_name, user_email, files_data):
                 'user_email':     user_email or '',   # ← كان ناقص
             },
             files=files_to_forward,
-            headers={'Host': 'localhost'},
             timeout=600
         )
 
@@ -145,7 +144,6 @@ def process_github_sync_task(self, project_id, project_name, user_email, files_d
                 'user_email':     user_email or '',   # ← كان ناقص
             },
             files=files_to_forward,
-            headers={'Host': 'localhost'},
             timeout=600
         )
         if not ai_response.ok:
@@ -163,7 +161,6 @@ def process_github_sync_task(self, project_id, project_name, user_email, files_d
                 'new_sha':    new_sha,
             },
             headers={
-                'Host':           'localhost',
                 'X-Internal-Key': settings.INTERNAL_SERVICE_KEY,
             },
             timeout=60

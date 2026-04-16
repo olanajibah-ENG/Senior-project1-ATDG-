@@ -718,16 +718,83 @@ const Dashboard: React.FC = () => {
                 return;
             }
 
-            // ===== مسار GitHub Repo =====
+            // ===== GitHub Repo =====
             if (payload.githubUrl) {
-                console.log('ًںگ™ GitHub URL detected â€” using folder-upload flow');
-                // TODO: يمكن إضافة GitHub fetch logic هنا لاحقاً
-                // حالياً نرسل للـ document generation مع الـ URL
+                console.log('â¬ GitHub URL detected â using project analysis flow like ZIP');
+                
+                // Step 1: GitHub is already connected, get project analysis
+                const analyzeResult = await UnifiedApiService.analyzeProject(payload.projectId);
+                console.log('â GitHub project analysis started:', analyzeResult);
+
+                const taskId = analyzeResult.task_id;
+
+                // Step 2: Wait for analysis completion (polling)
+                let analysisData: any = null;
+                const maxAttempts = 40;
+                const pollInterval = 3000;
+
+                for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+                    console.log(`â¬ Polling GitHub project analysis status (${attempt}/${maxAttempts})...`);
+                    await new Promise(resolve => setTimeout(resolve, pollInterval));
+
+                    try {
+                        const statusData = await UnifiedApiService.getAnalyzeProjectStatus(payload.projectId);
+                        console.log('â GitHub analysis status:', statusData.status);
+
+                        if (statusData.status === 'COMPLETED' || statusData.status === 'COMPLETED_WITH_ERRORS') {
+                            analysisData = statusData;
+                            console.log('â GitHub project analysis completed!');
+                            break;
+                        } else if (statusData.status === 'FAILED') {
+                            const reason = statusData.error_message || statusData.error || statusData.detail || '';
+                            throw new Error('GitHub project analysis failed on server' + (reason ? ': ' + reason : ''));
+                        }
+                        // IN_PROGRESS / PENDING - keep polling
+                    } catch (pollError: any) {
+                        const is404 = (pollError?.response?.status === 404) || String(pollError?.message).includes('404');
+                        if (is404 && attempt < 3) continue;
+                        throw pollError;
+                    }
+                }
+
+                if (!analysisData) {
+                    throw new Error('GitHub project analysis timed out. Please try again.');
+                }
+
+                // Step 3: Get project class diagram
+                const diagramData = await UnifiedApiService.getProjectClassDiagram(payload.projectId);
+                console.log('â GitHub project class diagram fetched:', diagramData);
+
+                // Close modal
+                setShowCodeModal(false);
+                setCodeProject(null);
+
+                // Step 4: Navigate to Class Diagram page with project data (same as ZIP)
+                navigate('/diagram', {
+                    state: {
+                        projectId: payload.projectId,
+                        codeName: payload.codeName || 'GitHub Repository',
+                        fileName: payload.fileName || 'GitHub Repository',
+                        isProjectDiagram: true,
+                        analysisIds: analysisData.analysis_ids || [],
+                        diagram: convertProjectDiagramToDiagramFormat(diagramData.project_class_diagram),
+                    }
+                });
+
+                showAlert({
+                    type: 'success',
+                    title: 'Success',
+                    message: `GitHub repository analyzed successfully! Found ${diagramData.total_classes || 0} classes.`
+                });
+
+                return;
             }
 
-            // ===== مسار الملفات المحلية (Single/Multi file) =====
-            console.log('âœ… Local files â€” using codefiles flow');
-            if (payload.files && payload.files.length > 0) {
+            // ===== Multi-file upload (treat as project) =====
+            if (payload.files && payload.files.length > 1) {
+                console.log('â Multiple files detected â using project analysis flow like ZIP');
+                
+                // Step 1: Upload files as project
                 await UnifiedApiService.uploadFilesWithProject({
                     files: payload.files,
                     project_id: payload.projectId,
@@ -737,34 +804,159 @@ const Dashboard: React.FC = () => {
                     githubUrl: payload.githubUrl,
                     zipFile: payload.zipFile
                 });
+
+                // Step 2: Start project analysis
+                const analyzeResult = await UnifiedApiService.analyzeProject(payload.projectId);
+                console.log('â Project analysis started:', analyzeResult);
+
+                const taskId = analyzeResult.task_id;
+
+                // Step 3: Poll for analysis completion
+                let analysisData: any = null;
+                const maxAttempts = 40;
+                const pollInterval = 3000;
+
+                for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+                    console.log(`â Polling project analysis status (${attempt}/${maxAttempts})...`);
+                    await new Promise(resolve => setTimeout(resolve, pollInterval));
+
+                    try {
+                        const statusData = await UnifiedApiService.getAnalyzeProjectStatus(payload.projectId);
+                        console.log('â Analysis status:', statusData.status);
+
+                        if (statusData.status === 'COMPLETED' || statusData.status === 'COMPLETED_WITH_ERRORS') {
+                            analysisData = statusData;
+                            console.log('â Project analysis completed!');
+                            break;
+                        } else if (statusData.status === 'FAILED') {
+                            const reason = statusData.error_message || statusData.error || statusData.detail || '';
+                            throw new Error('Project analysis failed on server' + (reason ? ': ' + reason : ''));
+                        }
+                    } catch (pollError: any) {
+                        const is404 = (pollError?.response?.status === 404) || String(pollError?.message).includes('404');
+                        if (is404 && attempt < 3) continue;
+                        throw pollError;
+                    }
+                }
+
+                if (!analysisData) {
+                    throw new Error('Project analysis timed out. Please try again.');
+                }
+
+                // Step 4: Get project class diagram
+                const diagramData = await UnifiedApiService.getProjectClassDiagram(payload.projectId);
+                console.log('â Project class diagram fetched:', diagramData);
+
+                // Close modal
+                setShowCodeModal(false);
+                setCodeProject(null);
+
+                // Step 5: Navigate to Class Diagram page
+                navigate('/diagram', {
+                    state: {
+                        projectId: payload.projectId,
+                        codeName: payload.codeName || 'Multi-file Project',
+                        fileName: payload.fileName || 'Multi-file Project',
+                        isProjectDiagram: true,
+                        analysisIds: analysisData.analysis_ids || [],
+                        diagram: convertProjectDiagramToDiagramFormat(diagramData.project_class_diagram),
+                    }
+                });
+
+                showAlert({
+                    type: 'success',
+                    title: 'Success',
+                    message: `Multi-file project analyzed successfully! Found ${diagramData.total_classes || 0} classes.`
+                });
+
+                return;
             }
 
-            console.log('âœ… Files uploaded successfully, navigating...');
-
-            // Close modal
-            setShowCodeModal(false);
-            setCodeProject(null);
-
-            // Navigate to document generation page
-            navigate('/document-generation', {
-                state: {
-                    projectId: payload.projectId,
-                    codeName: payload.codeName || payload.fileName,
-                    fileName: payload.fileName,
+            // ===== Single file upload (treat as project) =====
+            if (payload.files && payload.files.length === 1) {
+                console.log('â Single file detected â using project analysis flow like ZIP');
+                
+                // Step 1: Upload file as project
+                await UnifiedApiService.uploadFilesWithProject({
+                    files: payload.files,
+                    project_id: payload.projectId,
                     language: payload.language,
-                    codeText: payload.codeText || ' ', // space to avoid empty check
-                }
-            });
+                    version: payload.version,
+                    codeName: payload.codeName,
+                    githubUrl: payload.githubUrl,
+                    zipFile: payload.zipFile
+                });
 
-            showAlert({
-                type: 'success',
-                title: 'Success',
-                message: 'Code uploaded successfully'
-            });
+                // Step 2: Start project analysis
+                const analyzeResult = await UnifiedApiService.analyzeProject(payload.projectId);
+                console.log('â Project analysis started:', analyzeResult);
+
+                const taskId = analyzeResult.task_id;
+
+                // Step 3: Poll for analysis completion
+                let analysisData: any = null;
+                const maxAttempts = 40;
+                const pollInterval = 3000;
+
+                for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+                    console.log(`â Polling project analysis status (${attempt}/${maxAttempts})...`);
+                    await new Promise(resolve => setTimeout(resolve, pollInterval));
+
+                    try {
+                        const statusData = await UnifiedApiService.getAnalyzeProjectStatus(payload.projectId);
+                        console.log('â Analysis status:', statusData.status);
+
+                        if (statusData.status === 'COMPLETED' || statusData.status === 'COMPLETED_WITH_ERRORS') {
+                            analysisData = statusData;
+                            console.log('â Project analysis completed!');
+                            break;
+                        } else if (statusData.status === 'FAILED') {
+                            const reason = statusData.error_message || statusData.error || statusData.detail || '';
+                            throw new Error('Project analysis failed on server' + (reason ? ': ' + reason : ''));
+                        }
+                    } catch (pollError: any) {
+                        const is404 = (pollError?.response?.status === 404) || String(pollError?.message).includes('404');
+                        if (is404 && attempt < 3) continue;
+                        throw pollError;
+                    }
+                }
+
+                if (!analysisData) {
+                    throw new Error('Project analysis timed out. Please try again.');
+                }
+
+                // Step 4: Get project class diagram
+                const diagramData = await UnifiedApiService.getProjectClassDiagram(payload.projectId);
+                console.log('â Project class diagram fetched:', diagramData);
+
+                // Close modal
+                setShowCodeModal(false);
+                setCodeProject(null);
+
+                // Step 5: Navigate to Class Diagram page
+                navigate('/diagram', {
+                    state: {
+                        projectId: payload.projectId,
+                        codeName: payload.codeName || payload.fileName,
+                        fileName: payload.fileName,
+                        isProjectDiagram: true,
+                        analysisIds: analysisData.analysis_ids || [],
+                        diagram: convertProjectDiagramToDiagramFormat(diagramData.project_class_diagram),
+                    }
+                });
+
+                showAlert({
+                    type: 'success',
+                    title: 'Success',
+                    message: `File analyzed successfully! Found ${diagramData.total_classes || 0} classes.`
+                });
+
+                return;
+            }
         } catch (err: any) {
             const errorMessage = formatApiError(err);
             setCodeError(errorMessage);
-            console.error('â‌Œ Error in handleCodeSubmit:', err);
+            console.error('â Error in handleCodeSubmit:', err);
         } finally {
             setIsCodeProcessing(false);
             setShowAnalysis(false);
@@ -1433,6 +1625,7 @@ const Dashboard: React.FC = () => {
             {showAnalysis && (
                 <AnalysisOverlay
                     message={codeError || 'Processing code, please wait...'}
+                    isDarkMode={isDarkMode}
                 />
             )}
 
