@@ -2,6 +2,7 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from gridfs import GridFS
 from django.conf import settings
+from datetime import datetime
 
 
 def get_mongo_client():
@@ -94,3 +95,28 @@ def delete_from_gridfs(gridfs_id: str) -> None:
         raise Exception("GridFS connection failed")
 
     fs.delete(ObjectId(gridfs_id))
+
+# في نهاية ملف mongo_utils.py
+
+def get_conflict_reports_collection():
+    """يجيب collection التناقضات"""
+    db = get_mongo_db()
+    if db is None:
+        raise Exception("MongoDB connection failed")
+    return db["conflict_reports"]  # اسم الـ Collection
+
+def save_conflict_report(report_data: dict) -> str:
+    """يحفظ تقرير جديد ويرجع الـ ID"""
+    collection = get_conflict_reports_collection()
+    result = collection.insert_one(report_data)
+    return str(result.inserted_id)
+
+def update_conflict_report(report_id: str, update_data: dict):
+    """يحدث تقرير موجود"""
+    from bson import ObjectId
+    collection = get_conflict_reports_collection()
+    update_data['updated_at'] = datetime.utcnow() # تحديث الوقت
+    collection.update_one(
+        {"_id": ObjectId(report_id)},
+        {"$set": update_data}
+    )
