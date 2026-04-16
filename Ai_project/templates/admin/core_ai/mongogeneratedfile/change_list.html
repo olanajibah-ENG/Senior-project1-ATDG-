@@ -1,0 +1,232 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static admin_list %}
+
+{% block content_title %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block result_list %}
+    {% if mongodb_error %}
+        <div class="messagelist">
+            <div class="error">{{ mongodb_error }}</div>
+        </div>
+    {% elif has_mongodb_data %}
+        <form id="changelist-form" method="post">
+            {% csrf_token %}
+            <div class="results">
+                <table id="result_list">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <input type="checkbox" id="action-toggle">
+                            </th>
+                            <th scope="col">File Name</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Explanation Type</th>
+                            <th scope="col">Analysis ID</th>
+                            <th scope="col">File Size</th>
+                            <th scope="col">Downloads</th>
+                            <th scope="col">Created At</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for file in mongodb_data %}
+                            <tr class="{% cycle 'row1' 'row2' %}">
+                                <td>
+                                    <input type="checkbox" name="_selected_action" value="{{ file.id }}" class="action-select">
+                                </td>
+                                <td>
+                                    <strong>{{ file.filename|default:"Unknown" }}</strong>
+                                </td>
+                                <td>
+                                    <span class="badge badge-{{ file.file_type|default:'unknown' }}">
+                                        {% if file.file_type == 'pdf' %}
+                                            📄 PDF
+                                        {% elif file.file_type == 'markdown' %}
+                                            📝 Markdown
+                                        {% elif file.file_type == 'txt' %}
+                                            📄 TXT
+                                        {% else %}
+                                            {{ file.file_type|default:"FILE"|upper }}
+                                        {% endif %}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if file.explanation_type %}
+                                        {% if 'high' in file.explanation_type|lower %}
+                                            <span style="color: #d32f2f; font-weight: bold;">🔴 High Level</span>
+                                        {% elif 'low' in file.explanation_type|lower %}
+                                            <span style="color: #388e3c; font-weight: bold;">🟢 Low Level</span>
+                                        {% else %}
+                                            {{ file.explanation_type }}
+                                        {% endif %}
+                                    {% else %}
+                                        <span style="color: #999;">N/A</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if file.analysis_id %}
+                                        <code style="background: #f0f0f0; padding: 2px 4px; border-radius: 3px; font-size: 11px;">
+                                            {{ file.analysis_id|truncatechars:8 }}
+                                        </code>
+                                    {% else %}
+                                        <span style="color: #999;">N/A</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if file.file_size %}
+                                        {% if file.file_size > 1048576 %}
+                                            {{ file.file_size|filesizeformat }}
+                                        {% elif file.file_size > 1024 %}
+                                            {{ file.file_size|filesizeformat }}
+                                        {% else %}
+                                            {{ file.file_size }} bytes
+                                        {% endif %}
+                                    {% else %}
+                                        <span style="color: #999;">Unknown</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <span style="background: #e8f5e8; padding: 2px 6px; border-radius: 3px; font-size: 11px;">
+                                        {{ file.downloaded_count|default:0 }} downloads
+                                    </span>
+                                </td>
+                                <td>
+                                    {{ file.created_at|default:"N/A" }}
+                                </td>
+                                <td>
+                                    {% if file.id %}
+                                        <a href="/api/analysis/download-generated-file/{{ file.id }}/" target="_blank"
+                                           style="color: #1976d2; text-decoration: none; font-weight: bold;">
+                                            📥 Download
+                                        </a>
+                                        <br><a href="#" onclick="viewFileContent('{{ file.id }}', '{{ file.filename }}', '{{ file.file_type }}')"
+                                               style="color: #ff9800; text-decoration: none; font-size: 11px;">
+                                            👁️ View Content
+                                        </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="9">No generated files found in MongoDB.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Actions dropdown -->
+            <div class="actions">
+                <label>Action: 
+                    <select name="action" required>
+                        <option value="" selected>---------</option>
+                        <option value="delete_selected">Delete selected generated files</option>
+                        <option value="regenerate_selected">Regenerate selected files</option>
+                    </select>
+                </label>
+                <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
+            </div>
+        </form>
+
+        <!-- Modal for viewing file info -->
+        <div id="fileInfoModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+            <div style="background-color: #fefefe; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 60%; max-height: 70%; overflow-y: auto;">
+                <span onclick="closeFileInfoModal()" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+                <h2 id="fileInfoTitle">File Information</h2>
+                <div id="fileInfoContent" style="background: #f5f5f5; padding: 15px; border-radius: 5px;">
+                    Loading file information...
+                </div>
+            </div>
+        </div>
+
+        <script>
+        // Handle action selection
+        document.addEventListener('DOMContentLoaded', function() {
+            const actionSelect = document.querySelector('select[name="action"]');
+            const form = document.getElementById('changelist-form');
+            
+            if (actionSelect && form) {
+                form.addEventListener('submit', function(e) {
+                    const selectedAction = actionSelect.value;
+                    
+                    if (selectedAction === 'delete_selected' || selectedAction === 'regenerate_selected') {
+                        const checkedBoxes = document.querySelectorAll('input[name="_selected_action"]:checked');
+                        if (checkedBoxes.length === 0) {
+                            e.preventDefault();
+                            alert('Please select at least one item.');
+                        } else {
+                            const actionText = selectedAction === 'delete_selected' ? 'delete' : 'regenerate';
+                            if (!confirm(`Are you sure you want to ${actionText} ${checkedBoxes.length} selected item(s)?`)) {
+                                e.preventDefault();
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Toggle all checkboxes
+            const toggleAll = document.getElementById('action-toggle');
+            const checkboxes = document.querySelectorAll('.action-select');
+            
+            if (toggleAll) {
+                toggleAll.addEventListener('change', function() {
+                    checkboxes.forEach(checkbox => {
+                        checkbox.checked = this.checked;
+                    });
+                });
+            }
+        });
+
+        function viewFileContent(fileId, filename, fileType) {
+            // فتح نافذة جديدة لعرض المحتوى
+            var win = window.open('', '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+            win.document.write('<html><head><title>' + filename + '</title>');
+            win.document.write('<style>body{font-family: monospace; padding: 20px; background: #f5f5f5;} pre{white-space: pre-wrap; background: white; padding: 15px; border-radius: 5px; border: 1px solid #ddd;} .header{background: #2196f3; color: white; padding: 10px; margin: -20px -20px 20px -20px;}</style>');
+            win.document.write('</head><body>');
+            win.document.write('<div class="header"><h2>' + filename + ' (' + fileType.toUpperCase() + ')</h2></div>');
+            win.document.write('<div id="content">جاري تحميل المحتوى...</div>');
+            win.document.write('</body></html>');
+
+            // جلب المحتوى من API
+            fetch('/api/analysis/download-generated-file/' + fileId + '/')
+                .then(response => {
+                    if (fileType === 'pdf') {
+                        return response.blob();
+                    } else {
+                        return response.text();
+                    }
+                })
+                .then(data => {
+                    var contentDiv = win.document.getElementById('content');
+                    if (fileType === 'pdf') {
+                        var url = URL.createObjectURL(data);
+                        contentDiv.innerHTML = '<embed src="' + url + '" width="100%" height="500px" type="application/pdf">';
+                    } else {
+                        contentDiv.innerHTML = '<pre>' + data + '</pre>';
+                    }
+                })
+                .catch(error => {
+                    win.document.getElementById('content').innerHTML = '<div style="color: red;">خطأ في تحميل المحتوى: ' + error.message + '</div>';
+                });
+        }
+        </script>
+    {% else %}
+        <div class="messagelist">
+            <div class="info">No MongoDB data available.</div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block pagination %}
+    {% if has_mongodb_data and mongodb_data|length > 0 %}
+        <p class="paginator">
+            {{ mongodb_data|length }} generated file{{ mongodb_data|length|pluralize }} (showing first 100)
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block search %}{% endblock %}
+{% block date_hierarchy %}{% endblock %}
+{% block filters %}{% endblock %}

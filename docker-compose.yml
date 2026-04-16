@@ -1,0 +1,318 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: upm_mysql_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-upm_mysql_db}
+      MYSQL_USER: ${MYSQL_USER:-admin3}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-admin3}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+    ports:
+      - "${MYSQL_PORT:-3307}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-rootpassword}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - upm_network
+
+  web:
+    build: ./UPM_Project
+    container_name: upm_django_app
+    restart: unless-stopped
+    command: /bin/bash /app/entrypoint.sh
+    volumes:
+      - ./UPM_Project:/app
+    ports:
+      - "${DJANGO_PORT:-8001}:8000"
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+      - DB_NAME=${MYSQL_DATABASE:-upm_mysql_db}
+      - DB_USER=${MYSQL_USER:-admin3}
+      - DB_PASSWORD=${MYSQL_PASSWORD:-admin3}
+      - DB_PORT=3306
+      - SECRET_KEY=${UPM_DJANGO_SECRET_KEY}
+      - DEBUG=${DJANGO_DEBUG}
+      - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,web,upm_backend,upm_api_gateway,nginx,upm_django_app
+      - NOTIFICATION_SERVICE_URL=http://172.18.0.6:8000
+      - CELERY_BROKER_URL=redis://shared_redis:6379/2
+      - CELERY_RESULT_BACKEND=redis://shared_redis:6379/2
+      - INTERNAL_SERVICE_KEY=${INTERNAL_SERVICE_KEY:-dev-internal-key-change-in-prod}
+    depends_on:
+      db:
+        condition: service_healthy
+      shared_redis:
+        condition: service_started
+    networks:
+      - upm_network
+    healthcheck:
+      # Healthcheck محسّن وموثوق
+      test: [ "CMD-SHELL", "curl -f http://localhost:8000/health/ || exit 1" ]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # خدمة MongoDB لميكروسيرفس تحليل الكود (Ai_project)
+  mongodb:
+    image: mongo:latest
+    container_name: ai_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017" # المنفذ الافتراضي لـ MongoDB
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - upm_network # في نفس الشبكة لتسهيل التواصل
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+    # خدمة الويب لميكروسيرفس تحليل الكود (Ai_project)
+  ai_web:
+    build: ./Ai_project
+    container_name: ai_django_app
+    restart: unless-stopped
+    command: /bin/bash /app/entrypoint.sh
+    volumes:
+      - ./Ai_project:/app
+      - ai_static_data:/app/staticfiles # 👈 التعديل 2: لمشاركة الـ CSS مع Nginx
+    ports:
+      - "${AI_DJANGO_PORT:-8002}:8000" # منفذ جديد 8002 على المضيف
+    env_file:
+      - .env
+    environment:
+      - DJANGO_SETTINGS_MODULE=Ai_project.settings # 👈 إضافة هذا السطر المهم!
+      - MONGO_HOST=mongodb # اسم خدمة MongoDB في Docker Compose
+      - MONGO_PORT=27017
+      - MONGO_DB_NAME=${MONGO_DB_NAME:-ai_mongodb_db}
+      - SECRET_KEY=${AI_DJANGO_SECRET_KEY}
+      - DEBUG=${AI_DJANGO_DEBUG}
+      - ALLOWED_HOSTS=${AI_DJANGO_ALLOWED_HOSTS}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY} # 👈 التعديل 3
+      # لإعداد Celery (المعالج الخلفي)
+      - CELERY_BROKER_URL=${CELERY_BROKER_URL:-redis://ai_redis:6379/0}
+      - CELERY_RESULT_BACKEND=${CELERY_RESULT_BACKEND:-redis://ai_redis:6379/0}
+    depends_on:
+      mongodb:
+        condition: service_healthy # تغيير من service_healthy إلى service_started
+      redis:
+        condition: service_started
+    networks:
+      - upm_network
+
+    healthcheck:
+      # Healthcheck محسّن وموثوق
+      test: [ "CMD-SHELL", "curl -f http://localhost:8000/health/ || exit 1" ]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # خدمة Redis لـ Celery (معالج المهام الخلفية)
+  redis:
+    image: redis:latest
+    container_name: ai_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - upm_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5  
+
+  # خدمة Celery Worker لميكروسيرفس تحليل الكود
+
+  celery_worker:
+    build: ./Ai_project
+    container_name: ai_celery_worker
+    restart: unless-stopped
+    command: /bin/sh -c "celery -A Ai_project.celery_app worker -l DEBUG"
+    volumes:
+      - ./Ai_project:/app
+    env_file:
+      - .env
+    environment:
+      - DJANGO_SETTINGS_MODULE=Ai_project.settings
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_DB_NAME=ai_mongodb_db
+      - SECRET_KEY=${AI_DJANGO_SECRET_KEY}
+      - DEBUG=${AI_DJANGO_DEBUG}
+      - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - REDIS_HOST=ai_redis
+      - CELERY_BROKER_URL=redis://ai_redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://ai_redis:6379/0
+    depends_on:
+      ai_web:
+        condition: service_started
+      redis:
+        condition: service_started
+    networks:
+      - upm_network
+
+  # خدمة Redis للإشعارات
+  notification_redis:
+    image: redis:7
+    container_name: notification_redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379" # منفذ مختلف عن Redis الرئيسي (6379)
+    networks:
+      - upm_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # خدمة الإشعارات
+  notification_service:
+    build: ./Notification_Service
+    container_name: notification_django
+    restart: unless-stopped
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./Notification_Service:/app
+    ports:
+      - "${NOTIFICATION_DJANGO_PORT:-8004}:8000"
+    env_file:
+      - .env
+    environment:
+      - DJANGO_SETTINGS_MODULE=notification_service.settings
+      - CELERY_BROKER_URL=redis://notification_redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://notification_redis:6379/0
+      - SECRET_KEY=${NOTIFICATION_DJANGO_SECRET_KEY:-dev-notification-secret-key}
+      - DEBUG=${NOTIFICATION_DJANGO_DEBUG:-True}
+      - NOTIFICATION_DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,notification_django,notification_service,web,upm_backend,upm_api_gateway,nginx,upm_django_app,ai_django_app,notification_redis
+      - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,notification_django,notification_service,web,upm_backend,upm_api_gateway,nginx,upm_django_app,ai_django_app,notification_redis
+      # إعدادات البريد الإلكتروني
+      - EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+      - EMAIL_HOST=${EMAIL_HOST:-smtp.gmail.com}
+      - EMAIL_PORT=${EMAIL_PORT:-587}
+      - EMAIL_USE_TLS=${EMAIL_USE_TLS:-True}
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER:-}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD:-}
+      - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL:-noreply@example.com}
+    depends_on:
+      notification_redis:
+        condition: service_started
+    networks:
+      - upm_network
+    healthcheck:
+      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/')" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+      # خدمة Celery Worker لميكروسيرفس الإشعارات (إضافة جديدة)
+  notification_worker:
+    build: ./Notification_Service
+    container_name: notification_worker
+    restart: unless-stopped
+    # أمر التشغيل للتاسكات الخاصة بالإشعارات
+    command: celery -A notification_service worker -l info
+    volumes:
+      - ./Notification_Service:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=notification_service.settings
+      - CELERY_BROKER_URL=redis://notification_redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://notification_redis:6379/0
+      # يجب التأكد من تمرير إعدادات الإيميل هنا أيضاً لكي يستطيع الـ Worker الإرسال
+      - EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_PORT=${EMAIL_PORT}
+      - EMAIL_USE_TLS=${EMAIL_USE_TLS}
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+    depends_on:
+      - notification_redis
+      - notification_service
+    networks:
+      - upm_network
+  # Redis مشترك بين UPM وAI للـ Message Broker
+  shared_redis:
+    image: redis:latest
+    container_name: shared_redis
+    restart: unless-stopped
+    ports:
+      - "6381:6379"
+    networks:
+      - upm_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # UPM Celery Worker — يشيل رسائل الرفع من Redis ويعالجها
+  upm_celery_worker:
+    build: ./UPM_Project
+    container_name: upm_celery_worker
+    restart: unless-stopped
+    command: celery -A UPM_Project.celery_app worker -l INFO -Q uploads
+    volumes:
+      - ./UPM_Project:/app
+    env_file:
+      - .env
+    environment:
+      - CELERY_WORKER=true
+      - DJANGO_SETTINGS_MODULE=UPM_Project.settings
+      - DB_HOST=db
+      - DB_NAME=${MYSQL_DATABASE:-upm_mysql_db}
+      - DB_USER=${MYSQL_USER:-admin3}
+      - DB_PASSWORD=${MYSQL_PASSWORD:-admin3}
+      - DB_PORT=3306
+      - SECRET_KEY=${UPM_DJANGO_SECRET_KEY}
+      - DEBUG=${DJANGO_DEBUG}
+      - CELERY_BROKER_URL=redis://shared_redis:6379/2
+      - CELERY_RESULT_BACKEND=redis://shared_redis:6379/2
+      - INTERNAL_SERVICE_KEY=${INTERNAL_SERVICE_KEY:-dev-internal-key-change-in-prod}
+    depends_on:
+      db:
+        condition: service_healthy
+      shared_redis:
+        condition: service_started
+      web:
+        condition: service_healthy
+    networks:
+      - upm_network
+
+  api_gateway:
+    image: nginx:latest
+    container_name: upm_api_gateway
+    restart: unless-stopped
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf # ملف إعداد Nginx
+      - ai_static_data:/app/staticfiles:ro # 👈 إصلاح: Nginx يقرأ الـ CSS من المجلد الصحيح
+    ports:
+      - "80:80" # منفذ 80 على المضيف يذهب للـ Gateway
+    depends_on:
+      web:
+        condition: service_healthy
+      ai_web:
+        condition: service_healthy
+    networks:
+      - upm_network
+
+volumes:
+  mysql_data:
+  mongodb_data:
+  ai_static_data:
+networks:
+  upm_network:
+    driver: bridge
