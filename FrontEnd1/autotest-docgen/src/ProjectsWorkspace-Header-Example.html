@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects Workspace - Enhanced Header</title>
+    
+    <!-- Import Unified Design System -->
+    <link rel="stylesheet" href="./Dashboard.css">
+    <link rel="stylesheet" href="./ProjectsWorkspace-Enhanced.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/lucide-static@0.321.0/font/lucide.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--rd-bg);
+            color: var(--rd-text-primary);
+            transition: var(--rd-transition);
+        }
+        
+        .page-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: var(--rd-radius);
+        }
+        
+        /* Theme toggle button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--rd-card-bg);
+            border: 1px solid var(--rd-card-border);
+            border-radius: var(--rd-radius-sm);
+            padding: var(--rd-radius-sm);
+            cursor: pointer;
+            transition: var(--rd-transition);
+            box-shadow: var(--rd-shadow);
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: var(--rd-shadow-md);
+        }
+        
+        /* Sample content styling */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--rd-radius);
+            margin-top: var(--rd-radius);
+        }
+        
+        .sample-card {
+            background: var(--rd-card-bg);
+            border: 1px solid var(--rd-card-border);
+            border-radius: var(--rd-radius);
+            padding: var(--rd-radius);
+            transition: var(--rd-transition);
+        }
+        
+        .sample-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--rd-shadow-md);
+        }
+        
+        .sample-card h3 {
+            color: var(--rd-text-primary);
+            margin: 0 0 var(--rd-radius-sm) 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .sample-card p {
+            color: var(--rd-text-secondary);
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        /* Dark mode adjustments */
+        .dashboard.dark body {
+            background: var(--rd-bg-dark);
+            color: var(--rd-text-primary-dark);
+        }
+        
+        .dashboard.dark .theme-toggle {
+            background: var(--rd-card-bg-dark);
+            border-color: var(--rd-card-border-dark);
+            box-shadow: var(--rd-shadow-dark);
+        }
+        
+        .dashboard.dark .sample-card {
+            background: var(--rd-card-bg-dark);
+            border-color: var(--rd-card-border-dark);
+        }
+        
+        .dashboard.dark .sample-card h3 {
+            color: var(--rd-text-primary-dark);
+        }
+        
+        .dashboard.dark .sample-card p {
+            color: var(--rd-text-secondary-dark);
+        }
+    </style>
+</head>
+<body class="dashboard light">
+    <div class="page-container">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="lucide" data-lucide="sun"></i>
+        </button>
+        
+        <!-- Enhanced Projects Workspace Header -->
+        <header class="projects-workspace-header">
+            <h1 class="projects-workspace-title">Projects Workspace</h1>
+            <p class="projects-workspace-subtitle">مساحة عمل متقدمة مع خلفية متحركة وتأثيرات بصرية احترافية</p>
+        </header>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="content-grid">
+                <!-- Sample Project Cards -->
+                <div class="sample-card">
+                    <h3>مشروع الويب</h3>
+                    <p>تطوير واجهات مستخدم احترافية مع أحدث التقنيات وتصميم متجاوب</p>
+                </div>
+                
+                <div class="sample-card">
+                    <h3>تطبيق الموبايل</h3>
+                    <p>تطبيقات ذكية للأجهزة المحمولة بتجربة مستخدم مميزة وأداء عالية</p>
+                </div>
+                
+                <div class="sample-card">
+                    <h3>نظام البيانات</h3>
+                    <p>إدارة وتحليل البيانات الضخمة بكفاءة عالية وتقارير متقدمة</p>
+                </div>
+                
+                <div class="sample-card">
+                    <h3>واجهة الإدارة</h3>
+                    <p>لوحة تحكم شاملة لإدارة جميع جوانب المشروع بسهولة وفعالية</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.querySelector('.theme-toggle i');
+            
+            if (body.classList.contains('light')) {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                themeIcon.setAttribute('data-lucide', 'moon');
+            } else {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                themeIcon.setAttribute('data-lucide', 'sun');
+            }
+            
+            // Re-initialize icons
+            lucide.createIcons();
+        }
+        
+        // Add interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effect to header
+            const header = document.querySelector('.projects-workspace-header');
+            
+            header.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            header.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+            
+            // Add parallax effect on mouse move
+            document.addEventListener('mousemove', function(e) {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                const beforeElement = header.querySelector('::before');
+                if (beforeElement) {
+                    header.style.setProperty('--mouse-x', x);
+                    header.style.setProperty('--mouse-y', y);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
