@@ -139,11 +139,18 @@ def handle_export_with_auto_generation(analysis_id, explanation_type, format_typ
             analysis_obj_id = analysis_id
 
         # البحث عن الشرح — نفس منطق البحث القديم
+        # البحث بـ ObjectId (المفضل) وبـ String (fallback) لضمان التوافق
         data = db[collection_name].find_one({
             "analysis_id": analysis_obj_id,
             "explanation_type": explanation_type
         })
-
+        
+        if not data and str(analysis_obj_id) != str(analysis_id):
+            data = db[collection_name].find_one({
+                "analysis_id": str(analysis_id),
+                "explanation_type": explanation_type
+            })
+        
         if data:
             data = _normalize_ids(data)
 
@@ -324,8 +331,16 @@ def _save_generated_file(db, data, file_content, filename, format_type, analysis
 
         project_id = None
         try:
-            analysis_results = db[settings.ANALYSIS_RESULTS_COLLECTION]
-            analysis_data    = analysis_results.find_one({"_id": analysis_id_obj})
+            # 1. ابحث في نتائج التحليل العادية (فات ملف واحد)
+            analysis_data = db[settings.ANALYSIS_RESULTS_COLLECTION].find_one({"_id": analysis_id_obj})
+            if not analysis_data:
+                # 2. ابحث في نتائج تحليل المشاريع (Project)
+                analysis_data = db[settings.PROJECT_ANALYSIS_RESULTS_COLLECTION].find_one({"_id": analysis_id_obj})
+            
+            if not analysis_data and not isinstance(analysis_id_obj, ObjectId):
+                # 3. fallback: ابحث بـ project_id (UUID string) في المشاريع
+                analysis_data = db[settings.PROJECT_ANALYSIS_RESULTS_COLLECTION].find_one({"project_id": str(analysis_id_obj)})
+
             if analysis_data:
                 project_id = analysis_data.get('project_id')
                 if not project_id and 'code_file_id' in analysis_data:

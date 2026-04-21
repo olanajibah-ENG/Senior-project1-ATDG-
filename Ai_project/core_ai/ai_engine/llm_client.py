@@ -75,13 +75,14 @@ class LLMClient:
     @staticmethod
     def call_model(system_prompt, user_prompt, use_cache=True, force_request=False, model=None):
         """
-        Call Gemini API with advanced rate limiting handling
+        Call OpenRouter API with advanced rate limiting and fallback handling.
 
         Args:
             system_prompt: System prompt text
             user_prompt: User request
             use_cache: Use cache (default: True)
             force_request: Force request even if rate limited (default: False)
+            model: Specific model to use (default: None = use current default)
         """
         
         if use_cache:
@@ -111,56 +112,60 @@ class LLMClient:
             model = LLMClient.get_current_model()
 
         payload = {
-            "model": model,  # استخدام المودل المحدد أو الافتراضي
-            
+            "model": model,
             "messages": [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
-        ],
-            "max_tokens": 4000,  # تحديد حد أقصى للتوكنز
+            ],
+            "max_tokens": 4000,
             "temperature": 0.7
         }
         
         last_error = None
+        available_models = [m["model"] for m in LLMClient.get_available_free_models()]
         
         for attempt in range(LLMClient.MAX_RETRIES):
             try:
-                logger.info(f"[LLM Request] Attempt {attempt + 1}/{LLMClient.MAX_RETRIES}")
+                logger.info(f"[LLM Request] Attempt {attempt + 1}/{LLMClient.MAX_RETRIES} using model: {model}")
                 
                 response = requests.post(url, headers=headers, json=payload, timeout=120)
                 
-                if response.status_code == 429:
-                    logger.warning(f"[LLM Request] Rate limit hit (429) on attempt {attempt + 1} with model: {model}")
+                # Handle errors that require switching to another model
+                if response.status_code in (429, 404):
+                    status_code = response.status_code
+                    reason = "rate limit (429)" if status_code == 429 else "model not available (404)"
+                    logger.warning(f"[LLM Request] {reason} on attempt {attempt + 1} with model: {model}")
                     
-                    # محاولة التبديل إلى مودل آخر تلقائياً
-                    available_models = [m["model"] for m in LLMClient.get_available_free_models()]
+                    # Try switching to next model in list
                     current_index = available_models.index(model) if model in available_models else 0
                     next_index = (current_index + 1) % len(available_models)
                     next_model = available_models[next_index]
                     
                     if next_model != model and attempt < LLMClient.MAX_RETRIES - 1:
-                        logger.info(f"[LLM Request] Switching from {model} to {next_model} due to rate limit")
+                        logger.info(f"[LLM Request] Switching from {model} to {next_model}")
                         model = next_model
                         payload["model"] = model
                         cache.set("current_llm_model", model, 3600)
-                        # الانتظار قليلاً قبل المحاولة مرة أخرى
-                        time.sleep(10)
+                        wait_time = 10 if status_code == 429 else 2
+                        time.sleep(wait_time)
                         continue
                     
-                    LLMClient._set_rate_limit_block(60)
-                    
-                    rate_info = {
-                        'limit': response.headers.get('X-RateLimit-Limit', 'Unknown'),
-                        'remaining': response.headers.get('X-RateLimit-Remaining', 'Unknown'),
-                        'reset': response.headers.get('X-RateLimit-Reset', 'Unknown')
-                    }
-                    
-                    error_msg = f"Daily request limit exceeded ({rate_info['limit']} requests). "
-                    error_msg += f"Remaining: {rate_info['remaining']}. "
-                    error_msg += f"Tried model: {model}. "
-                    error_msg += "Please add credits or wait until midnight UTC."
-                    
-                    raise Exception(error_msg)
+                    # All models exhausted
+                    if status_code == 429:
+                        LLMClient._set_rate_limit_block(60)
+                        rate_info = {
+                            'limit': response.headers.get('X-RateLimit-Limit', 'Unknown'),
+                            'remaining': response.headers.get('X-RateLimit-Remaining', 'Unknown'),
+                            'reset': response.headers.get('X-RateLimit-Reset', 'Unknown')
+                        }
+                        error_msg = f"Daily request limit exceeded ({rate_info['limit']} requests). "
+                        error_msg += f"Remaining: {rate_info['remaining']}. "
+                        error_msg += f"Last tried model: {model}. "
+                        error_msg += "Please add credits or wait until midnight UTC."
+                        raise Exception(error_msg)
+                    else:
+                        error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else response.text
+                        raise Exception(f"All models unavailable. Last API Error: {status_code} - {error_data}")
                 
                 if response.status_code != 200:
                     error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else response.text
@@ -172,7 +177,7 @@ class LLMClient:
                 if use_cache:
                     LLMClient._cache_response(cache_key, content)
                 
-                logger.info(f"[LLM Request] Success on attempt {attempt + 1}")
+                logger.info(f"[LLM Request] Success on attempt {attempt + 1} with model: {model}")
                 return content
                 
             except requests.exceptions.RequestException as e:
@@ -239,40 +244,39 @@ class LLMClient:
 
             return {
                 "status": "success",
-                "model": "meta-llama/llama-3.2-3b-instruct:free",
+                "model": LLMClient.get_current_model(),
                 "response": result.strip(),
-                "message": "Successfully connected to Gemini Flash model!"
+                "message": "Successfully connected to LLM!"
             }
 
         except Exception as e:
-         return {
+            return {
                 "status": "error",
-                "model": "meta-llama/llama-3.2-3b-instruct:free",
+                "model": LLMClient.get_current_model(),
                 "error": str(e),
-                "message": "Failed to connect to Gemini Flash model"
+                "message": "Failed to connect to LLM"
             }
 
     @staticmethod
     def get_available_free_models():
         """
-        إرجاع قائمة بالنماذج المجانية المتاحة على OpenRouter
+        إرجاع قائمة بالنماذج المجانية المتاحة على OpenRouter (مُحدَّثة ومُتحقَّق منها)
         """
         return [
             {
-                "model": "meta-llama/llama-3.2-3b-instruct:free",
-                "name": "Meta Llama 3.2 (الافتراضي)",
-                "description": "نموذج Meta المتقدم والموثوق - الأفضل للبرمجة والتوثيق",
-                "strengths": ["أداء ممتاز", "دقة عالية", "موثوقية", "متوفر مجاناً"],
-                "context": "4K tokens"
+                "model": "openai/gpt-oss-120b:free",
+                "name": "OpenAI GPT OSS 120B",
+                "description": "نموذج OpenAI المفتوح - 120B param - أداء فائق",
+                "strengths": ["reasoning قوي", "tool use", "131K context", "مجاني"],
+                "context": "131K tokens"
             },
             {
-                "model": "mistralai/mistral-small-3.1-24b-instruct:free",
-                "name": "Mistral Small 3.1",
-                "description": "نموذج Mistral المتقدم - جيد للمهام المعقدة",
-                "strengths": ["أداء قوي", "فهم جيد", "دقة عالية"],
+                "model": "nvidia/nemotron-nano-9b-v2:free",
+                "name": "NVIDIA Nemotron Nano 9B V2",
+                "description": "نموذج NVIDIA المجاني - سريع وفعال للمهام العامة",
+                "strengths": ["سريع", "مجاني", "NVIDIA بنية", "جيد للكود"],
                 "context": "32K tokens"
             },
-
             {
                 "model": "google/gemma-3-27b-it:free",
                 "name": "Gemma 3 (27B)",
@@ -288,11 +292,11 @@ class LLMClient:
                 "context": "8K tokens"
             },
             {
-                "model": "meta-llama/llama-3.1-405b-instruct:free",
-                "name": "Meta Llama 3.1 (405B)",
-                "description": "نموذج Meta الأكبر - أداء فائق",
-                "strengths": ["سياق ضخم جداً", "دقة عالية", "أداء ممتاز"],
-                "context": "128K tokens"
+                "model": "meta-llama/llama-3.2-3b-instruct:free",
+                "name": "Meta Llama 3.2 (3B)",
+                "description": "نموذج Meta الخفيف والموثوق",
+                "strengths": ["أداء ممتاز", "موثوقية", "متوفر مجاناً"],
+                "context": "4K tokens"
             },
             {
                 "model": "mistralai/mistral-7b-instruct:free",
@@ -302,18 +306,11 @@ class LLMClient:
                 "context": "32K tokens"
             },
             {
-                "model": "mistralai/devstral-2512:free",
-                "name": "Mistral Devstral 2512",
-                "description": "نموذج Mistral التجريبي - أحدث إصدار",
-                "strengths": ["أحدث تقنيات", "أداء محسن", "تجريبي مجاني"],
+                "model": "mistralai/devstral-small-2505:free",
+                "name": "Mistral Devstral Small",
+                "description": "نموذج Mistral للبرمجة - محسّن للكود",
+                "strengths": ["متخصص للكود", "أداء محسن", "مجاني"],
                 "context": "32K tokens"
-            },
-            {
-                "model": "google/gemini-2.0-flash-001",
-                "name": "Gemini Flash 1.5",
-                "description": "نموذج Google السريع والمجاني - أداء ممتاز",
-                "strengths": ["سرعة فائقة", "دقة عالية", "مجاني من Google"],
-                "context": "1M tokens"
             }
         ]
 
@@ -345,5 +342,5 @@ class LLMClient:
         if cached_model:
             return cached_model
 
-        # المودل الافتراضي - تم تغييره إلى Mistral كبديل أفضل عند rate limit
-        return "arcee-ai/trinity-large-preview:free"
+        # الموديل الافتراضي
+        return "openai/gpt-oss-120b:free"
