@@ -139,6 +139,11 @@ class DocumentationOrchestrator:
         if not analysis_data:
             raise Exception("Analysis record not found.")
         
+        # 3.5 Resolve to actual Mongo _id if it was a UUID search
+        if not self._is_object_id and analysis_data:
+            self._query_id = analysis_data['_id']
+            print(f"DEBUG: Resolved UUID to Mongo ObjectId: {self._query_id}")
+        
         if is_project:
             contexts = analysis_data.get('contexts', {})
             ordered_files = analysis_data.get('dependency_order', [])
@@ -178,11 +183,22 @@ class DocumentationOrchestrator:
 
             analysis_summary = self._prepare_high_level_summary(semantic_data, class_diagram_data, extracted_features)
 
+            file_name = None
+            if not is_project:
+                code_file_id = analysis_data.get('code_file_id')
+                if code_file_id:
+                    code_files_collection = self.db[getattr(settings, 'CODE_FILES_COLLECTION', 'code_files')]
+                    query_id = ObjectId(code_file_id) if ObjectId.is_valid(code_file_id) else code_file_id
+                    code_file_doc = code_files_collection.find_one({"_id": query_id})
+                    if code_file_doc:
+                        file_name = code_file_doc.get('filename')
+
             try:
                 raw_content = agent.process(
                     code_content,
                     class_name=class_name,
-                    analysis_summary=analysis_summary
+                    analysis_summary=analysis_summary,
+                    file_name=file_name
                 )
                 # Skip strict filtering to let the hardened agent prompt handle formatting
                 # This prevents mangling the output when the agent slightly deviates from technical constraints
