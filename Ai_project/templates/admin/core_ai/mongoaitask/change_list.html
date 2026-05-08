@@ -1,0 +1,124 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static admin_list %}
+
+{% block content_title %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block result_list %}
+    {% if mongodb_error %}
+        <div class="messagelist">
+            <div class="error">{{ mongodb_error }}</div>
+        </div>
+    {% elif has_mongodb_data %}
+        <div class="results">
+            <table id="result_list">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <input type="checkbox" id="action-toggle">
+                        </th>
+                        <th scope="col">Task ID</th>
+                        <th scope="col">Analysis ID</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Completed At</th>
+                        <th scope="col">Result</th>
+                        <th scope="col">Error</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in mongodb_data %}
+                        <tr class="{% cycle 'row1' 'row2' %}">
+                            <td>
+                                <input type="checkbox" name="_selected_action" value="{{ task.id }}" class="action-select">
+                            </td>
+                            <td>
+                                {% if task.task_id %}
+                                    <code style="font-size: 0.9em;">{{ task.task_id|slice:":12" }}...</code>
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if task.analysis_id %}
+                                    {{ task.analysis_id|slice:":8" }}...
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="badge" style="background: #417690; color: white; padding: 2px 6px; border-radius: 3px;">
+                                    {{ task.exp_type|default:"Unknown" }}
+                                </span>
+                            </td>
+                            <td>
+                                {% if task.status == 'completed' %}
+                                    <span style="color: green;">✅ {{ task.status|upper }}</span>
+                                {% elif task.status == 'failed' %}
+                                    <span style="color: red;">❌ {{ task.status|upper }}</span>
+                                {% elif task.status == 'processing' %}
+                                    <span style="color: orange;">⏳ {{ task.status|upper }}</span>
+                                {% else %}
+                                    <span style="color: gray;">⏸️ {{ task.status|default:"PENDING"|upper }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ task.created_at|default:"N/A" }}</td>
+                            <td>{{ task.completed_at|default:"N/A" }}</td>
+                            <td>
+                                {% if task.result %}
+                                    <span style="color: green; font-size: 0.9em;">
+                                        📄 {{ task.result|truncatechars:30 }}
+                                    </span>
+                                {% else %}
+                                    <span style="color: gray;">No result</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if task.error %}
+                                    <span style="color: red; font-size: 0.9em;">
+                                        ⚠️ {{ task.error|truncatechars:40 }}
+                                    </span>
+                                {% else %}
+                                    <span style="color: green;">✓ No errors</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="9">No AI tasks found in MongoDB.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Actions dropdown -->
+        <div class="actions">
+            <label>Action: 
+                <select name="action" required>
+                    <option value="" selected>---------</option>
+                    <option value="delete_selected">Delete selected AI tasks</option>
+                </select>
+            </label>
+            <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
+        </div>
+    {% else %}
+        <div class="messagelist">
+            <div class="info">No MongoDB data available.</div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block pagination %}
+    {% if has_mongodb_data and mongodb_data|length > 0 %}
+        <p class="paginator">
+            {{ mongodb_data|length }} AI task{{ mongodb_data|length|pluralize }} (showing first 100)
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block search %}{% endblock %}
+{% block date_hierarchy %}{% endblock %}
+{% block filters %}{% endblock %}

@@ -1,0 +1,270 @@
+/* Logic Explanation Modal Styles */
+.logic-explanation-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.logic-explanation-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  color: var(--primary-color, #6366f1);
+}
+
+.logic-explanation-title h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.logic-explanation-subtitle {
+  color: var(--secondary-color, #6b7280);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.logic-explanation-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--error-bg, #fef2f2);
+  border: 1px solid var(--error-border, #fecaca);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  color: var(--error-color, #dc2626);
+}
+
+.logic-explanation-content {
+  margin-bottom: 24px;
+}
+
+.code-info-section h3,
+.levels-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color, #1f2937);
+}
+
+.code-info-card {
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 12px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.code-info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.code-info-item svg {
+  color: var(--primary-color, #6366f1);
+  flex-shrink: 0;
+}
+
+.levels-loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--secondary-color, #6b7280);
+}
+
+.levels-loading .spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border-color, #e5e7eb);
+  border-top: 2px solid var(--primary-color, #6366f1);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 12px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.level-card {
+  background: var(--card-bg, #ffffff);
+  border: 2px solid var(--border-color, #e5e7eb);
+  border-radius: 16px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.level-card:hover {
+  border-color: var(--primary-color, #6366f1);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+  transform: translateY(-2px);
+}
+
+.level-card.selected {
+  border-color: var(--primary-color, #6366f1);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(99, 102, 241, 0.02));
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
+}
+
+.level-icon {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary-color, #6366f1), #8b5cf6);
+  border-radius: 50%;
+  color: white;
+}
+
+.level-content h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color, #1f2937);
+}
+
+.level-content p {
+  margin: 0 0 12px 0;
+  color: var(--secondary-color, #6b7280);
+  font-size: 0.9rem;
+}
+
+.level-suitable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--success-color, #059669);
+  background: rgba(5, 150, 105, 0.1);
+  padding: 4px 8px;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+.level-radio {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.level-radio input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-color, #6366f1);
+}
+
+.logic-explanation-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.logic-explanation-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  min-width: 140px;
+}
+
+.logic-explanation-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.logic-explanation-btn-primary {
+  background: linear-gradient(135deg, var(--primary-color, #6366f1), #8b5cf6);
+  color: white;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.logic-explanation-btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+.logic-explanation-btn-secondary {
+  background: var(--card-bg, #ffffff);
+  color: var(--text-color, #1f2937);
+  border: 2px solid var(--border-color, #e5e7eb);
+}
+
+.logic-explanation-btn-secondary:hover:not(:disabled) {
+  background: var(--hover-bg, #f9fafb);
+  border-color: var(--primary-color, #6366f1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .levels-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .code-info-card {
+    grid-template-columns: 1fr;
+  }
+
+  .logic-explanation-actions {
+    flex-direction: column;
+  }
+
+  .logic-explanation-btn {
+    width: 100%;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .level-card {
+    background: var(--card-bg-dark, #1f2937);
+    border-color: var(--border-color-dark, #374151);
+  }
+
+  .level-card:hover,
+  .level-card.selected {
+    border-color: var(--primary-color, #6366f1);
+  }
+
+  .code-info-card {
+    background: var(--card-bg-dark, #1f2937);
+    border-color: var(--border-color-dark, #374151);
+  }
+
+  .logic-explanation-btn-secondary {
+    background: var(--card-bg-dark, #1f2937);
+    color: var(--text-color, #f9fafb);
+    border-color: var(--border-color-dark, #374151);
+  }
+
+  .logic-explanation-btn-secondary:hover:not(:disabled) {
+    background: var(--hover-bg-dark, #374151);
+  }
+}

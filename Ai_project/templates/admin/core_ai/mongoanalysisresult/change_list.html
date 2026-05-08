@@ -1,0 +1,125 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static admin_list %}
+
+{% block content_title %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block result_list %}
+    {% if mongodb_error %}
+        <div class="messagelist">
+            <div class="error">{{ mongodb_error }}</div>
+        </div>
+    {% elif has_mongodb_data %}
+        <div class="results">
+            <table id="result_list">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <input type="checkbox" id="action-toggle">
+                        </th>
+                        <th scope="col">Code File ID</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Started At</th>
+                        <th scope="col">Completed At</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Features</th>
+                        <th scope="col">Dependencies</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in mongodb_data %}
+                        <tr class="{% cycle 'row1' 'row2' %}">
+                            <td>
+                                <input type="checkbox" name="_selected_action" value="{{ result.id }}" class="action-select">
+                            </td>
+                            <td>
+                                {% if result.code_file_id %}
+                                    {{ result.code_file_id|slice:":8" }}...
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if result.status == 'COMPLETED' %}
+                                    <span style="color: green;">✅ {{ result.status }}</span>
+                                {% elif result.status == 'FAILED' %}
+                                    <span style="color: red;">❌ {{ result.status }}</span>
+                                {% else %}
+                                    <span style="color: orange;">⏳ {{ result.status|default:"IN_PROGRESS" }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ result.analysis_started_at|default:"N/A" }}</td>
+                            <td>{{ result.analysis_completed_at|default:"N/A" }}</td>
+                            <td>
+                                {% if result.analysis_started_at and result.analysis_completed_at %}
+                                    <span style="color: #666;">⏱️ Duration</span>
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if result.extracted_features %}
+                                    <span style="color: #417690;">
+                                        📊 {{ result.extracted_features|length }} features
+                                    </span>
+                                {% else %}
+                                    0
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if result.dependencies %}
+                                    <span style="color: #8b4513;">
+                                        🔗 {{ result.dependencies|length }} deps
+                                    </span>
+                                {% else %}
+                                    0
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if result.id %}
+                                    <a href="/api/analysis/analysis-results/{{ result.id }}/" target="_blank" 
+                                       style="color: #417690; text-decoration: none;">
+                                        📈 View
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="9">No analysis results found in MongoDB.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Actions dropdown -->
+        <div class="actions">
+            <label>Action: 
+                <select name="action" required>
+                    <option value="" selected>---------</option>
+                    <option value="delete_selected">Delete selected analysis results</option>
+                </select>
+            </label>
+            <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
+        </div>
+    {% else %}
+        <div class="messagelist">
+            <div class="info">No MongoDB data available.</div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block pagination %}
+    {% if has_mongodb_data and mongodb_data|length > 0 %}
+        <p class="paginator">
+            {{ mongodb_data|length }} analysis result{{ mongodb_data|length|pluralize }} (showing first 100)
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block search %}{% endblock %}
+{% block date_hierarchy %}{% endblock %}
+{% block filters %}{% endblock %}

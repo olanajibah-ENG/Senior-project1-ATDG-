@@ -1,0 +1,110 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static admin_list %}
+
+{% block content_title %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block result_list %}
+    {% if mongodb_error %}
+        <div class="messagelist">
+            <div class="error">{{ mongodb_error }}</div>
+        </div>
+    {% elif has_mongodb_data %}
+        <div class="results">
+            <table id="result_list">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <input type="checkbox" id="action-toggle">
+                        </th>
+                        <th scope="col">Code File ID</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Started At</th>
+                        <th scope="col">Completed At</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Error</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job in mongodb_data %}
+                        <tr class="{% cycle 'row1' 'row2' %}">
+                            <td>
+                                <input type="checkbox" name="_selected_action" value="{{ job.id }}" class="action-select">
+                            </td>
+                            <td>
+                                {% if job.code_file_id %}
+                                    {{ job.code_file_id|slice:":8" }}...
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if job.status == 'COMPLETED' %}
+                                    <span style="color: green;">✅ {{ job.status }}</span>
+                                {% elif job.status == 'FAILED' %}
+                                    <span style="color: red;">❌ {{ job.status }}</span>
+                                {% elif job.status == 'STARTED' %}
+                                    <span style="color: orange;">⏳ {{ job.status }}</span>
+                                {% else %}
+                                    <span style="color: gray;">⏸️ {{ job.status|default:"CREATED" }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ job.created_at|default:"N/A" }}</td>
+                            <td>{{ job.started_at|default:"N/A" }}</td>
+                            <td>{{ job.completed_at|default:"N/A" }}</td>
+                            <td>
+                                {% if job.started_at and job.completed_at %}
+                                    <span style="color: #666;">⏱️ Duration</span>
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if job.error_message %}
+                                    <span style="color: red; font-size: 0.9em;">
+                                        ⚠️ {{ job.error_message|truncatechars:50 }}
+                                    </span>
+                                {% else %}
+                                    <span style="color: green;">✓ No errors</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="8">No analysis jobs found in MongoDB.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Actions dropdown -->
+        <div class="actions">
+            <label>Action: 
+                <select name="action" required>
+                    <option value="" selected>---------</option>
+                    <option value="delete_selected">Delete selected analysis jobs</option>
+                </select>
+            </label>
+            <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
+        </div>
+    {% else %}
+        <div class="messagelist">
+            <div class="info">No MongoDB data available.</div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block pagination %}
+    {% if has_mongodb_data and mongodb_data|length > 0 %}
+        <p class="paginator">
+            {{ mongodb_data|length }} analysis job{{ mongodb_data|length|pluralize }} (showing first 100)
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block search %}{% endblock %}
+{% block date_hierarchy %}{% endblock %}
+{% block filters %}{% endblock %}
