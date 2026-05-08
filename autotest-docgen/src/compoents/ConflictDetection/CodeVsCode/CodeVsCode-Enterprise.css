@@ -1,0 +1,716 @@
+/* ================================================================
+   CodeVsCode - Enterprise Clean Design (Light Mode)
+   تصميم نظيف واحترافي بدون ألوان فاقعة
+   ================================================================ */
+
+/* ══════════════════════════════════════════════════════════════
+   LIGHT MODE - ENTERPRISE CLEAN DESIGN
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-overlay {
+  position: static;
+  background: transparent;
+  backdrop-filter: none;
+  padding: 0;
+  display: block;
+}
+
+.dashboard.light .cvc-modal {
+  background: #ffffff;
+  border-radius: 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: none;
+  overflow: visible;
+  display: block;
+  box-shadow: none;
+  border: none;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HEADER - Clean & Minimal
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-header {
+  background: #F9FAFB;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1.5rem 2rem;
+}
+
+.dashboard.light .cvc-title {
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.dashboard.light .cvc-header-icon {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+}
+
+/* إخفاء زر الإغلاق */
+.dashboard.light .cvc-close {
+  display: none;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   STEP PILLS - Neutral Colors
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-step-pill {
+  color: #64748b;
+  background: #F3F4F6;
+  border-color: #d1d5db;
+  font-weight: 500;
+}
+
+.dashboard.light .cvc-step-pill.active {
+  color: #1e293b;
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .cvc-step-pill.done {
+  color: #047857;
+  background: #d1fae5;
+  border-color: #6ee7b7;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BODY - White Background
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-body {
+  background: #ffffff;
+  padding: 2rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION LABELS - Dark Gray
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-section-label {
+  color: #374151;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROJECT CARDS - Neutral Gray
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-project-card {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+}
+
+.dashboard.light .cvc-project-card:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .cvc-project-card.selected {
+  background: #e5e7eb;
+  border-color: #6b7280;
+  box-shadow: 0 0 0 2px #d1d5db;
+}
+
+.dashboard.light .cvc-proj-name {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .cvc-proj-desc {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FILE LIST - Clean Cards
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-file-row {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+}
+
+.dashboard.light .cvc-file-row:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .cvc-file-row.selected {
+  background: #e5e7eb;
+  border-color: #6b7280;
+}
+
+.dashboard.light .cvc-fname {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .cvc-fpath {
+  color: #64748b;
+}
+
+.dashboard.light .cvc-file-icon {
+  background: #e5e7eb;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   VERSION CARDS - Minimal Style
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .vp-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .vp-card:hover {
+  background: #F9FAFB;
+  border-color: #d1d5db;
+}
+
+.dashboard.light .vp-card.vp-sel-a {
+  background: #F3F4F6;
+  border-color: #9ca3af;
+  border-left: 3px solid #6b7280;
+}
+
+.dashboard.light .vp-card.vp-sel-b {
+  background: #F3F4F6;
+  border-color: #9ca3af;
+  border-left: 3px solid #10b981;
+}
+
+.dashboard.light .vp-num {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .vp-date {
+  color: #64748b;
+}
+
+.dashboard.light .vp-status {
+  color: #64748b;
+  background: #F3F4F6;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BUTTONS - Neutral with Hover Only
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-back-btn {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-weight: 500;
+}
+
+.dashboard.light .cvc-back-btn:hover {
+  background: #e5e7eb;
+  color: #1e293b;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .cvc-next-btn {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-weight: 500;
+}
+
+.dashboard.light .cvc-next-btn:hover:not(:disabled) {
+  background: #e5e7eb;
+  color: #1e293b;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .cvc-analyze-btn {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-weight: 500;
+  box-shadow: none;
+}
+
+.dashboard.light .cvc-analyze-btn:hover:not(:disabled) {
+  background: #e5e7eb;
+  color: #1e293b;
+  border-color: #9ca3af;
+  box-shadow: none;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   UPLOAD SECTION - Clean Style
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-upload-box {
+  background: #F9FAFB;
+  border: 2px dashed #d1d5db;
+}
+
+.dashboard.light .cvc-upload-box:hover {
+  background: #F3F4F6;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .cvc-upload-icon {
+  color: #64748b;
+}
+
+.dashboard.light .cvc-upload-title {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .cvc-upload-sub {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ANALYZING STATE - Clean Progress
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-analyzing-title {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .cvc-analyzing-sub {
+  color: #64748b;
+}
+
+.dashboard.light .cvc-progress-bar {
+  background: #e5e7eb;
+}
+
+.dashboard.light .cvc-progress-fill {
+  background: #6b7280;
+  box-shadow: none;
+}
+
+.dashboard.light .cvc-progress-lbl {
+  color: #64748b;
+}
+
+.dashboard.light .cvc-analyze-step {
+  color: #9ca3af;
+}
+
+.dashboard.light .cvc-analyze-step.active {
+  color: #374151;
+  background: #F3F4F6;
+}
+
+.dashboard.light .cvc-analyze-step.done {
+  color: #047857;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESULTS - Clean Cards
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-result-context {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+  color: #64748b;
+}
+
+.dashboard.light .cvc-ctx-item {
+  color: #374151;
+}
+
+.dashboard.light .cd-stat {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .cd-stat .val {
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.dashboard.light .cd-stat .lbl {
+  color: #64748b;
+}
+
+.dashboard.light .cvc-summary-text {
+  color: #374151;
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   GRADE CIRCLE - Semantic Colors Only
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-grade {
+  border-width: 2px;
+}
+
+.dashboard.light .cd-grade.A {
+  background: #d1fae5;
+  color: #047857;
+  border-color: #6ee7b7;
+}
+
+.dashboard.light .cd-grade.B {
+  background: #dbeafe;
+  color: #2563eb;
+  border-color: #93c5fd;
+}
+
+.dashboard.light .cd-grade.C {
+  background: #fef3c7;
+  color: #d97706;
+  border-color: #fcd34d;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TABS - Clean Style
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-tab-bar {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+}
+
+.dashboard.light .cd-tab {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.dashboard.light .cd-tab:hover {
+  color: #374151;
+}
+
+.dashboard.light .cd-tab.active {
+  background: #ffffff;
+  color: #1e293b;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CONFLICT ITEMS - Neutral with Border-Left Only
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-conflict-item {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+  border-left: 3px solid #d1d5db;
+}
+
+.dashboard.light .cd-conflict-item.critical {
+  border-left-color: #ef4444;
+  background: #F9FAFB;
+}
+
+.dashboard.light .cd-conflict-item.high {
+  border-left-color: #f59e0b;
+  background: #F9FAFB;
+}
+
+.dashboard.light .cd-conflict-item.medium {
+  border-left-color: #3b82f6;
+  background: #F9FAFB;
+}
+
+.dashboard.light .cd-conflict-item.success {
+  border-left-color: #10b981;
+  background: #F9FAFB;
+}
+
+.dashboard.light .cd-conflict-item h4 {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .cd-conflict-item p {
+  color: #64748b;
+}
+
+.dashboard.light .cvc-impact {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CODE DIFF - Neutral Background with Border-Left Only
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .enhanced-diff-wrap {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .diff-header-enhanced {
+  background: #F9FAFB;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dashboard.light .diff-ver-badge {
+  background: #F3F4F6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.dashboard.light .diff-stats-badges .stat-badge {
+  font-weight: 600;
+}
+
+.dashboard.light .stat-badge.stat-add {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.dashboard.light .stat-badge.stat-del {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.dashboard.light .stat-badge.stat-mod {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.dashboard.light .diff-file-container {
+  background: #ffffff;
+}
+
+.dashboard.light .diff-file-header {
+  background: #F9FAFB;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dashboard.light .diff-panel {
+  background: #F8F9FA;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .diff-panel-header {
+  background: #F3F4F6;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dashboard.light .code-line-enhanced {
+  background: #F8F9FA;
+  border-left: 3px solid transparent;
+}
+
+.dashboard.light .code-line-enhanced.line-added {
+  border-left-color: #10b981;
+}
+
+.dashboard.light .code-line-enhanced.line-removed {
+  border-left-color: #ef4444;
+}
+
+.dashboard.light .code-line-enhanced.line-modified {
+  border-left-color: #f59e0b;
+}
+
+.dashboard.light .line-num {
+  color: #9ca3af;
+}
+
+.dashboard.light .line-indicator {
+  color: #64748b;
+}
+
+.dashboard.light .line-content {
+  color: #1e293b;
+}
+
+.dashboard.light .diff-legend-bar {
+  background: #F9FAFB;
+  border-top: 1px solid #e5e7eb;
+}
+
+.dashboard.light .legend-item {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   UML DIAGRAM - Clean Boxes
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .uml2-wrap {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .uml2-legend {
+  background: #F9FAFB;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dashboard.light .uml2-box {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .uml2-header {
+  background: #F3F4F6;
+  color: #1e293b;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dashboard.light .uml2-h-added {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.dashboard.light .uml2-h-removed {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.dashboard.light .uml2-h-modified {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.dashboard.light .uml2-member {
+  color: #374151;
+}
+
+.dashboard.light .uml2-m-added {
+  color: #047857;
+}
+
+.dashboard.light .uml2-m-removed {
+  color: #dc2626;
+  text-decoration: line-through;
+}
+
+.dashboard.light .uml2-m-modified {
+  color: #d97706;
+}
+
+.dashboard.light .uml2-summary {
+  background: #F9FAFB;
+  border-top: 1px solid #e5e7eb;
+}
+
+.dashboard.light .uml2-sum.added {
+  color: #047857;
+}
+
+.dashboard.light .uml2-sum.removed {
+  color: #dc2626;
+}
+
+.dashboard.light .uml2-sum.modified {
+  color: #d97706;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BADGES - Minimal Colors
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-badge {
+  font-weight: 600;
+}
+
+.dashboard.light .cd-badge.critical {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+.dashboard.light .cd-badge.high {
+  background: #fef3c7;
+  color: #d97706;
+  border: 1px solid #fcd34d;
+}
+
+.dashboard.light .cd-badge.medium {
+  background: #dbeafe;
+  color: #2563eb;
+  border: 1px solid #93c5fd;
+}
+
+.dashboard.light .cd-badge.success {
+  background: #d1fae5;
+  color: #059669;
+  border: 1px solid #6ee7b7;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BEFORE/AFTER CODE - Neutral with Border-Left
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-before-after {
+  gap: 1rem;
+}
+
+.dashboard.light .cvc-ba-col {
+  background: #F8F9FA;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .cvc-ba-col.removed-bg {
+  background: #F8F9FA;
+  border-left: 3px solid #ef4444;
+}
+
+.dashboard.light .cvc-ba-col.added-bg {
+  background: #F8F9FA;
+  border-left: 3px solid #10b981;
+}
+
+.dashboard.light .cvc-ba-label {
+  color: #374151;
+  font-weight: 600;
+}
+
+.dashboard.light .cvc-ba-col code {
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LOADING & EMPTY STATES
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-loading-row {
+  color: #64748b;
+}
+
+.dashboard.light .cvc-empty-note {
+  color: #9ca3af;
+}
+
+.dashboard.light .cvc-step-context {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   REMOVE ALL ANIMATIONS IN LIGHT MODE
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-analyze-btn:hover,
+.dashboard.light .cvc-next-btn:hover {
+  animation: none;
+}
+
+.dashboard.light .cvc-file-row.selected,
+.dashboard.light .vp-card.vp-sel-a,
+.dashboard.light .vp-card.vp-sel-b {
+  animation: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.dashboard.light .cvc-spinner-orbit,
+.dashboard.light .cvc-analyze-spinner {
+  display: none;
+}
+
+.dashboard.light .cvc-progress-shimmer {
+  display: none;
+}

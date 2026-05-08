@@ -1,0 +1,1362 @@
+/* ================================================================
+   Unified Dark Purple & Gray Theme
+   تصميم موحد احترافي بألوان Dark Purple & Gray
+   ================================================================ */
+
+:root {
+  /* Purple Colors - Matching AutoTestDocGen Brand (Darker) */
+  --purple-dark: #5b21b6;      /* Primary - Darker brand color */
+  --purple-medium: #7c3aed;    /* Hover States */
+  --purple-light: #8b5cf6;     /* Accents */
+  --purple-lighter: #a78bfa;   /* Subtle Accents */
+  
+  /* Gray Colors */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  
+  /* Semantic Colors */
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --info: #3b82f6;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CONFLICT TYPE SELECTOR - Unified Cards
+   ══════════════════════════════════════════════════════════════ */
+
+/* علامة مائية خلف البطاقات */
+.dashboard.light .scs-container {
+  background: transparent !important;
+  position: relative;
+}
+
+.dashboard.light .scs-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dashboard.dark .scs-container {
+  background: transparent !important;
+  position: relative;
+}
+
+.dashboard.dark .scs-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* البطاقات فوق العلامة المائية */
+.dashboard.light .scs-card,
+.dashboard.dark .scs-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* توحيد العنوان الرئيسي */
+.dashboard.light .scs-main-title,
+.dashboard.dark .scs-main-title {
+  color: var(--purple-dark) !important;
+  font-weight: 700;
+}
+
+.dashboard.light .scs-subtitle-text,
+.dashboard.dark .scs-subtitle-text {
+  color: var(--gray-600) !important;
+}
+
+/* توحيد البطاقات - إزالة الحدود الملونة */
+.dashboard.light .scs-card,
+.dashboard.dark .scs-card {
+  border: 2px solid var(--gray-300) !important;
+  background: #ffffff !important;
+  transition: all 0.3s ease !important;
+}
+
+.dashboard.dark .scs-card {
+  background: var(--gray-800) !important;
+  border-color: var(--gray-700) !important;
+}
+
+/* Hover State - Brand Purple */
+.dashboard.light .scs-card:hover,
+.dashboard.dark .scs-card:hover {
+  border-color: var(--purple-medium) !important;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* إزالة الحدود الخاصة بـ Full Analysis - نفس البطاقات الأخرى */
+.dashboard.light .scs-card.recommended,
+.dashboard.dark .scs-card.recommended {
+  border: 2px solid var(--gray-300) !important;
+  box-shadow: none !important;
+}
+
+.dashboard.dark .scs-card.recommended {
+  border-color: var(--gray-700) !important;
+}
+
+.dashboard.light .scs-card.recommended:hover,
+.dashboard.dark .scs-card.recommended:hover {
+  border-color: var(--purple-medium) !important;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15) !important;
+}
+
+/* Recommended Tag - Dark Purple */
+.dashboard.light .scs-recommended-tag,
+.dashboard.dark .scs-recommended-tag {
+  background: var(--purple-dark) !important;
+  color: #ffffff !important;
+}
+
+/* Card Title - Dark Purple */
+.dashboard.light .scs-card-title,
+.dashboard.dark .scs-card-title {
+  color: var(--purple-dark) !important;
+  font-weight: 700;
+}
+
+/* Card Description - Gray */
+.dashboard.light .scs-card-desc,
+.dashboard.dark .scs-card-desc {
+  color: var(--gray-600) !important;
+}
+
+.dashboard.dark .scs-card-desc {
+  color: var(--gray-400) !important;
+}
+
+/* Card Button - Dark Purple */
+.dashboard.light .scs-card-btn,
+.dashboard.dark .scs-card-btn {
+  background: var(--purple-dark) !important;
+  color: #ffffff !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.dashboard.light .scs-card-btn:hover,
+.dashboard.dark .scs-card-btn:hover {
+  background: var(--purple-medium) !important;
+  transform: translateX(4px) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HEADERS & TITLES - Dark Purple with Larger Size
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-title,
+.dashboard.light .cvd-title,
+.dashboard.light .fa-title,
+.dashboard.dark .cvc-title,
+.dashboard.dark .cvd-title,
+.dashboard.dark .fa-title {
+  color: var(--purple-dark) !important;
+  font-weight: 700;
+  font-size: 24px !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   STEPPER - Dark Purple Active State
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-step-pill.active,
+.dashboard.light .cvd-step-pill.active,
+.dashboard.light .fa-step-pill.active,
+.dashboard.dark .cvc-step-pill.active,
+.dashboard.dark .cvd-step-pill.active,
+.dashboard.dark .fa-step-pill.active {
+  background: var(--purple-dark) !important;
+  color: #ffffff !important;
+  border-color: var(--purple-dark) !important;
+}
+
+.dashboard.light .cvc-step-pill.done,
+.dashboard.light .cvd-step-pill.done,
+.dashboard.light .fa-step-pill.done,
+.dashboard.dark .cvc-step-pill.done,
+.dashboard.dark .cvd-step-pill.done,
+.dashboard.dark .fa-step-pill.done {
+  background: var(--purple-dark) !important;
+  color: #ffffff !important;
+  border-color: var(--purple-dark) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BUTTONS - Dark Purple
+   ══════════════════════════════════════════════════════════════ */
+
+/* Primary Buttons */
+.dashboard.light .cvc-next-btn,
+.dashboard.light .cvd-next-btn,
+.dashboard.light .fa-next-btn,
+.dashboard.light .cvc-analyze-btn,
+.dashboard.light .cvd-analyze-btn,
+.dashboard.light .fa-start-btn,
+.dashboard.dark .cvc-next-btn,
+.dashboard.dark .cvd-next-btn,
+.dashboard.dark .fa-next-btn,
+.dashboard.dark .cvc-analyze-btn,
+.dashboard.dark .cvd-analyze-btn,
+.dashboard.dark .fa-start-btn {
+  background: var(--purple-dark) !important;
+  color: #ffffff !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(91, 33, 182, 0.2) !important;
+}
+
+.dashboard.light .cvc-next-btn:hover:not(:disabled),
+.dashboard.light .cvd-next-btn:hover:not(:disabled),
+.dashboard.light .fa-next-btn:hover:not(:disabled),
+.dashboard.light .cvc-analyze-btn:hover:not(:disabled),
+.dashboard.light .cvd-analyze-btn:hover:not(:disabled),
+.dashboard.light .fa-start-btn:hover:not(:disabled),
+.dashboard.dark .cvc-next-btn:hover:not(:disabled),
+.dashboard.dark .cvd-next-btn:hover:not(:disabled),
+.dashboard.dark .fa-next-btn:hover:not(:disabled),
+.dashboard.dark .cvc-analyze-btn:hover:not(:disabled),
+.dashboard.dark .cvd-analyze-btn:hover:not(:disabled),
+.dashboard.dark .fa-start-btn:hover:not(:disabled) {
+  background: var(--purple-medium) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(91, 33, 182, 0.3) !important;
+}
+
+/* Secondary Buttons (Back) */
+.dashboard.light .cvc-back-btn,
+.dashboard.light .cvd-back-btn,
+.dashboard.light .fa-back-btn,
+.dashboard.dark .cvc-back-btn,
+.dashboard.dark .cvd-back-btn,
+.dashboard.dark .fa-back-btn {
+  background: transparent !important;
+  color: var(--purple-dark) !important;
+  border: 2px solid var(--purple-dark) !important;
+  transition: all 0.3s ease !important;
+}
+
+.dashboard.light .cvc-back-btn:hover,
+.dashboard.light .cvd-back-btn:hover,
+.dashboard.light .fa-back-btn:hover,
+.dashboard.dark .cvc-back-btn:hover,
+.dashboard.dark .cvd-back-btn:hover,
+.dashboard.dark .fa-back-btn:hover {
+  background: var(--purple-dark) !important;
+  color: #ffffff !important;
+  transform: translateX(-4px) !important;
+}
+
+/* Dark Mode Specific - Remove Gray Background */
+.dashboard.dark .cvc-back-btn,
+.dashboard.dark .cvd-back-btn,
+.dashboard.dark .fa-back-btn {
+  background: rgba(91, 33, 182, 0.1) !important;
+  border: 1px solid rgba(91, 33, 182, 0.4) !important;
+  color: rgba(168, 139, 250, 0.9) !important;
+}
+
+.dashboard.dark .cvc-back-btn:hover,
+.dashboard.dark .cvd-back-btn:hover,
+.dashboard.dark .fa-back-btn:hover {
+  background: rgba(91, 33, 182, 0.25) !important;
+  border-color: rgba(91, 33, 182, 0.6) !important;
+  color: #c4b5fd !important;
+  transform: translateX(-4px) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROJECT CARDS - Gray Dates & Purple Selection
+   ══════════════════════════════════════════════════════════════ */
+
+/* Date Text - Gray */
+.dashboard.light .cvc-proj-desc,
+.dashboard.light .cvd-proj-desc,
+.dashboard.light .fa-proj-desc,
+.dashboard.light .vp-date,
+.dashboard.dark .cvc-proj-desc,
+.dashboard.dark .cvd-proj-desc,
+.dashboard.dark .fa-proj-desc,
+.dashboard.dark .vp-date {
+  color: var(--gray-500) !important;
+}
+
+/* Selected State - Brand Purple */
+.dashboard.light .cvc-project-card.selected,
+.dashboard.light .cvd-project-card.selected,
+.dashboard.light .fa-project-card.selected,
+.dashboard.dark .cvc-project-card.selected,
+.dashboard.dark .cvd-project-card.selected,
+.dashboard.dark .fa-project-card.selected {
+  border-color: var(--purple-dark) !important;
+  background: rgba(99, 102, 241, 0.05) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+.dashboard.dark .cvc-project-card.selected,
+.dashboard.dark .cvd-project-card.selected,
+.dashboard.dark .fa-project-card.selected {
+  background: rgba(99, 102, 241, 0.15) !important;
+}
+
+/* Checkmark - Dark Purple (تغيير من الأخضر) */
+.dashboard.light .cvc-proj-check,
+.dashboard.light .cvd-proj-check,
+.dashboard.light .fa-proj-check,
+.dashboard.dark .cvc-proj-check,
+.dashboard.dark .cvd-proj-check,
+.dashboard.dark .fa-proj-check {
+  color: var(--purple-dark) !important;
+}
+
+/* جميع الـ CheckCircle icons - Dark Purple */
+.dashboard.light .cvc-project-card.selected svg[class*="lucide-check"],
+.dashboard.light .cvd-project-card.selected svg[class*="lucide-check"],
+.dashboard.light .fa-project-card.selected svg[class*="lucide-check"],
+.dashboard.light .cvc-file-row.selected svg[class*="lucide-check"],
+.dashboard.light .cvd-file-row.selected svg[class*="lucide-check"],
+.dashboard.light .fa-file-row.selected svg[class*="lucide-check"],
+.dashboard.dark .cvc-project-card.selected svg[class*="lucide-check"],
+.dashboard.dark .cvd-project-card.selected svg[class*="lucide-check"],
+.dashboard.dark .fa-project-card.selected svg[class*="lucide-check"],
+.dashboard.dark .cvc-file-row.selected svg[class*="lucide-check"],
+.dashboard.dark .cvd-file-row.selected svg[class*="lucide-check"],
+.dashboard.dark .fa-file-row.selected svg[class*="lucide-check"] {
+  color: var(--purple-dark) !important;
+}
+
+/* File Selection - Brand Purple */
+.dashboard.light .cvc-file-row.selected,
+.dashboard.light .cvd-file-row.selected,
+.dashboard.light .fa-file-row.selected,
+.dashboard.dark .cvc-file-row.selected,
+.dashboard.dark .cvd-file-row.selected,
+.dashboard.dark .fa-file-row.selected {
+  border-color: var(--purple-dark) !important;
+  background: rgba(99, 102, 241, 0.05) !important;
+}
+
+.dashboard.dark .cvc-file-row.selected,
+.dashboard.dark .cvd-file-row.selected,
+.dashboard.dark .fa-file-row.selected {
+  background: rgba(99, 102, 241, 0.15) !important;
+}
+
+/* Version Selection - Brand Purple */
+.dashboard.light .vp-card.vp-sel-a,
+.dashboard.light .vp-card.vp-sel-b,
+.dashboard.light .cvd-ver-row.sel-a,
+.dashboard.light .fa-ver-row.sel-a,
+.dashboard.light .fa-ver-row.sel-b,
+.dashboard.dark .vp-card.vp-sel-a,
+.dashboard.dark .vp-card.vp-sel-b,
+.dashboard.dark .cvd-ver-row.sel-a,
+.dashboard.dark .fa-ver-row.sel-a,
+.dashboard.dark .fa-ver-row.sel-b {
+  border-color: var(--purple-dark) !important;
+  border-left: 4px solid var(--purple-dark) !important;
+  background: rgba(99, 102, 241, 0.05) !important;
+}
+
+.dashboard.dark .vp-card.vp-sel-a,
+.dashboard.dark .vp-card.vp-sel-b,
+.dashboard.dark .cvd-ver-row.sel-a,
+.dashboard.dark .fa-ver-row.sel-a,
+.dashboard.dark .fa-ver-row.sel-b {
+  background: rgba(99, 102, 241, 0.15) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESULTS - Dark Purple Labels
+   ══════════════════════════════════════════════════════════════ */
+
+/* Summary Labels - Dark Purple */
+.dashboard.light .cd-stat .lbl,
+.dashboard.dark .cd-stat .lbl {
+  color: var(--purple-dark) !important;
+  font-weight: 600;
+}
+
+/* Section Titles - Dark Purple */
+.dashboard.light .cvc-section-label,
+.dashboard.light .cvd-section-label,
+.dashboard.light .fa-section-label,
+.dashboard.light .fa-col-title,
+.dashboard.dark .cvc-section-label,
+.dashboard.dark .cvd-section-label,
+.dashboard.dark .fa-section-label,
+.dashboard.dark .fa-col-title {
+  color: var(--purple-dark) !important;
+  font-weight: 700;
+}
+
+/* Context Items - Dark Purple */
+.dashboard.light .cvc-ctx-item,
+.dashboard.light .cvd-ctx-item,
+.dashboard.light .fa-ctx-item,
+.dashboard.dark .cvc-ctx-item,
+.dashboard.dark .cvd-ctx-item,
+.dashboard.dark .fa-ctx-item {
+  color: var(--purple-dark) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROGRESS BAR - Dark Purple
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-progress-fill,
+.dashboard.light .cvd-progress-fill,
+.dashboard.light .fa-progress-fill,
+.dashboard.dark .cvc-progress-fill,
+.dashboard.dark .cvd-progress-fill,
+.dashboard.dark .fa-progress-fill {
+  background: linear-gradient(90deg, var(--purple-dark), var(--purple-medium)) !important;
+  box-shadow: 0 0 10px rgba(76, 29, 149, 0.3) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TABS - Dark Purple Active
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-tab.active,
+.dashboard.dark .cd-tab.active {
+  background: var(--purple-dark) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(76, 29, 149, 0.3) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BADGES - Unified Colors
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-badge.critical,
+.dashboard.dark .cd-badge.critical {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: var(--danger) !important;
+  border-color: var(--danger) !important;
+}
+
+.dashboard.light .cd-badge.high,
+.dashboard.dark .cd-badge.high {
+  background: rgba(245, 158, 11, 0.1) !important;
+  color: var(--warning) !important;
+  border-color: var(--warning) !important;
+}
+
+.dashboard.light .cd-badge.medium,
+.dashboard.dark .cd-badge.medium {
+  background: rgba(76, 29, 149, 0.1) !important;
+  color: var(--purple-dark) !important;
+  border-color: var(--purple-dark) !important;
+}
+
+.dashboard.light .cd-badge.success,
+.dashboard.dark .cd-badge.success {
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: var(--success) !important;
+  border-color: var(--success) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   GRADE CIRCLE - Dark Purple for B
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-grade.B,
+.dashboard.light .fa-grade-circle.grade-B,
+.dashboard.dark .cd-grade.B,
+.dashboard.dark .fa-grade-circle.grade-B {
+  background: rgba(76, 29, 149, 0.1) !important;
+  color: var(--purple-dark) !important;
+  border-color: var(--purple-dark) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HEADER ICONS - Darker Purple
+   أيقونات العناوين بلون بنفسجي أغمق
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-header-icon,
+.dashboard.light .cvd-header-icon,
+.dashboard.light .fa-header-icon,
+.dashboard.dark .cvc-header-icon,
+.dashboard.dark .cvd-header-icon,
+.dashboard.dark .fa-header-icon {
+  background: rgba(91, 33, 182, 0.2) !important;
+  border-color: var(--purple-dark) !important;
+}
+
+.dashboard.light .cvc-header-icon svg,
+.dashboard.light .cvd-header-icon svg,
+.dashboard.light .fa-header-icon svg,
+.dashboard.dark .cvc-header-icon svg,
+.dashboard.dark .cvd-header-icon svg,
+.dashboard.dark .fa-header-icon svg {
+  color: var(--purple-dark) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SMOOTH ANIMATIONS
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .scs-card,
+.dashboard.light .cvc-project-card,
+.dashboard.light .cvd-project-card,
+.dashboard.light .fa-project-card,
+.dashboard.light .cvc-file-row,
+.dashboard.light .cvd-file-row,
+.dashboard.light .fa-file-row,
+.dashboard.light .vp-card,
+.dashboard.dark .scs-card,
+.dashboard.dark .cvc-project-card,
+.dashboard.dark .cvd-project-card,
+.dashboard.dark .fa-project-card,
+.dashboard.dark .cvc-file-row,
+.dashboard.dark .cvd-file-row,
+.dashboard.dark .fa-file-row,
+.dashboard.dark .vp-card {
+  transition: all 0.3s ease !important;
+}
+
+.dashboard.light .scs-card:hover,
+.dashboard.light .cvc-project-card:hover,
+.dashboard.light .cvd-project-card:hover,
+.dashboard.light .fa-project-card:hover,
+.dashboard.light .cvc-file-row:hover,
+.dashboard.light .cvd-file-row:hover,
+.dashboard.light .fa-file-row:hover,
+.dashboard.light .vp-card:hover,
+.dashboard.dark .scs-card:hover,
+.dashboard.dark .cvc-project-card:hover,
+.dashboard.dark .cvd-project-card:hover,
+.dashboard.dark .fa-project-card:hover,
+.dashboard.dark .cvc-file-row:hover,
+.dashboard.dark .cvd-file-row:hover,
+.dashboard.dark .fa-file-row:hover,
+.dashboard.dark .vp-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15) !important;
+}
+
+/* EXPORT BUTTON - HIDDEN */
+
+.dashboard.light .cvc-export-btn,
+.dashboard.light .cvd-export-btn,
+.dashboard.light .fa-export-btn,
+.dashboard.dark .cvc-export-btn,
+.dashboard.dark .cvd-export-btn,
+.dashboard.dark .fa-export-btn {
+  display: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DIFF STATS - Semantic Colors (Green/Red/Orange)
+   ألوان دلالية للإضافة/الحذف/التعديل
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .stat-badge.stat-add,
+.dashboard.dark .stat-badge.stat-add {
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: #10b981 !important;
+}
+
+.dashboard.light .stat-badge.stat-del,
+.dashboard.dark .stat-badge.stat-del {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #ef4444 !important;
+}
+
+.dashboard.light .stat-badge.stat-mod,
+.dashboard.dark .stat-badge.stat-mod {
+  background: rgba(245, 158, 11, 0.1) !important;
+  color: #f59e0b !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LEGEND - Semantic Colors (Green/Red/Orange)
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-legend,
+.dashboard.dark .cd-legend {
+  color: var(--gray-600) !important;
+}
+
+.dashboard.dark .cd-legend {
+  color: var(--gray-400) !important;
+}
+
+/* Legend dots - Semantic Colors */
+.dashboard.light .cd-legend span:nth-child(1) .cd-legend-dot,
+.dashboard.dark .cd-legend span:nth-child(1) .cd-legend-dot {
+  background: #10b981 !important; /* Added - Green */
+}
+
+.dashboard.light .cd-legend span:nth-child(2) .cd-legend-dot,
+.dashboard.dark .cd-legend span:nth-child(2) .cd-legend-dot {
+  background: #ef4444 !important; /* Removed - Red */
+}
+
+.dashboard.light .cd-legend span:nth-child(3) .cd-legend-dot,
+.dashboard.dark .cd-legend span:nth-child(3) .cd-legend-dot {
+  background: #f59e0b !important; /* Modified - Orange */
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   PROJECT CARDS - Unified Size & Layout
+   توحيد حجم وشكل بطاقات المشروع في جميع الواجهات
+   ══════════════════════════════════════════════════════════════ */
+
+/* توحيد حجم بطاقات المشروع */
+.dashboard.light .cvd-project-card,
+.dashboard.dark .cvd-project-card {
+  min-height: 120px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  padding: 20px !important;
+}
+
+.dashboard.light .cvd-proj-icon,
+.dashboard.dark .cvd-proj-icon {
+  flex-shrink: 0 !important;
+  width: 48px !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 12px !important;
+  background: rgba(124, 58, 237, 0.05) !important;
+}
+
+.dashboard.dark .cvd-proj-icon {
+  background: rgba(124, 58, 237, 0.1) !important;
+}
+
+.dashboard.light .cvd-proj-info,
+.dashboard.dark .cvd-proj-info {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.dashboard.light .cvd-proj-name,
+.dashboard.dark .cvd-proj-name {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: var(--purple-dark) !important;
+  margin-bottom: 6px !important;
+}
+
+.dashboard.light .cvd-proj-desc,
+.dashboard.dark .cvd-proj-desc {
+  font-size: 13px !important;
+  color: var(--gray-500) !important;
+  line-height: 1.4 !important;
+}
+
+.dashboard.dark .cvd-proj-desc {
+  color: var(--gray-400) !important;
+}
+
+/* Checkmark position */
+.dashboard.light .cvd-proj-check,
+.dashboard.dark .cvd-proj-check {
+  flex-shrink: 0 !important;
+  margin-left: auto !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROGRESS BAR - Brand Purple
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvc-progress-fill,
+.dashboard.light .cvd-progress-fill,
+.dashboard.light .fa-progress-fill,
+.dashboard.dark .cvc-progress-fill,
+.dashboard.dark .cvd-progress-fill,
+.dashboard.dark .fa-progress-fill {
+  background: linear-gradient(90deg, var(--purple-dark), var(--purple-medium)) !important;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BADGES - Updated Brand Purple
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-badge.medium,
+.dashboard.dark .cd-badge.medium {
+  background: rgba(99, 102, 241, 0.1) !important;
+  color: var(--purple-dark) !important;
+  border-color: var(--purple-dark) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   GRADE CIRCLE - Updated Purple for B
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-grade.B,
+.dashboard.light .fa-grade-circle.grade-B,
+.dashboard.dark .cd-grade.B,
+.dashboard.dark .fa-grade-circle.grade-B {
+  background: rgba(124, 58, 237, 0.1) !important;
+  color: var(--purple-dark) !important;
+  border-color: var(--purple-dark) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TAB ACTIVE STATE - Updated Purple
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-tab.active,
+.dashboard.dark .cd-tab.active {
+  background: var(--purple-dark) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   GRADE CIRCLE - Brand Purple for B
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-grade.B,
+.dashboard.light .fa-grade-circle.grade-B,
+.dashboard.dark .cd-grade.B,
+.dashboard.dark .fa-grade-circle.grade-B {
+  background: rgba(99, 102, 241, 0.1) !important;
+  color: var(--purple-dark) !important;
+  border-color: var(--purple-dark) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TAB ACTIVE STATE - Brand Purple
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-tab.active,
+.dashboard.dark .cd-tab.active {
+  background: var(--purple-dark) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROJECT ICON BACKGROUND - Brand Purple
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-proj-icon,
+.dashboard.dark .cvd-proj-icon {
+  background: rgba(99, 102, 241, 0.05) !important;
+}
+
+.dashboard.dark .cvd-proj-icon {
+  background: rgba(99, 102, 241, 0.1) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   UNIFIED PROJECT CARDS - Same Size & Layout for ALL
+   توحيد بطاقات المشروع في جميع الواجهات - تم نقلها إلى CSS الخاص بكل واجهة
+   ══════════════════════════════════════════════════════════════ */
+
+/* تم نقل جميع تنسيقات بطاقات المشروع إلى:
+   - CodeVsCode.css
+   - CodeVsDoc.css
+   - FullAnalysis.css
+   لضمان التطابق الكامل */
+
+/* ══════════════════════════════════════════════════════════════
+   REMOVE ORANGE COLORS - Replace with Purple
+   إزالة اللون البرتقالي واستبداله بالبنفسجي
+   ══════════════════════════════════════════════════════════════ */
+
+/* Code vs Doc - Orange badges to Purple */
+.dashboard.light .cvd-file-row .cd-badge.high,
+.dashboard.dark .cvd-file-row .cd-badge.high {
+  background: rgba(91, 33, 182, 0.1) !important;
+  color: var(--purple-dark) !important;
+  border-color: var(--purple-dark) !important;
+}
+
+/* Full Analysis - "No Documentation" orange to Purple */
+.dashboard.light .fa-doc-auto .cd-badge.medium,
+.dashboard.dark .fa-doc-auto .cd-badge.medium {
+  background: rgba(91, 33, 182, 0.1) !important;
+  color: var(--purple-dark) !important;
+  border-color: var(--purple-dark) !important;
+}
+
+/* Any orange text to Purple */
+.dashboard.light .fa-doc-auto-title,
+.dashboard.dark .fa-doc-auto-title {
+  color: var(--purple-dark) !important;
+}
+
+/* Replace "Not Documented" badge from orange to purple */
+.dashboard.light .cvd-file-row .cd-badge.high,
+.dashboard.light .fa-file-row .cd-badge.high,
+.dashboard.dark .cvd-file-row .cd-badge.high,
+.dashboard.dark .fa-file-row .cd-badge.high {
+  background: rgba(91, 33, 182, 0.1) !important;
+  color: var(--purple-dark) !important;
+  border-color: var(--purple-dark) !important;
+}
+
+/* Replace orange relevance badges with purple */
+.dashboard.light .cvd-relevance-badge,
+.dashboard.dark .cvd-relevance-badge {
+  background: rgba(91, 33, 182, 0.2) !important;
+  color: var(--purple-dark) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   UPDATE ALL RGBA VALUES to Darker Purple
+   ══════════════════════════════════════════════════════════════ */
+
+/* Watermark */
+.dashboard.light .scs-container::before {
+  background: radial-gradient(circle, rgba(91, 33, 182, 0.03) 0%, transparent 70%) !important;
+}
+
+.dashboard.dark .scs-container::before {
+  background: radial-gradient(circle, rgba(91, 33, 182, 0.05) 0%, transparent 70%) !important;
+}
+
+/* Selected States */
+.dashboard.light .cvc-project-card.selected,
+.dashboard.light .cvd-project-card.selected,
+.dashboard.light .fa-project-card.selected {
+  background: rgba(91, 33, 182, 0.05) !important;
+  box-shadow: 0 0 0 3px rgba(91, 33, 182, 0.1) !important;
+}
+
+.dashboard.dark .cvc-project-card.selected,
+.dashboard.dark .cvd-project-card.selected,
+.dashboard.dark .fa-project-card.selected {
+  background: rgba(91, 33, 182, 0.15) !important;
+}
+
+/* File Selection */
+.dashboard.light .cvc-file-row.selected,
+.dashboard.light .cvd-file-row.selected,
+.dashboard.light .fa-file-row.selected {
+  background: rgba(91, 33, 182, 0.05) !important;
+}
+
+.dashboard.dark .cvc-file-row.selected,
+.dashboard.dark .cvd-file-row.selected,
+.dashboard.dark .fa-file-row.selected {
+  background: rgba(91, 33, 182, 0.15) !important;
+}
+
+/* Version Selection */
+.dashboard.light .vp-card.vp-sel-a,
+.dashboard.light .vp-card.vp-sel-b,
+.dashboard.light .cvd-ver-row.sel-a,
+.dashboard.light .fa-ver-row.sel-a,
+.dashboard.light .fa-ver-row.sel-b {
+  background: rgba(91, 33, 182, 0.05) !important;
+}
+
+.dashboard.dark .vp-card.vp-sel-a,
+.dashboard.dark .vp-card.vp-sel-b,
+.dashboard.dark .cvd-ver-row.sel-a,
+.dashboard.dark .fa-ver-row.sel-a,
+.dashboard.dark .fa-ver-row.sel-b {
+  background: rgba(91, 33, 182, 0.15) !important;
+}
+
+/* Hover Effects */
+.dashboard.light .scs-card:hover,
+.dashboard.light .cvc-project-card:hover,
+.dashboard.light .cvd-project-card:hover,
+.dashboard.light .fa-project-card:hover,
+.dashboard.light .cvc-file-row:hover,
+.dashboard.light .cvd-file-row:hover,
+.dashboard.light .fa-file-row:hover {
+  box-shadow: 0 4px 12px rgba(91, 33, 182, 0.15) !important;
+}
+
+/* Icons */
+.dashboard.light .cvc-header-icon,
+.dashboard.light .cvd-header-icon,
+.dashboard.light .fa-header-icon {
+  background: rgba(91, 33, 182, 0.1) !important;
+}
+
+/* Badges */
+.dashboard.light .cd-badge.medium,
+.dashboard.dark .cd-badge.medium {
+  background: rgba(91, 33, 182, 0.1) !important;
+}
+
+/* Grade Circle */
+.dashboard.light .cd-grade.B,
+.dashboard.light .fa-grade-circle.grade-B {
+  background: rgba(91, 33, 182, 0.1) !important;
+}
+
+/* Tab Active */
+.dashboard.light .cd-tab.active,
+.dashboard.dark .cd-tab.active {
+  box-shadow: 0 2px 8px rgba(91, 33, 182, 0.3) !important;
+}
+
+/* Progress Bar */
+.dashboard.light .cvc-progress-fill,
+.dashboard.light .cvd-progress-fill,
+.dashboard.light .fa-progress-fill,
+.dashboard.dark .cvc-progress-fill,
+.dashboard.dark .cvd-progress-fill,
+.dashboard.dark .fa-progress-fill {
+  box-shadow: 0 0 10px rgba(91, 33, 182, 0.3) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   DARK MODE ONLY - Replace Gray with Purple Tones
+   تعديل Dark Mode فقط: استبدال الرمادي بدرجات البنفسجي
+   ══════════════════════════════════════════════════════════════ */
+
+/* Background Colors - Dark Mode Purple Tones */
+.dashboard.dark .cvc-modal,
+.dashboard.dark .cvd-modal,
+.dashboard.dark .fa-modal {
+  background: #1a0b2e !important;
+}
+
+.dashboard.dark .cvc-body,
+.dashboard.dark .cvd-body,
+.dashboard.dark .fa-body {
+  background: #1a0b2e !important;
+}
+
+.dashboard.dark .cvc-header,
+.dashboard.dark .cvd-header,
+.dashboard.dark .fa-header {
+  background: linear-gradient(135deg, #2d1b4e 0%, #1a0b2e 100%) !important;
+  border-bottom: 1px solid rgba(91, 33, 182, 0.2) !important;
+}
+
+/* Cards - Dark Purple Background */
+.dashboard.dark .cvc-project-card,
+.dashboard.dark .cvd-project-card,
+.dashboard.dark .fa-project-card {
+  background: #2d1b4e !important;
+  border-color: rgba(91, 33, 182, 0.3) !important;
+}
+
+.dashboard.dark .cvc-project-card:hover,
+.dashboard.dark .cvd-project-card:hover,
+.dashboard.dark .fa-project-card:hover {
+  background: #3d2b5e !important;
+  border-color: rgba(91, 33, 182, 0.5) !important;
+}
+
+.dashboard.dark .cvc-file-row,
+.dashboard.dark .cvd-file-row,
+.dashboard.dark .fa-file-row {
+  background: #2d1b4e !important;
+  border-color: rgba(91, 33, 182, 0.2) !important;
+}
+
+.dashboard.dark .cvc-file-row:hover,
+.dashboard.dark .cvd-file-row:hover,
+.dashboard.dark .fa-file-row:hover {
+  background: #3d2b5e !important;
+}
+
+/* Version Cards */
+.dashboard.dark .vp-card,
+.dashboard.dark .cvd-ver-row,
+.dashboard.dark .fa-ver-row {
+  background: #2d1b4e !important;
+  border-color: rgba(91, 33, 182, 0.2) !important;
+}
+
+.dashboard.dark .vp-card:hover,
+.dashboard.dark .cvd-ver-row:hover,
+.dashboard.dark .fa-ver-row:hover {
+  background: #3d2b5e !important;
+}
+
+/* Panels */
+.dashboard.dark .cvd-panel,
+.dashboard.dark .fa-section {
+  background: #2d1b4e !important;
+  border-color: rgba(91, 33, 182, 0.2) !important;
+}
+
+/* Text Colors - Purple Tones */
+.dashboard.dark .cvc-proj-desc,
+.dashboard.dark .cvd-proj-desc,
+.dashboard.dark .fa-proj-desc,
+.dashboard.dark .cvc-fpath,
+.dashboard.dark .cvd-fpath,
+.dashboard.dark .fa-fpath {
+  color: rgba(168, 139, 250, 0.6) !important;
+}
+
+.dashboard.dark .cvc-section-label,
+.dashboard.dark .cvd-section-label,
+.dashboard.dark .fa-section-label {
+  color: #a78bfa !important;
+}
+
+/* Step Context */
+.dashboard.dark .cvc-step-context,
+.dashboard.dark .cvd-step-context,
+.dashboard.dark .fa-step-context {
+  background: rgba(91, 33, 182, 0.1) !important;
+  color: #a78bfa !important;
+}
+
+/* Loading & Error States */
+.dashboard.dark .cvc-loading-row,
+.dashboard.dark .cvd-loading-row,
+.dashboard.dark .fa-loading-row {
+  color: #a78bfa !important;
+}
+
+.dashboard.dark .cvc-error-box,
+.dashboard.dark .cvd-error-box,
+.dashboard.dark .fa-error-box {
+  background: rgba(91, 33, 182, 0.1) !important;
+  border-color: rgba(91, 33, 182, 0.3) !important;
+  color: #c4b5fd !important;
+}
+
+/* Empty States */
+.dashboard.dark .cvc-empty-note,
+.dashboard.dark .cvd-empty-note,
+.dashboard.dark .fa-empty-note {
+  color: rgba(168, 139, 250, 0.5) !important;
+}
+
+/* Breadcrumb */
+.dashboard.dark .cvc-breadcrumb {
+  background: rgba(91, 33, 182, 0.1) !important;
+  color: #a78bfa !important;
+}
+
+/* Search Input */
+.dashboard.dark .cvc-search-wrap input {
+  background: #2d1b4e !important;
+  border-color: rgba(91, 33, 182, 0.3) !important;
+  color: #c4b5fd !important;
+}
+
+.dashboard.dark .cvc-search-wrap input::placeholder {
+  color: rgba(168, 139, 250, 0.4) !important;
+}
+
+/* Result Context */
+.dashboard.dark .cvc-result-context,
+.dashboard.dark .cvd-result-context,
+.dashboard.dark .fa-result-context {
+  background: rgba(91, 33, 182, 0.1) !important;
+  color: #a78bfa !important;
+}
+
+/* Conflict Items */
+.dashboard.dark .cd-conflict-item {
+  background: #2d1b4e !important;
+  border-color: rgba(91, 33, 182, 0.3) !important;
+}
+
+.dashboard.dark .cd-conflict-item h4 {
+  color: #c4b5fd !important;
+}
+
+.dashboard.dark .cd-conflict-item p {
+  color: rgba(168, 139, 250, 0.7) !important;
+}
+
+/* Diff Container */
+.dashboard.dark .diff-file-container {
+  background: #2d1b4e !important;
+  border-color: rgba(91, 33, 182, 0.2) !important;
+}
+
+.dashboard.dark .diff-panel {
+  background: #1a0b2e !important;
+  border-color: rgba(91, 33, 182, 0.2) !important;
+}
+
+.dashboard.dark .diff-panel-header {
+  background: rgba(91, 33, 182, 0.1) !important;
+  color: #a78bfa !important;
+}
+
+.dashboard.dark .code-line-enhanced {
+  background: #2d1b4e !important;
+  color: #c4b5fd !important;
+}
+
+/* UML Diagram */
+.dashboard.dark .uml2-box {
+  background: #2d1b4e !important;
+  border-color: rgba(91, 33, 182, 0.3) !important;
+}
+
+.dashboard.dark .uml2-header {
+  background: rgba(91, 33, 182, 0.15) !important;
+  color: #c4b5fd !important;
+}
+
+.dashboard.dark .uml2-body {
+  background: #1a0b2e !important;
+}
+
+.dashboard.dark .uml2-member {
+  color: rgba(168, 139, 250, 0.8) !important;
+}
+
+/* Progress Bar Background */
+.dashboard.dark .cvc-progress-bar,
+.dashboard.dark .cvd-progress-bar,
+.dashboard.dark .fa-progress-bar {
+  background: rgba(91, 33, 182, 0.2) !important;
+}
+
+/* Tabs */
+.dashboard.dark .cd-tab {
+  background: #2d1b4e !important;
+  color: #a78bfa !important;
+  border-color: rgba(91, 33, 182, 0.2) !important;
+}
+
+.dashboard.dark .cd-tab:hover {
+  background: #3d2b5e !important;
+}
+
+/* Footer */
+.dashboard.dark .cvc-step-footer,
+.dashboard.dark .cvd-step-footer,
+.dashboard.dark .fa-step-footer,
+.dashboard.dark .cvd-footer-bar {
+  background: rgba(91, 33, 182, 0.05) !important;
+  border-top-color: rgba(91, 33, 182, 0.2) !important;
+}
+
+/* Stats */
+.dashboard.dark .cd-stat .lbl {
+  color: rgba(168, 139, 250, 0.7) !important;
+}
+
+/* Summary Text */
+.dashboard.dark .cvc-summary-text,
+.dashboard.dark .cvd-summary-text,
+.dashboard.dark .fa-summary-text {
+  background: rgba(91, 33, 182, 0.1) !important;
+  color: #c4b5fd !important;
+  border-color: rgba(91, 33, 182, 0.2) !important;
+}
+
+/* Doc Row */
+.dashboard.dark .cvd-doc-row,
+.dashboard.dark .fa-doc-row {
+  background: #2d1b4e !important;
+  border-color: rgba(91, 33, 182, 0.2) !important;
+}
+
+.dashboard.dark .cvd-doc-row:hover,
+.dashboard.dark .fa-doc-row:hover {
+  background: #3d2b5e !important;
+}
+
+/* Auto Note */
+.dashboard.dark .cvd-auto-note,
+.dashboard.dark .fa-auto-note {
+  color: rgba(168, 139, 250, 0.6) !important;
+}
+
+/* Analyzing Screen */
+.dashboard.dark .cvc-analyzing-body,
+.dashboard.dark .cvd-analyzing-body,
+.dashboard.dark .fa-analyzing {
+  background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 100%) !important;
+}
+
+.dashboard.dark .cvc-analyzing-title,
+.dashboard.dark .cvd-analyzing-title,
+.dashboard.dark .fa-analyzing-title {
+  color: #c4b5fd !important;
+}
+
+.dashboard.dark .cvc-analyzing-sub,
+.dashboard.dark .cvd-analyzing-sub,
+.dashboard.dark .fa-analyzing-sub {
+  color: rgba(168, 139, 250, 0.7) !important;
+}
+
+/* Analyze Steps */
+.dashboard.dark .cvc-analyze-step,
+.dashboard.dark .cvd-analyze-step,
+.dashboard.dark .fa-step-item {
+  color: rgba(168, 139, 250, 0.5) !important;
+}
+
+.dashboard.dark .cvc-analyze-step.active,
+.dashboard.dark .cvd-analyze-step.active,
+.dashboard.dark .fa-step-item.active {
+  color: #a78bfa !important;
+}
+
+/* Legend Bar */
+.dashboard.dark .diff-legend-bar,
+.dashboard.dark .uml2-legend {
+  background: rgba(91, 33, 182, 0.1) !important;
+  color: rgba(168, 139, 250, 0.7) !important;
+}
+
+/* Coverage Stats */
+.dashboard.dark .cvd-cov-stat {
+  background: #2d1b4e !important;
+  border-color: rgba(91, 33, 182, 0.2) !important;
+}
+
+.dashboard.dark .cvd-cov-lbl {
+  color: rgba(168, 139, 250, 0.6) !important;
+}
+
+/* Undocumented List */
+.dashboard.dark .cvd-undoc-row {
+  background: #2d1b4e !important;
+  border-color: rgba(91, 33, 182, 0.2) !important;
+}
+
+.dashboard.dark .cvd-undoc-name {
+  color: #c4b5fd !important;
+}
+
+.dashboard.dark .cvd-undoc-class {
+  color: rgba(168, 139, 250, 0.6) !important;
+}
+
+/* Cross Reference */
+.dashboard.dark .fa-cross-ref {
+  background: rgba(91, 33, 182, 0.1) !important;
+  border-color: rgba(91, 33, 182, 0.3) !important;
+}
+
+.dashboard.dark .fa-cross-title {
+  color: #c4b5fd !important;
+}
+
+.dashboard.dark .fa-cross-desc {
+  color: rgba(168, 139, 250, 0.7) !important;
+}
+
+/* Mini Stats */
+.dashboard.dark .cvc-mini-stat {
+  background: #2d1b4e !important;
+  border-color: rgba(91, 33, 182, 0.2) !important;
+}
+
+.dashboard.dark .cvc-mini-stat-lbl {
+  color: rgba(168, 139, 250, 0.6) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   PROJECT META - Unified Style (like Code vs Code)
+   توحيد تنسيق معلومات المشروع
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-proj-meta,
+.dashboard.light .fa-proj-meta,
+.dashboard.dark .cvd-proj-meta,
+.dashboard.dark .fa-proj-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.dashboard.light .cvd-proj-stat,
+.dashboard.light .fa-proj-stat,
+.dashboard.dark .cvd-proj-stat,
+.dashboard.dark .fa-proj-stat {
+  font-size: 11px;
+  color: var(--gray-500);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dashboard.dark .cvd-proj-stat,
+.dashboard.dark .fa-proj-stat {
+  color: rgba(168, 139, 250, 0.6);
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   DARK MODE ENHANCED - Complete Purple Theme (No Gray!)
+   Dark Mode محسّن: بنفسجي كامل بدون رمادي!
+   ══════════════════════════════════════════════════════════════ */
+
+/* Override all gray backgrounds with purple */
+.dashboard.dark .cvc-project-card,
+.dashboard.dark .cvd-project-card,
+.dashboard.dark .fa-project-card {
+  background: rgba(91, 33, 182, 0.08) !important;
+  border-color: rgba(91, 33, 182, 0.25) !important;
+}
+
+.dashboard.dark .cvc-project-card:hover,
+.dashboard.dark .cvd-project-card:hover,
+.dashboard.dark .fa-project-card:hover {
+  background: rgba(91, 33, 182, 0.12) !important;
+  border-color: rgba(91, 33, 182, 0.5) !important;
+}
+
+.dashboard.dark .cvc-project-card.selected,
+.dashboard.dark .cvd-project-card.selected,
+.dashboard.dark .fa-project-card.selected {
+  background: rgba(91, 33, 182, 0.2) !important;
+  border-color: rgba(91, 33, 182, 0.7) !important;
+  box-shadow: 0 0 0 2px rgba(91, 33, 182, 0.3), 0 8px 24px rgba(91, 33, 182, 0.25) !important;
+}
+
+/* All text colors to purple tones */
+.dashboard.dark .cvc-proj-name,
+.dashboard.dark .cvd-proj-name,
+.dashboard.dark .fa-proj-name {
+  color: #c4b5fd !important;
+}
+
+.dashboard.dark .cvc-proj-desc,
+.dashboard.dark .cvd-proj-desc,
+.dashboard.dark .fa-proj-desc {
+  color: rgba(168, 139, 250, 0.7) !important;
+}
+
+.dashboard.dark .cvc-proj-stat,
+.dashboard.dark .cvd-proj-stat,
+.dashboard.dark .fa-proj-stat {
+  color: rgba(168, 139, 250, 0.5) !important;
+}

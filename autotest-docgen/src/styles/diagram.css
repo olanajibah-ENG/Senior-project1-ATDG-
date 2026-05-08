@@ -1,0 +1,93 @@
+/* Professional Class Diagram Styles */
+
+.mermaid-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 300px;
+  width: 100%;
+  padding: 20px;
+  background: #f1f5f9; /* خلفية رمادية فاتحة جداً */
+  border-radius: 16px;
+  overflow: auto;
+}
+
+.mermaid {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  width: 100%;
+}
+
+/* تنسيق الحاوية الرئيسية للكلاس - تصميم جميل باللون الأزرق الداكن */
+.mermaid rect {
+  fill: #ffffffde !important; /* خلفية بيضاء نظيفة */
+  stroke: #4720b4 !important; /* أزرق داكن قوي */
+  stroke-width: 3px !important; /* خطوط أكثر سمكاً */
+  rx: 12; /* حواف منحنية أكثر جمالاً */
+  ry: 12;
+  filter: drop-shadow(0 4px 8px rgba(30, 64, 175, 0.2)) !important;
+}
+
+/* تنسيق عنوان الكلاس (ليكون الأبرز والأجمل) */
+.mermaid .classTitle {
+  fill: #6d28d9 !important; /* بنفسجي داكن جداً للعناوين */
+  font-weight: 900 !important;
+  font-size: 17px !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* تنسيق النصوص داخل الكلاس (الخصائص والدوال) */
+.mermaid .classLabel text,
+.mermaid .nodeLabel text {
+  fill: #374151 !important; /* رمادي داكن جميل للقراءة */
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.025em !important;
+}
+
+/* تنسيق العلاقات والأسهم (UML Standard جميل) */
+.mermaid .edgePath path {
+  stroke: #000000 !important; /* أسود للعلاقات */
+  stroke-width: 2.5px !important;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2)) !important;
+}
+
+.mermaid marker path {
+  fill: #000000 !important; /* أسود للأسهم */
+  stroke: #000000 !important; /* أسود للأسهم */
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) !important;
+}
+
+/* نصوص التوضيح على الأسهم (Labels جميلة) */
+.mermaid .edgeLabel {
+  background: #ffffff !important; /* خلفية بيضاء نظيفة */
+  color: #6d28d9 !important; /* بنفسجي داكن جداً للنص */
+  font-weight: 700 !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  border: 1px solid #c4b5fd !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  font-size: 12px !important;
+}
+
+/* خط الفصل بين الاسم والمحتوى داخل الكلاس */
+.mermaid .classLabel line {
+  stroke: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%) !important;
+  stroke-width: 1.5px !important;
+}
+
+/* تحسينات إضافية للمظهر العام */
+.mermaid-container {
+  background: #f8fafc !important; /* خلفية رمادية فاتحة جميلة */
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(30, 64, 175, 0.1) !important;
+}
+
+.mermaid {
+  background: #ffffff !important; /* خلفية بيضاء نظيفة */
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
