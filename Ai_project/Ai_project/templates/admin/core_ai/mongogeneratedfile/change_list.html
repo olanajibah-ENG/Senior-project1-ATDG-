@@ -1,0 +1,208 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+
+{% block content_title %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block result_list %}
+    {% if has_mongodb_data %}
+        <div class="results">
+            <table id="result_list">
+                <thead>
+                    <tr>
+                        <th scope="col" class="column-checkbox">
+                            <input type="checkbox" id="action-toggle" />
+                        </th>
+                        <th scope="col" class="column-filename">
+                            <div class="text">
+                                <a href="#">File Name</a>
+                            </div>
+                        </th>
+                        <th scope="col" class="column-file_type">
+                            <div class="text">
+                                <a href="#">Type</a>
+                            </div>
+                        </th>
+                        <th scope="col" class="column-explanation_id">
+                            <div class="text">
+                                <a href="#">Explanation ID</a>
+                            </div>
+                        </th>
+                        <th scope="col" class="column-file_size">
+                            <div class="text">
+                                <a href="#">Size</a>
+                            </div>
+                        </th>
+                        <th scope="col" class="column-created_at">
+                            <div class="text">
+                                <a href="#">Created</a>
+                            </div>
+                        </th>
+                        <th scope="col" class="column-downloaded_count">
+                            <div class="text">
+                                <a href="#">Downloads</a>
+                            </div>
+                        </th>
+                        <th scope="col" class="column-download">
+                            <div class="text">
+                                <a href="#">Download</a>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in mongodb_data %}
+                        <tr class="{% cycle 'row1' 'row2' %}">
+                            <td class="action-checkbox">
+                                <input type="checkbox" class="action-select" value="{{ item.id }}" name="_selected_action" />
+                            </td>
+                            <td class="field-filename">
+                                <strong>{{ item.filename|default:"N/A" }}</strong>
+                                {% if item.file_type == "pdf" %}
+                                    <span class="status status_pdf" style="background:#dc3545; color:white; padding:2px 6px; border-radius:3px; font-size:10px;">PDF</span>
+                                {% elif item.file_type == "markdown" %}
+                                    <span class="status status_md" style="background:#28a745; color:white; padding:2px 6px; border-radius:3px; font-size:10px;">MD</span>
+                                {% endif %}
+                            </td>
+                            <td class="field-file_type">{{ item.file_type|default:"N/A"|title }}</td>
+                            <td class="field-explanation_id">
+                                <code style="font-size:11px;">{{ item.explanation_id|truncatechars:16|default:"N/A" }}</code>
+                            </td>
+                            <td class="field-file_size">
+                                {% if item.file_size %}
+                                    {% if item.file_size > 1048576 %}
+                                        {{ item.file_size|add:"0"|floatformat:"1"|add:" MB" }}
+                                    {% elif item.file_size > 1024 %}
+                                        {{ item.file_size|add:"0"|floatformat:"1"|add:" KB" }}
+                                    {% else %}
+                                        {{ item.file_size }} bytes
+                                    {% endif %}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td class="field-created_at">{{ item.created_at|default:"N/A"|truncatechars:19 }}</td>
+                            <td class="field-downloaded_count">
+                                <span style="font-weight:bold; color:#007bff;">{{ item.downloaded_count|default:0 }}</span>
+                            </td>
+                            <td class="field-download">
+                                <a href="/api/analysis/download-generated-file/{{ item.id }}/"
+                                   target="_blank"
+                                   class="button"
+                                   style="background:#007bff; color:white; padding:4px 8px; text-decoration:none; border-radius:3px; font-size:11px;">
+                                    Download
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <p class="paginator">
+            Showing {{ mongodb_data|length }} generated file{{ mongodb_data|length|pluralize }} from MongoDB
+        </p>
+    {% else %}
+        <div style="padding:20px; text-align:center; color:#666;">
+            <h3>No Generated Files Found</h3>
+            <p>Files will appear here after they are generated through the API.</p>
+            {% if mongodb_error %}
+                <p style="color:#dc3545;"><strong>Error:</strong> {{ mongodb_error }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block actions %}
+    {% if has_mongodb_data %}
+        <div class="actions">
+            <label>Action:
+                <select name="action" required>
+                    <option value="" selected>---------</option>
+                    <option value="delete_selected">Delete selected generated files</option>
+                </select>
+            </label>
+            <input type="submit" value="Go" />
+        </div>
+    {% endif %}
+{% endblock %}
+
+<style>
+.results table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+.results th, .results td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.results th {
+    background: #f8f9fa;
+    font-weight: 600;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.results tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.results tr:hover {
+    background: #e9ecef;
+}
+
+.button {
+    display: inline-block;
+    padding: 4px 8px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 11px;
+    transition: background 0.2s;
+}
+
+.button:hover {
+    background: #0056b3;
+    color: white;
+}
+
+code {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    background: #f8f9fa;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 10px;
+    color: #495057;
+}
+
+.paginator {
+    margin: 20px 0;
+    text-align: center;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.actions {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.actions label {
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.actions select, .actions input[type="submit"] {
+    padding: 4px 8px;
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+}
+</style>

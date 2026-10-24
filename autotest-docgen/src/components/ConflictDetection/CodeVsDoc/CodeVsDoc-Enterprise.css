@@ -1,0 +1,576 @@
+/* ================================================================
+   CodeVsDoc - Enterprise Clean Design (Light Mode)
+   تصميم نظيف واحترافي بدون ألوان فاقعة
+   ================================================================ */
+
+/* ══════════════════════════════════════════════════════════════
+   LIGHT MODE - ENTERPRISE CLEAN DESIGN
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-overlay {
+  position: static;
+  background: transparent;
+  backdrop-filter: none;
+  padding: 0;
+  display: block;
+}
+
+.dashboard.light .cvd-modal {
+  background: #ffffff;
+  border-radius: 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: none;
+  overflow: visible;
+  display: block;
+  box-shadow: none;
+  border: none;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HEADER - Clean & Minimal
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-header {
+  background: #F9FAFB;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1.5rem 2rem;
+}
+
+.dashboard.light .cvd-title {
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.dashboard.light .cvd-header-icon {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+}
+
+/* إخفاء زر الإغلاق */
+.dashboard.light .cvd-close {
+  display: none;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   STEP PILLS - Neutral Colors
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-step-pill {
+  color: #64748b;
+  background: #F3F4F6;
+  border-color: #d1d5db;
+  font-weight: 500;
+}
+
+.dashboard.light .cvd-step-pill.active {
+  color: #1e293b;
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .cvd-step-pill.done {
+  color: #047857;
+  background: #d1fae5;
+  border-color: #6ee7b7;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BODY - White Background
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-body {
+  background: #ffffff;
+  padding: 2rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION LABELS - Dark Gray
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-section-label {
+  color: #374151;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROJECT CARDS - Neutral Gray
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-project-card {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+}
+
+.dashboard.light .cvd-project-card:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .cvd-project-card.selected {
+  background: #e5e7eb;
+  border-color: #6b7280;
+  box-shadow: 0 0 0 2px #d1d5db;
+}
+
+.dashboard.light .cvd-proj-name {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .cvd-proj-desc {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FILE LIST - Clean Cards
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-file-row {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+}
+
+.dashboard.light .cvd-file-row:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .cvd-file-row.selected {
+  background: #e5e7eb;
+  border-color: #6b7280;
+}
+
+.dashboard.light .cvd-fname {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .cvd-fpath {
+  color: #64748b;
+}
+
+.dashboard.light .cvd-file-icon {
+  background: #e5e7eb;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PANELS - Light Gray Background
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-panel {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .cvd-panel-header {
+  color: #1e293b;
+  font-weight: 600;
+  background: transparent;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.75rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   VERSION & DOC ROWS - Minimal Style
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-ver-row {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .cvd-ver-row:hover {
+  background: #F9FAFB;
+  border-color: #d1d5db;
+}
+
+.dashboard.light .cvd-ver-row.sel-a {
+  background: #F3F4F6;
+  border-color: #9ca3af;
+  border-left: 3px solid #6b7280;
+}
+
+.dashboard.light .cvd-ver-num {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .cvd-ver-date {
+  color: #64748b;
+}
+
+.dashboard.light .cvd-doc-row {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .cvd-doc-row:hover {
+  background: #F9FAFB;
+}
+
+.dashboard.light .cvd-doc-row.selected {
+  background: #F3F4F6;
+  border-color: #9ca3af;
+  border-left: 3px solid #6b7280;
+}
+
+.dashboard.light .cvd-doc-name {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .cvd-doc-path {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BUTTONS - Neutral with Hover Only
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-back-btn {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-weight: 500;
+}
+
+.dashboard.light .cvd-back-btn:hover {
+  background: #e5e7eb;
+  color: #1e293b;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .cvd-next-btn {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-weight: 500;
+}
+
+.dashboard.light .cvd-next-btn:hover:not(:disabled) {
+  background: #e5e7eb;
+  color: #1e293b;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .cvd-analyze-btn {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-weight: 500;
+  box-shadow: none;
+}
+
+.dashboard.light .cvd-analyze-btn:hover:not(:disabled) {
+  background: #e5e7eb;
+  color: #1e293b;
+  border-color: #9ca3af;
+  box-shadow: none;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ANALYZING STATE - Clean Progress
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-analyzing-title {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .cvd-analyzing-sub {
+  color: #64748b;
+}
+
+.dashboard.light .cvd-progress-bar {
+  background: #e5e7eb;
+}
+
+.dashboard.light .cvd-progress-fill {
+  background: #6b7280;
+  box-shadow: none;
+}
+
+.dashboard.light .cvd-progress-lbl {
+  color: #64748b;
+}
+
+.dashboard.light .cvd-analyze-step {
+  color: #9ca3af;
+}
+
+.dashboard.light .cvd-analyze-step.active {
+  color: #374151;
+  background: #F3F4F6;
+}
+
+.dashboard.light .cvd-analyze-step.done {
+  color: #047857;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESULTS - Clean Cards with Semantic Colors Only
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-result-context {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+  color: #64748b;
+}
+
+.dashboard.light .cvd-ctx-item {
+  color: #374151;
+}
+
+.dashboard.light .cd-stat {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .cd-stat .val {
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.dashboard.light .cd-stat .lbl {
+  color: #64748b;
+}
+
+.dashboard.light .cvd-summary-text {
+  color: #374151;
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CONFLICT ITEMS - Neutral with Border-Left Only
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-conflict-item {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+  border-left: 3px solid #d1d5db;
+}
+
+.dashboard.light .cd-conflict-item.critical {
+  border-left-color: #ef4444;
+  background: #F9FAFB;
+}
+
+.dashboard.light .cd-conflict-item.high {
+  border-left-color: #f59e0b;
+  background: #F9FAFB;
+}
+
+.dashboard.light .cd-conflict-item.medium {
+  border-left-color: #3b82f6;
+  background: #F9FAFB;
+}
+
+.dashboard.light .cd-conflict-item.success {
+  border-left-color: #10b981;
+  background: #F9FAFB;
+}
+
+.dashboard.light .cd-conflict-item h4 {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .cd-conflict-item p {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CODE BLOCKS - Neutral Background with Border-Left
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-ba-col {
+  background: #F8F9FA;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .removed-bg {
+  background: #F8F9FA;
+  border-left: 3px solid #ef4444;
+}
+
+.dashboard.light .added-bg {
+  background: #F8F9FA;
+  border-left: 3px solid #10b981;
+}
+
+.dashboard.light .cvd-ba-label {
+  color: #374151;
+  font-weight: 600;
+}
+
+.dashboard.light .cvd-ba-col code {
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.dashboard.light .cvd-suggestion {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BADGES - Minimal Colors
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-badge {
+  font-weight: 600;
+}
+
+.dashboard.light .cd-badge.critical {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+.dashboard.light .cd-badge.high {
+  background: #fef3c7;
+  color: #d97706;
+  border: 1px solid #fcd34d;
+}
+
+.dashboard.light .cd-badge.medium {
+  background: #dbeafe;
+  color: #2563eb;
+  border: 1px solid #93c5fd;
+}
+
+.dashboard.light .cd-badge.success {
+  background: #d1fae5;
+  color: #059669;
+  border: 1px solid #6ee7b7;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TABS - Clean Style
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-tab-bar {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+}
+
+.dashboard.light .cd-tab {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.dashboard.light .cd-tab:hover {
+  color: #374151;
+}
+
+.dashboard.light .cd-tab.active {
+  background: #ffffff;
+  color: #1e293b;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   COVERAGE & STATS - Clean Numbers
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-cov-stat {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .cvd-cov-val {
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.dashboard.light .cvd-cov-lbl {
+  color: #64748b;
+}
+
+.dashboard.light .cvd-undoc-type {
+  color: #64748b;
+}
+
+.dashboard.light .cvd-undoc-name {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .cvd-undoc-class {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FOOTER - Clean Export Button
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-footer-bar {
+  border-top: 1px solid #e5e7eb;
+}
+
+.dashboard.light .cvd-export-btn {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-weight: 500;
+}
+
+.dashboard.light .cvd-export-btn:hover {
+  background: #e5e7eb;
+  color: #1e293b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LOADING & EMPTY STATES
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-loading-row {
+  color: #64748b;
+}
+
+.dashboard.light .cvd-empty-note {
+  color: #9ca3af;
+}
+
+.dashboard.light .cvd-auto-note {
+  color: #64748b;
+  background: transparent;
+}
+
+.dashboard.light .cvd-step-context {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   REMOVE ALL ANIMATIONS IN LIGHT MODE
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cvd-analyze-btn:hover {
+  animation: none;
+}
+
+.dashboard.light .cvd-next-btn:hover {
+  animation: none;
+}
+
+.dashboard.light .cvd-file-row.selected,
+.dashboard.light .cvd-ver-row.sel-a,
+.dashboard.light .cvd-doc-row.selected {
+  animation: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.dashboard.light .cvd-spinner-orbit,
+.dashboard.light .cvd-analyze-spinner {
+  display: none;
+}
+
+.dashboard.light .cvd-progress-shimmer {
+  display: none;
+}

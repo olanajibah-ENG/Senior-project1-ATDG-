@@ -1,0 +1,27 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.sqlite3
+.venv/
+venv/
+
+# Node / frontend
+node_modules/
+.vite/
+dist/
+
+# Generated / archives
+Ai_project/staticfiles/
+*.zip
+*.log
+
+# pip output accidentally redirected to files named like versions (e.g. "0.18.0")
+Ai_project/[0-9]*.[0-9]*
+
+# Old disabled repo inside the frontend
+autotest-docgen/.git_disabled/

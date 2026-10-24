@@ -1,0 +1,89 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static admin_list %}
+
+{% block content_title %}<h1>{{ title }}</h1>{% endblock %}
+
+{% block result_list %}
+{% if mongodb_error %}
+<div class="messagelist"><div class="error">{{ mongodb_error }}</div></div>
+{% elif has_mongodb_data %}
+<div class="results">
+<table id="result_list">
+<thead><tr>
+  <th scope="col"><input type="checkbox" id="action-toggle"></th>
+  <th scope="col">Project UUID</th>
+  <th scope="col">Status</th>
+  <th scope="col">Files Analyzed</th>
+  <th scope="col">Nodes (Graph)</th>
+  <th scope="col">Analysis Date</th>
+  <th scope="col">Actions</th>
+</tr></thead>
+<tbody>
+{% for item in mongodb_data %}
+<tr class="{% cycle 'row1' 'row2' %}">
+  <td><input type="checkbox" name="_selected_action" value="{{ item.id }}" class="action-select"></td>
+  <td><strong style="color: #2196f3;">{% if item.project_id %}{{ item.project_id|slice:":8" }}...{% else %}N/A{% endif %}</strong></td>
+  <td>
+    {% if item.status == 'COMPLETED' %}<span style="background:#4caf50;color:white;padding:2px 8px;border-radius:10px;font-size:11px;">COMPLETED</span>
+    {% elif item.status == 'FAILED' %}<span style="background:#f44336;color:white;padding:2px 8px;border-radius:10px;font-size:11px;">FAILED</span>
+    {% else %}<span style="background:#ff9800;color:white;padding:2px 8px;border-radius:10px;font-size:11px;">{{ item.status|default:"IN_PROGRESS" }}</span>{% endif %}
+  </td>
+  <td><span style="font-weight:bold;color:#666;">{{ item.analysis_ids|length|default:"0" }} files</span></td>
+  <td>
+    {% if item.dependency_graph and item.dependency_graph.nodes %}
+      <span style="color:#673ab7;font-weight:bold;">🧬 {{ item.dependency_graph.nodes|length }} nodes</span>
+    {% else %}<span style="color:#999;">N/A</span>{% endif %}
+  </td>
+  <td>{{ item.created_at|default:"N/A" }}</td>
+  <td>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a href="/api/analysis/analyze-project/?project_id={{ item.project_id }}" target="_blank" style="color:#417690;text-decoration:none;font-weight:bold;background:#e1f5fe;padding:4px 8px;border-radius:4px;">🔍 JSON</a>
+      <a href="/api/analysis/project-class-diagram/{{ item.project_id }}/" target="_blank" style="color:#e91e63;text-decoration:none;font-weight:bold;background:#fce4ec;padding:4px 8px;border-radius:4px;">📊 Diagram</a>
+      <a href="javascript:void(0);" onclick="generateExplanation('{{ item.id }}', 'high_level')" style="color:#673ab7;text-decoration:none;font-weight:bold;background:#ede7f6;padding:4px 8px;border-radius:4px;border:1px solid #673ab7;">🤖 High-Level</a>
+      <a href="javascript:void(0);" onclick="generateExplanation('{{ item.id }}', 'low_level')" style="color:#009688;text-decoration:none;font-weight:bold;background:#e0f2f1;padding:4px 8px;border-radius:4px;border:1px solid #009688;">⚙️ Low-Level</a>
+    </div>
+  </td>
+</tr>
+{% empty %}
+<tr><td colspan="7">No project analysis results found.</td></tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+<div class="actions">
+  <label>Action: <select name="action" required>
+    <option value="" selected>---------</option>
+    <option value="delete_selected">Delete selected project results</option>
+  </select></label>
+  <button type="submit" class="button" name="index" value="0">Go</button>
+</div>
+{% else %}
+<div class="messagelist"><div class="info">No project analysis data available yet.</div></div>
+{% endif %}
+
+<script>
+function generateExplanation(analysisId, type) {
+  if (!confirm('هل أنت متأكد من بناء شرح ' + (type === 'high_level' ? 'عالي المستوى (High-Level)' : 'منخفض المستوى (Low-Level)') + ' للمشروع بالكامل؟')) return;
+  alert((type === 'high_level' ? 'بدأ بناء الشرح...' : 'بدأ التحليل التفصيلي...') + ' سيتم إضافة النتيجة في جدول "AI Explanations" عند الانتهاء.');
+  // نستخدم window.location.origin لضمان الطلب يروح لنفس الـ host (nginx port 80)
+  var baseUrl = window.location.protocol + '//' + window.location.hostname;
+  fetch(baseUrl + '/api/analysis/ai-explanations/generate-explanation/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({analysis_id: analysisId, type: type})
+  }).then(r => r.json()).then(data => {
+    if (data.status === 'processing' || data.task_id) {
+      alert('✅ تم وضع طلب بناء ' + (type === 'high_level' ? 'الشرح المنطقي' : 'التقرير التفصيلي') + ' قيد التنفيذ!');
+    } else {
+      alert('⚠️ رسالة غير متوقعة: ' + JSON.stringify(data));
+    }
+  }).catch(e => alert('❌ خطأ: ' + e.message));
+}
+</script>
+{% endblock %}
+
+{% block pagination %}
+{% if has_mongodb_data %}<p class="paginator">{{ mongodb_data|length }} project result{{ mongodb_data|length|pluralize }}</p>{% endif %}
+{% endblock %}
+{% block search %}{% endblock %}
+{% block filters %}{% endblock %}

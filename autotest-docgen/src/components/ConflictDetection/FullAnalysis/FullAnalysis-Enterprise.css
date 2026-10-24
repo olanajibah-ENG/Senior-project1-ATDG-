@@ -1,0 +1,753 @@
+/* ================================================================
+   FullAnalysis - Enterprise Clean Design (Light Mode)
+   تصميم نظيف واحترافي بدون ألوان فاقعة
+   ================================================================ */
+
+/* ══════════════════════════════════════════════════════════════
+   LIGHT MODE - ENTERPRISE CLEAN DESIGN
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-overlay {
+  position: static;
+  background: transparent;
+  backdrop-filter: none;
+  padding: 0;
+  display: block;
+}
+
+.dashboard.light .fa-modal {
+  background: #ffffff;
+  border-radius: 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: none;
+  overflow: visible;
+  display: block;
+  box-shadow: none;
+  border: none;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HEADER - Clean & Minimal
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-header {
+  background: #F9FAFB;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1.5rem 2rem;
+}
+
+.dashboard.light .fa-title {
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.dashboard.light .fa-header-icon {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+}
+
+.dashboard.light .fa-recommended-tag {
+  background: #F3F4F6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  font-weight: 600;
+}
+
+/* إخفاء زر الإغلاق */
+.dashboard.light .fa-close {
+  display: none;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   STEP PILLS - Neutral Colors
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-step-pill {
+  color: #64748b;
+  background: #F3F4F6;
+  border-color: #d1d5db;
+  font-weight: 500;
+}
+
+.dashboard.light .fa-step-pill.active {
+  color: #1e293b;
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .fa-step-pill.done {
+  color: #047857;
+  background: #d1fae5;
+  border-color: #6ee7b7;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BODY - White Background
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-body {
+  background: #ffffff;
+  padding: 2rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION LABELS - Dark Gray
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-section-label {
+  color: #374151;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROJECT CARDS - Neutral Gray
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-project-card {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+}
+
+.dashboard.light .fa-project-card:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .fa-project-card.selected {
+  background: #e5e7eb;
+  border-color: #6b7280;
+  box-shadow: 0 0 0 2px #d1d5db;
+}
+
+.dashboard.light .fa-proj-name {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .fa-proj-desc {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FILE LIST - Clean Cards
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-file-row {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+}
+
+.dashboard.light .fa-file-row:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .fa-file-row.selected {
+  background: #e5e7eb;
+  border-color: #6b7280;
+}
+
+.dashboard.light .fa-fname {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .fa-fpath {
+  color: #64748b;
+}
+
+.dashboard.light .fa-file-icon {
+  background: #e5e7eb;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SECTIONS - Light Gray Background
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-section {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   VERSION ROWS - Minimal Style
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-ver-row {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .fa-ver-row:hover {
+  background: #F9FAFB;
+  border-color: #d1d5db;
+}
+
+.dashboard.light .fa-ver-row.sel-a {
+  background: #F3F4F6;
+  border-color: #9ca3af;
+  border-left: 3px solid #6b7280;
+}
+
+.dashboard.light .fa-ver-row.sel-b {
+  background: #F3F4F6;
+  border-color: #9ca3af;
+  border-left: 3px solid #10b981;
+}
+
+.dashboard.light .fa-ver-num {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .fa-ver-date {
+  color: #64748b;
+}
+
+.dashboard.light .ver-a-color {
+  color: #374151;
+}
+
+.dashboard.light .ver-b-color {
+  color: #047857;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DOC ROWS - Clean Style
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-doc-row {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .fa-doc-row:hover {
+  background: #F9FAFB;
+}
+
+.dashboard.light .fa-doc-row.selected {
+  background: #F3F4F6;
+  border-color: #9ca3af;
+  border-left: 3px solid #6b7280;
+}
+
+.dashboard.light .fa-doc-auto-title {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .fa-doc-auto-sub {
+  color: #64748b;
+}
+
+.dashboard.light .fa-doc-auto {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BUTTONS - Neutral with Hover Only
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-back-btn {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-weight: 500;
+}
+
+.dashboard.light .fa-back-btn:hover {
+  background: #e5e7eb;
+  color: #1e293b;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .fa-next-btn {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-weight: 500;
+}
+
+.dashboard.light .fa-next-btn:hover:not(:disabled) {
+  background: #e5e7eb;
+  color: #1e293b;
+  border-color: #9ca3af;
+}
+
+.dashboard.light .fa-start-btn {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-weight: 500;
+  box-shadow: none;
+}
+
+.dashboard.light .fa-start-btn:hover:not(:disabled) {
+  background: #e5e7eb;
+  color: #1e293b;
+  border-color: #9ca3af;
+  box-shadow: none;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ANALYZING STATE - Clean Progress
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-analyzing-title {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .fa-analyzing-sub {
+  color: #64748b;
+}
+
+.dashboard.light .fa-progress-bar {
+  background: #e5e7eb;
+}
+
+.dashboard.light .fa-progress-fill {
+  background: #6b7280;
+}
+
+.dashboard.light .fa-progress-pct {
+  color: #64748b;
+}
+
+.dashboard.light .fa-step-item {
+  color: #9ca3af;
+}
+
+.dashboard.light .fa-step-item.active {
+  color: #374151;
+}
+
+.dashboard.light .fa-step-item.done {
+  color: #047857;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESULTS - Clean Cards
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-result-context {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+  color: #64748b;
+}
+
+.dashboard.light .fa-ctx-item {
+  color: #374151;
+}
+
+.dashboard.light .ver-a-text {
+  color: #374151;
+}
+
+.dashboard.light .ver-b-text {
+  color: #047857;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   GRADE CIRCLE - Semantic Colors Only
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-grade-circle {
+  border-width: 2px;
+}
+
+.dashboard.light .grade-A {
+  background: #d1fae5;
+  color: #047857;
+  border-color: #6ee7b7;
+}
+
+.dashboard.light .grade-B {
+  background: #dbeafe;
+  color: #2563eb;
+  border-color: #93c5fd;
+}
+
+.dashboard.light .grade-C {
+  background: #fef3c7;
+  color: #d97706;
+  border-color: #fcd34d;
+}
+
+.dashboard.light .grade-D,
+.dashboard.light .grade-F {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+.dashboard.light .fa-grade-label {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .fa-grade-sub {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   STATS - Clean Numbers
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-stat {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .cd-stat .val {
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.dashboard.light .cd-stat .lbl {
+  color: #64748b;
+}
+
+.dashboard.light .fa-summary-text {
+  color: #374151;
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LEGEND - Simple Colors
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-legend {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TABS - Clean Style
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-tab-bar {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+}
+
+.dashboard.light .cd-tab {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.dashboard.light .cd-tab:hover {
+  color: #374151;
+}
+
+.dashboard.light .cd-tab.active {
+  background: #ffffff;
+  color: #1e293b;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CONFLICT ITEMS - Neutral with Border-Left Only
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-conflict-item {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+  border-left: 3px solid #d1d5db;
+}
+
+.dashboard.light .cd-conflict-item.critical {
+  border-left-color: #ef4444;
+  background: #F9FAFB;
+}
+
+.dashboard.light .cd-conflict-item.high {
+  border-left-color: #f59e0b;
+  background: #F9FAFB;
+}
+
+.dashboard.light .cd-conflict-item.medium {
+  border-left-color: #3b82f6;
+  background: #F9FAFB;
+}
+
+.dashboard.light .cd-conflict-item.success {
+  border-left-color: #10b981;
+  background: #F9FAFB;
+}
+
+.dashboard.light .cd-conflict-item h4 {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .cd-conflict-item p {
+  color: #64748b;
+}
+
+.dashboard.light .fa-suggestion {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CODE BLOCKS - Neutral Background with Border-Left
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-ba {
+  background: #F8F9FA;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .removed-bg {
+  background: #F8F9FA;
+  border-left: 3px solid #ef4444;
+}
+
+.dashboard.light .added-bg {
+  background: #F8F9FA;
+  border-left: 3px solid #10b981;
+}
+
+.dashboard.light .fa-ba-label {
+  color: #374151;
+  font-weight: 600;
+}
+
+.dashboard.light .fa-ba code {
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BADGES - Minimal Colors
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .cd-badge {
+  font-weight: 600;
+}
+
+.dashboard.light .cd-badge.critical {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+.dashboard.light .cd-badge.high {
+  background: #fef3c7;
+  color: #d97706;
+  border: 1px solid #fcd34d;
+}
+
+.dashboard.light .cd-badge.medium {
+  background: #dbeafe;
+  color: #2563eb;
+  border: 1px solid #93c5fd;
+}
+
+.dashboard.light .cd-badge.success {
+  background: #d1fae5;
+  color: #059669;
+  border: 1px solid #6ee7b7;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SUMMARY GRID - Two Columns
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-col-title {
+  color: #374151;
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CROSS REFERENCE - Clean Alert
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-cross-ref {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .fa-cross-title {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .fa-cross-desc {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   UML DIAGRAM - Clean Boxes
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-uml-node {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .fa-uml-header {
+  background: #F3F4F6;
+  color: #1e293b;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dashboard.light .fa-uml-member.added {
+  color: #047857;
+}
+
+.dashboard.light .fa-uml-member.modified {
+  color: #d97706;
+}
+
+.dashboard.light .fa-uml-member.removed {
+  color: #dc2626;
+}
+
+.dashboard.light .fa-uml-sum.added {
+  color: #047857;
+}
+
+.dashboard.light .fa-uml-sum.removed {
+  color: #dc2626;
+}
+
+.dashboard.light .fa-uml-sum.modified {
+  color: #d97706;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   UNDOCUMENTED ELEMENTS
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-undoc-row {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .fa-undoc-type {
+  color: #64748b;
+}
+
+.dashboard.light .fa-undoc-name {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .fa-undoc-class {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MIGRATION GUIDE
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-migration-header {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .fa-migration-step {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .fa-step-num-circle {
+  background: #F3F4F6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.dashboard.light .fa-step-title {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.dashboard.light .fa-breaking-tag {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+.dashboard.light .fa-step-code {
+  background: #F8F9FA;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard.light .fa-step-code-label {
+  color: #374151;
+  font-weight: 600;
+}
+
+.dashboard.light .fa-step-code pre {
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FOOTER - Clean Export Button
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-result-footer {
+  border-top: 1px solid #e5e7eb;
+}
+
+.dashboard.light .fa-export-btn {
+  background: #F3F4F6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-weight: 500;
+}
+
+.dashboard.light .fa-export-btn:hover {
+  background: #e5e7eb;
+  color: #1e293b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LOADING & EMPTY STATES
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-loading-row {
+  color: #64748b;
+}
+
+.dashboard.light .fa-empty-note {
+  color: #9ca3af;
+}
+
+.dashboard.light .fa-auto-note {
+  color: #64748b;
+}
+
+.dashboard.light .fa-step-context {
+  background: #F9FAFB;
+  border: 1px solid #e5e7eb;
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   REMOVE ALL ANIMATIONS IN LIGHT MODE
+   ══════════════════════════════════════════════════════════════ */
+
+.dashboard.light .fa-start-btn:hover,
+.dashboard.light .fa-next-btn:hover {
+  animation: none;
+}
+
+.dashboard.light .fa-file-row.selected,
+.dashboard.light .fa-ver-row.sel-a,
+.dashboard.light .fa-ver-row.sel-b,
+.dashboard.light .fa-doc-row.selected {
+  animation: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.dashboard.light .fa-spinner-wrap {
+  display: none;
+}

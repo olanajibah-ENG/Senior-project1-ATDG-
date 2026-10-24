@@ -1,0 +1,62 @@
+def create_test_scenario():
+    """إنشاء سيناريو اختبار كامل"""
+    
+    # Create Hospital
+    hospital = Hospital("City General Hospital", "Downtown", 500)
+    
+    # Create Departments
+    emergency = Department("Emergency", 1, 50)
+    cardiology = Department("Cardiology", 3, 30)
+    surgery = Department("Surgery", 4, 20)
+    
+    hospital.add_department(emergency)
+    hospital.add_department(cardiology)
+    hospital.add_department(surgery)
+    
+    # Create Staff
+    dr_smith = Doctor(1, "Dr. Smith", 45, Gender.MALE, "DOC001", 120000, 
+                     "Cardiology", "LIC12345678")
+    dr_jones = Surgeon(2, "Dr. Jones", 50, Gender.FEMALE, "SUR001", 150000,
+                      "General Surgery", "LIC87654321", ["Appendectomy", "Hernia"])
+    prof_brown = MedicalProfessor(3, "Prof. Brown", 55, Gender.MALE, "PROF001",
+                                 180000, "Neurology", "LIC11111111", "Medical University")
+    
+    nurse_adams = Nurse(4, "Nurse Adams", 30, Gender.FEMALE, "NUR001", 60000,
+                       "Day", "RN Level 2")
+    
+    hospital.hire_staff(dr_smith, "Cardiology")
+    hospital.hire_staff(dr_jones, "Surgery")
+    hospital.hire_staff(nurse_adams, "Emergency")
+    
+    # Create Patients
+    patient1 = Patient(101, "John Doe", 35, Gender.MALE, "O+", ["Penicillin"])
+    patient2 = Patient(102, "Jane Smith", 28, Gender.FEMALE, "A-", [])
+    
+    hospital.admit_patient(patient1)
+    hospital.admit_patient(patient2)
+    
+    # Create relationships
+    dr_smith.add_patient(patient1)
+    patient1.assign_doctor(dr_smith)
+    
+    # Create prescription
+    prescription = dr_smith.prescribe_medication(patient1, "Aspirin", "100mg daily")
+    
+    # Create appointment
+    appointment = dr_smith.schedule_appointment(patient1, datetime.now())
+    
+    # Test complex scenario
+    dr_jones.perform_surgery(patient2, "Appendectomy", [nurse_adams])
+    
+    # Professor activities
+    prof_brown.publish_paper("Advances in Neurosurgery")
+    prof_brown.add_course("Advanced Neurology 401")
+    prof_brown.supervise_phd("Student X")
+    
+    return hospital
+
+
+if name == "main":
+    hospital = create_test_scenario()
+    print(f"✅ Hospital created: {hospital.hospital_name}")
+    print(f"📊 Statistics: {hospital.get_statistics()}")

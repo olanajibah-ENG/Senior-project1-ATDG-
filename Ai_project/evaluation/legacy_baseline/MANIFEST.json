@@ -1,0 +1,41 @@
+{
+  "frozen_at": "2026-10-22T21:58:16.040601+00:00",
+  "source": "core_ai/services/conflict_detection + core_ai/language_processors",
+  "modifications": [
+    "conflict_detection/semantic_analyzer.py: import LLMClient من evaluation.harness.llm_recorder بدل core_ai.ai_engine.llm_client (temperature 0، بدون cache، موديل مثبّت). باقي المنطق بدون أي تعديل."
+  ],
+  "snapshot_hash": "a8649b221ee7587b4516d5edfbd8963b05c3ccc44b003686b710048df1b387da",
+  "files": {
+    "__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "conflict_detection/__init__.py": "6c964d10a8d3ec12913cd525f81a4bbdbef0ef305ebdb9e96a5cdab7ac13d9be",
+    "conflict_detection/ast_unifier.py": "fa5629bae72391fe667f04dbf55d20c968d7d01beb0ada0bc9818ea4e66209b3",
+    "conflict_detection/code_doc_consistency.py": "22413ea2f1709efcda3a15e5430f5735cb62304910cfc4b9323be467eb6b7060",
+    "conflict_detection/doc_normalizer.py": "defd356e5ec8347f4a22133024fd464d7dabd529e5776b2464003dd1b9f50b20",
+    "conflict_detection/fingerprint_builder.py": "53c4ba77355a1fdd591e1c2646647f9b5cdde0e375d8250b91aba82c469a4b19",
+    "conflict_detection/orchestrator.py": "0ac90ca518cfb4e16c004a559c6d63058814a21d65179c4b48dcc2f223491128",
+    "conflict_detection/prompts/__init__.py": "494e978871244016952b782ac3832fb6b47838ebc070a0597dca593af4798e02",
+    "conflict_detection/prompts/conflict_prompts.py": "857cff41a136237759f0616a0516fa8734196caaecb78495c6c5cf2f10f13ded",
+    "conflict_detection/rename_detector.py": "5eb2fa2913fa00b54b0d405204d4dffd51572120df9a0af3b92a317c4466cf54",
+    "conflict_detection/report_generator.py": "c9ce0e224ea54c1a1751fbc529d5144894b8a0899388fd02961684e5442769b1",
+    "conflict_detection/schemas.py": "59703aab0cb120e1ddba9d19ac04c845798435db7336a1dab4ebda5802532c46",
+    "conflict_detection/semantic_analyzer.py": "8d6b9b5f56dbcb67c3cff24d9b0fa3ec6187be35c6b17b3795e5028dfa526d66",
+    "conflict_detection/structural_diff.py": "f33f8650fd85872ed8e8ed13cc58fc4c84b984a20babb61396d72e1c7b99071c",
+    "language_processors/__init__.py": "3c7d4e3a39695eb27d589614095781784bf92a4c933cfff700c205e9b3901852",
+    "language_processors/base_processor.py": "461d35cd67b9d94cf9165ef3fd8a0e63c28f986e1253de519bd713562c27c5a2",
+    "language_processors/generic_processor.py": "7d353da198353246ac83ecd484faa51f74963f2390d819c42b0011ba69298812",
+    "language_processors/java_processor.py": "fa5a291961b4934bf93e810f03137ec0e281f0f7bb0399a5a7ef868b6fb7cb46",
+    "language_processors/processor_factory.py": "b3cd70f5136b48bf9ebb539cc9ab1a1cc1fb2fb953d0aea8fe9ba84d3542dc1b",
+    "language_processors/python_processor.py": "4d6677c199cb6545137ff635f2e40d6e9b565df9f0f132c1d460b8b2e69948c8",
+    "language_processors/tree_sitter_processor.py": "f94f57825b4dfe5e108b903200087f531f67cfe7649d735465e0d2ebb4a029eb"
+  },
+  "amendments": [
+    {
+      "at": "2026-10-22T22:24:07.956457+00:00",
+      "reason": "ConflictItem.category: Optional[ChangeCategory] -> Optional[str]. StructuralDiff القديم بيمرّر قيم مثل method_signature_changed فكان كل تغيير بنيوي يوقع بـ ValidationError (نفس العطل موجود بالإنتاج — إصلاحه الحقيقي بالمرحلة 1). المنطق بدون تعديل.",
+      "files": [
+        "conflict_detection/schemas.py"
+      ],
+      "previous_hash": "60e514c65733871d642cd2f2798f8abdd155ff329aad5e90ba899904f35064e5"
+    }
+  ]
+}
