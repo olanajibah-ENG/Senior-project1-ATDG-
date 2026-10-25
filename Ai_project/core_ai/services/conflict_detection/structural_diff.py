@@ -127,7 +127,7 @@ class StructuralDiff:
         rename_result = RenameDetector.detect(methods_list_a, methods_list_b)
         for r in rename_result.get("renames", []):
             conflicts.append(ConflictItem(
-                type=ChangeType.RENAMED if hasattr(ChangeType, "RENAMED") else ChangeType.BEHAVIOR_CHANGE,
+                type=ChangeType.RENAMED,
                 severity=SeverityLevel.MEDIUM,
                 class_name=r.get("class_name", "unknown"),
                 member=r.get("old_name"),

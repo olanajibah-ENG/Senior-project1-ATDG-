@@ -23,6 +23,8 @@ class ChangeType(str, Enum):
     DOC_DRIFT        = "documentation_drift"
     UNUSED_CODE      = "unused_code"
     NEW_FEATURE      = "new_feature"
+    # structural_diff كان بيسأل عنه بـ hasattr، وبدونه كانت إعادة التسمية تنحسب behavior_change
+    RENAMED          = "renamed"
 
 
 class SeverityLevel(str, Enum):
@@ -43,6 +45,29 @@ class ChangeCategory(str, Enum):
     SYNTACTIC   = "syntactic"
     SEMANTIC    = "semantic"
     BEHAVIORAL  = "behavioral"
+
+
+class DocConsistencyLabel(str, Enum):
+    """تصنيف DocPrism (LCEF) لعلاقة التوثيق بالكود"""
+    CONSISTENT      = "Consistent"
+    DIRECT_MISMATCH = "Direct_Mismatch"   # التوثيق بيقول شي، والكود بيعمل شي تاني بداله
+    OVER_PROMISE    = "Over_Promise"      # التوثيق بيوعد بشي، والكود ما بيعمله أصلاً
+    UNDER_PROMISE   = "Under_Promise"     # الكود بيعمل شي زيادة ما انذكر — ما بينعرض للمستخدم
+
+
+class ChangeDecision(str, Enum):
+    """قرار الـ ChangeClassifier (مصفوفة Signature × Body)"""
+    STRUCTURAL_ONLY           = "structural_only"            # التوقيع تغيّر والجسم لا → بدون LLM
+    STRUCTURAL_AND_BEHAVIORAL = "structural_and_behavioral"  # التنين تغيّروا
+    BEHAVIORAL_CANDIDATE      = "behavioral_candidate"       # الجسم بس تغيّر
+    NO_CHANGE                 = "no_change"
+
+
+class RiskLevel(str, Enum):
+    """مخرج الـ SeverityClassifier (من مستويات AexPy). منفصل عن SeverityLevel يلي بتلوّن فيه الواجهة."""
+    CRITICAL      = "critical"        # AexPy High
+    WARNING       = "warning"         # AexPy Medium / Low
+    INFORMATIONAL = "informational"   # AexPy Compatible، أو عنصر اسمه بيبلش بـ _
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -186,7 +211,19 @@ class ConflictItem(BaseModel):
     auto_fix_available: bool  = False
     ai_confidence:      float = 0.0
     doc_type:           Optional[DocType] = None
-    category:           Optional[ChangeCategory] = None   # جديد - من Breaking Changes SLR
+    # اسم نمط التغيير (method_removed, class_added, ...). كان Optional[ChangeCategory]
+    # بس structural_diff بيبعت أسماء أنماط مش syntactic/semantic/behavioral، فكان كل
+    # تغيير هيكلي يوقّع المسار بـ ValidationError.
+    category:           Optional[str] = None
+
+    # ── Code vs Doc (DocPrism) ──
+    doc_label:          Optional[DocConsistencyLabel] = None
+    is_flagged:         Optional[bool] = None   # False = منحتفظ فيه بس ما منعرضه (متل Under_Promise)
+    evidence:           Optional[str]  = None   # السطر من الكود + الجملة من التوثيق
+
+    # ── Code vs Code ──
+    decision:           Optional[ChangeDecision] = None
+    risk_level:         Optional[RiskLevel] = None
 
 
 # ─────────────────────────────────────────────────────────────────────────────
