@@ -1,0 +1,6 @@
+{
+  "id": "cc_method_to_property",
+  "language": "python",
+  "code_a": "class Person:\n    def full_name(self) -> str:\n        return self.first + \" \" + self.last\n",
+  "code_b": "class Person:\n    @property\n    def full_name(self) -> str:\n        return self.first + \" \" + self.last\n"
+}

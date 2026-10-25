@@ -1,0 +1,9 @@
+{
+  "id": "doc_http_client",
+  "language": "python",
+  "code": "class HttpClient:\n    def __init__(self, base_url: str, timeout: float = 5):\n        self.base_url = base_url\n        self.timeout = timeout\n\n    def fetch(self, path: str) -> str:\n        return self._session.get(self.base_url + path, timeout=self.timeout).text\n\n    def fetch_with_retry(self, path: str) -> str:\n        for _ in range(3):\n            try:\n                return self.fetch(path)\n            except IOError:\n                continue\n        raise IOError(\"failed after 3 attempts\")\n\n    def get_json(self, path: str) -> dict:\n        return json.loads(self.fetch(path))\n\n    def close(self):\n        self._session.close()\n",
+  "doc": {
+    "content": "## Class: HttpClient\n**Purpose:** Small HTTP client bound to a base URL.\n\n### Constructor: __init__\n**Parameters:**\n- **base_url**: root URL prepended to every path\n- **timeout**: request timeout in seconds (default 5)\n\n### Method: fetch\n**Description:** Downloads the resource at path. Results are cached, so repeated calls for the same path do not hit the network.\n**Returns:** str - response body\n\n### Method: fetch_with_retry\n**Description:** Fetches the path, retrying up to 3 times on IO errors before raising IOError.\n\n### Method: get_json\n**Description:** Fetches the path and parses the body as JSON.\n**Returns:** dict\n",
+    "explanation_type": "low_level"
+  }
+}

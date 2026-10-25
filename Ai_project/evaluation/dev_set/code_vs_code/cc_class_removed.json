@@ -1,0 +1,6 @@
+{
+  "id": "cc_class_removed",
+  "language": "python",
+  "code_a": "class Payment:\n    def pay(self, amount: float) -> bool:\n        return True\n\nclass OldPayment:\n    def pay(self, amount: float) -> bool:\n        return False\n",
+  "code_b": "class Payment:\n    def pay(self, amount: float) -> bool:\n        return True\n"
+}

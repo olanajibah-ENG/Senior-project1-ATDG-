@@ -1,0 +1,3 @@
+stage,system,run_at,code_hash,model,elements,precision,recall,f1,specificity,tp,fp,fn,tn,unlabeled_flags,llm_calls,llm_failed_samples,errors,Q1_interface_f1,Q2_behavior_f1,Q3_breaking_f1
+baseline (after step 3),legacy,2026-10-25T19:47:57,a8649b221ee7,poolside/laguna-s-2.1:free,20,0.727,0.5,0.593,0.5,8,3,8,3,2,18,0,0,0.762,0.0,0.556
+baseline (after step 3),current,2026-10-25T19:50:01,0133978c6c66,poolside/laguna-s-2.1:free,20,0.75,0.562,0.643,0.5,9,3,7,3,2,17,0,0,0.818,,0.632

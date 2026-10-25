@@ -1,0 +1,9 @@
+{
+  "id": "doc_counter_threadsafe",
+  "language": "python",
+  "code": "class Counter:\n    def __init__(self):\n        self.value = 0\n\n    def increment(self) -> int:\n        self.value += 1\n        return self.value\n\n    def reset(self) -> None:\n        self.value = 0\n",
+  "doc": {
+    "content": "## Class: Counter\n**Purpose:** A thread-safe counter that can be shared between worker threads.\n\n### Constructor: __init__\n**Description:** Starts the counter at zero.\n\n### Method: increment\n**Description:** Atomically increments the counter under a lock and returns the new value.\n**Returns:** int\n\n### Method: reset\n**Description:** Resets the counter to zero.\n",
+    "explanation_type": "low_level"
+  }
+}

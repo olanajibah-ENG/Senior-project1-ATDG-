@@ -1,0 +1,1016 @@
+{
+ "mode": "code_vs_doc",
+ "system": "current",
+ "stage": "baseline (after step 3)",
+ "run_at": "2026-10-25T19:43:59.719762+00:00",
+ "code_hash": "0133978c6c66cb3b9d127423bc9d0aa4f01ab3c0794f0f2bbf7bc756edcba85c",
+ "samples_hash": "654b90e044dc6a1ec0cdda5f7f3f628b36ba30a50ae1d15112de4db035635d22",
+ "labels_file": "labels_code_vs_doc.csv",
+ "llm": {
+  "model": null,
+  "model_info": null,
+  "seed": 42,
+  "calls": 0,
+  "failed_samples": 0
+ },
+ "errors": [],
+ "metrics": {
+  "elements": 46,
+  "all": {
+   "tp": 0,
+   "fp": 4,
+   "fn": 14,
+   "tn": 28,
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "specificity": 0.875,
+   "flag_rate": 0.087
+  },
+  "documented_only": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 14,
+   "tn": 28,
+   "precision": null,
+   "recall": 0.0,
+   "f1": null,
+   "specificity": 1.0,
+   "flag_rate": 0.0
+  },
+  "flags_by_true_label": {
+   "Direct_Mismatch": {
+    "n": 6,
+    "flagged": 0
+   },
+   "Over_Promise": {
+    "n": 8,
+    "flagged": 0
+   },
+   "Under_Promise": {
+    "n": 2,
+    "flagged": 0
+   },
+   "Consistent": {
+    "n": 26,
+    "flagged": 0
+   },
+   "skip": {
+    "n": 4,
+    "flagged": 4
+   }
+  },
+  "label_accuracy": null,
+  "unlabeled_flags": [],
+  "rows": [
+   {
+    "sample": "doc_counter_threadsafe",
+    "element": "Counter",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_counter_threadsafe",
+    "element": "Counter.__init__",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_counter_threadsafe",
+    "element": "Counter.increment",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_counter_threadsafe",
+    "element": "Counter.reset",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_http_client",
+    "element": "HttpClient.__init__",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_http_client",
+    "element": "HttpClient.fetch",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_http_client",
+    "element": "HttpClient.fetch_with_retry",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_http_client",
+    "element": "HttpClient.get_json",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_http_client",
+    "element": "HttpClient.close",
+    "label": "skip",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_inventory_java",
+    "element": "Inventory.Inventory",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_inventory_java",
+    "element": "Inventory.quantity",
+    "label": "Direct_Mismatch",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_inventory_java",
+    "element": "Inventory.remove",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_inventory_java",
+    "element": "Inventory.has",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_mailer_params",
+    "element": "Mailer.send",
+    "label": "Direct_Mismatch",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_mailer_params",
+    "element": "Mailer.format_name",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_1",
+    "element": "Book",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_1",
+    "element": "Book.Book",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_1",
+    "element": "Book.getTitle",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_1",
+    "element": "Book.getIsbn",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_1",
+    "element": "Book.isAvailable",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_1",
+    "element": "Book.setAvailable",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_2",
+    "element": "Book",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_2",
+    "element": "Book.Book",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_2",
+    "element": "Book.getTitle",
+    "label": "skip",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_2",
+    "element": "Book.getIsbn",
+    "label": "skip",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_2",
+    "element": "Book.isAvailable",
+    "label": "skip",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_2",
+    "element": "Book.setAvailable",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_low",
+    "element": "Book",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_low",
+    "element": "Book.Book",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_low",
+    "element": "Book.getTitle",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_low",
+    "element": "Book.getIsbn",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_low",
+    "element": "Book.isAvailable",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_low",
+    "element": "Book.setAvailable",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_rectangle_high",
+    "element": "Rectangle.__init__",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_rectangle_high",
+    "element": "Rectangle.area",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_rectangle_high",
+    "element": "Rectangle.perimeter",
+    "label": "Direct_Mismatch",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_rectangle_high",
+    "element": "Rectangle.scale",
+    "label": "Direct_Mismatch",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_text_utils_docstrings",
+    "element": "TextUtils.parse_date",
+    "label": "Direct_Mismatch",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_text_utils_docstrings",
+    "element": "TextUtils.normalize",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_text_utils_docstrings",
+    "element": "TextUtils.save",
+    "label": "Under_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_text_utils_docstrings",
+    "element": "TextUtils.word_count",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_user_repo",
+    "element": "UserRepository.__init__",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_user_repo",
+    "element": "UserRepository.get",
+    "label": "Direct_Mismatch",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_user_repo",
+    "element": "UserRepository.add",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_user_repo",
+    "element": "UserRepository.remove",
+    "label": "Under_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_user_repo",
+    "element": "UserRepository.count",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   }
+  ]
+ },
+ "results": [
+  {
+   "id": "doc_counter_threadsafe",
+   "language": "python",
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 4,
+      "fully_documented": 4,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_http_client",
+   "language": "python",
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "high",
+     "element": null,
+     "class_name": "HttpClient",
+     "member": "close",
+     "line_number": null,
+     "description": "الدالة 'close' موجودة في الكود لكن غير موثقة في التوثيق القديم",
+     "old_value": null,
+     "new_value": "close(): Any",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "تحديث التوثيق ليشمل هذه الدالة",
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليشمل هذه الدالة",
+     "auto_fix_available": false,
+     "ai_confidence": 0.8,
+     "doc_type": "low",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 66.7,
+      "total_elements": 6,
+      "fully_documented": 4,
+      "partially_documented": 1,
+      "undocumented": 1,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": [
+       {
+        "class": "HttpClient",
+        "method": "close"
+       }
+      ]
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_inventory_java",
+   "language": "java",
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 5,
+      "fully_documented": 5,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_mailer_params",
+   "language": "python",
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 3,
+      "fully_documented": 3,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_real_book_high_1",
+   "language": "java",
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 6,
+      "fully_documented": 6,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "high",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_real_book_high_2",
+   "language": "java",
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Book",
+     "member": "getTitle",
+     "line_number": null,
+     "description": "الدالة 'getTitle' موجودة في الكود لكن غير موثقة في التوثيق القديم",
+     "old_value": null,
+     "new_value": "+ getTitle(): String",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "تحديث التوثيق ليشمل هذه الدالة",
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليشمل هذه الدالة",
+     "auto_fix_available": false,
+     "ai_confidence": 0.8,
+     "doc_type": "high",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Book",
+     "member": "getIsbn",
+     "line_number": null,
+     "description": "الدالة 'getIsbn' موجودة في الكود لكن غير موثقة في التوثيق القديم",
+     "old_value": null,
+     "new_value": "+ getIsbn(): String",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "تحديث التوثيق ليشمل هذه الدالة",
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليشمل هذه الدالة",
+     "auto_fix_available": false,
+     "ai_confidence": 0.8,
+     "doc_type": "high",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Book",
+     "member": "isAvailable",
+     "line_number": null,
+     "description": "الدالة 'isAvailable' موجودة في الكود لكن غير موثقة في التوثيق القديم",
+     "old_value": null,
+     "new_value": "+ isAvailable(): boolean",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "تحديث التوثيق ليشمل هذه الدالة",
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليشمل هذه الدالة",
+     "auto_fix_available": false,
+     "ai_confidence": 0.8,
+     "doc_type": "high",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 33.3,
+      "total_elements": 6,
+      "fully_documented": 2,
+      "partially_documented": 1,
+      "undocumented": 3,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": [
+       {
+        "class": "Book",
+        "method": "getTitle"
+       },
+       {
+        "class": "Book",
+        "method": "getIsbn"
+       },
+       {
+        "class": "Book",
+        "method": "isAvailable"
+       }
+      ]
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "high",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_real_book_low",
+   "language": "java",
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 6,
+      "fully_documented": 6,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_rectangle_high",
+   "language": "python",
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 5,
+      "fully_documented": 5,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "high",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_text_utils_docstrings",
+   "language": "python",
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 5,
+      "fully_documented": 5,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_user_repo",
+   "language": "python",
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 6,
+      "fully_documented": 6,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null,
+     "doc_label": null,
+     "is_flagged": null,
+     "evidence": null,
+     "decision": null,
+     "risk_level": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  }
+ ]
+}

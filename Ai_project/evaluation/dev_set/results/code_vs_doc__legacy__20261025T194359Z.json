@@ -1,0 +1,1173 @@
+{
+ "mode": "code_vs_doc",
+ "system": "legacy",
+ "stage": "baseline (after step 3)",
+ "run_at": "2026-10-25T19:43:59.041837+00:00",
+ "code_hash": "a8649b221ee7587b4516d5edfbd8963b05c3ccc44b003686b710048df1b387da",
+ "samples_hash": "654b90e044dc6a1ec0cdda5f7f3f628b36ba30a50ae1d15112de4db035635d22",
+ "labels_file": "labels_code_vs_doc.csv",
+ "llm": {
+  "model": null,
+  "model_info": null,
+  "seed": 42,
+  "calls": 0,
+  "failed_samples": 0
+ },
+ "errors": [],
+ "metrics": {
+  "elements": 46,
+  "all": {
+   "tp": 1,
+   "fp": 10,
+   "fn": 13,
+   "tn": 22,
+   "precision": 0.091,
+   "recall": 0.071,
+   "f1": 0.08,
+   "specificity": 0.688,
+   "flag_rate": 0.239
+  },
+  "documented_only": {
+   "tp": 1,
+   "fp": 6,
+   "fn": 13,
+   "tn": 22,
+   "precision": 0.143,
+   "recall": 0.071,
+   "f1": 0.095,
+   "specificity": 0.786,
+   "flag_rate": 0.167
+  },
+  "flags_by_true_label": {
+   "Direct_Mismatch": {
+    "n": 6,
+    "flagged": 1
+   },
+   "Over_Promise": {
+    "n": 8,
+    "flagged": 0
+   },
+   "Under_Promise": {
+    "n": 2,
+    "flagged": 0
+   },
+   "Consistent": {
+    "n": 26,
+    "flagged": 6
+   },
+   "skip": {
+    "n": 4,
+    "flagged": 4
+   }
+  },
+  "label_accuracy": null,
+  "unlabeled_flags": [],
+  "rows": [
+   {
+    "sample": "doc_counter_threadsafe",
+    "element": "Counter",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_counter_threadsafe",
+    "element": "Counter.__init__",
+    "label": "Consistent",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_counter_threadsafe",
+    "element": "Counter.increment",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_counter_threadsafe",
+    "element": "Counter.reset",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_http_client",
+    "element": "HttpClient.__init__",
+    "label": "Consistent",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_http_client",
+    "element": "HttpClient.fetch",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_http_client",
+    "element": "HttpClient.fetch_with_retry",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_http_client",
+    "element": "HttpClient.get_json",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_http_client",
+    "element": "HttpClient.close",
+    "label": "skip",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_inventory_java",
+    "element": "Inventory.Inventory",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_inventory_java",
+    "element": "Inventory.quantity",
+    "label": "Direct_Mismatch",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_inventory_java",
+    "element": "Inventory.remove",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_inventory_java",
+    "element": "Inventory.has",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_mailer_params",
+    "element": "Mailer.send",
+    "label": "Direct_Mismatch",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_mailer_params",
+    "element": "Mailer.format_name",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_1",
+    "element": "Book",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_1",
+    "element": "Book.Book",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_1",
+    "element": "Book.getTitle",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_1",
+    "element": "Book.getIsbn",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_1",
+    "element": "Book.isAvailable",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_1",
+    "element": "Book.setAvailable",
+    "label": "Consistent",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_2",
+    "element": "Book",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_2",
+    "element": "Book.Book",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_2",
+    "element": "Book.getTitle",
+    "label": "skip",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_2",
+    "element": "Book.getIsbn",
+    "label": "skip",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_2",
+    "element": "Book.isAvailable",
+    "label": "skip",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_high_2",
+    "element": "Book.setAvailable",
+    "label": "Consistent",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_low",
+    "element": "Book",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_low",
+    "element": "Book.Book",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_low",
+    "element": "Book.getTitle",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_low",
+    "element": "Book.getIsbn",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_low",
+    "element": "Book.isAvailable",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_real_book_low",
+    "element": "Book.setAvailable",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_rectangle_high",
+    "element": "Rectangle.__init__",
+    "label": "Consistent",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_rectangle_high",
+    "element": "Rectangle.area",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_rectangle_high",
+    "element": "Rectangle.perimeter",
+    "label": "Direct_Mismatch",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_rectangle_high",
+    "element": "Rectangle.scale",
+    "label": "Direct_Mismatch",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_text_utils_docstrings",
+    "element": "TextUtils.parse_date",
+    "label": "Direct_Mismatch",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_text_utils_docstrings",
+    "element": "TextUtils.normalize",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_text_utils_docstrings",
+    "element": "TextUtils.save",
+    "label": "Under_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_text_utils_docstrings",
+    "element": "TextUtils.word_count",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_user_repo",
+    "element": "UserRepository.__init__",
+    "label": "Consistent",
+    "flagged": true,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_user_repo",
+    "element": "UserRepository.get",
+    "label": "Direct_Mismatch",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_user_repo",
+    "element": "UserRepository.add",
+    "label": "Over_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_user_repo",
+    "element": "UserRepository.remove",
+    "label": "Under_Promise",
+    "flagged": false,
+    "predicted_label": null
+   },
+   {
+    "sample": "doc_user_repo",
+    "element": "UserRepository.count",
+    "label": "Consistent",
+    "flagged": false,
+    "predicted_label": null
+   }
+  ]
+ },
+ "results": [
+  {
+   "id": "doc_counter_threadsafe",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: Counter\n**Purpose:** A thread-safe counter that can be shared between worker threads.\n\n### Constructor: __init__\n**Description:** Starts the counter at zero.\n\n### Method: increment\n**Description:** Atomically increments the counter under a lock and returns the new value.\n**Returns:** int\n\n### Method: reset\n**Description:** Resets the counter to zero.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "high",
+     "element": null,
+     "class_name": "Counter",
+     "member": "__init__",
+     "line_number": null,
+     "description": "الدالة '__init__' موجودة في الكود لكن غير موثقة في التوثيق القديم",
+     "old_value": null,
+     "new_value": "+ __init__()",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "تحديث التوثيق ليشمل هذه الدالة",
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليشمل هذه الدالة",
+     "auto_fix_available": false,
+     "ai_confidence": 0.8,
+     "doc_type": "low",
+     "category": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 50.0,
+      "total_elements": 4,
+      "fully_documented": 2,
+      "partially_documented": 1,
+      "undocumented": 1,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": [
+       {
+        "class": "Counter",
+        "method": "__init__"
+       }
+      ]
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_http_client",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: HttpClient\n**Purpose:** Small HTTP client bound to a base URL.\n\n### Constructor: __init__\n**Parameters:**\n- **base_url**: root URL prepended to every path\n- **timeout**: request timeout in seconds (default 5)\n\n### Method: fetch\n**Description:** Downloads the resource at path. Results are cached, so repeated calls for the same path do not hit the network.\n**Returns:** str - response body\n\n### Method: fetch_with_retry\n**Description:** Fetches the path, retrying up to 3 times on IO errors before raising IOError.\n\n### Method: get_json\n**Description:** Fetches the path and parses the body as JSON.\n**Returns:** dict\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "high",
+     "element": null,
+     "class_name": "HttpClient",
+     "member": "__init__",
+     "line_number": null,
+     "description": "الدالة '__init__' موجودة في الكود لكن غير موثقة في التوثيق القديم",
+     "old_value": null,
+     "new_value": "+ __init__(base_url: str, timeout: float)",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "تحديث التوثيق ليشمل هذه الدالة",
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليشمل هذه الدالة",
+     "auto_fix_available": false,
+     "ai_confidence": 0.8,
+     "doc_type": "low",
+     "category": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "high",
+     "element": null,
+     "class_name": "HttpClient",
+     "member": "close",
+     "line_number": null,
+     "description": "الدالة 'close' موجودة في الكود لكن غير موثقة في التوثيق القديم",
+     "old_value": null,
+     "new_value": "close(): Any",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "تحديث التوثيق ليشمل هذه الدالة",
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليشمل هذه الدالة",
+     "auto_fix_available": false,
+     "ai_confidence": 0.8,
+     "doc_type": "low",
+     "category": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 50.0,
+      "total_elements": 6,
+      "fully_documented": 3,
+      "partially_documented": 1,
+      "undocumented": 2,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": [
+       {
+        "class": "HttpClient",
+        "method": "__init__"
+       },
+       {
+        "class": "HttpClient",
+        "method": "close"
+       }
+      ]
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_inventory_java",
+   "language": "java",
+   "doc_input": {
+    "content": "## Class: Inventory\n**Purpose:** Tracks stock levels per SKU.\n\n### Constructor: Inventory\n**Description:** Creates an empty inventory.\n\n### Method: quantity\n**Description:** Returns the stock level for the given sku.\n**Error Handling:** Throws IllegalArgumentException when the sku is unknown.\n\n### Method: remove\n**Description:** Removes n units of the sku. Throws IllegalStateException if there is not enough stock.\n\n### Method: has\n**Description:** Returns true if the sku exists in the inventory.\n**Returns:** boolean\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 4,
+      "fully_documented": 4,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_mailer_params",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: Mailer\n**Purpose:** Sends e-mail through an SMTP connection.\n\n### Method: send\n**Description:** Sends a message, retrying on failure.\n**Parameters:**\n- **to**: recipient address\n- **subject**: message subject\n- **body**: message body\n- **retries**: number of attempts (default 3)\n**Returns:** bool - True if the message was sent.\n\n### Method: format_name\n**Description:** Formats a person's name as \"Last, First\".\n**Returns:** str\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 3,
+      "fully_documented": 3,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_real_book_high_1",
+   "language": "java",
+   "doc_input": {
+    "content": "\n\nFile: models\r\n\r\n## Executive Summary\r\nThe Book class represents a book in a system, storing its title, author, ISBN, and availability status. It provides controlled access to these properties and allows updating the availability flag.\r\n\r\n## Purpose & Responsibility\r\nPurpose: To model a book entity with essential attributes and track its availability.\r\nResponsibility: Manages book metadata and availability state.\r\n- Stores book title, author, and ISBN\r\n- Provides read-only access to book details\r\n- Allows updating availability status\r\n\r\n## Key Capabilities\r\n- Store and retrieve book metadata (title, author, ISBN)\r\n- Check current availability status\r\n- Update availability status programmatically\r\n\r\n---\r\n\r\n## Class: Book\r\nPURPOSE:\r\nRepresents a physical or digital book with identifiable attributes and availability tracking.\r\n\r\n### Constructor: public Book(String title, String author, String isbn)\r\nLogic Flow:\r\n1. Initializes the book with provided title, author, and ISBN\r\n2. Sets availability to true by default\r\n3. Stores all attributes as private instance variables\r\n\r\n### Method: getTitle()\r\nLogic Flow:\r\n1. Returns the stored title value\r\n\r\n### Method: getIsbn()\r\nLogic Flow:\r\n1. Returns the stored ISBN value\r\n\r\n### Method: isAvailable()\r\nLogic Flow:\r\n1. Returns the current availability boolean value\r\n\r\n### Method: setAvailable(boolean available)\r\nLogic Flow:\r\n1. Updates the availability flag to the provided boolean value\n",
+    "explanation_type": "high_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Book",
+     "member": "setAvailable",
+     "line_number": null,
+     "description": "Signature mismatch: doc mentions 1 params, code has 0",
+     "old_value": null,
+     "new_value": null,
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليتوافق مع التوقيع الحالي",
+     "auto_fix_available": false,
+     "ai_confidence": 0.75,
+     "doc_type": "high",
+     "category": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 5,
+      "fully_documented": 5,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "high",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_real_book_high_2",
+   "language": "java",
+   "doc_input": {
+    "content": "---\n## Executive Summary\nThe Book class models a book entity, storing its title, author, ISBN, and availability status, and provides methods to access and modify these properties.\n\n## Purpose & Responsibility\nPurpose: Represents a book with its bibliographic details and availability state.  \nResponsibility: Manages the book's data fields and its availability flag.  \n- Stores title, author, and ISBN information.  \n- Tracks whether the book is currently available.  \n- Exposes methods to retrieve and update its state.\n\n## Key Capabilities\n- Retrieve the book's title, author, and ISBN.  \n- Check the current availability status.  \n- Set the availability status to true or false.\n\n---\n\n## Class: Book\nPurpose:\nEncapsulates the data and behavior of a book, including its bibliographic attributes and availability state, providing accessor and mutator methods.\n\n### Constructor: Book(String title, String author, String isbn)\nLogic Flow:\n1. Accepts the book's title, author, and ISBN as parameters.  \n2. Assigns these values to the corresponding instance fields and initializes availability to true.\n\n### Method: setAvailable(self, available: boolean)\nLogic Flow:\n1. Updates the internal available flag with the provided boolean value.  \n2. No further actions are required.",
+    "explanation_type": "high_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Book",
+     "member": "getTitle",
+     "line_number": null,
+     "description": "الدالة 'getTitle' موجودة في الكود لكن غير موثقة في التوثيق القديم",
+     "old_value": null,
+     "new_value": "+ getTitle(): String",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "تحديث التوثيق ليشمل هذه الدالة",
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليشمل هذه الدالة",
+     "auto_fix_available": false,
+     "ai_confidence": 0.8,
+     "doc_type": "high",
+     "category": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Book",
+     "member": "getIsbn",
+     "line_number": null,
+     "description": "الدالة 'getIsbn' موجودة في الكود لكن غير موثقة في التوثيق القديم",
+     "old_value": null,
+     "new_value": "+ getIsbn(): String",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "تحديث التوثيق ليشمل هذه الدالة",
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليشمل هذه الدالة",
+     "auto_fix_available": false,
+     "ai_confidence": 0.8,
+     "doc_type": "high",
+     "category": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Book",
+     "member": "isAvailable",
+     "line_number": null,
+     "description": "الدالة 'isAvailable' موجودة في الكود لكن غير موثقة في التوثيق القديم",
+     "old_value": null,
+     "new_value": "+ isAvailable(): boolean",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "تحديث التوثيق ليشمل هذه الدالة",
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليشمل هذه الدالة",
+     "auto_fix_available": false,
+     "ai_confidence": 0.8,
+     "doc_type": "high",
+     "category": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Book",
+     "member": "setAvailable",
+     "line_number": null,
+     "description": "Signature mismatch: doc mentions 1 params, code has 0",
+     "old_value": null,
+     "new_value": null,
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليتوافق مع التوقيع الحالي",
+     "auto_fix_available": false,
+     "ai_confidence": 0.75,
+     "doc_type": "high",
+     "category": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 20.0,
+      "total_elements": 5,
+      "fully_documented": 1,
+      "partially_documented": 1,
+      "undocumented": 3,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": [
+       {
+        "class": "Book",
+        "method": "getTitle"
+       },
+       {
+        "class": "Book",
+        "method": "getIsbn"
+       },
+       {
+        "class": "Book",
+        "method": "isAvailable"
+       }
+      ]
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "high",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_real_book_low",
+   "language": "java",
+   "doc_input": {
+    "content": "File: Book Model Class\n\n---\n\n## Application Lifecycle\nThe provided code defines a single model class without application lifecycle logic. This is a data model component that would be instantiated by other parts of a larger application, such as service layers or controllers.\n\n---\n\n## API Routes Overview\nNone - This is a model class file, not a web application with routes.\n\n---\n\n## Purpose & Responsibility\nThe Book class serves as a domain model representing a book entity in a library or inventory system. It encapsulates book-related data (title, author, ISBN) and availability status, providing controlled access through getter and setter methods.\n\n---\n\n## Key Capabilities\n- Stores immutable book metadata (title, author, ISBN) upon instantiation\n- Tracks and manages the availability status of a book\n- Provides read access to book identification fields\n- Allows modification of availability status\n\n---\n\n## Class: Book\n**Purpose:** Represents a book entity with core bibliographic information and availability tracking in a library or inventory management system.\n**Patterns:** Data Transfer Object (DTO) pattern, Encapsulation pattern\n**Relationships:** None - standalone model class with no dependencies on other classes\n**Complexity Level:** Low\n**Security Note:** None\n**Impact Analysis:** Changes to this class affect all code that instantiates or interacts with Book objects. Modifying field names or method signatures would require updates across the entire codebase.\n**Best Practices:** Follows encapsulation principle by keeping fields private. However, the author field lacks a getter method, creating an inconsistency in the API. Consider implementing equals/hashCode/toString methods for better object representation.\n\n### Constructor: Book\n**Description:** Initializes a new Book instance with the provided title, author, and ISBN, automatically setting the book as available by default.\n\n**Logic Flow:**\n1. Receives three String parameters: title, author, and isbn\n2. Assigns each parameter to its corresponding private instance field using the this keyword\n3. Explicitly initializes the available field to true\n\n**Parameters:**\n- **title**: String - The title of the book\n- **author**: String - The author of the book\n- **isbn**: String - The unique International Standard Book Number identifier\n\n**Returns:** None\n\n**Error Handling:** No error handling present. Consider adding null checks for parameters to prevent NullPointerException.\n\n### Method: getTitle\n\n**Description:** Returns the title of the book.\n\n**Logic Flow:**\n1. Returns the value of the private title field directly\n\n**Parameters:** None\n\n**Returns:** String - The title of the book\n\n**Error Handling:** No error handling present.\n\n**Architectural Recommendations:** None - simple getter method following standard conventions.\n\n### Method: getIsbn\n\n**Description:** Returns the ISBN of the book.\n\n**Logic Flow:**\n1. Returns the value of the private isbn field directly\n\n**Parameters:** None\n\n**Returns:** String - The ISBN of the book\n\n**Error Handling:** No error handling present.\n\n**Architectural Recommendations:** None - simple getter method following standard conventions.\n\n### Method: isAvailable\n\n**Description:** Returns the current availability status of the book.\n\n**Logic Flow:**\n1. Returns the value of the private available field directly\n\n**Parameters:** None\n\n**Returns:** boolean - true if the book is available, false otherwise\n\n**Error Handling:** No error handling present.\n\n**Architectural Recommendations:** None - standard boolean getter following JavaBean naming conventions.\n\n### Method: setAvailable\n\n**Description:** Sets the availability status of the book to the provided boolean value.\n\n**Logic Flow:**\n1. Assigns the provided boolean parameter to the private available field\n\n**Parameters:**\n- **available**: boolean - The new availability status to set\n\n**Returns:** void\n\n**Error Handling:** No error handling present.\n\n**Architectural Recommendations:** Consider adding validation to ensure the availability change follows business rules (e.g., cannot set to true if already true).",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 5,
+      "fully_documented": 5,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_rectangle_high",
+   "language": "python",
+   "doc_input": {
+    "content": "---\n## Executive Summary\nRectangle models a rectangle and computes its basic geometry.\n\n## Class: Rectangle\nPurpose:\nRepresents a rectangle defined by its width and height.\n\n### Constructor: __init__(self, w, h)\nLogic Flow:\n1. Stores the width and height.\n\n### Method: area(self)\nLogic Flow:\n1. Multiplies width by height and returns the result.\n\n### Method: perimeter(self)\nLogic Flow:\n1. Returns twice the sum of width and height.\n\n### Method: scale(self, k)\nLogic Flow:\n1. Creates and returns a new Rectangle whose sides are multiplied by k.\n2. The original rectangle is left unchanged.\n",
+    "explanation_type": "high_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Rectangle",
+     "member": "__init__",
+     "line_number": null,
+     "description": "الدالة '__init__' موجودة في الكود لكن غير موثقة في التوثيق القديم",
+     "old_value": null,
+     "new_value": "+ __init__(w: float, h: float)",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "تحديث التوثيق ليشمل هذه الدالة",
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليشمل هذه الدالة",
+     "auto_fix_available": false,
+     "ai_confidence": 0.8,
+     "doc_type": "high",
+     "category": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Rectangle",
+     "member": "scale",
+     "line_number": null,
+     "description": "Signature mismatch: doc mentions 1 params, code has 0",
+     "old_value": null,
+     "new_value": null,
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليتوافق مع التوقيع الحالي",
+     "auto_fix_available": false,
+     "ai_confidence": 0.75,
+     "doc_type": "high",
+     "category": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 60.0,
+      "total_elements": 5,
+      "fully_documented": 3,
+      "partially_documented": 1,
+      "undocumented": 1,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": [
+       {
+        "class": "Rectangle",
+        "method": "__init__"
+       }
+      ]
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "high",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_text_utils_docstrings",
+   "language": "python",
+   "doc_input": {
+    "content": "### Class: TextUtils\n### Method: parse_date\nParse an ISO date string (YYYY-MM-DD). Returns None if the string is invalid.\n### Method: normalize\nLowercase the text and strip surrounding whitespace.\n### Method: save\nSave the text to path.\n### Method: word_count\nReturn the number of whitespace-separated words in s.",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 5,
+      "fully_documented": 5,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "doc_user_repo",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: UserRepository\n**Purpose:** In-memory storage of user records.\n\n### Constructor: __init__\n**Description:** Stores the backing dictionary.\n\n### Method: get\n**Description:** Returns the user with the given id.\n**Returns:** dict - the user record.\n**Error Handling:** Raises KeyError if the user does not exist.\n\n### Method: add\n**Description:** Adds a user after validating the email format.\n\n### Method: remove\n**Description:** Removes the user with the given id from the store.\n\n### Method: count\n**Description:** Returns the number of stored users.\n**Returns:** int\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "high",
+     "element": null,
+     "class_name": "UserRepository",
+     "member": "__init__",
+     "line_number": null,
+     "description": "الدالة '__init__' موجودة في الكود لكن غير موثقة في التوثيق القديم",
+     "old_value": null,
+     "new_value": "+ __init__(store: dict)",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "تحديث التوثيق ليشمل هذه الدالة",
+     "affected_files": [],
+     "recommendation": "تحديث التوثيق ليشمل هذه الدالة",
+     "auto_fix_available": false,
+     "ai_confidence": 0.8,
+     "doc_type": "low",
+     "category": null
+    },
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 66.7,
+      "total_elements": 6,
+      "fully_documented": 4,
+      "partially_documented": 1,
+      "undocumented": 1,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": [
+       {
+        "class": "UserRepository",
+        "method": "__init__"
+       }
+      ]
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  }
+ ]
+}

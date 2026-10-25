@@ -1,0 +1,9 @@
+{
+  "id": "doc_user_repo",
+  "language": "python",
+  "code": "class UserRepository:\n    def __init__(self, store: dict):\n        self.store = store\n\n    def get(self, uid: int) -> Optional[dict]:\n        return self.store.get(uid)\n\n    def add(self, user: dict) -> None:\n        self.store[user[\"id\"]] = user\n\n    def remove(self, uid: int) -> None:\n        if uid not in self.store:\n            raise ValueError(\"unknown user\")\n        del self.store[uid]\n\n    def count(self) -> int:\n        return len(self.store)\n",
+  "doc": {
+    "content": "## Class: UserRepository\n**Purpose:** In-memory storage of user records.\n\n### Constructor: __init__\n**Description:** Stores the backing dictionary.\n\n### Method: get\n**Description:** Returns the user with the given id.\n**Returns:** dict - the user record.\n**Error Handling:** Raises KeyError if the user does not exist.\n\n### Method: add\n**Description:** Adds a user after validating the email format.\n\n### Method: remove\n**Description:** Removes the user with the given id from the store.\n\n### Method: count\n**Description:** Returns the number of stored users.\n**Returns:** int\n",
+    "explanation_type": "low_level"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "id": "cc_optional_param",
+  "language": "python",
+  "code_a": "class Report:\n    def render(self, data: list) -> str:\n        return \"\\n\".join(map(str, data))\n",
+  "code_b": "class Report:\n    def render(self, data: list, title: str = None) -> str:\n        body = \"\\n\".join(map(str, data))\n        if title:\n            return title + \"\\n\" + body\n        return body\n"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "doc_mailer_params",
+  "language": "python",
+  "code": "class Mailer:\n    def send(self, to: str, subject: str, body: str, retries: int = 5) -> bool:\n        for _ in range(retries):\n            if self._smtp.send(to, subject, body):\n                return True\n        return False\n\n    def format_name(self, first: str, last: str) -> str:\n        return f\"{last}, {first}\"\n",
+  "doc": {
+    "content": "## Class: Mailer\n**Purpose:** Sends e-mail through an SMTP connection.\n\n### Method: send\n**Description:** Sends a message, retrying on failure.\n**Parameters:**\n- **to**: recipient address\n- **subject**: message subject\n- **body**: message body\n- **retries**: number of attempts (default 3)\n**Returns:** bool - True if the message was sent.\n\n### Method: format_name\n**Description:** Formats a person's name as \"Last, First\".\n**Returns:** str\n",
+    "explanation_type": "low_level"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "id": "cc_removed_method",
+  "language": "python",
+  "code_a": "class Billing:\n    def charge(self, amount: float) -> bool:\n        return self.gw.charge(amount)\n\n    def legacy_charge(self, amount: float) -> bool:\n        return self.old_gw.charge(amount)\n",
+  "code_b": "class Billing:\n    def charge(self, amount: float) -> bool:\n        return self.gw.charge(amount)\n"
+}

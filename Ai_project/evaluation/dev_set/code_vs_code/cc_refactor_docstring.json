@@ -1,0 +1,6 @@
+{
+  "id": "cc_refactor_docstring",
+  "language": "python",
+  "code_a": "class Cart:\n    def total(self) -> float:\n        s = 0\n        for x in self.items:\n            s += x.price\n        return s\n",
+  "code_b": "class Cart:\n    def total(self) -> float:\n        \"\"\"Sum of item prices.\"\"\"\n        return sum(x.price for x in self.items)\n"
+}

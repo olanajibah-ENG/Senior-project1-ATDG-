@@ -1,0 +1,6 @@
+{
+  "id": "cc_required_param",
+  "language": "python",
+  "code_a": "class Api:\n    def call(self, url: str) -> dict:\n        return self.http.get(url)\n",
+  "code_b": "class Api:\n    def call(self, url: str, token: str) -> dict:\n        return self.http.get(url, headers={\"Authorization\": token})\n"
+}

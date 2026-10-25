@@ -1,0 +1,6 @@
+{
+  "id": "cc_return_type",
+  "language": "python",
+  "code_a": "class Order:\n    def total(self) -> int:\n        return sum(i.cents for i in self.items)\n",
+  "code_b": "class Order:\n    def total(self) -> str:\n        return f\"{sum(i.cents for i in self.items) / 100:.2f}\"\n"
+}

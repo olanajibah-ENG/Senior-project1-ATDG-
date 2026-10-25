@@ -1,0 +1,6 @@
+{
+  "id": "cc_added_method",
+  "language": "python",
+  "code_a": "class Shelf:\n    def size(self) -> int:\n        return len(self.items)\n",
+  "code_b": "class Shelf:\n    def size(self) -> int:\n        return len(self.items)\n\n    def capacity(self) -> int:\n        return self.max_items\n"
+}

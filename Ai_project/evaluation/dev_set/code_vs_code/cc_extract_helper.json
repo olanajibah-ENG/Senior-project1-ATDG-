@@ -1,0 +1,6 @@
+{
+  "id": "cc_extract_helper",
+  "language": "python",
+  "code_a": "class Invoice:\n    def total(self) -> float:\n        return sum(l.qty * l.price for l in self.lines) * (1 + self.tax)\n",
+  "code_b": "class Invoice:\n    def total(self) -> float:\n        return self._subtotal() * (1 + self.tax)\n\n    def _subtotal(self) -> float:\n        return sum(l.qty * l.price for l in self.lines)\n"
+}

@@ -1,0 +1,47 @@
+sample_id,element,label,secondary_label,unsure,evidence,notes
+doc_user_repo,UserRepository.__init__,Consistent,,0,,draft:claude
+doc_user_repo,UserRepository.get,Direct_Mismatch,,0,"""Raises KeyError if the user does not exist"" vs L6 self.store.get(uid) returns None",draft:claude
+doc_user_repo,UserRepository.add,Over_Promise,,0,"""after validating the email format"" vs L9 stores without any check",draft:claude
+doc_user_repo,UserRepository.remove,Under_Promise,,0,"L12-13 raises ValueError for unknown uid; doc silent",draft:claude
+doc_user_repo,UserRepository.count,Consistent,,0,,draft:claude
+doc_http_client,HttpClient.__init__,Consistent,,0,,draft:claude
+doc_http_client,HttpClient.fetch,Over_Promise,,0,"""Results are cached"" vs L7 always calls self._session.get",draft:claude
+doc_http_client,HttpClient.fetch_with_retry,Consistent,,0,,draft:claude
+doc_http_client,HttpClient.get_json,Consistent,,0,,draft:claude
+doc_http_client,HttpClient.close,skip,,0,,draft:claude; no documentation section
+doc_rectangle_high,Rectangle.__init__,Consistent,,0,,draft:claude
+doc_rectangle_high,Rectangle.area,Consistent,,0,,draft:claude
+doc_rectangle_high,Rectangle.perimeter,Direct_Mismatch,,0,"""twice the sum of width and height"" vs L10 returns self.w * self.h",draft:claude
+doc_rectangle_high,Rectangle.scale,Direct_Mismatch,,0,"""returns a new Rectangle ... original unchanged"" vs L13-14 mutates self and returns None",draft:claude
+doc_text_utils_docstrings,TextUtils.parse_date,Direct_Mismatch,,0,"""Returns None if the string is invalid"" vs L4 strptime raises ValueError",draft:claude
+doc_text_utils_docstrings,TextUtils.normalize,Over_Promise,,0,"""strip surrounding whitespace"" vs L8 only s.lower()",draft:claude
+doc_text_utils_docstrings,TextUtils.save,Under_Promise,,0,"L12-13 deletes an existing file at path; doc silent",draft:claude
+doc_text_utils_docstrings,TextUtils.word_count,Consistent,,0,,draft:claude
+doc_mailer_params,Mailer.send,Direct_Mismatch,,0,"""retries ... (default 3)"" vs L2 retries: int = 5",draft:claude
+doc_mailer_params,Mailer.format_name,Consistent,,0,,draft:claude
+doc_counter_threadsafe,Counter,Over_Promise,,0,"""A thread-safe counter"" vs no lock anywhere in the class",draft:claude; class-level claim
+doc_counter_threadsafe,Counter.__init__,Consistent,,0,,draft:claude
+doc_counter_threadsafe,Counter.increment,Over_Promise,,0,"""Atomically increments the counter under a lock"" vs L6 plain self.value += 1",draft:claude
+doc_counter_threadsafe,Counter.reset,Consistent,,0,,draft:claude
+doc_inventory_java,Inventory.Inventory,Consistent,,0,,draft:claude; constructor
+doc_inventory_java,Inventory.quantity,Direct_Mismatch,,0,"""Throws IllegalArgumentException when the sku is unknown"" vs L6 getOrDefault(sku, 0) returns 0",draft:claude
+doc_inventory_java,Inventory.remove,Over_Promise,,0,"""Throws IllegalStateException if there is not enough stock"" vs L9-10 no stock check",draft:claude
+doc_inventory_java,Inventory.has,Consistent,,0,,draft:claude
+doc_real_book_high_1,Book,Over_Promise,,0,"Key Capabilities ""Store and retrieve book metadata (title, author, ISBN)"" vs no getAuthor in the class",draft:claude; real doc; class-level claim
+doc_real_book_high_1,Book.Book,Consistent,,0,,draft:claude; real doc; constructor
+doc_real_book_high_1,Book.getTitle,Consistent,,0,,draft:claude; real doc
+doc_real_book_high_1,Book.getIsbn,Consistent,,0,,draft:claude; real doc
+doc_real_book_high_1,Book.isAvailable,Consistent,,0,,draft:claude; real doc
+doc_real_book_high_1,Book.setAvailable,Consistent,,0,,draft:claude; real doc
+doc_real_book_high_2,Book,Over_Promise,,0,"Key Capabilities ""Retrieve the book's title, author, and ISBN"" vs no getAuthor in the class",draft:claude; real doc; class-level claim
+doc_real_book_high_2,Book.Book,Consistent,,0,,draft:claude; real doc; constructor
+doc_real_book_high_2,Book.getTitle,skip,,0,,draft:claude; real doc; not documented
+doc_real_book_high_2,Book.getIsbn,skip,,0,,draft:claude; real doc; not documented
+doc_real_book_high_2,Book.isAvailable,skip,,0,,draft:claude; real doc; not documented
+doc_real_book_high_2,Book.setAvailable,Consistent,,0,,draft:claude; real doc; header uses Python-style self but content is correct
+doc_real_book_low,Book,Consistent,,0,,draft:claude; real doc; explicitly notes author has no getter
+doc_real_book_low,Book.Book,Consistent,,0,,draft:claude; real doc; constructor
+doc_real_book_low,Book.getTitle,Consistent,,0,,draft:claude; real doc
+doc_real_book_low,Book.getIsbn,Consistent,,0,,draft:claude; real doc
+doc_real_book_low,Book.isAvailable,Consistent,,0,,draft:claude; real doc
+doc_real_book_low,Book.setAvailable,Consistent,,0,,draft:claude; real doc

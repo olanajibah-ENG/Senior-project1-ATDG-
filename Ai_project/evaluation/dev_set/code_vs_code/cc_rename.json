@@ -1,0 +1,6 @@
+{
+  "id": "cc_rename",
+  "language": "python",
+  "code_a": "class Svc:\n    def fetchUser(self, uid: int) -> dict:\n        return self.db.load(uid)\n",
+  "code_b": "class Svc:\n    def get_user(self, uid: int) -> dict:\n        return self.db.load(uid)\n"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "doc_inventory_java",
+  "language": "java",
+  "code": "public class Inventory {\n    private Map<String, Integer> stock = new HashMap<>();\n\n    public Inventory() { }\n\n    public int quantity(String sku) { return stock.getOrDefault(sku, 0); }\n\n    public void remove(String sku, int n) {\n        int q = quantity(sku);\n        stock.put(sku, q - n);\n    }\n\n    public boolean has(String sku) { return stock.containsKey(sku); }\n}\n",
+  "doc": {
+    "content": "## Class: Inventory\n**Purpose:** Tracks stock levels per SKU.\n\n### Constructor: Inventory\n**Description:** Creates an empty inventory.\n\n### Method: quantity\n**Description:** Returns the stock level for the given sku.\n**Error Handling:** Throws IllegalArgumentException when the sku is unknown.\n\n### Method: remove\n**Description:** Removes n units of the sku. Throws IllegalStateException if there is not enough stock.\n\n### Method: has\n**Description:** Returns true if the sku exists in the inventory.\n**Returns:** boolean\n",
+    "explanation_type": "low_level"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "id": "cc_find_default",
+  "language": "python",
+  "code_a": "class Store:\n    def find(self, k: str) -> int:\n        return self.d[k]\n",
+  "code_b": "class Store:\n    def find(self, k: str) -> int:\n        return self.d.get(k, -1)\n"
+}

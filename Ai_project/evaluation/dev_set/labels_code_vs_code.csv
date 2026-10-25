@@ -1,0 +1,21 @@
+sample_id,element,change_kind,Q1,Q2,Q3,private,unsure,evidence,notes
+cc_find_default,Store.find,modified,0,1,1,0,0,"find(""x"") with empty d: KeyError -> -1",draft:claude
+cc_rename,Svc.fetchUser,removed,1,0,1,0,0,,draft:claude; rename (same body as get_user)
+cc_rename,Svc.get_user,added,1,0,0,0,0,,draft:claude; rename target
+cc_refactor_docstring,Cart.total,modified,0,0,0,0,0,,draft:claude; equivalent refactor + docstring
+cc_default_change,Conn.connect,modified,1,1,1,0,0,"connect(""h"") opens with timeout 30 -> 5",draft:claude
+cc_optional_param,Report.render,modified,1,0,0,0,0,,draft:claude; title=None keeps old output
+cc_required_param,Api.call,modified,1,0,1,0,0,,draft:claude; old call(url) now TypeError
+cc_none_instead_of_raise,Repo.get,modified,0,1,1,0,0,"get(missing): KeyError -> None",draft:claude
+cc_comment_only,Calc.add,modified,0,0,0,0,0,,draft:claude; comments/whitespace only
+cc_removed_method,Billing.legacy_charge,removed,1,0,1,0,0,,draft:claude
+cc_added_method,Shelf.capacity,added,1,0,0,0,0,,draft:claude; Shelf.size unchanged (same shape -> false rename probe)
+cc_private_behavior,Parser._clean,modified,0,1,1,1,0,"_clean("" A "") : ""A"" -> "" a """,draft:claude
+cc_method_to_property,Person.full_name,modified,1,0,1,0,0,,draft:claude; p.full_name() now TypeError
+cc_return_type,Order.total,modified,1,1,1,0,0,"total() 1234 -> ""12.34""",draft:claude
+cc_extract_helper,Invoice.total,modified,0,0,0,0,0,,draft:claude; equivalent extract-method refactor
+cc_extract_helper,Invoice._subtotal,added,1,0,0,1,0,,draft:claude
+cc_class_removed,OldPayment,removed,1,0,1,0,0,,draft:claude; whole class removed
+cc_java_account,Account.Account,modified,1,0,1,0,0,,draft:claude; new Account(id) no longer compiles
+cc_java_account,Account.withdraw,modified,0,1,1,0,0,"withdraw(100) with balance 0: IllegalStateException -> balance -100",draft:claude
+cc_java_equivalent,MathUtil.max,modified,0,0,0,0,0,,draft:claude; ternary -> Math.max equivalent

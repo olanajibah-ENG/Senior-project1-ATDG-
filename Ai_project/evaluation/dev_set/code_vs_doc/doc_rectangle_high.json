@@ -1,0 +1,9 @@
+{
+  "id": "doc_rectangle_high",
+  "language": "python",
+  "code": "class Rectangle:\n    def __init__(self, w: float, h: float):\n        self.w = w\n        self.h = h\n\n    def area(self) -> float:\n        return self.w * self.h\n\n    def perimeter(self) -> float:\n        return self.w * self.h\n\n    def scale(self, k: float) -> None:\n        self.w *= k\n        self.h *= k\n",
+  "doc": {
+    "content": "---\n## Executive Summary\nRectangle models a rectangle and computes its basic geometry.\n\n## Class: Rectangle\nPurpose:\nRepresents a rectangle defined by its width and height.\n\n### Constructor: __init__(self, w, h)\nLogic Flow:\n1. Stores the width and height.\n\n### Method: area(self)\nLogic Flow:\n1. Multiplies width by height and returns the result.\n\n### Method: perimeter(self)\nLogic Flow:\n1. Returns twice the sum of width and height.\n\n### Method: scale(self, k)\nLogic Flow:\n1. Creates and returns a new Rectangle whose sides are multiplied by k.\n2. The original rectangle is left unchanged.\n",
+    "explanation_type": "high_level"
+  }
+}

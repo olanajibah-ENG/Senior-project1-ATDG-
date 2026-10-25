@@ -1,0 +1,1396 @@
+{
+ "snapshot_hash": "a8649b221ee7587b4516d5edfbd8963b05c3ccc44b003686b710048df1b387da",
+ "results": [
+  {
+   "id": "cc_added_method",
+   "language": "python",
+   "structural_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "new_feature",
+     "severity": "info",
+     "element": null,
+     "class_name": "Shelf",
+     "member": "capacity",
+     "line_number": null,
+     "description": "تمت إضافة دالة جديدة 'capacity'",
+     "old_value": null,
+     "new_value": "capacity(): int",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "وثّق الدالة الجديدة",
+     "affected_files": [],
+     "recommendation": null,
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": null,
+     "category": "method_added"
+    },
+    {
+     "conflict_id": null,
+     "type": "behavior_change",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Shelf",
+     "member": "size",
+     "line_number": null,
+     "description": "Renamed from size to capacity",
+     "old_value": "size",
+     "new_value": "capacity",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": null,
+     "auto_fix_available": false,
+     "ai_confidence": 0.92,
+     "doc_type": null,
+     "category": null
+    }
+   ],
+   "semantic_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "new_feature",
+     "severity": "low",
+     "element": null,
+     "class_name": "Shelf",
+     "member": "capacity",
+     "line_number": null,
+     "description": "A new method 'capacity' has been added to the Shelf class. This method did not exist in the previous version and represents a new feature or capability being introduced.",
+     "old_value": "No 'capacity' method existed in the Shelf class.",
+     "new_value": "A new public method 'capacity(): int' has been added to the Shelf class.",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": "No action required unless the new method is expected to be used immediately. Ensure documentation is updated to reflect the new capability.",
+     "auto_fix_available": false,
+     "ai_confidence": 0.95,
+     "doc_type": null,
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_added_method",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5279,
+     "started_at": "2026-10-25T19:44:32.288867+00:00",
+     "ok": true,
+     "transport_attempts": 1,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1340,
+      "completion_tokens": 185,
+      "total_tokens": 1525,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "```json\n{\n    \"conflicts\": [\n        {\n            \"type\": \"new_feature\",\n            \"severity\": \"low\",\n            \"class_name\": \"Shelf\",\n            \"member\": \"capacity\",\n            \"description\": \"A new method 'capacity' has been added to the Shelf class. This method did not exist in the previous version and represents a new feature or capability being introduced.\",\n            \"old_value\": \"No 'capacity' method existed in the Shelf class.\",\n            \"new_value\": \"A new public method 'capacity(): int' has been added to the Shelf class.\",\n            \"recommendation\": \"No action required unless the new method is expected to be used immediately. Ensure documentation is updated to reflect the new capability.\",\n            \"confidence\": 0.95\n        }\n    ]\n}\n```",
+     "latency_s": 5.34
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_class_removed",
+   "language": "python",
+   "structural_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "breaking_change",
+     "severity": "critical",
+     "element": null,
+     "class_name": "OldPayment",
+     "member": null,
+     "line_number": null,
+     "description": "تم حذف الكلاس 'OldPayment' بالكامل (1 public methods)",
+     "old_value": "class OldPayment [pay]",
+     "new_value": null,
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": "Breaking Change - جميع الاستخدامات ستفشل فوراً",
+     "suggestion": "تحقق: هل تمت إعادة تسمية 'OldPayment'؟ هل توجد كلاس بديلة؟ تأكد من تحديث كل الاستدعاءات",
+     "affected_files": [],
+     "recommendation": null,
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": null,
+     "category": "class_removed"
+    }
+   ],
+   "semantic_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "breaking_change",
+     "severity": "critical",
+     "element": null,
+     "class_name": "OldPayment",
+     "member": null,
+     "line_number": null,
+     "description": "Class 'OldPayment' present in Diagram A has been completely removed in Diagram B. All references to this class will cause compilation or runtime errors.",
+     "old_value": "Class 'OldPayment' existed with method 'pay(amount: float): bool'",
+     "new_value": "Class 'OldPayment' no longer exists in the current version",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": "Migrate all usages of 'OldPayment' to the 'Payment' class, ensuring equivalent behavior is preserved.",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": null,
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_class_removed",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5480,
+     "started_at": "2026-10-25T19:44:37.637520+00:00",
+     "ok": true,
+     "transport_attempts": 1,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1401,
+      "completion_tokens": 137,
+      "total_tokens": 1538,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "{\"conflicts\": [{\"type\": \"breaking_change\", \"severity\": \"critical\", \"class_name\": \"OldPayment\", \"member\": null, \"description\": \"Class 'OldPayment' present in Diagram A has been completely removed in Diagram B. All references to this class will cause compilation or runtime errors.\", \"old_value\": \"Class 'OldPayment' existed with method 'pay(amount: float): bool'\", \"new_value\": \"Class 'OldPayment' no longer exists in the current version\", \"recommendation\": \"Migrate all usages of 'OldPayment' to the 'Payment' class, ensuring equivalent behavior is preserved.\", \"confidence\": 1.0}]}",
+     "latency_s": 5.97
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_comment_only",
+   "language": "python",
+   "structural_conflicts": [],
+   "semantic_conflicts": [],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_comment_only",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5076,
+     "started_at": "2026-10-25T19:44:43.610285+00:00",
+     "ok": true,
+     "transport_attempts": 1,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1296,
+      "completion_tokens": 7,
+      "total_tokens": 1303,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "{\"conflicts\": []}",
+     "latency_s": 2.65
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_default_change",
+   "language": "python",
+   "structural_conflicts": [],
+   "semantic_conflicts": [],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_default_change",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5112,
+     "started_at": "2026-10-25T19:44:46.260954+00:00",
+     "ok": true,
+     "transport_attempts": 1,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1296,
+      "completion_tokens": 7,
+      "total_tokens": 1303,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "{\"conflicts\": []}",
+     "latency_s": 2.77
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_extract_helper",
+   "language": "python",
+   "structural_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "new_feature",
+     "severity": "info",
+     "element": null,
+     "class_name": "Invoice",
+     "member": "_subtotal",
+     "line_number": null,
+     "description": "تمت إضافة دالة جديدة '_subtotal'",
+     "old_value": null,
+     "new_value": "_subtotal(): float",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "وثّق الدالة الجديدة",
+     "affected_files": [],
+     "recommendation": null,
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": null,
+     "category": "method_added"
+    },
+    {
+     "conflict_id": null,
+     "type": "behavior_change",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Invoice",
+     "member": "total",
+     "line_number": null,
+     "description": "Renamed from total to _subtotal",
+     "old_value": "total",
+     "new_value": "_subtotal",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": null,
+     "auto_fix_available": false,
+     "ai_confidence": 0.92,
+     "doc_type": null,
+     "category": null
+    }
+   ],
+   "semantic_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "new_feature",
+     "severity": "low",
+     "element": null,
+     "class_name": "Invoice",
+     "member": "_subtotal",
+     "line_number": null,
+     "description": "A new protected method '_subtotal' has been added to the Invoice class. This method was not present in the previous version and is now available for internal or subclass use.",
+     "old_value": "No '_subtotal' method existed in the Invoice class.",
+     "new_value": "A protected method '_subtotal(): float' has been introduced.",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": "Ensure that subclasses or internal logic that may rely on this method are updated accordingly. No immediate action required unless subclasses need to override or use this method.",
+     "auto_fix_available": false,
+     "ai_confidence": 0.95,
+     "doc_type": null,
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_extract_helper",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5298,
+     "started_at": "2026-10-25T19:44:49.038404+00:00",
+     "ok": true,
+     "transport_attempts": 1,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1340,
+      "completion_tokens": 187,
+      "total_tokens": 1527,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "```json\n{\n    \"conflicts\": [\n        {\n            \"type\": \"new_feature\",\n            \"severity\": \"low\",\n            \"class_name\": \"Invoice\",\n            \"member\": \"_subtotal\",\n            \"description\": \"A new protected method '_subtotal' has been added to the Invoice class. This method was not present in the previous version and is now available for internal or subclass use.\",\n            \"old_value\": \"No '_subtotal' method existed in the Invoice class.\",\n            \"new_value\": \"A protected method '_subtotal(): float' has been introduced.\",\n            \"recommendation\": \"Ensure that subclasses or internal logic that may rely on this method are updated accordingly. No immediate action required unless subclasses need to override or use this method.\",\n            \"confidence\": 0.95\n        }\n    ]\n}\n```",
+     "latency_s": 11.4
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_find_default",
+   "language": "python",
+   "structural_conflicts": [],
+   "semantic_conflicts": [],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_find_default",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5066,
+     "started_at": "2026-10-25T19:45:00.437235+00:00",
+     "ok": true,
+     "transport_attempts": 1,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1288,
+      "completion_tokens": 7,
+      "total_tokens": 1295,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 64,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "{\"conflicts\": []}",
+     "latency_s": 3.42
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_java_account",
+   "language": "java",
+   "structural_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "new_feature",
+     "severity": "info",
+     "element": null,
+     "class_name": "Account",
+     "member": "limit",
+     "line_number": null,
+     "description": "تمت إضافة خاصية جديدة 'limit'",
+     "old_value": null,
+     "new_value": "int",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "وثّق الخاصية الجديدة",
+     "affected_files": [],
+     "recommendation": null,
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": null,
+     "category": "attribute_added"
+    }
+   ],
+   "semantic_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "new_feature",
+     "severity": "low",
+     "element": null,
+     "class_name": "Account",
+     "member": "limit",
+     "line_number": null,
+     "description": "A new private attribute 'limit' of type int has been added to the Account class. This attribute is not exposed through any method and does not alter existing method signatures or behavior.",
+     "old_value": "Account had attributes: id (String, private), balance (int, private)",
+     "new_value": "Account now has attributes: id (String, private), balance (int, private), limit (int, private)",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": "No action required unless the 'limit' attribute is intended to be used in business logic (e.g., enforcing withdrawal limits). If so, ensure the withdraw method is updated to respect this limit.",
+     "auto_fix_available": false,
+     "ai_confidence": 0.95,
+     "doc_type": null,
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_java_account",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 6159,
+     "started_at": "2026-10-25T19:45:03.856703+00:00",
+     "ok": false,
+     "error": "HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"poolside/laguna-s-2.1:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Poolside\",\"is_byok\":fal",
+     "latency_s": 67.2
+    },
+    {
+     "sample_id": "cc_java_account",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 6159,
+     "started_at": "2026-10-25T19:46:11.061050+00:00",
+     "ok": true,
+     "transport_attempts": 2,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1572,
+      "completion_tokens": 210,
+      "total_tokens": 1782,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "```json\n{\n    \"conflicts\": [\n        {\n            \"type\": \"new_feature\",\n            \"severity\": \"low\",\n            \"class_name\": \"Account\",\n            \"member\": \"limit\",\n            \"description\": \"A new private attribute 'limit' of type int has been added to the Account class. This attribute is not exposed through any method and does not alter existing method signatures or behavior.\",\n            \"old_value\": \"Account had attributes: id (String, private), balance (int, private)\",\n            \"new_value\": \"Account now has attributes: id (String, private), balance (int, private), limit (int, private)\",\n            \"recommendation\": \"No action required unless the 'limit' attribute is intended to be used in business logic (e.g., enforcing withdrawal limits). If so, ensure the withdraw method is updated to respect this limit.\",\n            \"confidence\": 0.95\n        }\n    ]\n}\n```",
+     "latency_s": 20.04
+    }
+   ],
+   "llm_call_count": 2,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_java_equivalent",
+   "language": "java",
+   "structural_conflicts": [],
+   "semantic_conflicts": [],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_java_equivalent",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5084,
+     "started_at": "2026-10-25T19:46:31.099537+00:00",
+     "ok": true,
+     "transport_attempts": 1,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1298,
+      "completion_tokens": 7,
+      "total_tokens": 1305,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "{\"conflicts\": []}",
+     "latency_s": 2.36
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_method_to_property",
+   "language": "python",
+   "structural_conflicts": [],
+   "semantic_conflicts": [],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_method_to_property",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5076,
+     "started_at": "2026-10-25T19:46:33.459462+00:00",
+     "ok": true,
+     "transport_attempts": 2,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1286,
+      "completion_tokens": 7,
+      "total_tokens": 1293,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "{\"conflicts\": []}",
+     "latency_s": 13.8
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_none_instead_of_raise",
+   "language": "python",
+   "structural_conflicts": [],
+   "semantic_conflicts": [],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_none_instead_of_raise",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5066,
+     "started_at": "2026-10-25T19:46:47.265123+00:00",
+     "ok": true,
+     "transport_attempts": 1,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1288,
+      "completion_tokens": 7,
+      "total_tokens": 1295,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "{\"conflicts\": []}",
+     "latency_s": 2.15
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_optional_param",
+   "language": "python",
+   "structural_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "breaking_change",
+     "severity": "critical",
+     "element": null,
+     "class_name": "Report",
+     "member": "render",
+     "line_number": null,
+     "description": "تغيّرت signature الدالة 'render' في 'Report'",
+     "old_value": "render(data: list): str",
+     "new_value": "render(data: list, title: str): str",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": "Breaking change - الاستدعاءات ستفشل",
+     "suggestion": "حدّث جميع الاستدعاءات أو أنشئ wrapper للتوافق",
+     "affected_files": [],
+     "recommendation": null,
+     "auto_fix_available": true,
+     "ai_confidence": 0.95,
+     "doc_type": null,
+     "category": "method_signature_changed"
+    }
+   ],
+   "semantic_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "breaking_change",
+     "severity": "high",
+     "element": null,
+     "class_name": "Report",
+     "member": "render",
+     "line_number": null,
+     "description": "The render method signature was changed by adding a new required parameter 'title' of type str. This breaks all existing callers that invoke render with only the 'data' parameter.",
+     "old_value": "render(data: list): str",
+     "new_value": "render(data: list, title: str): str",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": "Add a default value for the 'title' parameter (e.g., title: str = '') to maintain backward compatibility, or update all call sites to pass the 'title' argument.",
+     "auto_fix_available": false,
+     "ai_confidence": 0.95,
+     "doc_type": null,
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_optional_param",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5096,
+     "started_at": "2026-10-25T19:46:49.416897+00:00",
+     "ok": true,
+     "transport_attempts": 1,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1292,
+      "completion_tokens": 186,
+      "total_tokens": 1478,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "```json\n{\n    \"conflicts\": [\n        {\n            \"type\": \"breaking_change\",\n            \"severity\": \"high\",\n            \"class_name\": \"Report\",\n            \"member\": \"render\",\n            \"description\": \"The render method signature was changed by adding a new required parameter 'title' of type str. This breaks all existing callers that invoke render with only the 'data' parameter.\",\n            \"old_value\": \"render(data: list): str\",\n            \"new_value\": \"render(data: list, title: str): str\",\n            \"recommendation\": \"Add a default value for the 'title' parameter (e.g., title: str = '') to maintain backward compatibility, or update all call sites to pass the 'title' argument.\",\n            \"confidence\": 0.95\n        }\n    ]\n}\n```",
+     "latency_s": 7.98
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_private_behavior",
+   "language": "python",
+   "structural_conflicts": [],
+   "semantic_conflicts": [],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_private_behavior",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5534,
+     "started_at": "2026-10-25T19:46:57.395226+00:00",
+     "ok": true,
+     "transport_attempts": 1,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1406,
+      "completion_tokens": 7,
+      "total_tokens": 1413,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "{\"conflicts\": []}",
+     "latency_s": 3.01
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_refactor_docstring",
+   "language": "python",
+   "structural_conflicts": [],
+   "semantic_conflicts": [],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_refactor_docstring",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5060,
+     "started_at": "2026-10-25T19:47:00.405956+00:00",
+     "ok": true,
+     "transport_attempts": 1,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1282,
+      "completion_tokens": 7,
+      "total_tokens": 1289,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "{\"conflicts\": []}",
+     "latency_s": 2.87
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_removed_method",
+   "language": "python",
+   "structural_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "breaking_change",
+     "severity": "high",
+     "element": null,
+     "class_name": "Billing",
+     "member": "legacy_charge",
+     "line_number": null,
+     "description": "تم حذف الدالة 'legacy_charge' من 'Billing'",
+     "old_value": "legacy_charge(amount: float): bool",
+     "new_value": null,
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": "Breaking Change - الاستدعاءات ستفشل",
+     "suggestion": "أعد الدالة أو حدّث كل الاستدعاءات",
+     "affected_files": [],
+     "recommendation": null,
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": null,
+     "category": "method_removed"
+    },
+    {
+     "conflict_id": null,
+     "type": "behavior_change",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Billing",
+     "member": "legacy_charge",
+     "line_number": null,
+     "description": "Renamed from legacy_charge to charge",
+     "old_value": "legacy_charge",
+     "new_value": "charge",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": null,
+     "auto_fix_available": false,
+     "ai_confidence": 0.92,
+     "doc_type": null,
+     "category": null
+    }
+   ],
+   "semantic_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "breaking_change",
+     "severity": "high",
+     "element": null,
+     "class_name": "Billing",
+     "member": "legacy_charge",
+     "line_number": null,
+     "description": "The method 'legacy_charge' was present in the previous version (Diagram A) but has been removed in the current version (Diagram B). This is a breaking change for any code that calls 'legacy_charge'.",
+     "old_value": "legacy_charge(amount: float): bool",
+     "new_value": "Method no longer exists",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": "If 'legacy_charge' was intended to be deprecated, ensure all callers have been migrated to 'charge'. If it is still needed, restore the method or provide a deprecation wrapper.",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": null,
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_removed_method",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5343,
+     "started_at": "2026-10-25T19:47:03.280235+00:00",
+     "ok": true,
+     "transport_attempts": 1,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1349,
+      "completion_tokens": 151,
+      "total_tokens": 1500,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "{\"conflicts\": [{\"type\": \"breaking_change\", \"severity\": \"high\", \"class_name\": \"Billing\", \"member\": \"legacy_charge\", \"description\": \"The method 'legacy_charge' was present in the previous version (Diagram A) but has been removed in the current version (Diagram B). This is a breaking change for any code that calls 'legacy_charge'.\", \"old_value\": \"legacy_charge(amount: float): bool\", \"new_value\": \"Method no longer exists\", \"recommendation\": \"If 'legacy_charge' was intended to be deprecated, ensure all callers have been migrated to 'charge'. If it is still needed, restore the method or provide a deprecation wrapper.\", \"confidence\": 1.0}]}",
+     "latency_s": 7.18
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_rename",
+   "language": "python",
+   "structural_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "refactoring",
+     "severity": "low",
+     "element": null,
+     "class_name": "Svc",
+     "member": "fetchUser",
+     "line_number": null,
+     "description": "تمت إعادة تسمية 'fetchUser' إلى 'get_user'",
+     "old_value": "fetchUser",
+     "new_value": "get_user",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": "Refactoring - يجب تحديث الاستدعاءات",
+     "suggestion": "استخدم Find & Replace لتحديث 'fetchUser' → 'get_user'",
+     "affected_files": [],
+     "recommendation": null,
+     "auto_fix_available": true,
+     "ai_confidence": 1.0,
+     "doc_type": null,
+     "category": "method_renamed"
+    },
+    {
+     "conflict_id": null,
+     "type": "behavior_change",
+     "severity": "medium",
+     "element": null,
+     "class_name": "Svc",
+     "member": "fetchUser",
+     "line_number": null,
+     "description": "Renamed from fetchUser to get_user",
+     "old_value": "fetchUser",
+     "new_value": "get_user",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": null,
+     "auto_fix_available": false,
+     "ai_confidence": 0.92,
+     "doc_type": null,
+     "category": null
+    }
+   ],
+   "semantic_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "refactoring",
+     "severity": "high",
+     "element": null,
+     "class_name": "Svc",
+     "member": "fetchUser",
+     "line_number": null,
+     "description": "Method 'fetchUser' has been renamed to 'get_user'. The signature remains identical (uid: int): dict, but the method name change is a breaking change for all existing callers that reference 'fetchUser'.",
+     "old_value": "fetchUser(uid: int): dict",
+     "new_value": "get_user(uid: int): dict",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": "Update all call sites to use the new method name 'get_user', or provide a backward-compatible alias 'fetchUser' that delegates to 'get_user'.",
+     "auto_fix_available": false,
+     "ai_confidence": 0.95,
+     "doc_type": null,
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_rename",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5086,
+     "started_at": "2026-10-25T19:47:10.462469+00:00",
+     "ok": true,
+     "transport_attempts": 2,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1292,
+      "completion_tokens": 152,
+      "total_tokens": 1444,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "{\"conflicts\": [{\"type\": \"refactoring\", \"severity\": \"high\", \"class_name\": \"Svc\", \"member\": \"fetchUser\", \"description\": \"Method 'fetchUser' has been renamed to 'get_user'. The signature remains identical (uid: int): dict, but the method name change is a breaking change for all existing callers that reference 'fetchUser'.\", \"old_value\": \"fetchUser(uid: int): dict\", \"new_value\": \"get_user(uid: int): dict\", \"recommendation\": \"Update all call sites to use the new method name 'get_user', or provide a backward-compatible alias 'fetchUser' that delegates to 'get_user'.\", \"confidence\": 0.95}]}",
+     "latency_s": 21.26
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_required_param",
+   "language": "python",
+   "structural_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "breaking_change",
+     "severity": "critical",
+     "element": null,
+     "class_name": "Api",
+     "member": "call",
+     "line_number": null,
+     "description": "تغيّرت signature الدالة 'call' في 'Api'",
+     "old_value": "call(url: str): dict",
+     "new_value": "call(url: str, token: str): dict",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": "Breaking change - الاستدعاءات ستفشل",
+     "suggestion": "حدّث جميع الاستدعاءات أو أنشئ wrapper للتوافق",
+     "affected_files": [],
+     "recommendation": null,
+     "auto_fix_available": true,
+     "ai_confidence": 0.95,
+     "doc_type": null,
+     "category": "method_signature_changed"
+    }
+   ],
+   "semantic_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "breaking_change",
+     "severity": "high",
+     "element": null,
+     "class_name": "Api",
+     "member": "call",
+     "line_number": null,
+     "description": "The 'call' method signature was changed from 'call(url: str): dict' to 'call(url: str, token: str): dict', adding a new required parameter 'token'.",
+     "old_value": "call(url: str): dict",
+     "new_value": "call(url: str, token: str): dict",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": "Add a default value for the 'token' parameter (e.g., token: str = None) or provide an overload to maintain backward compatibility with existing callers.",
+     "auto_fix_available": false,
+     "ai_confidence": 0.95,
+     "doc_type": null,
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_required_param",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5080,
+     "started_at": "2026-10-25T19:47:31.727872+00:00",
+     "ok": true,
+     "transport_attempts": 2,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1292,
+      "completion_tokens": 185,
+      "total_tokens": 1477,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "```json\n{\n    \"conflicts\": [\n        {\n            \"type\": \"breaking_change\",\n            \"severity\": \"high\",\n            \"class_name\": \"Api\",\n            \"member\": \"call\",\n            \"description\": \"The 'call' method signature was changed from 'call(url: str): dict' to 'call(url: str, token: str): dict', adding a new required parameter 'token'.\",\n            \"old_value\": \"call(url: str): dict\",\n            \"new_value\": \"call(url: str, token: str): dict\",\n            \"recommendation\": \"Add a default value for the 'token' parameter (e.g., token: str = None) or provide an overload to maintain backward compatibility with existing callers.\",\n            \"confidence\": 0.95\n        }\n    ]\n}\n```",
+     "latency_s": 19.32
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  },
+  {
+   "id": "cc_return_type",
+   "language": "python",
+   "structural_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "breaking_change",
+     "severity": "critical",
+     "element": null,
+     "class_name": "Order",
+     "member": "total",
+     "line_number": null,
+     "description": "تغيّرت signature الدالة 'total' في 'Order'",
+     "old_value": "total(): int",
+     "new_value": "total(): str",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": "Breaking change - الاستدعاءات ستفشل",
+     "suggestion": "حدّث جميع الاستدعاءات أو أنشئ wrapper للتوافق",
+     "affected_files": [],
+     "recommendation": null,
+     "auto_fix_available": true,
+     "ai_confidence": 0.95,
+     "doc_type": null,
+     "category": "method_signature_changed"
+    }
+   ],
+   "semantic_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "breaking_change",
+     "severity": "high",
+     "element": null,
+     "class_name": "Order",
+     "member": "total",
+     "line_number": null,
+     "description": "The return type of the 'total' method has changed from 'int' to 'str', which breaks any existing callers expecting an integer value.",
+     "old_value": "total(): int",
+     "new_value": "total(): str",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": null,
+     "affected_files": [],
+     "recommendation": "Update all callers of the 'total' method to handle string return values, or revert the return type to 'int' if integer behavior is required.",
+     "auto_fix_available": false,
+     "ai_confidence": 0.95,
+     "doc_type": null,
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [
+    {
+     "sample_id": "cc_return_type",
+     "requested_model": "poolside/laguna-s-2.1:free",
+     "requested_temperature": 0.0,
+     "temperature": 0.0,
+     "seed": 42,
+     "prompt_chars": 5058,
+     "started_at": "2026-10-25T19:47:51.054183+00:00",
+     "ok": true,
+     "transport_attempts": 1,
+     "served_model": "poolside/laguna-s-2.1:free",
+     "provider": "Poolside",
+     "usage": {
+      "prompt_tokens": 1282,
+      "completion_tokens": 163,
+      "total_tokens": 1445,
+      "cost": 0,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0,
+       "upstream_inference_prompt_cost": 0,
+       "upstream_inference_completions_cost": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "raw_response": "```json\n{\n    \"conflicts\": [\n        {\n            \"type\": \"breaking_change\",\n            \"severity\": \"high\",\n            \"class_name\": \"Order\",\n            \"member\": \"total\",\n            \"description\": \"The return type of the 'total' method has changed from 'int' to 'str', which breaks any existing callers expecting an integer value.\",\n            \"old_value\": \"total(): int\",\n            \"new_value\": \"total(): str\",\n            \"recommendation\": \"Update all callers of the 'total' method to handle string return values, or revert the return type to 'int' if integer behavior is required.\",\n            \"confidence\": 0.95\n        }\n    ]\n}\n```",
+     "latency_s": 6.23
+    }
+   ],
+   "llm_call_count": 1,
+   "semantic_failed": false
+  }
+ ]
+}

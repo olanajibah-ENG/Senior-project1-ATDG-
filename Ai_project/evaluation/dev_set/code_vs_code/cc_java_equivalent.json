@@ -1,0 +1,6 @@
+{
+  "id": "cc_java_equivalent",
+  "language": "java",
+  "code_a": "public class MathUtil {\n    public int max(int a, int b) { return a > b ? a : b; }\n}\n",
+  "code_b": "public class MathUtil {\n    public int max(int a, int b) { return Math.max(a, b); }\n}\n"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "doc_real_book_high_2",
+  "language": "java",
+  "code": "package models;\r\n\r\npublic class Book {\r\n    private String title;\r\n    private String author;\r\n    private String isbn;\r\n    private boolean available;\r\n\r\n    public Book(String title, String author, String isbn) {\r\n        this.title = title;\r\n        this.author = author;\r\n        this.isbn = isbn;\r\n        this.available = true;\r\n    }\r\n\r\n    public String getTitle() { return title; }\r\n    public String getIsbn() { return isbn; }\r\n    public boolean isAvailable() { return available; }\r\n    public void setAvailable(boolean available) { this.available = available; }\r\n}\n",
+  "doc": {
+    "content": "---\n## Executive Summary\nThe Book class models a book entity, storing its title, author, ISBN, and availability status, and provides methods to access and modify these properties.\n\n## Purpose & Responsibility\nPurpose: Represents a book with its bibliographic details and availability state.  \nResponsibility: Manages the book's data fields and its availability flag.  \n- Stores title, author, and ISBN information.  \n- Tracks whether the book is currently available.  \n- Exposes methods to retrieve and update its state.\n\n## Key Capabilities\n- Retrieve the book's title, author, and ISBN.  \n- Check the current availability status.  \n- Set the availability status to true or false.\n\n---\n\n## Class: Book\nPurpose:\nEncapsulates the data and behavior of a book, including its bibliographic attributes and availability state, providing accessor and mutator methods.\n\n### Constructor: Book(String title, String author, String isbn)\nLogic Flow:\n1. Accepts the book's title, author, and ISBN as parameters.  \n2. Assigns these values to the corresponding instance fields and initializes availability to true.\n\n### Method: setAvailable(self, available: boolean)\nLogic Flow:\n1. Updates the internal available flag with the provided boolean value.  \n2. No further actions are required.",
+    "explanation_type": "high_level"
+  },
+  "source": "ai_explanations/6aceb9997cc4fde32443cd3c"
+}

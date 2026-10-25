@@ -1,0 +1,6 @@
+{
+  "id": "cc_comment_only",
+  "language": "python",
+  "code_a": "class Calc:\n    def add(self, a: int, b: int) -> int:\n        # add two numbers\n        return a + b\n",
+  "code_b": "class Calc:\n    def add(self, a: int, b: int) -> int:\n        # returns the sum\n        return  a + b   # simple\n"
+}

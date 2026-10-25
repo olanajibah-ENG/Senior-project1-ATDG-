@@ -1,0 +1,6 @@
+{
+  "id": "cc_private_behavior",
+  "language": "python",
+  "code_a": "class Parser:\n    def parse(self, s: str) -> list:\n        return self._clean(s).split(\",\")\n\n    def _clean(self, s: str) -> str:\n        return s.strip()\n",
+  "code_b": "class Parser:\n    def parse(self, s: str) -> list:\n        return self._clean(s).split(\",\")\n\n    def _clean(self, s: str) -> str:\n        return s.lower()\n"
+}

@@ -1,0 +1,6 @@
+{
+  "id": "cc_java_account",
+  "language": "java",
+  "code_a": "public class Account {\n    private String id;\n    private int balance;\n    public Account(String id) { this.id = id; }\n    public void withdraw(int amount) {\n        if (amount > balance) { throw new IllegalStateException(\"insufficient funds\"); }\n        balance -= amount;\n    }\n    public int getBalance() { return balance; }\n}\n",
+  "code_b": "public class Account {\n    private String id;\n    private int balance;\n    private int limit;\n    public Account(String id, int limit) { this.id = id; this.limit = limit; }\n    public void withdraw(int amount) {\n        balance -= amount;\n    }\n    public int getBalance() { return balance; }\n}\n"
+}

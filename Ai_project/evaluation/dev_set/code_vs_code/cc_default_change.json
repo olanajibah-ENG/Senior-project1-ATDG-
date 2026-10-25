@@ -1,0 +1,6 @@
+{
+  "id": "cc_default_change",
+  "language": "python",
+  "code_a": "class Conn:\n    def connect(self, host: str, timeout: int = 30) -> bool:\n        return self.sock.open(host, timeout)\n",
+  "code_b": "class Conn:\n    def connect(self, host: str, timeout: int = 5) -> bool:\n        return self.sock.open(host, timeout)\n"
+}

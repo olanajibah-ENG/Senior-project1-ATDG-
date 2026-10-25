@@ -1,0 +1,6 @@
+{
+  "id": "cc_none_instead_of_raise",
+  "language": "python",
+  "code_a": "class Repo:\n    def get(self, uid: int) -> dict:\n        if uid not in self.rows:\n            raise KeyError(uid)\n        return self.rows[uid]\n",
+  "code_b": "class Repo:\n    def get(self, uid: int) -> dict:\n        if uid not in self.rows:\n            return None\n        return self.rows[uid]\n"
+}

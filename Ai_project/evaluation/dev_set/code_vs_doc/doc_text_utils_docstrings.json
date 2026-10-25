@@ -1,0 +1,6 @@
+{
+  "id": "doc_text_utils_docstrings",
+  "language": "python",
+  "doc_source": "python_docstrings",
+  "code": "class TextUtils:\n    def parse_date(self, s: str):\n        \"\"\"Parse an ISO date string (YYYY-MM-DD). Returns None if the string is invalid.\"\"\"\n        return datetime.strptime(s, \"%Y-%m-%d\")\n\n    def normalize(self, s: str) -> str:\n        \"\"\"Lowercase the text and strip surrounding whitespace.\"\"\"\n        return s.lower()\n\n    def save(self, path: str, text: str) -> None:\n        \"\"\"Save the text to path.\"\"\"\n        if os.path.exists(path):\n            os.remove(path)\n        with open(path, \"w\") as f:\n            f.write(text)\n\n    def word_count(self, s: str) -> int:\n        \"\"\"Return the number of whitespace-separated words in s.\"\"\"\n        return len(s.split())\n"
+}
