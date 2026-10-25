@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>تقرير التقدّم 2 — تقسيم التوثيق وخط القياس</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  :root {
+    --ink: #1c2430; --muted: #5a6573; --line: #d9dee5; --accent: #1f5fa8;
+    --accent-bg: #eef4fb; --ok: #1e7d4f; --ok-bg: #e9f6ef; --bad: #b3261e; --bad-bg: #fdecea;
+    --warn: #8a5a00; --warn-bg: #fff6e0; --code-bg: #f4f6f8;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Tahoma, Arial, sans-serif; color: var(--ink); background: #fff;
+         font-size: 10.5pt; line-height: 1.75; margin: 0; }
+  h1 { font-size: 21pt; color: var(--accent); margin: 0 0 4px; line-height: 1.4; }
+  h2 { font-size: 15pt; color: var(--accent); border-bottom: 2px solid var(--accent);
+       padding-bottom: 4px; margin: 26px 0 10px; page-break-after: avoid; }
+  h3 { font-size: 12pt; margin: 18px 0 6px; page-break-after: avoid; }
+  h4 { font-size: 10.5pt; margin: 12px 0 4px; color: var(--muted); page-break-after: avoid; }
+  p { margin: 6px 0; }
+  ul, ol { margin: 6px 0; padding-right: 22px; padding-left: 0; }
+  li { margin: 2px 0; }
+  code, .ltr { font-family: Consolas, "Courier New", monospace; font-size: 9pt; direction: ltr;
+               unicode-bidi: isolate; }
+  code { background: var(--code-bg); padding: 0 4px; border-radius: 3px; }
+  pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px;
+        direction: ltr; text-align: left; font-family: Consolas, monospace; font-size: 8.6pt;
+        line-height: 1.5; white-space: pre-wrap; page-break-inside: avoid; margin: 8px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 9.4pt;
+          page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  th, td { border: 1px solid var(--line); padding: 5px 7px; vertical-align: top; text-align: right; }
+  th { background: var(--accent-bg); font-weight: 600; }
+  .cover { border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 14px; }
+  .subtitle { color: var(--muted); font-size: 11pt; }
+  .meta { display: flex; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: 9.5pt; margin-top: 8px; }
+  .box { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin: 10px 0;
+         page-break-inside: avoid; }
+  .box.ok { background: var(--ok-bg); border-color: #b7dfc8; }
+  .box.bad { background: var(--bad-bg); border-color: #f2c2bd; }
+  .box.warn { background: var(--warn-bg); border-color: #f0d9a0; }
+  .box.info { background: var(--accent-bg); border-color: #c8dbf0; }
+  .box b.t { display: block; margin-bottom: 2px; }
+  .ok-t { color: var(--ok); font-weight: 600; }
+  .bad-t { color: var(--bad); font-weight: 600; }
+  .warn-t { color: var(--warn); font-weight: 600; }
+  .kpis { display: flex; gap: 10px; margin: 10px 0; }
+  .kpi { flex: 1; border: 1px solid var(--line); border-radius: 8px; padding: 8px; text-align: center; }
+  .kpi .v { font-size: 17pt; font-weight: 700; color: var(--accent); line-height: 1.2; }
+  .kpi .l { font-size: 8.8pt; color: var(--muted); }
+  .toc ol { columns: 2; column-gap: 28px; }
+  .pb { page-break-before: always; }
+  .small { font-size: 9pt; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+  <h1>تقرير التقدّم 2: تقسيم التوثيق وخط القياس</h1>
+  <div class="subtitle">الخطوة 3 (DocSplitter) + مجموعة التطوير + قياس الأساس: القديم مقابل الحالي</div>
+  <div class="meta">
+    <span>التاريخ: 2026-10-25</span>
+    <span>يكمّل: progress_report_steps_0-2.pdf</span>
+    <span>آخر commit: <code>&lrm;2afa9a1&lrm;</code></span>
+  </div>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="v">44/44</div><div class="l">اختبار ناجح بالـ Docker</div></div>
+  <div class="kpi"><div class="v">66</div><div class="l">عنصر موسوم بمجموعة التطوير</div></div>
+  <div class="kpi"><div class="v">من 6 لـ 0</div><div class="l">إنذارات كاذبة على عناصر سليمة (Code vs Doc)</div></div>
+  <div class="kpi"><div class="v">0/6</div><div class="l">تغييرات سلوكية انكشفت (بالنسختين)</div></div>
+</div>
+
+<div class="toc box info">
+  <b class="t">المحتويات</b>
+  <ol>
+    <li>ملخص: شو صار من التقرير السابق</li>
+    <li>الخطوة 3: تقسيم التوثيق (DocSplitter)</li>
+    <li>ليش ضفنا خط قياس هلق</li>
+    <li>مجموعة التطوير: العينات والوسم</li>
+    <li>الموديل المثبّت للقياس</li>
+    <li>سكربت القياس وتعريف المقاييس</li>
+    <li>نتائج Code vs Doc</li>
+    <li>نتائج Code vs Code</li>
+    <li>الخلاصة وشو لازم يتحسن</li>
+    <li>المطلوب من الفريق، والـ commits، والخطوة الجاية</li>
+  </ol>
+</div>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>1. ملخص: شو صار من التقرير السابق</h2>
+<table>
+  <tr><th style="width:24%">الشغل</th><th>النتيجة</th><th style="width:14%">commit</th></tr>
+  <tr><td>الخطوة 3: DocSplitter</td><td>التوثيق صار ينقسم لأجزاء (ملف، كلاس، دالة) وكل جزء بينربط بعنصره بالكود. الإنذارات الكاذبة على التوثيقات الحقيقية نزلت لصفر.</td><td><code>&lrm;9af541b&lrm;</code></td></tr>
+  <tr><td>خط القياس</td><td>مجموعة تطوير فيها 66 عنصر موسوم، وسكربت بيحسب Precision و Recall و F1 للنسختين، وقياس الأساس.</td><td><code>&lrm;2afa9a1&lrm;</code></td></tr>
+</table>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>2. الخطوة 3: تقسيم التوثيق (DocSplitter)</h2>
+
+<h3>2.1 قبل التصميم: فحص التوثيقات الحقيقية</h3>
+<p>فحصنا 3 توثيقات مولّدة من النظام ومحفوظة بـ MongoDB (كلاس <code>&lrm;Book&lrm;</code> بالجافا: 2 high-level و 1 low-level). لقينا:</p>
+<ul>
+  <li><b>الموديل ما بيلتزم بشكل العناوين.</b> نفس الـ constructor انكتب بثلاث أشكال: <code>&lrm;public Book(String title, ...)&lrm;</code> و <code>&lrm;Book(String title, ...)&lrm;</code> و <code>&lrm;Book&lrm;</code>. ومرة كتب توقيع بايثون (<code>&lrm;self&lrm;</code>) لكود جافا.</li>
+  <li><b>في تناقض حقيقي بالأقسام العامة:</b> التوثيق بيقول "Retrieve the book's title, <b>author</b>, and ISBN"، والكود ما فيه <code>&lrm;getAuthor&lrm;</code>.</li>
+  <li><code>&lrm;doc_normalizer.py&lrm;</code> موجود بالمشروع بس ما حدا بيستعمله.</li>
+</ul>
+
+<h3>2.2 شو بيعمل DocSplitter</h3>
+<table>
+  <tr><th style="width:22%">الجزء</th><th>الوظيفة</th></tr>
+  <tr><td><code>&lrm;split()&lrm;</code></td><td>بيقسّم التوثيق لأجزاء <code>&lrm;file&lrm;</code> و <code>&lrm;class&lrm;</code> و <code>&lrm;method&lrm;</code>. بيفهم <code>&lrm;Constructor:&lrm;</code> و <code>&lrm;Method:&lrm;</code> بكل أشكالها، و <code>&lrm;## File:&lrm;</code> بتوثيق المشروع، والتوثيق المنظّم كقاموس. وإذا ما في عناوين، بيرجع لبحث بأسماء الدوال.</td></tr>
+  <tr><td><code>&lrm;match()&lrm;</code></td><td>بيربط كل جزء بالعنصر المقابل، وبيطلّع 3 قوائم: <b>انربط</b> (رح ينبعت للـ LLM)، <b>بيحكي عن عنصر مش موجود</b> (مؤشر جديد)، و<b>عناصر بدون توثيق</b> (تغطية).</td></tr>
+  <tr><td>الربط مع الـ checker</td><td>الـ checker الحالي صار يستعمل الـ splitter فوق الـ regex القديم (union)، فما بينشال شي كان موثّق.</td></tr>
+</table>
+
+<h3>2.3 النتيجة على التوثيقات الحقيقية</h3>
+<table>
+  <tr><th>التوثيق</th><th>النسخة الأصلية</th><th>بعد الخطوتين 1 و 2</th><th>بعد الخطوة 3</th></tr>
+  <tr><td>high-level #1</td><td class="bad-t">setAvailable</td><td class="bad-t">Book</td><td class="ok-t">ولا تنبيه</td></tr>
+  <tr><td>high-level #2</td><td>3 غير موثّقة + <span class="bad-t">setAvailable</span></td><td>3 غير موثّقة + <span class="bad-t">Book</span></td><td>3 غير موثّقة</td></tr>
+  <tr><td>low-level</td><td>ولا تنبيه</td><td class="bad-t">Book</td><td class="ok-t">ولا تنبيه</td></tr>
+  <tr><td><b>تنبيهات غلط</b></td><td class="bad-t">2</td><td class="bad-t">3</td><td class="ok-t">0</td></tr>
+</table>
+<div class="box warn">
+  <b class="t">من وين إجت التنبيهات الغلط</b>
+  <ul>
+    <li><b>setAvailable (النسخة الأصلية):</b> توقيعات الجافا بتبلّش بـ <code>&lrm;+ &lrm;</code>، والدالة <code>&lrm;_parse_signature&lrm;</code> ما بتفهمها فبتعتبر المعاملات صفر. الخطوة 1 صلّحت هالشي بالصدفة عبر حقل <code>&lrm;parameters&lrm;</code>.</li>
+    <li><b>Book (بعد الخطوة 1):</b> الخطوة 1 خلّت constructors الجافا تظهر، بس الـ regex القديم ما بيعرف <code>&lrm;Constructor:&lrm;</code>. <b>خطأ سبّبته الخطوة 1 وانصلح بالخطوة 3.</b></li>
+  </ul>
+</div>
+<p>الاختبارات: 23 اختبار جديد (منهم 10 أشكال عناوين)، والمجموع 44/44 بالـ Docker. التفاصيل بـ <code>&lrm;core_ai/tests/reports/step3_doc_splitter.md&lrm;</code>.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">3. ليش ضفنا خط قياس هلق</h2>
+<p>اختبارات الوحدة بتأكد إنه الكود بيشتغل متل ما كتبناه، بس <b>ما بتقيس إذا النتيجة عم تتحسن</b>. وشفنا مثال على هالشي: الخطوة 1 خرّبت شي بالكود مقابل التوثيق بدون ما تنتبه أي اختبار وحدة، وما بيّن الخلل إلا لما جرّبنا على توثيقات حقيقية.</p>
+<p>لهيك قدّمنا القياس: منقيس النسخة القديمة مرة وحدة، وبعد كل خطوة منقيس الجديد ومنضيف سطر على جدول التقدّم.</p>
+<table>
+  <tr><th style="width:26%">المجموعة</th><th>الاستعمال</th><th style="width:30%">ليش منفصلة</th></tr>
+  <tr><td><b>مجموعة التطوير</b><br><code>&lrm;evaluation/dev_set/&lrm;</code></td><td>منقيس عليها بعد كل خطوة لنعرف الاتجاه</td><td>صغيرة ونحنا وسمناها، فبتعطي مؤشر بس</td></tr>
+  <tr><td><b>مجموعة الاختبار</b><br>DocPrism و Cascade</td><td>بتنقاس مرة وحدة بالآخر للتقرير</td><td>إذا ضلّينا نعدّل ونقيس عليها، منفصّل النظام عليها بدون قصد وتطلع الأرقام أحلى من الحقيقة</td></tr>
+</table>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>4. مجموعة التطوير: العينات والوسم</h2>
+
+<h3>4.1 Code vs Doc: 10 عينات، 46 عنصر</h3>
+<table>
+  <tr><th style="width:27%">العينة</th><th style="width:16%">شكل التوثيق</th><th>شو بتختبر</th></tr>
+  <tr><td><code>&lrm;doc_user_repo&lrm;</code></td><td>low-level</td><td>Raises KeyError مقابل return None (Direct)، "validates email" بدون فحص (Over)، ValueError ما انذكر (Under)</td></tr>
+  <tr><td><code>&lrm;doc_http_client&lrm;</code></td><td>low-level</td><td>"Results are cached" بدون cache (Over)، دالة بدون توثيق (skip)</td></tr>
+  <tr><td><code>&lrm;doc_rectangle_high&lrm;</code></td><td>high-level</td><td>perimeter بترجّع w×h (Direct)، scale بتعدّل الكائن بدل ما ترجّع جديد (Direct)</td></tr>
+  <tr><td><code>&lrm;doc_text_utils_docstrings&lrm;</code></td><td>docstrings</td><td>"Returns None" والكود بيرمي (Direct)، "strip" ما انعمل (Over)، مسح ملف موجود (Under)</td></tr>
+  <tr><td><code>&lrm;doc_mailer_params&lrm;</code></td><td>low-level</td><td>القيمة الافتراضية: التوثيق 3، الكود 5 (Direct)</td></tr>
+  <tr><td><code>&lrm;doc_counter_threadsafe&lrm;</code></td><td>low-level</td><td>"thread-safe" و "under a lock" بدون أي lock (Over، على الكلاس والدالة)</td></tr>
+  <tr><td><code>&lrm;doc_inventory_java&lrm;</code></td><td>low-level (Java)</td><td>Throws مقابل getOrDefault (Direct)، فحص كمية ما انعمل (Over)</td></tr>
+  <tr><td><code>&lrm;doc_real_book_high_1&lrm;</code> و <code>&lrm;_high_2&lrm;</code> و <code>&lrm;_low&lrm;</code></td><td>حقيقية من Mongo</td><td>"retrieve author" بدون getAuthor (Over، على الكلاس)، توثيق مختصر (skip)</td></tr>
+</table>
+<table>
+  <tr><th>Consistent</th><th>Direct_Mismatch</th><th>Over_Promise</th><th>Under_Promise</th><th>skip</th></tr>
+  <tr><td>26</td><td>6</td><td>8</td><td>2</td><td>4</td></tr>
+</table>
+
+<h3>4.2 Code vs Code: 17 عينة، 20 عنصر</h3>
+<table>
+  <tr><th style="width:16%">Q1 Q2 Q3</th><th style="width:28%">المعنى</th><th style="width:8%">العدد</th><th>العينات</th></tr>
+  <tr><td>1 0 x</td><td>بنيوي بس</td><td>10</td><td>rename، حذف دالة، حذف كلاس، إضافة دالة، parameter اختياري، parameter إجباري، دالة ← property، constructor جافا</td></tr>
+  <tr><td>0 1 1</td><td><b>سلوكي بس (الأخطر)</b></td><td>4</td><td><code>&lrm;d[k]&lrm;</code> ← <code>&lrm;d.get(k,-1)&lrm;</code>، raise ← return None، strip ← lower، شيل فحص الرصيد (جافا)</td></tr>
+  <tr><td>1 1 1</td><td>بنيوي + سلوكي</td><td>2</td><td>timeout=30 ← 5، نوع الإرجاع int ← str</td></tr>
+  <tr><td>0 0 0</td><td>ما في تغيير حقيقي</td><td>4</td><td>تعليقات بس، loop ← sum، استخراج دالة مساعدة، ternary ← Math.max</td></tr>
+</table>
+<p class="small">Q1: هل تغيّرت الواجهة؟ — Q2: هل تغيّر السلوك لاستدعاء صالح بالنسختين؟ — Q3: هل بينكسر مستدعي قديم؟ (حسب <code>&lrm;guide_code_vs_code.md&lrm;</code>)</p>
+
+<div class="box warn">
+  <b class="t">الوسم لسا مسودة</b>
+  كل الوسم كتبه Claude ومعلّم <code>&lrm;draft:claude&lrm;</code>، مع دليل لكل تناقض (العبارة من التوثيق ورقم السطر بالكود، وتأكدنا إنه رقم السطر صح). حسب دليل الوسم، لازم <b>شخصين من الفريق يراجعوه</b>.
+</div>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">5. الموديل المثبّت للقياس</h2>
+<ul>
+  <li>الإنتاج بيستعمل <code>&lrm;openrouter/free&lrm;</code>، يلي بيختار موديل مختلف كل مرة، فما بينفع للقياس.</li>
+  <li>الموديلات المكتوبة بالمشروع (<code>&lrm;llama-3.3-70b:free&lrm;</code> وغيرها) <b>ما عادت موجودة</b> على OpenRouter.</li>
+  <li>جرّبنا 6 موديلات مجانية على حالة "Raises KeyError مقابل return None":</li>
+</ul>
+<table>
+  <tr><th style="width:44%">الموديل</th><th>النتيجة</th><th>الوقت</th><th>tokens</th></tr>
+  <tr><td><code>&lrm;poolside/laguna-s-2.1:free&lrm;</code> ✅ <b>المختار</b></td><td class="ok-t">Direct_Mismatch</td><td>5.2s</td><td>186</td></tr>
+  <tr><td><code>&lrm;cohere/north-mini-code:free&lrm;</code> (بديل)</td><td class="ok-t">Direct_Mismatch</td><td>8.6s</td><td>361</td></tr>
+  <tr><td><code>&lrm;nvidia/nemotron-3.5-lightning:free&lrm;</code></td><td class="ok-t">Direct_Mismatch</td><td>12.5s</td><td>1490</td></tr>
+  <tr><td><code>&lrm;nvidia/nemotron-3-ultra-550b:free&lrm;</code></td><td class="ok-t">Direct_Mismatch</td><td>37.0s</td><td>873</td></tr>
+  <tr><td><code>&lrm;google/gemma-4-31b-it:free&lrm;</code> و <code>&lrm;gemma-4-26b&lrm;</code></td><td class="bad-t">429 (مشغول)</td><td>—</td><td>—</td></tr>
+  <tr><td><code>&lrm;nvidia/nemotron-3-super-120b:free&lrm;</code></td><td class="bad-t">404</td><td>—</td><td>—</td></tr>
+</table>
+<p>كل الاستدعاءات بتمرق من <code>&lrm;llm_recorder&lrm;</code>: temperature 0، و seed 42، وبدون cache، وبدون fallback لموديل تاني، وكل رد بينسجّل.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>6. سكربت القياس وتعريف المقاييس</h2>
+<p><code>&lrm;evaluation/harness/evaluate.py&lrm;</code> بيشغّل النسختين على نفس العينات، وبيقارن مع الوسم، وبيحفظ النتيجة الخام وسطر بجدول التقدّم. النسخة القديمة بتنحسب مرة وحدة وبتنحفظ لأنها مجمّدة.</p>
+<table>
+  <tr><th style="width:18%">المقياس</th><th>المعنى</th></tr>
+  <tr><td>Precision</td><td>من كل يلي نبّه عليه النظام، قديش صح؟ (أعلى = إنذارات كاذبة أقل)</td></tr>
+  <tr><td>Recall</td><td>من كل المشاكل الحقيقية، قديش لقى؟</td></tr>
+  <tr><td>F1</td><td>توازن بين الاثنين</td></tr>
+  <tr><td>Specificity</td><td>من كل العناصر السليمة، قديش تركها بحالها؟</td></tr>
+  <tr><td>Flag Rate</td><td>نسبة العناصر يلي نبّه عليها</td></tr>
+</table>
+<ul>
+  <li><b>Code vs Doc:</b> الصح = <code>&lrm;Direct_Mismatch&lrm;</code> أو <code>&lrm;Over_Promise&lrm;</code>. أما <code>&lrm;Under_Promise&lrm;</code> فحسب DocPrism ما بيتعرض للمستخدم.</li>
+  <li><b>Code vs Code:</b> كشف التغيير = (Q1 أو Q2)، وكل سؤال بينقاس لحاله.</li>
+  <li><b>أي تنبيه على عنصر ما إله مشكلة ولا تغيير بينحسب إنذار كاذب.</b></li>
+  <li>التعريف بيعتمد على <b>مخرجات النظام بس</b>، مش على آليته الداخلية.</li>
+</ul>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">7. نتائج Code vs Doc</h2>
+<table>
+  <tr><th>النظام</th><th>Precision</th><th>Recall</th><th>F1</th><th>Specificity</th><th>Flag Rate</th><th>TP</th><th>FP</th><th>FN</th><th>TN</th></tr>
+  <tr><td><b>القديم</b></td><td>0.091</td><td>0.071</td><td>0.080</td><td>0.688</td><td>0.239</td><td>1</td><td>10</td><td>13</td><td>22</td></tr>
+  <tr><td><b>الحالي</b></td><td>0.000</td><td>0.000</td><td>0.000</td><td class="ok-t">0.875</td><td class="ok-t">0.087</td><td>0</td><td class="ok-t">4</td><td>14</td><td>28</td></tr>
+</table>
+<table>
+  <tr><th>الجواب الصح</th><th>العدد</th><th>نبّه القديم</th><th>نبّه الحالي</th></tr>
+  <tr><td>Direct_Mismatch</td><td>6</td><td>1</td><td>0</td></tr>
+  <tr><td>Over_Promise</td><td>8</td><td>0</td><td>0</td></tr>
+  <tr><td>Under_Promise</td><td>2</td><td>0</td><td>0</td></tr>
+  <tr><td>Consistent</td><td>26</td><td class="bad-t">6</td><td class="ok-t">0</td></tr>
+  <tr><td>skip (بدون توثيق)</td><td>4</td><td>4</td><td>4</td></tr>
+</table>
+<h3>التفسير</h3>
+<ol>
+  <li><b>ولا نسخة بتكشف تناقضات حقيقية.</b> من 14 مشكلة، القديم لقى وحدة والحالي ولا وحدة. هاد متوقع، لأنه المسارين ما فيهم أي LLM لسا.</li>
+  <li><b>إصابة القديم كانت صدفة:</b> <code>&lrm;Rectangle.scale&lrm;</code> انمسكت بسبب "Signature mismatch: 1 vs 0"، وهاد خطأ بقراءة التوقيع. المشكلة الحقيقية إنها بتعدّل الكائن. يعني <b>العنصر صح والسبب غلط</b>.</li>
+  <li><b>الحالي شال كل الإنذارات الكاذبة على العناصر السليمة (من 6 لـ 0)</b>: الـ constructors (الخطوة 3) و setAvailable (الخطوة 1).</li>
+  <li>الإنذارات الأربعة الباقية كلها "غير موثّقة". هي تغطية، ورح تنشال بالخطوة 6.</li>
+</ol>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>8. نتائج Code vs Code</h2>
+<table>
+  <tr><th>النظام</th><th>Precision</th><th>Recall</th><th>F1</th><th>Specificity</th><th>Q1 F1</th><th>Q2 F1</th><th>Q3 F1</th><th>LLM</th></tr>
+  <tr><td><b>القديم</b></td><td>0.727</td><td>0.500</td><td>0.593</td><td>0.500</td><td>0.762</td><td class="bad-t">0.000</td><td>0.556</td><td>18</td></tr>
+  <tr><td><b>الحالي</b></td><td>0.750</td><td>0.562</td><td>0.643</td><td>0.500</td><td>0.818</td><td class="bad-t">—</td><td>0.632</td><td>17</td></tr>
+</table>
+<p class="small">"—" يعني الحالي ما ادّعى ولا مرة إنه في تغيير سلوكي. ومن الـ FP بالنسختين، تنبيهين على عناصر ما تغيّرت: <code>&lrm;Shelf.size&lrm;</code> (إعادة تسمية وهمية) و <code>&lrm;Account.limit&lrm;</code>.</p>
+
+<h3>أخطر نوع تغيير ما عم ينكشف</h3>
+<table>
+  <tr><th style="width:24%">العنصر</th><th>التغيير</th><th style="width:12%">القديم</th><th style="width:12%">الحالي</th></tr>
+  <tr><td><code>&lrm;Store.find&lrm;</code></td><td><code>&lrm;d[k]&lrm;</code> (بترمي) ← <code>&lrm;d.get(k, -1)&lrm;</code></td><td class="bad-t">فات</td><td class="bad-t">فات</td></tr>
+  <tr><td><code>&lrm;Repo.get&lrm;</code></td><td><code>&lrm;raise KeyError&lrm;</code> ← <code>&lrm;return None&lrm;</code></td><td class="bad-t">فات</td><td class="bad-t">فات</td></tr>
+  <tr><td><code>&lrm;Parser._clean&lrm;</code></td><td><code>&lrm;strip()&lrm;</code> ← <code>&lrm;lower()&lrm;</code></td><td class="bad-t">فات</td><td class="bad-t">فات</td></tr>
+  <tr><td><code>&lrm;Account.withdraw&lrm;</code></td><td>انشال فحص الرصيد</td><td class="bad-t">فات</td><td class="bad-t">فات</td></tr>
+  <tr><td><code>&lrm;Conn.connect&lrm;</code></td><td><code>&lrm;timeout=30&lrm;</code> ← <code>&lrm;5&lrm;</code></td><td class="bad-t">فات</td><td class="bad-t">فات</td></tr>
+  <tr><td><code>&lrm;Person.full_name&lrm;</code></td><td>دالة ← <code>&lrm;@property&lrm;</code></td><td class="bad-t">فات</td><td class="bad-t">فات</td></tr>
+</table>
+<p>السبب: الـ LLM بيشوف التوقيعات بس. الـ body والقيم الافتراضية والـ decorators ما بينبعتوا. وهاد شغل الخطوات 7 لـ 11.</p>
+
+<h3>التفسير</h3>
+<ol>
+  <li><b>الحالي أحسن بشوي (F1 من 0.593 لـ 0.643)</b> لأنه constructors الجافا صارت تنشاف (الخطوة 1)، فانكشف تغيير الـ constructor تبع <code>&lrm;Account&lrm;</code>.</li>
+  <li><b>القديم كان يسمّي الحذف "تغيير سلوكي":</b> <code>&lrm;legacy_charge&lrm;</code> (محذوفة) انحسبت rename لـ <code>&lrm;charge&lrm;</code> بنوع <code>&lrm;behavior_change&lrm;</code>. بالحالي النوع صار <code>&lrm;renamed&lrm;</code> (الخطوة 2)، فاختفى هالخطأ.</li>
+  <li><b>إنذارات غلط من الـ LLM:</b> نبّه على refactor مكافئ (<code>&lrm;Invoice.total&lrm;</code>)، وقال عن parameter اختياري إنه "required" (<code>&lrm;Report.render&lrm;</code>).</li>
+</ol>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">9. الخلاصة وشو لازم يتحسن</h2>
+<div class="kpis">
+  <div class="kpi"><div class="v" style="font-size:13pt">نجح</div><div class="l">تقليل الإنذارات الكاذبة: Specificity بالكود مقابل التوثيق من 0.69 لـ 0.88</div></div>
+  <div class="kpi"><div class="v" style="font-size:13pt">ناقص</div><div class="l">كشف التناقضات الحقيقية: Recall = 0 بالكود مقابل التوثيق</div></div>
+  <div class="kpi"><div class="v" style="font-size:13pt">ناقص</div><div class="l">كشف التغييرات السلوكية: 0 من 6 بالكود مقابل الكود</div></div>
+</div>
+<table>
+  <tr><th style="width:22%">المسار</th><th>الهدف</th><th style="width:16%">الخطوات</th></tr>
+  <tr><td>Code vs Doc</td><td>رفع Recall من الصفر، مع الحفاظ على Specificity ≥ 0.875</td><td>4 و 5 و 6</td></tr>
+  <tr><td>Code vs Code</td><td>Q2 Recall أكبر من صفر، وما يطلع إنذار على التغييرات المكافئة الأربعة ولا على <code>&lrm;Shelf.size&lrm;</code>، واستدعاءات LLM أقل</td><td>7 لـ 11</td></tr>
+</table>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>10. المطلوب من الفريق، والـ commits، والخطوة الجاية</h2>
+<h3>المطلوب من الفريق</h3>
+<ul>
+  <li><b>مراجعة الوسم</b> بالملفين <code>&lrm;labels_code_vs_doc.csv&lrm;</code> و <code>&lrm;labels_code_vs_code.csv&lrm;</code> من شخصين، حسب دليل الوسم.</li>
+  <li>حالات بتستاهل نقاش: <code>&lrm;Book&lrm;</code> ("retrieve author" ← Over_Promise على مستوى الكلاس)، و <code>&lrm;Counter&lrm;</code> ("thread-safe" على الكلاس والدالة).</li>
+</ul>
+<h3>الـ commits</h3>
+<table>
+  <tr><th style="width:14%">commit</th><th>الوصف</th></tr>
+  <tr><td><code>&lrm;9af541b&lrm;</code></td><td>Step 3: DocSplitter + تقرير PDF للخطوات 0–2</td></tr>
+  <tr><td><code>&lrm;2afa9a1&lrm;</code></td><td>Evaluation track: dev set, draft labels, evaluate.py and baseline metrics</td></tr>
+</table>
+<h3>الخطوة الجاية: الخطوة 4 (CODE_DOC_PROMPT)</h3>
+<p>كتابة الـ prompt يلي بيبعت لكل كلاس كود دواله (التوقيع والجسم) مع جزء التوثيق تبع كل دالة، وبيطلب JSON فيه التصنيف ودرجة الثقة والدليل. بعد الخطوة 5 منقيس على مجموعة التطوير، ومنتوقع يطلع Recall الكود مقابل التوثيق من الصفر.</p>
+
+</body>
+</html>
