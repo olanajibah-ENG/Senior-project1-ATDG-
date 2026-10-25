@@ -8,10 +8,19 @@ from .schemas import ConflictItem, ChangeType, SeverityLevel
 from .prompts.conflict_prompts import SEMANTIC_PROMPT
 
 logger = logging.getLogger(__name__)
+
+# الحقول يلي كانت بتنبعت للـ LLM قبل الخطوة 1. الحقول الجديدة (body, parameters, ...)
+# ما بتنبعت لحد ما نقرر سياسة الإرسال (الخطوة 11) — لحتى ما يكبر الـ prompt فجأة.
+_PROMPT_METHOD_FIELDS = ("name", "signature", "is_abstract", "is_constructor", "visibility", "is_override")
+
+
 def prune_diagram(d: dict) -> dict:
     classes = sorted(d.get("classes", []), key=lambda c: c.get("name", ""))
     for cls in classes:
-        methods = cls.get("methods", [])
+        methods = [
+            {k: m[k] for k in _PROMPT_METHOD_FIELDS if k in m} if isinstance(m, dict) else m
+            for m in cls.get("methods", [])
+        ]
         cls["methods"] = sorted(methods, key=lambda m: m.get("name", "") if isinstance(m, dict) else str(m))
         for field in ("relationships", "constraints", "attributes"):
             if not cls.get(field):

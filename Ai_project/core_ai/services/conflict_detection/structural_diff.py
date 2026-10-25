@@ -113,7 +113,7 @@ class StructuralDiff:
                     "class_name": cls.name,
                     "name": m.name,
                     "signature": m.signature,
-                    "parameters": [p.model_dump() for p in m.parameters] if hasattr(m, 'parameters') else []
+                    "parameters": [p.model_dump() for p in (m.parameters or [])]
                 })
         for cls in diagram_b.classes:
             for m in cls.methods:
@@ -121,7 +121,7 @@ class StructuralDiff:
                     "class_name": cls.name,
                     "name": m.name,
                     "signature": m.signature,
-                    "parameters": [p.model_dump() for p in m.parameters] if hasattr(m, 'parameters') else []
+                    "parameters": [p.model_dump() for p in (m.parameters or [])]
                 })
 
         rename_result = RenameDetector.detect(methods_list_a, methods_list_b)

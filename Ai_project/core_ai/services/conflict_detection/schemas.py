@@ -105,6 +105,14 @@ class ConflictMetadata(BaseModel):
 # 4. Diagram Schemas
 # ─────────────────────────────────────────────────────────────────────────────
 
+class ParameterDetail(BaseModel):
+    name:    Optional[str] = None
+    type:    Optional[str] = None
+    default: Optional[str] = None
+    # positional_only | positional_or_keyword | positional | keyword_only | var_positional | var_keyword
+    kind:    str = "positional"
+
+
 class MethodDetail(BaseModel):
     name:           str
     signature:      str
@@ -112,6 +120,19 @@ class MethodDetail(BaseModel):
     is_constructor: bool = False
     visibility:     str  = "public"
     is_override:    bool = False
+
+    # كلها اختيارية: التحليلات القديمة المحفوظة بـ Mongo ما فيها هالحقول.
+    # body_hash = None معناها "الجسم غير معروف"، مش "الجسم فاضي".
+    parameters:     Optional[List[ParameterDetail]] = None
+    return_type:    Optional[str]       = None
+    decorators:     List[str]           = Field(default_factory=list)
+    docstring:      Optional[str]       = None
+    is_async:       bool                = False
+    body:           Optional[str]       = None
+    body_hash:      Optional[str]       = None
+    body_truncated: bool                = False
+    line_start:     Optional[int]       = None
+    line_end:       Optional[int]       = None
 
 
 class AttributeDetail(BaseModel):

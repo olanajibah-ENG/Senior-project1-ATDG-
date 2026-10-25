@@ -6,6 +6,7 @@ import logging
 from typing import Dict, Any, List, Optional
 
 from .base_processor import ILanguageProcessorStrategy
+from .method_details import ts_body_fields, ts_leading_doc
 
 logger = logging.getLogger(__name__)
 
@@ -412,6 +413,7 @@ class TreeSitterProcessor(ILanguageProcessorStrategy):
                         "is_constructor": name in ("__init__", "constructor") or child.type == "constructor_declaration",
                         "visibility": self._get_visibility(child),
                         "is_override": self._has_modifier(child, "override"),
+                        **self._method_details(child),
                     })
 
                 elif child.type in _BODY_CONTAINERS or child.type in {"block", "declaration_list"}:
@@ -463,6 +465,45 @@ class TreeSitterProcessor(ILanguageProcessorStrategy):
                                         props.append(name)
                                     break
         return props
+
+    def _method_details(self, method_node) -> Dict[str, Any]:
+        """
+        حقول إضافية عامة لكل اللغات (best-effort):
+        parameters / return_type / docstring / is_async / body / body_hash
+        """
+        params = []
+        for p in self._extract_parameters(method_node):
+            name, _, ptype = p.partition(": ")
+            params.append({"name": name, "type": ptype or None, "default": None, "kind": "positional"})
+        if not params:
+            params = self._js_style_parameters(method_node)
+
+        return {
+            "parameters": params,
+            "return_type": self._extract_return_type(method_node) or None,
+            "docstring": ts_leading_doc(method_node),
+            # JS/TS: token "async"؛ C#: modifier نصّه "async"
+            "is_async": any(c.type == "async" or (c.type == "modifier" and self._node_text(c) == "async")
+                            for c in method_node.children),
+            "line_start": method_node.start_point[0] + 1,
+            "line_end": method_node.end_point[0] + 1,
+            **ts_body_fields(method_node.child_by_field_name("body")),
+        }
+
+    def _js_style_parameters(self, method_node) -> List[Dict[str, Any]]:
+        """معاملات JavaScript (identifier / x = 1 / ...rest) يلي _extract_parameters ما بيفهمها."""
+        param_list = method_node.child_by_field_name("parameters")
+        params = []
+        for p in (param_list.named_children if param_list is not None else []):
+            if p.type == "identifier":
+                params.append({"name": self._node_text(p), "type": None, "default": None, "kind": "positional"})
+            elif p.type == "assignment_pattern":
+                params.append({"name": self._node_text(p.child_by_field_name("left")), "type": None,
+                               "default": self._node_text(p.child_by_field_name("right")), "kind": "positional"})
+            elif p.type == "rest_pattern":
+                name = next((self._node_text(c) for c in p.named_children), None)
+                params.append({"name": name, "type": None, "default": None, "kind": "var_positional"})
+        return params
 
     def _build_method_signature(self, method_node, name: str) -> str:
         params = self._extract_parameters(method_node)

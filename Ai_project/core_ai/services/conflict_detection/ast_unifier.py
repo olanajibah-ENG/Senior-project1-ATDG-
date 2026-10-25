@@ -20,9 +20,21 @@ class ASTUnifier:
                     is_abstract=m.get("is_abstract", False),
                     is_constructor=m.get("is_constructor", False),
                     visibility=m.get("visibility", "public"),
-                    is_override=m.get("is_override", False)
+                    is_override=m.get("is_override", False),
+                    # حقول الخطوة 1 — بتكون None بالتحليلات القديمة
+                    parameters=m.get("parameters"),
+                    return_type=m.get("return_type"),
+                    decorators=m.get("decorators") or [],
+                    docstring=m.get("docstring"),
+                    is_async=m.get("is_async", False),
+                    body=m.get("body"),
+                    body_hash=m.get("body_hash"),
+                    body_truncated=m.get("body_truncated", False),
+                    line_start=m.get("line_start"),
+                    line_end=m.get("line_end"),
                 )
                 for m in cls.get("methods", [])
+                if isinstance(m, dict)
             ]
 
             attributes = [

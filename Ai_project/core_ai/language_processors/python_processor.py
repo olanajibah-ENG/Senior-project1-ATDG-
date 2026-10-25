@@ -16,6 +16,7 @@ import logging
 import re
 from typing import Dict, Any, List, Set
 from .base_processor import ILanguageProcessorStrategy
+from .method_details import body_fields
 
 logger = logging.getLogger(__name__)
 
@@ -314,24 +315,26 @@ class PythonProcessor(ILanguageProcessorStrategy):
         param_types = {}
         
         for item in class_node.body:
-            if isinstance(item, ast.FunctionDef):
+            # AsyncFunctionDef: الدوال async كانت تضيع من المخطط
+            if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 if item.name == "__init__":
                     for arg in item.args.args:
                         if arg.arg != 'self' and arg.annotation:
                             param_types[arg.arg] = self._get_annotation_type(arg.annotation)
-                    
+
                     constructor_params = []
                     for arg in item.args.args:
                         if arg.arg != 'self':
                             ptype = self._get_annotation_type(arg.annotation) or "Any"
                             constructor_params.append(f"{arg.arg}: {ptype}")
-                    
+
                     methods.append({
                         "name": "__init__",
                         "signature": f"+ __init__({', '.join(constructor_params)})",
                         "is_abstract": False,
                         "visibility": "public",
-                        "is_constructor": True
+                        "is_constructor": True,
+                        **self._method_details(item),
                     })
                     continue
                 
@@ -359,7 +362,8 @@ class PythonProcessor(ILanguageProcessorStrategy):
                     "signature": method_signature,
                     "is_abstract": is_abstract_method,
                     "visibility": visibility,
-                    "is_constructor": False
+                    "is_constructor": False,
+                    **self._method_details(item),
                 })
 
         attributes = []
@@ -821,6 +825,55 @@ class PythonProcessor(ILanguageProcessorStrategy):
                 elif isinstance(node.value, (ast.JoinedStr, ast.FormattedValue)):
                     return "str"
         return "Any"
+
+    def _method_details(self, func_node) -> Dict[str, Any]:
+        """
+        حقول إضافية للدالة (فوق signature القديم يلي ما تغيّر):
+        parameters / return_type / decorators / docstring / is_async / body / body_hash
+        """
+        args = func_node.args
+        params: List[Dict[str, Any]] = []
+
+        def add(arg, kind, default=None):
+            params.append({
+                "name": arg.arg,
+                "type": self._get_annotation_type(arg.annotation) if arg.annotation else None,
+                "default": ast.unparse(default) if default is not None else None,
+                "kind": kind,
+            })
+
+        positional = list(args.posonlyargs) + list(args.args)
+        # defaults بتنطبق على آخر المعاملات الموضعية
+        defaults = [None] * (len(positional) - len(args.defaults)) + list(args.defaults)
+        for i, (arg, default) in enumerate(zip(positional, defaults)):
+            if i == 0 and arg.arg in ("self", "cls"):
+                continue
+            kind = "positional_only" if i < len(args.posonlyargs) else "positional_or_keyword"
+            add(arg, kind, default)
+        if args.vararg:
+            add(args.vararg, "var_positional")
+        for arg, default in zip(args.kwonlyargs, args.kw_defaults):
+            add(arg, "keyword_only", default)
+        if args.kwarg:
+            add(args.kwarg, "var_keyword")
+
+        # الجسم بدون الـ docstring؛ ast.unparse بيشيل التعليقات وبيوحّد التنسيق
+        stmts = list(func_node.body)
+        docstring = ast.get_docstring(func_node)
+        if docstring is not None:
+            stmts = stmts[1:]
+        body_src = "\n".join(ast.unparse(s) for s in stmts)
+
+        return {
+            "parameters": params,
+            "return_type": self._get_annotation_type(func_node.returns) if func_node.returns is not None else None,
+            "decorators": [ast.unparse(d) for d in func_node.decorator_list],
+            "docstring": docstring,
+            "is_async": isinstance(func_node, ast.AsyncFunctionDef),
+            "line_start": func_node.lineno,
+            "line_end": getattr(func_node, "end_lineno", None),
+            **body_fields(body_src, body_src),
+        }
 
     def _get_visibility(self, name: str) -> str:
         if name.startswith('__') and not name.endswith('__'):

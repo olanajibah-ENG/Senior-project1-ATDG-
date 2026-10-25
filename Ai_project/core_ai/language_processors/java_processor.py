@@ -14,6 +14,7 @@ java_processor.py
 """
 
 from .base_processor import ILanguageProcessorStrategy
+from .method_details import ts_body_fields, ts_leading_doc
 from typing import Dict, Any, List, Set
 import logging
 import re
@@ -618,11 +619,16 @@ class JavaProcessor(ILanguageProcessorStrategy):
                         field_attrs = self._extract_field_attributes(body_item)
                         attributes.extend(field_attrs)
                     
-                    # Methods (بدون Constructors)
                     elif body_item.type == 'method_declaration':
                         method_info = self._extract_method_info_enhanced(body_item)
                         if method_info:
                             methods.append(method_info)
+
+                    # Constructors (كانت مستثناة من المخطط)
+                    elif body_item.type == 'constructor_declaration':
+                        ctor_info = self._extract_constructor_info(body_item, class_name)
+                        if ctor_info:
+                            methods.append(ctor_info)
         
         return {
             "name": class_name,
@@ -974,7 +980,85 @@ class JavaProcessor(ILanguageProcessorStrategy):
             "signature": f"{vis_symbol} {signature}",
             "is_abstract": is_abstract,
             "visibility": visibility,
-            "is_constructor": False
+            "is_constructor": False,
+            **self._method_details(method_node),
+        }
+
+    def _extract_constructor_info(self, ctor_node, class_name: str) -> Dict | None:
+        """Constructor بنفس شكل الدوال، مع is_constructor=True"""
+        visibility = "public"
+        for child in ctor_node.children:
+            if child.type == 'modifiers':
+                for modifier in child.children:
+                    if modifier.type in ['public', 'private', 'protected']:
+                        visibility = modifier.text.decode('utf-8')
+
+        name = self._get_identifier(ctor_node) or class_name
+        if not name:
+            return None
+
+        parameters = []
+        for child in ctor_node.children:
+            if child.type == 'formal_parameters':
+                parameters = self._extract_method_parameters(child)
+        param_strs = [f"{p['name']}: {p['type']}" for p in parameters]
+        vis_symbol = {"private": "-", "protected": "#"}.get(visibility, "+")
+
+        details = self._method_details(ctor_node)
+        details["return_type"] = None
+        return {
+            "name": name,
+            "signature": f"{vis_symbol} {name}({', '.join(param_strs)})",
+            "is_abstract": False,
+            "visibility": visibility,
+            "is_constructor": True,
+            **details,
+        }
+
+    def _method_details(self, decl_node) -> Dict[str, Any]:
+        """
+        حقول إضافية (فوق signature القديم يلي ما تغيّر):
+        parameters (مع arrays و varargs) / return_type / decorators / docstring / body / body_hash
+        """
+        def text(n):
+            return n.text.decode('utf-8') if n is not None and n.text else None
+
+        params = []
+        params_node = decl_node.child_by_field_name('parameters')
+        for p in (params_node.children if params_node is not None else []):
+            if p.type == 'formal_parameter':
+                params.append({
+                    "name": text(p.child_by_field_name('name')),
+                    "type": text(p.child_by_field_name('type')),
+                    "default": None,
+                    "kind": "positional",
+                })
+            elif p.type == 'spread_parameter':  # String... names
+                ptype = next((text(c) for c in p.named_children
+                              if c.type not in ('modifiers', 'variable_declarator')), None)
+                declarator = next((c for c in p.named_children if c.type == 'variable_declarator'), None)
+                params.append({
+                    "name": text(declarator.child_by_field_name('name')) if declarator is not None else None,
+                    "type": f"{ptype}..." if ptype else None,
+                    "default": None,
+                    "kind": "var_positional",
+                })
+
+        annotations = []
+        for child in decl_node.children:
+            if child.type == 'modifiers':
+                annotations = [text(m) for m in child.named_children
+                               if m.type in ('marker_annotation', 'annotation')]
+
+        return {
+            "parameters": params,
+            "return_type": text(decl_node.child_by_field_name('type')),
+            "decorators": annotations,
+            "docstring": ts_leading_doc(decl_node),
+            "is_async": False,
+            "line_start": decl_node.start_point[0] + 1,
+            "line_end": decl_node.end_point[0] + 1,
+            **ts_body_fields(decl_node.child_by_field_name('body')),
         }
 
     def _extract_method_parameters(self, formal_params_node) -> List[Dict]:
