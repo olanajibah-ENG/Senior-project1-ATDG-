@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>تقرير التقدّم — تحسين كشف التناقضات (الخطوات 0–2)</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  :root {
+    --ink: #1c2430; --muted: #5a6573; --line: #d9dee5; --accent: #1f5fa8;
+    --accent-bg: #eef4fb; --ok: #1e7d4f; --ok-bg: #e9f6ef; --bad: #b3261e; --bad-bg: #fdecea;
+    --warn: #8a5a00; --warn-bg: #fff6e0; --code-bg: #f4f6f8;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Tahoma, Arial, sans-serif; color: var(--ink); background: #fff;
+         font-size: 10.5pt; line-height: 1.75; margin: 0; }
+  h1 { font-size: 21pt; color: var(--accent); margin: 0 0 4px; line-height: 1.4; }
+  h2 { font-size: 15pt; color: var(--accent); border-bottom: 2px solid var(--accent);
+       padding-bottom: 4px; margin: 26px 0 10px; page-break-after: avoid; }
+  h3 { font-size: 12pt; margin: 18px 0 6px; page-break-after: avoid; }
+  h4 { font-size: 10.5pt; margin: 12px 0 4px; color: var(--muted); page-break-after: avoid; }
+  p { margin: 6px 0; }
+  ul, ol { margin: 6px 0; padding-right: 22px; padding-left: 0; }
+  li { margin: 2px 0; }
+  code, .ltr { font-family: Consolas, "Courier New", monospace; font-size: 9pt; direction: ltr;
+               unicode-bidi: isolate; }
+  code { background: var(--code-bg); padding: 0 4px; border-radius: 3px; }
+  pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px;
+        direction: ltr; text-align: left; font-family: Consolas, monospace; font-size: 8.6pt;
+        line-height: 1.5; white-space: pre-wrap; page-break-inside: avoid; margin: 8px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 9.4pt;
+          page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  th, td { border: 1px solid var(--line); padding: 5px 7px; vertical-align: top; text-align: right; }
+  th { background: var(--accent-bg); font-weight: 600; }
+  .cover { border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 14px; }
+  .subtitle { color: var(--muted); font-size: 11pt; }
+  .meta { display: flex; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: 9.5pt; margin-top: 8px; }
+  .box { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin: 10px 0;
+         page-break-inside: avoid; }
+  .box.ok { background: var(--ok-bg); border-color: #b7dfc8; }
+  .box.bad { background: var(--bad-bg); border-color: #f2c2bd; }
+  .box.warn { background: var(--warn-bg); border-color: #f0d9a0; }
+  .box.info { background: var(--accent-bg); border-color: #c8dbf0; }
+  .box b.t { display: block; margin-bottom: 2px; }
+  .ok-t { color: var(--ok); font-weight: 600; }
+  .bad-t { color: var(--bad); font-weight: 600; }
+  .warn-t { color: var(--warn); font-weight: 600; }
+  .kpis { display: flex; gap: 10px; margin: 10px 0; }
+  .kpi { flex: 1; border: 1px solid var(--line); border-radius: 8px; padding: 8px; text-align: center; }
+  .kpi .v { font-size: 17pt; font-weight: 700; color: var(--accent); line-height: 1.2; }
+  .kpi .l { font-size: 8.8pt; color: var(--muted); }
+  .toc ol { columns: 2; column-gap: 28px; }
+  .pb { page-break-before: always; }
+  .small { font-size: 9pt; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>تقرير التقدّم: تحسين نظام كشف التناقضات</h1>
+  <div class="subtitle">مسارا Code vs Doc و Code vs Code — الخطوات 0 و 1 و 2 من الخطة التنفيذية</div>
+  <div class="meta">
+    <span>التاريخ: 2026-10-25</span>
+    <span>المشروع: Senior-project1ATDG / Ai_project</span>
+    <span>آخر commit: <code>&lrm;722d170&lrm;</code></span>
+  </div>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="v">3</div><div class="l">خطوات منجزة (0 و 1 و 2)</div></div>
+  <div class="kpi"><div class="v">21/21</div><div class="l">اختبار ناجح بالـ Docker</div></div>
+  <div class="kpi"><div class="v">2</div><div class="l">أخطاء إنتاج انصلحت</div></div>
+  <div class="kpi"><div class="v">581</div><div class="l">دالة حقيقية اتقارنت قديم/جديد</div></div>
+</div>
+
+<div class="toc box info">
+  <b class="t">المحتويات</b>
+  <ol>
+    <li>الخطط الثلاث والتقييم المبدئي</li>
+    <li>الخطة التنفيذية (14 خطوة)</li>
+    <li>الخطوة 0: التجهيز والتحقق من الـ baseline</li>
+    <li>الخطوة 1: استخراج جسم الدالة ومعلوماتها</li>
+    <li>الخطوة 2: تحديث الـ schemas وإصلاح category</li>
+    <li>بيئة الاختبار (Docker)</li>
+    <li>ملخص الاختبارات</li>
+    <li>المشاكل المكتشفة وحالتها</li>
+    <li>سجل الـ commits والملفات</li>
+    <li>الخطوات الجاية</li>
+  </ol>
+</div>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>1. الخطط الثلاث والتقييم المبدئي</h2>
+<p>انطلق العمل من ثلاث خطط مكتوبة، كل وحدة مبنية على أوراق علمية:</p>
+<table>
+  <tr><th style="width:24%">الخطة</th><th style="width:30%">الأوراق</th><th>الفكرة الأساسية</th></tr>
+  <tr><td>تحسين مسار Code vs Doc</td><td>DocPrism (ISSTA 2026)، METAMON (arXiv 2025)</td>
+      <td>تقسيم التوثيق وربط كل جزء بعنصره، تحليل دلالي بالـ LLM، تصنيف LCEF الرباعي، تجاهل الـ Under-Promise، درجات ثقة وعتبات قرار، و Fallback عند فشل الـ LLM.</td></tr>
+  <tr><td>تحسين مسار Code vs Code</td><td>AexPy (ISSRE 2022)، Safer Builders (MSR 2026)، NPM Breaking Changes (TOSEM 2025)</td>
+      <td>مقارنة التوقيع والجسم دائماً، مصفوفة قرار (Signature × Body)، استدعاء الـ LLM بس للتغييرات السلوكية، تصنيف خطورة بمستويات AexPy الأربعة.</td></tr>
+  <tr><td>خطة إثبات الدقة</td><td>DocPrism، Cascade (FSE 2026)، C4RLLaMA</td>
+      <td>قياس Precision و Recall و Specificity و F1 و PFP و Flag Rate على عينات جاهزة، ومقارنة النظام القديم مع الجديد.</td></tr>
+</table>
+
+<h3>أهم الملاحظات على الخطط قبل التنفيذ</h3>
+<div class="box warn">
+  <b class="t">1. أساس مشترك ناقص: جسم الدالة</b>
+  خطة Code vs Code قائمة على "افحص الـ Body دائماً"، وخطة الإثبات معتمدة على Cascade يلي تناقضاتها سلوكية جوا الجسم. بس <code>&lrm;MethodDetail&lrm;</code> ما كان فيه أي حقل للجسم، والـ processors ما كانت تستخرجه. لهيك صار هاد <b>الخطوة 1</b>.
+</div>
+<ul>
+  <li><b>Code vs Doc ما فيه LLM أصلاً:</b> كله regex بـ <code>&lrm;code_doc_consistency.py&lrm;</code>. والخطة كانت بتقترح تعديل <code>&lrm;semantic_analyzer.py&lrm;</code>، وهاد ملف Code vs Code. القرار: محلّل دلالي منفصل للتوثيق.</li>
+  <li><b>ما منلغي المطابقة القديمة كلها:</b> فحوصات التوثيق المنظّم (متل raises مقابل return None) دقيقة وبدون تكلفة، فبتضل طبقة أولى و Fallback.</li>
+  <li><b>الدوال غير الموثّقة:</b> حالياً كل وحدة بتنحسب تناقض، وهاد مصدر رئيسي للإنذارات الكاذبة. القرار: بتنتقل لإحصائيات التغطية.</li>
+  <li><b>بناء "قبل وبعد لكل hunk":</b> فكرة Safer Builders معمولة للـ commits، ونظامنا بياخد نسختين كاملتين. القرار: مؤجّلة.</li>
+  <li><b>خطة الإثبات:</b> بتحتاج محوّل (adapter) من صيغة عينات DocPrism و Cascade لصيغة مدخلات نظامنا، وهاد مش مذكور بالخطة.</li>
+</ul>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>2. الخطة التنفيذية (14 خطوة)</h2>
+<table>
+  <tr><th style="width:10%">الخطوة</th><th style="width:22%">المسار</th><th>العمل</th><th style="width:12%">الحالة</th></tr>
+  <tr><td>0</td><td>تجهيز</td><td>git، والتحقق من الـ baseline المجمّد</td><td class="ok-t">✅ منجزة</td></tr>
+  <tr><td>1</td><td>أساس مشترك</td><td>استخراج الـ body والمعاملات والتوثيق، و async، والـ constructors</td><td class="ok-t">✅ منجزة</td></tr>
+  <tr><td>2</td><td>أساس مشترك</td><td>تحديث الـ schemas، وإصلاح <code>&lrm;category&lrm;</code></td><td class="ok-t">✅ منجزة</td></tr>
+  <tr><td>3</td><td>Code vs Doc</td><td>تقسيم التوثيق وربط كل جزء بعنصره (DocSplitter)</td><td>التالية</td></tr>
+  <tr><td>4</td><td>Code vs Doc</td><td><code>&lrm;CODE_DOC_PROMPT&lrm;</code></td><td>—</td></tr>
+  <tr><td>5</td><td>Code vs Doc</td><td><code>&lrm;DocSemanticAnalyzer&lrm;</code>: Fallback، فلترة خارجية، عتبة ثقة</td><td>—</td></tr>
+  <tr><td>6</td><td>Code vs Doc</td><td>الربط بـ <code>&lrm;compare()&lrm;</code>، والدوال غير الموثّقة لإحصائيات التغطية</td><td>—</td></tr>
+  <tr><td>7</td><td>Code vs Code</td><td><code>&lrm;SignatureComparer&lrm;</code> و <code>&lrm;ElementTypeClassifier&lrm;</code>، وإصلاح RenameDetector</td><td>—</td></tr>
+  <tr><td>8</td><td>Code vs Code</td><td>مقارنة الـ Body كخطوة إلزامية</td><td>—</td></tr>
+  <tr><td>9</td><td>Code vs Code</td><td><code>&lrm;change_classifier.py&lrm;</code> ومصفوفة القرار</td><td>—</td></tr>
+  <tr><td>10</td><td>Code vs Code</td><td><code>&lrm;severity_classifier.py&lrm;</code> (مستويات AexPy)</td><td>—</td></tr>
+  <tr><td>11</td><td>Code vs Code</td><td>منع استدعاء الـ LLM للتغييرات الهيكلية، وعدّاد للاستدعاءات الموفّرة</td><td>—</td></tr>
+  <tr><td>12</td><td>إثبات</td><td>Adapters لعينات DocPrism و Cascade</td><td>—</td></tr>
+  <tr><td>13</td><td>إثبات</td><td>الـ Ground Truth والوسم اليدوي</td><td>—</td></tr>
+  <tr><td>14</td><td>إثبات</td><td>تشغيل القديم والجديد، المقاييس، التقرير</td><td>—</td></tr>
+</table>
+
+<div class="box info">
+  <b class="t">قاعدة ثابتة بكل الخطوات</b>
+  كل التعديلات بتنعمل على كود الإنتاج (<code>&lrm;core_ai/&lrm;</code>). النسخة المجمّدة <code>&lrm;evaluation/legacy_baseline/&lrm;</code> ممنوع تنلمس، لأنها النظام القديم يلي منقارن فيه بالتقرير. بنتحقق منها بأول وآخر كل خطوة بأمر <code>&lrm;python -m evaluation.harness.snapshot&lrm;</code>.
+</div>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">3. الخطوة 0: التجهيز والتحقق من الـ baseline</h2>
+
+<h3>3.1 شو كان معمول من قبل (المرحلة 0)</h3>
+<table>
+  <tr><th style="width:26%">المكوّن</th><th>الوظيفة</th></tr>
+  <tr><td><code>&lrm;legacy_baseline/&lrm;</code></td><td>نسخة مجمّدة من <code>&lrm;conflict_detection&lrm;</code> و <code>&lrm;language_processors&lrm;</code>. انجمّدت الـ processors كمان، لأنه نتيجة الكشف بتعتمد على شو بيطلّعوا.</td></tr>
+  <tr><td><code>&lrm;snapshot.py&lrm;</code> و <code>&lrm;MANIFEST.json&lrm;</code></td><td>بصمة sha256 لكل ملف وبصمة إجمالية، لإثبات إنه النسخة ما انلمست، مع سجل للتعديلات المبرّرة (amendments).</td></tr>
+  <tr><td><code>&lrm;llm_recorder.py&lrm;</code></td><td>LLM حتمي: temperature 0، seed 42، بدون cache، موديل مثبّت، وتسجيل كل استدعاء.</td></tr>
+  <tr><td><code>&lrm;run_baseline.py&lrm;</code></td><td>بيشغّل النسخة المجمّدة على العينات وبيحفظ النتائج read-only مع البصمات.</td></tr>
+  <tr><td><code>&lrm;labeling/&lrm;</code></td><td>أدلة الوسم اليدوي، وقوالب CSV، وحساب Kappa.</td></tr>
+</table>
+<p>التعديلان الموثّقان على النسخة المجمّدة: استعمال الـ LLM الحتمي، وإصلاح <code>&lrm;category&lrm;</code> لحتى ما يوقع الـ baseline على كل عينة.</p>
+
+<h3>3.2 شو عملنا بالخطوة 0</h3>
+<table>
+  <tr><th style="width:30%">الفحص</th><th>النتيجة</th></tr>
+  <tr><td>بصمة النسخة المجمّدة</td><td class="ok-t">✅ <span class="ltr">ok: a8649b22…</span> — ما انلمست</td></tr>
+  <tr><td>تشغيل Code vs Doc على عينة تجريبية</td><td>اشتغل بدون LLM. طلّع إنه <code>&lrm;add&lrm;</code> مش موثّقة، بس <b>فوّت تناقض حقيقي</b>: التوثيق بيقول "Raises KeyError" والكود بيرجّع Optional.</td></tr>
+  <tr><td>تشغيل Code vs Code بدون إنترنت</td><td>الجزء الهيكلي اشتغل بدون crash، و <code>&lrm;semantic_failed=True&lrm;</code> متل المتوقع.</td></tr>
+  <tr><td>إعداد git</td><td>مستودع محلي مع <code>&lrm;.gitignore&lrm;</code> بيستثني <code>&lrm;.env&lrm;</code> و <code>&lrm;node_modules&lrm;</code> و <code>&lrm;__pycache__&lrm;</code> و <code>&lrm;db.sqlite3&lrm;</code> و <code>&lrm;staticfiles&lrm;</code> والملف المضغوط. أول commit: <code>&lrm;c35580a&lrm;</code> (780 ملف).</td></tr>
+</table>
+<div class="box warn">
+  <b class="t">ملاحظتين من الخطوة 0</b>
+  <ul>
+    <li>بـ <code>&lrm;settings.py&lrm;</code> في مفتاح OpenRouter مكتوب كقيمة افتراضية. القرار: يضل متل ما هو لأنه المستودع محلي. <b>لازم ما ينرفع المستودع على GitHub عام بهالحالة.</b></li>
+    <li>ممكن يكون كان في <code>&lrm;.gitignore&lrm;</code> قديم، وانكتب فوقه وقت إعداد git.</li>
+  </ul>
+</div>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">4. الخطوة 1: استخراج جسم الدالة ومعلوماتها</h2>
+<p class="small">commit: <code>&lrm;84e5ac5&lrm;</code> — تقرير الاختبارات: <code>&lrm;core_ai/tests/reports/step1_method_details.md&lrm;</code></p>
+
+<h3>4.1 المشكلة</h3>
+<ul>
+  <li>كل دالة كان ينحفظلها: الاسم، والتوقيع كنص، والـ visibility، و abstract/constructor. <b>بدون جسم.</b></li>
+  <li>معلومات المعاملات ناقصة: بايثون ما بيسجّل القيم الافتراضية ولا <code>&lrm;*args&lrm;</code> و <code>&lrm;**kwargs&lrm;</code>. جافا بتطلّع المصفوفة <code>&lrm;Object&lrm;</code> وبتضيّع الـ varargs.</li>
+  <li>دوال ضايعة من المخطط: دوال <code>&lrm;async&lrm;</code> بالبايثون، والـ constructors بالجافا.</li>
+</ul>
+
+<h3>4.2 الحقول الجديدة لكل دالة</h3>
+<table>
+  <tr><th style="width:22%">الحقل</th><th>المحتوى</th></tr>
+  <tr><td><code>&lrm;body&lrm;</code></td><td>جسم الدالة بدون تعليقات وبدون docstring (حد أعلى 20 ألف حرف)</td></tr>
+  <tr><td><code>&lrm;body_hash&lrm;</code></td><td>بصمة للجسم بعد التطبيع: التعليقات والمسافات ما بتغيّرها، وتغيير المنطق بيغيّرها. بتنحسب على الجسم الكامل.</td></tr>
+  <tr><td><code>&lrm;parameters&lrm;</code></td><td>لكل معامل: name و type و default و kind (positional_only, positional_or_keyword, keyword_only, var_positional, var_keyword)</td></tr>
+  <tr><td><code>&lrm;return_type&lrm;</code></td><td>نوع الإرجاع المكتوب</td></tr>
+  <tr><td><code>&lrm;decorators&lrm;</code></td><td>متل <code>&lrm;@staticmethod&lrm;</code> و <code>&lrm;@property&lrm;</code> و <code>&lrm;@Override&lrm;</code></td></tr>
+  <tr><td><code>&lrm;docstring&lrm;</code></td><td>docstring بالبايثون، أو Javadoc/JSDoc (<code>&lrm;/** */&lrm;</code>)، أو C# (<code>&lrm;///&lrm;</code>)</td></tr>
+  <tr><td><code>&lrm;is_async&lrm;</code> و <code>&lrm;line_start&lrm;</code> و <code>&lrm;line_end&lrm;</code></td><td>معلومات إضافية</td></tr>
+</table>
+<div class="box info"><b class="t">قرار تصميم</b>حقل <code>&lrm;signature&lrm;</code> القديم ضل <b>حرف بحرف</b> متل ما هو، لأنه الواجهة الأمامية و <code>&lrm;FingerprintBuilder&lrm;</code> بيعتمدوا عليه. المعلومات الصحيحة صارت بالحقول الجديدة.</div>
+
+<h3>4.3 الملفات المعدّلة</h3>
+<table>
+  <tr><th style="width:30%">الملف</th><th>التعديل</th></tr>
+  <tr><td><code>&lrm;method_details.py&lrm;</code> (جديد)</td><td>أدوات مشتركة: تطبيع الجسم وحساب البصمة، والحد الأعلى للطول، وقراءة التوثيق يلي فوق الدالة.</td></tr>
+  <tr><td><code>&lrm;python_processor.py&lrm;</code></td><td>دالة <code>&lrm;_method_details&lrm;</code> بتستعمل <code>&lrm;ast&lrm;</code> لاستخراج كل الحقول. ودعم <code>&lrm;AsyncFunctionDef&lrm;</code>.</td></tr>
+  <tr><td><code>&lrm;java_processor.py&lrm;</code></td><td>دالة <code>&lrm;_method_details&lrm;</code> بتستعمل tree-sitter. ودالة جديدة <code>&lrm;_extract_constructor_info&lrm;</code> لإضافة الـ constructors.</td></tr>
+  <tr><td><code>&lrm;tree_sitter_processor.py&lrm;</code></td><td>نفس الحقول لباقي اللغات (JS و TS و C# ...). مع قراءة معاملات JS، و <code>&lrm;async&lrm;</code> بالـ C#.</td></tr>
+  <tr><td><code>&lrm;schemas.py&lrm;</code></td><td><code>&lrm;ParameterDetail&lrm;</code>، والحقول الجديدة على <code>&lrm;MethodDetail&lrm;</code>، <b>كلها اختيارية</b> للتوافق مع التحليلات المحفوظة.</td></tr>
+  <tr><td><code>&lrm;ast_unifier.py&lrm;</code></td><td>تمرير الحقول الجديدة.</td></tr>
+  <tr><td><code>&lrm;semantic_analyzer.py&lrm;</code></td><td>البيانات المرسلة للـ LLM محصورة بالحقول الستة القديمة، فالـ prompt ما تغيّر.</td></tr>
+  <tr><td><code>&lrm;structural_diff.py&lrm;</code></td><td>إصلاح: <code>&lrm;parameters=None&lrm;</code> (بالتحليلات القديمة) كان رح يوقّع المقارنة.</td></tr>
+</table>
+
+<h3>4.4 مثال: البصمة</h3>
+<p><b>نفس البصمة:</b> التعليق والمسافات والـ docstring مختلفين، والمنطق نفسه.</p>
+<table>
+  <tr><th style="width:50%">النسخة A</th><th>النسخة B</th></tr>
+  <tr><td><pre>def get(self, uid):
+    """Return the user."""
+    # lookup
+    return self.store.get(uid)</pre></td>
+      <td><pre>def get(self, uid):
+    """Fetch the user."""
+    return   self.store.get( uid )  # trailing</pre></td></tr>
+</table>
+<p><b>بصمة مختلفة:</b> السطر صار <code>&lrm;return self.store[uid]&lrm;</code>، يعني الدالة صارت بترمي <code>&lrm;KeyError&lrm;</code> بدل ما ترجّع <code>&lrm;None&lrm;</code>.</p>
+
+<h3>4.5 التحقق</h3>
+<table>
+  <tr><th style="width:30%">الفحص</th><th>النتيجة</th></tr>
+  <tr><td>12 اختبار وحدة</td><td class="ok-t">✅ 12/12 بالـ Docker</td></tr>
+  <tr><td>بايثون: قديم مقابل جديد</td><td>147 ملف حقيقي و 581 دالة: <b>كل الحقول القديمة متطابقة 100%</b>، والكلاسات والعلاقات متطابقة</td></tr>
+  <tr><td>جافا: قديم مقابل جديد</td><td>كل الحقول القديمة متطابقة، والفرق الوحيد 4 constructors انضافوا</td></tr>
+  <tr><td>JS و TS و C#</td><td>متطابق. الفحص كشف 3 نواقص وانصلحت: معاملات JS، و async بالـ C#، و توثيق <code>&lrm;///&lrm;</code></td></tr>
+  <tr><td>المسار الكامل بدون إنترنت</td><td>Code vs Code و Code vs Doc اشتغلوا</td></tr>
+</table>
+<div class="box warn"><b class="t">ملاحظة</b>غيّرنا <code>&lrm;force=False&lrm;</code> لـ <code>&lrm;force&lrm;</code> وغيّرنا سطر منطقي، والكود مقابل الكود طلّع <b>صفر تغييرات</b>. الحقول موجودة بس لسا ما حدا عم يقارنها، وهاد شغل الخطوتين 7 و 8.</div>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">5. الخطوة 2: تحديث الـ schemas وإصلاح category</h2>
+<p class="small">commit: <code>&lrm;722d170&lrm;</code> — تقرير الاختبارات: <code>&lrm;core_ai/tests/reports/step2_schemas.md&lrm;</code></p>
+
+<h3>5.1 الخطأ الخطير بكود الإنتاج</h3>
+<div class="box bad">
+  <b class="t">أي تغيير هيكلي كان يوقّع مسار Code vs Code كله</b>
+  حقل <code>&lrm;category&lrm;</code> كان معرّف إنه بيقبل 3 قيم بس: <code>&lrm;syntactic&lrm;</code> و <code>&lrm;semantic&lrm;</code> و <code>&lrm;behavioral&lrm;</code>. بينما <code>&lrm;structural_diff.py&lrm;</code> بيبعت 13 قيمة متل <code>&lrm;method_removed&lrm;</code> و <code>&lrm;class_added&lrm;</code>. النتيجة: <code>&lrm;ValidationError&lrm;</code> مع حذف أو إضافة أي دالة، أو تغيير أي توقيع.
+</div>
+<table>
+  <tr><th style="width:34%">الحالة</th><th style="width:33%">قبل الخطوة 2</th><th>بعد الخطوة 2</th></tr>
+  <tr><td>حذف دالة</td><td class="bad-t">ValidationError</td><td class="ok-t">method_removed</td></tr>
+  <tr><td>إعادة تسمية</td><td class="bad-t">ValidationError</td><td class="ok-t">renamed</td></tr>
+</table>
+<p><b>الإصلاح:</b> <code>&lrm;category&lrm;</code> صار نص حر بيحمل اسم نمط التغيير، وهاد بالزبط يلي رح نحتاجه بالخطوة 10 لنربط كل نمط بمستوى AexPy.</p>
+
+<h3>5.2 الإضافات</h3>
+<table>
+  <tr><th style="width:24%">الإضافة</th><th style="width:40%">القيم</th><th>تُستعمل بـ</th></tr>
+  <tr><td><code>&lrm;ChangeType.RENAMED&lrm;</code></td><td><code>&lrm;renamed&lrm;</code></td><td>هلق — بدل ما تنحسب إعادة التسمية behavior_change</td></tr>
+  <tr><td><code>&lrm;DocConsistencyLabel&lrm;</code></td><td>Consistent، Direct_Mismatch، Over_Promise، Under_Promise</td><td>الخطوات 3–6 (DocPrism)</td></tr>
+  <tr><td><code>&lrm;ChangeDecision&lrm;</code></td><td>structural_only، structural_and_behavioral، behavioral_candidate، no_change</td><td>الخطوة 9</td></tr>
+  <tr><td><code>&lrm;RiskLevel&lrm;</code></td><td>critical، warning، informational</td><td>الخطوة 10 (AexPy)</td></tr>
+  <tr><td>حقول على <code>&lrm;ConflictItem&lrm;</code></td><td><code>&lrm;doc_label&lrm;</code>، <code>&lrm;is_flagged&lrm;</code>، <code>&lrm;evidence&lrm;</code>، <code>&lrm;decision&lrm;</code>، <code>&lrm;risk_level&lrm;</code> — كلها اختيارية</td><td>الخطوات الجاية</td></tr>
+</table>
+<div class="box info"><b class="t">قرار تصميم</b>حقل <code>&lrm;severity&lrm;</code> وقيمه (critical, high, medium, low, info) <b>ما تغيّروا</b>، لأنه الواجهة الأمامية بتلوّن فيهم صفحات Code vs Code و Code vs Doc. مستوى AexPy صار بحقل جديد <code>&lrm;risk_level&lrm;</code> جنبه.</div>
+
+<h3>5.3 التحقق</h3>
+<table>
+  <tr><th style="width:40%">الاختبار</th><th style="width:22%">قبل</th><th>بعد</th></tr>
+  <tr><td>حذف دالة من كلاس</td><td class="bad-t">ValidationError</td><td class="ok-t">method_removed</td></tr>
+  <tr><td>8 أنماط تغيير هيكلي مع بعض</td><td class="bad-t">crash</td><td class="ok-t">الثمانية طلعوا</td></tr>
+  <tr><td>المسار الكامل عبر ConflictOrchestrator</td><td class="bad-t">crash</td><td class="ok-t">success</td></tr>
+  <tr><td>إعادة تسمية fetch_user → get_user</td><td class="bad-t">crash</td><td class="ok-t">renamed</td></tr>
+  <tr><td>تقرير قديم بدون الحقول الجديدة</td><td>✅</td><td class="ok-t">✅ بينقرأ</td></tr>
+  <tr><td>الحقول الجديدة بتنحفظ كنص وبترجع تنقرأ</td><td>—</td><td class="ok-t">✅</td></tr>
+  <tr><td>قيم severity ما تغيّرت</td><td>✅</td><td class="ok-t">✅</td></tr>
+  <tr><td>أسماء DocPrism مطابقة لدليل الوسم</td><td>—</td><td class="ok-t">✅</td></tr>
+</table>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">6. بيئة الاختبار (Docker)</h2>
+<p>على جهاز التطوير، tree-sitter نسخة 0.25، بينما المشروع مثبّت على 0.20. بالنسخة الجديدة ما في <code>&lrm;set_language&lrm;</code>، فـ <b>معالج الجافا ما بيشتغل على الجهاز أصلاً، حتى النسخة القديمة منه</b>. لهيك كل الاختبارات النهائية بتنعمل بحاوية <code>&lrm;ai_web&lrm;</code>، يلي فيها البيئة الحقيقية:</p>
+<table>
+  <tr><th>المكوّن</th><th>جهاز التطوير</th><th>حاوية ai_web</th></tr>
+  <tr><td>Python</td><td>3.13</td><td>3.10.20</td></tr>
+  <tr><td>tree-sitter</td><td>0.25.2</td><td>0.20.4</td></tr>
+  <tr><td>tree-sitter-languages</td><td>غير مثبّت</td><td>1.6.1</td></tr>
+  <tr><td>معالج الجافا</td><td class="bad-t">ما بيشتغل</td><td class="ok-t">بيشتغل</td></tr>
+</table>
+<p>أمر التشغيل (حاوية مؤقتة، بدون قواعد بيانات، بتنمسح لحالها، والصورة ما بتتغيّر):</p>
+<pre>MSYS_NO_PATHCONV=1 docker compose run --rm --no-deps -T --entrypoint sh ai_web -c \
+  "pip install -q pytest; python -m pytest core_ai/tests -v; python -m evaluation.harness.snapshot"</pre>
+<ul>
+  <li><code>&lrm;--entrypoint&lrm;</code> ضروري، لأنه سكربت التشغيل بينتظر MongoDB وبيفشل.</li>
+  <li>مجلد <code>&lrm;Ai_project&lrm;</code> مربوط بالحاوية كـ volume، فالتعديلات بتنشاف بدون إعادة بناء.</li>
+</ul>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>7. ملخص الاختبارات</h2>
+<table>
+  <tr><th style="width:38%">الملف</th><th style="width:12%">العدد</th><th>بيغطّي</th></tr>
+  <tr><td><code>&lrm;core_ai/tests/test_method_details.py&lrm;</code></td><td>12</td><td>بايثون (6)، جافا (3)، توافق النظام (3)</td></tr>
+  <tr><td><code>&lrm;core_ai/tests/test_schemas_step2.py&lrm;</code></td><td>9</td><td>إصلاح category (3)، RENAMED (1)، الحقول والتوافق (5)</td></tr>
+  <tr><td><b>المجموع</b></td><td><b>21</b></td><td class="ok-t">21/21 نجحت بالـ Docker، والنسخة المجمّدة ما انلمست</td></tr>
+</table>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>8. المشاكل المكتشفة وحالتها</h2>
+<table>
+  <tr><th style="width:5%">#</th><th style="width:45%">المشكلة</th><th style="width:17%">بالـ baseline؟</th><th>الحالة</th></tr>
+  <tr><td>1</td><td>أي تغيير هيكلي بيوقّع Code vs Code (<code>&lrm;category&lrm;</code>)</td><td>انصلح بالـ amendment</td><td class="ok-t">✅ انصلح (الخطوة 2)</td></tr>
+  <tr><td>2</td><td>دوال async بالبايثون والـ constructors بالجافا ضايعين من المخطط</td><td>نعم</td><td class="ok-t">✅ انصلح (الخطوة 1)</td></tr>
+  <tr><td>3</td><td>معاملات ناقصة: القيم الافتراضية، و *args، والمصفوفات، و varargs</td><td>نعم</td><td class="ok-t">✅ انصلح بالحقول الجديدة (الخطوة 1)</td></tr>
+  <tr><td>4</td><td>Code vs Doc بيفوّت تناقض "raises مقابل return None" بالتوثيق النصي</td><td>نعم</td><td>الخطوات 3–6</td></tr>
+  <tr><td>5</td><td>إعادة التسمية بتنعرض مرتين (refactoring + renamed)</td><td>نعم</td><td>الخطوة 7</td></tr>
+  <tr><td>6</td><td>إعادة تسمية وهمية: إضافة <code>&lrm;b()&lrm;</code> مع بقاء <code>&lrm;a()&lrm;</code> بتطلع "a انعاد تسميتها لـ b"</td><td>نعم</td><td>الخطوة 7</td></tr>
+  <tr><td>7</td><td>تغيير القيمة الافتراضية أو الجسم ما بينكشف</td><td>نعم</td><td>الخطوتين 7 و 8</td></tr>
+  <tr><td>8</td><td>الـ prompt بيطلب <code>&lrm;type=RENAMED&lrm;</code> بأحرف كبيرة، والـ parser بيتوقّع <code>&lrm;renamed&lrm;</code></td><td>نعم</td><td>الخطوة 11</td></tr>
+  <tr><td>9</td><td>بيئة جهاز التطوير ما بتشغّل معالج الجافا (نسخة tree-sitter)</td><td>نعم</td><td>الحل: Docker للتقييم</td></tr>
+</table>
+<div class="box info"><b class="t">أهمية هالجدول للتقييم</b>المشاكل 4–8 موجودة بالنسخة المجمّدة، فهي نقاط محددة رح نقيس فيها التحسّن بجدول "القديم مقابل الجديد".</div>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">9. سجل الـ commits والملفات</h2>
+<table>
+  <tr><th style="width:14%">commit</th><th>الوصف</th></tr>
+  <tr><td><code>&lrm;c35580a&lrm;</code></td><td>Baseline before Phase 1 (frozen legacy + evaluation harness)</td></tr>
+  <tr><td><code>&lrm;84e5ac5&lrm;</code></td><td>Step 1: extract method body, parameters, docstring, async methods and Java constructors</td></tr>
+  <tr><td><code>&lrm;722d170&lrm;</code></td><td>Step 2: fix category crash, add RENAMED and schema fields for DocPrism/AexPy</td></tr>
+</table>
+<h4>ملفات جديدة</h4>
+<ul>
+  <li><code>&lrm;core_ai/language_processors/method_details.py&lrm;</code></li>
+  <li><code>&lrm;core_ai/tests/test_method_details.py&lrm;</code> و <code>&lrm;core_ai/tests/test_schemas_step2.py&lrm;</code></li>
+  <li><code>&lrm;core_ai/tests/reports/step1_method_details.md&lrm;</code> و <code>&lrm;step2_schemas.md&lrm;</code></li>
+</ul>
+<h4>ملفات معدّلة</h4>
+<ul>
+  <li><code>&lrm;core_ai/language_processors/&lrm;</code>: <code>&lrm;python_processor.py&lrm;</code>، <code>&lrm;java_processor.py&lrm;</code>، <code>&lrm;tree_sitter_processor.py&lrm;</code></li>
+  <li><code>&lrm;core_ai/services/conflict_detection/&lrm;</code>: <code>&lrm;schemas.py&lrm;</code>، <code>&lrm;ast_unifier.py&lrm;</code>، <code>&lrm;semantic_analyzer.py&lrm;</code>، <code>&lrm;structural_diff.py&lrm;</code></li>
+</ul>
+<p class="small">ما انلمس: <code>&lrm;evaluation/legacy_baseline/&lrm;</code>، والواجهة الأمامية، و <code>&lrm;settings.py&lrm;</code>.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>10. الخطوات الجاية</h2>
+<h3>الخطوة 3: تقسيم التوثيق (DocSplitter)</h3>
+<p>بدل ما ينبعت التوثيق كله دفعة وحدة، منقسّمه لأجزاء ومنربط كل جزء بالكلاس أو الدالة يلي بيحكي عنها. هاد أساس فكرة DocPrism إنه كل دالة بتنقارن بالتوثيق تبعها بس. قبل التطبيق، منفحص شكل التوثيق يلي بيولّده النظام فعلياً، لأنه التقسيم معتمد عليه.</p>
+<h3>بعدها</h3>
+<ul>
+  <li><b>الخطوات 4–6:</b> prompt مخصص، ومحلّل دلالي للتوثيق مع Fallback وعتبة ثقة، والربط مع نقل الدوال غير الموثّقة لإحصائيات التغطية.</li>
+  <li><b>الخطوات 7–11:</b> مقارنة التوقيع والجسم، ومصفوفة القرار، وتصنيف الخطورة، وتقليل استدعاءات الـ LLM.</li>
+  <li><b>الخطوات 12–14:</b> التقييم على DocPrism و Cascade، وجدول القديم مقابل الجديد.</li>
+</ul>
+
+</body>
+</html>

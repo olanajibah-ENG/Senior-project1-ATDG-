@@ -2,6 +2,7 @@
 import re
 from typing import Dict, Any, List, Tuple
 from .schemas import ConflictItem, UnifiedClassDiagram, ChangeType, SeverityLevel, DocType
+from .doc_splitter import DocSplitter
 
 
 class CodeDocConsistencyChecker:
@@ -212,6 +213,13 @@ class CodeDocConsistencyChecker:
         entities["methods"] |= structured["methods"]
         documented_class_names = {c.lower() for c in entities["classes"]}
         documented_methods = {m.lower() for m in entities["methods"]}
+
+        # DocSplitter بيفهم Constructor: وأشكال العناوين المختلفة (public Book(...)، Book(...)، ...).
+        # منضيف نتيجته فوق الـ regex القديم (union) — ما منشيل شي كان موثّق قبل.
+        mapping = DocSplitter.match(DocSplitter.split(old_explanation), current_diagram, explanation_text)
+        splitter_keys = mapping.documented_keys()
+        documented_class_names |= splitter_keys["classes"]
+        documented_methods |= splitter_keys["methods"]
 
         for cls in current_diagram.classes:
             class_name       = cls.name
