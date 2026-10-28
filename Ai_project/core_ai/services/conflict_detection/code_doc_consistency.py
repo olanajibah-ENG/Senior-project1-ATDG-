@@ -1,7 +1,7 @@
 # core_ai/services/conflict_detection/code_doc_consistency.py
 import re
 from typing import Dict, Any, List, Tuple
-from .schemas import ConflictItem, UnifiedClassDiagram, ChangeType, SeverityLevel, DocType
+from .schemas import ConflictItem, UnifiedClassDiagram, ChangeType, SeverityLevel, DocType, MODULE_CLASS
 from .doc_splitter import DocSplitter
 
 
@@ -224,7 +224,8 @@ class CodeDocConsistencyChecker:
         for cls in current_diagram.classes:
             class_name       = cls.name
             class_documented = class_name.lower() in documented_class_names
-            total_elements  += 1
+            is_module        = class_name == MODULE_CLASS   # الدوال المستقلة: مش كلاس حقيقي
+            total_elements  += 0 if is_module else 1
 
             # حساب الدوال الموثقة في هذا الكلاس
             methods_total      = len(cls.methods)
@@ -234,7 +235,11 @@ class CodeDocConsistencyChecker:
             )
             total_elements += methods_total
 
-            if class_documented:
+            if is_module:
+                # الدوال بس بتنحسب بالتغطية، وما في تنبيه "كلاس غير موثّق"
+                fully_doc_elements += methods_documented
+                undoc_elements     += methods_total - methods_documented
+            elif class_documented:
                 documented_classes += 1
                 if methods_total == 0 or methods_documented == methods_total:
                     fully_doc_elements += 1 + methods_total
@@ -319,7 +324,7 @@ class CodeDocConsistencyChecker:
                             ))
 
 
-        total_classes        = len(current_diagram.classes)
+        total_classes        = sum(c.name != MODULE_CLASS for c in current_diagram.classes)
         compatibility_score  = round((documented_classes / total_classes * 100), 1) if total_classes > 0 else 0.0
         coverage_percentage  = round((fully_doc_elements / total_elements * 100), 1) if total_elements > 0 else 0.0
         critical_conflicts   = sum(1 for c in conflicts if c.severity == SeverityLevel.CRITICAL)
@@ -348,7 +353,7 @@ class CodeDocConsistencyChecker:
                 "critical_conflicts":    critical_conflicts,
                 "undocumented_classes":  [
                     c.name for c in current_diagram.classes
-                    if c.name.lower() not in documented_class_names
+                    if c.name != MODULE_CLASS and c.name.lower() not in documented_class_names
                 ],
                 "undocumented_methods": [
                     {"class": cls.name, "method": m.name}

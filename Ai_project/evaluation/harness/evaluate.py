@@ -6,13 +6,22 @@
     python -m evaluation.harness.evaluate code_vs_doc  --stage "after step 3"
     python -m evaluation.harness.evaluate code_vs_code --stage "after step 3" --model poolside/laguna-s-2.1:free
 
+بيانات الأوراق (evaluation/paper_sets، من build_paper_sets.py):
+    python -m evaluation.harness.evaluate code_vs_doc --set docprism_ablation --stage "after step 3"
+    python -m evaluation.harness.evaluate code_vs_doc --set cascade_balanced  --stage "after step 3"
+
 الافتراضي: --samples evaluation/dev_set/<mode>  --labels evaluation/dev_set/labels_<mode>.csv
 
 - كل استدعاءات الـ LLM (بالنسختين) بتمرق من evaluation.harness.llm_recorder: temperature 0،
-  seed ثابت، موديل مثبّت، بدون cache.
+  seed ثابت، موديل مثبّت.
+- replay cache (evaluation/llm_cache/): نفس الموديل + نفس الـ seed + نفس الـ prompt حرفياً → بيرجع
+  الرد المسجّل بدل طلب جديد (الرد كان رح يطلع نفسه، وبيوفّر من حد الـ free tier).
+  --no-replay بيجبر طلبات جديدة. كل استدعاء بينسجّل إذا كان replayed.
 - نتيجة النسخة القديمة بتنحفظ مرة وحدة وبيعاد استعمالها (هي مجمّدة) طالما العينات والموديل ما تغيّروا.
   --rerun-legacy بيجبر إعادة التشغيل.
-- المخرجات: evaluation/dev_set/results/<mode>__<system>__<UTC>.json + سطر بـ progress_<mode>.csv
+- المخرجات: <set>/../results/<set>__<system>__<UTC>.json + سطر بـ progress_<set>.csv
+- إذا ملف الوسم فيه pair_id (CASCADE): بينحسب PFP = من المتناقضة يلي انكشفت صح، نسبة يلي
+  نسختها المصلّحة ما انبّه عليها.
 
 تعريف التنبؤ (prediction) — بيعتمد على مخرجات النظام بس، مش على آليته:
   code_vs_doc : العنصر "منبَّه عليه" إذا في ConflictItem عليه (غير Overall) و is_flagged مش False.
@@ -38,9 +47,11 @@ from evaluation.harness.run_baseline import doc_from_python_docstrings, run_samp
 
 ROOT = Path(__file__).resolve().parent.parent          # evaluation/
 DEV = ROOT / "dev_set"
-RESULTS = DEV / "results"
+PAPER_SETS = ROOT / "paper_sets"
+LLM_CACHE = ROOT / "llm_cache"
 
-POSITIVE_DOC_LABELS = {"Direct_Mismatch", "Over_Promise"}
+# Inconsistent = وسم ثنائي من بيانات الأوراق (DocPrism / CASCADE)
+POSITIVE_DOC_LABELS = {"Direct_Mismatch", "Over_Promise", "Inconsistent"}
 STRUCTURAL_TYPES = {"renamed", "refactoring", "new_feature"}
 BEHAVIORAL_TYPES = {"behavior_change", "logic_change"}
 
@@ -53,6 +64,32 @@ def _route_production_llm_through_recorder() -> None:
     """أي LLMClient.call_model بكود الإنتاج بيمرق من الـ recorder الحتمي."""
     from core_ai.ai_engine import llm_client as prod
     prod.LLMClient.call_model = Recorder.call_model
+
+
+def _enable_replay_cache() -> None:
+    """نفس (موديل، seed، system، user) → الرد المسجّل. بيلفّ Recorder.call_model للنسختين."""
+    original = Recorder.call_model
+    LLM_CACHE.mkdir(exist_ok=True)
+
+    def call_model(system_prompt: str, user_prompt: str, **kwargs):
+        key = hashlib.sha256(json.dumps([Recorder.model, Recorder.seed, system_prompt, user_prompt],
+                                        ensure_ascii=False).encode()).hexdigest()
+        path = LLM_CACHE / f"{key}.json"
+        if path.exists() and not Recorder.offline:
+            cached = json.loads(path.read_text(encoding="utf-8"))
+            Recorder._calls.append({"sample_id": Recorder._current_sample, "requested_model": Recorder.model,
+                                    "ok": True, "replayed": True, "served_model": cached.get("served_model"),
+                                    "raw_response": cached["response"], "cache_key": key})
+            return cached["response"]
+        response = original(system_prompt, user_prompt, **kwargs)
+        last = Recorder._calls[-1] if Recorder._calls else {}
+        if response and last.get("ok"):
+            path.write_text(json.dumps({"model": Recorder.model, "seed": Recorder.seed,
+                                        "served_model": last.get("served_model"), "response": response},
+                                       ensure_ascii=False), encoding="utf-8")
+        return response
+
+    Recorder.call_model = staticmethod(call_model)
 
 
 def _analyze_current(code: str, language: str) -> Dict[str, Any]:
@@ -129,6 +166,7 @@ def score_code_vs_doc(results: List[Dict[str, Any]], labels) -> Dict[str, Any]:
         sample_labels = labels.get(r["id"], {})
         for el, row in sample_labels.items():
             rows.append({"sample": r["id"], "element": row["element"], "label": row["label"],
+                         "pair_id": row.get("pair_id") or "",
                          "flagged": el in flagged, "predicted_label": predicted_label.get(el)})
         unlabeled += [{"sample": r["id"], "element": k} for k in sorted(flagged - set(sample_labels))]
 
@@ -142,9 +180,21 @@ def score_code_vs_doc(results: List[Dict[str, Any]], labels) -> Dict[str, Any]:
         return m
 
     by_label = {}
-    for lab in ("Direct_Mismatch", "Over_Promise", "Under_Promise", "Consistent", "skip"):
+    for lab in sorted({x["label"] for x in rows}):
         sub = [x for x in rows if x["label"] == lab]
         by_label[lab] = {"n": len(sub), "flagged": sum(x["flagged"] for x in sub)}
+
+    # PFP: من المتناقضة يلي انكشفت صح، قديش منها نسختها المصلّحة (نفس pair_id) ما انبّه عليها
+    pfp = None
+    pairs = defaultdict(dict)
+    for x in rows:
+        if x["pair_id"]:
+            pairs[x["pair_id"]]["pos" if x["label"] in POSITIVE_DOC_LABELS else "neg"] = x
+    detected = [p for p in pairs.values() if "pos" in p and "neg" in p and p["pos"]["flagged"]]
+    if pairs:
+        clean_fix = sum(not p["neg"]["flagged"] for p in detected)
+        pfp = {"value": round(clean_fix / len(detected), 3) if detected else None,
+               "fixed_left_clean": clean_fix, "detected_pairs": len(detected), "pairs": len(pairs)}
 
     with_label = [x for x in rows if x["predicted_label"] and x["label"] != "skip"]
     return {
@@ -152,6 +202,7 @@ def score_code_vs_doc(results: List[Dict[str, Any]], labels) -> Dict[str, Any]:
         "all": binary(rows, len(unlabeled)),
         "documented_only": binary([x for x in rows if x["label"] != "skip"], len(unlabeled)),
         "flags_by_true_label": by_label,
+        "pfp": pfp,
         "label_accuracy": (round(sum(x["predicted_label"] == x["label"] for x in with_label) / len(with_label), 3)
                            if with_label else None),
         "unlabeled_flags": unlabeled,
@@ -237,6 +288,7 @@ def run_system(system: str, mode: str, samples, model: Optional[str]) -> List[Di
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("mode", choices=["code_vs_doc", "code_vs_code"])
+    ap.add_argument("--set", help="مجموعة من evaluation/paper_sets (مثلاً docprism_ablation، cascade_balanced)")
     ap.add_argument("--samples")
     ap.add_argument("--labels")
     ap.add_argument("--systems", default="legacy,current")
@@ -244,10 +296,17 @@ def main() -> None:
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--stage", default="", help="اسم المرحلة لجدول التقدّم، مثلاً 'after step 3'")
     ap.add_argument("--rerun-legacy", action="store_true")
+    ap.add_argument("--no-replay", action="store_true", help="ما تستعمل ردود LLM مسجّلة")
     args = ap.parse_args()
 
-    samples_dir = Path(args.samples) if args.samples else DEV / args.mode
-    labels_path = Path(args.labels) if args.labels else DEV / f"labels_{args.mode}.csv"
+    if args.set:
+        samples_dir = PAPER_SETS / args.set
+        labels_path = PAPER_SETS / f"labels_{args.set}.csv"
+        results_dir, set_name = PAPER_SETS / "results", args.set
+    else:
+        samples_dir = Path(args.samples) if args.samples else DEV / args.mode
+        labels_path = Path(args.labels) if args.labels else DEV / f"labels_{args.mode}.csv"
+        results_dir, set_name = DEV / "results", args.mode
     samples = [json.loads(f.read_text(encoding="utf-8")) for f in sorted(samples_dir.glob("*.json"))]
     if not samples:
         sys.exit(f"ما في عينات بـ {samples_dir}")
@@ -258,17 +317,19 @@ def main() -> None:
         Recorder.configure(model=args.model, seed=args.seed)
     else:
         Recorder.configure(model=None, offline=True)
+    if not args.no_replay:
+        _enable_replay_cache()
     _route_production_llm_through_recorder()
 
     samples_hash = hashlib.sha256(json.dumps(samples, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
-    RESULTS.mkdir(parents=True, exist_ok=True)
+    results_dir.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     scorer = score_code_vs_doc if args.mode == "code_vs_doc" else score_code_vs_code
     model_tag = (args.model or "offline").replace("/", "_").replace(":", "_")
 
     summary_rows = []
     for system in [s.strip() for s in args.systems.split(",") if s.strip()]:
-        cache = RESULTS / f"legacy__{args.mode}__{samples_hash[:12]}__{model_tag}.json"
+        cache = results_dir / f"legacy__{set_name}__{samples_hash[:12]}__{model_tag}.json"
         if system == "legacy" and cache.exists() and not args.rerun_legacy:
             print(f"legacy: reusing {cache.name}")
             results = json.loads(cache.read_text(encoding="utf-8"))["results"]
@@ -280,24 +341,25 @@ def main() -> None:
                                             ensure_ascii=False, indent=1), encoding="utf-8")
 
         metrics = scorer(results, labels)
-        llm_calls = sum(r.get("llm_call_count", 0) for r in results)
+        calls = [c for r in results for c in r.get("llm_calls", [])]
         report = {
-            "mode": args.mode, "system": system, "stage": args.stage,
+            "mode": args.mode, "set": set_name, "system": system, "stage": args.stage,
             "run_at": datetime.now(timezone.utc).isoformat(),
             "code_hash": legacy_hash if system == "legacy" else current_code_hash(),
             "samples_hash": samples_hash, "labels_file": labels_path.name,
             "llm": {"model": args.model, "model_info": Recorder.model_info, "seed": args.seed,
-                    "calls": llm_calls, "failed_samples": sum(r.get("semantic_failed", False) for r in results)},
+                    "calls": len(calls), "replayed": sum(bool(c.get("replayed")) for c in calls),
+                    "failed_samples": sum(r.get("semantic_failed", False) for r in results)},
             "errors": [{"id": r["id"], "error": r.get("error")} for r in results if r.get("status") == "error"],
             "metrics": metrics,
             "results": results,
         }
-        out = RESULTS / f"{args.mode}__{system}__{stamp}.json"
+        out = results_dir / f"{set_name}__{system}__{stamp}.json"
         out.write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
         summary_rows.append(_progress_row(args, system, report))
         print(f"  -> {out.relative_to(ROOT.parent)}")
 
-    _append_progress(args.mode, summary_rows)
+    _append_progress(results_dir / f"progress_{set_name}.csv", summary_rows)
     _print_table(args.mode, summary_rows)
 
 
@@ -308,18 +370,19 @@ def _progress_row(args, system, report) -> Dict[str, Any]:
            "code_hash": report["code_hash"][:12], "model": args.model or "offline",
            "elements": m["elements"], **{k: main_m[k] for k in ("precision", "recall", "f1", "specificity", "tp", "fp", "fn", "tn")},
            "unlabeled_flags": len(m["unlabeled_flags"]), "llm_calls": report["llm"]["calls"],
+           "llm_replayed": report["llm"]["replayed"],
            "llm_failed_samples": report["llm"]["failed_samples"], "errors": len(report["errors"])}
     if args.mode == "code_vs_doc":
         row["flag_rate"] = main_m["flag_rate"]
         row["label_accuracy"] = m["label_accuracy"]
+        row["pfp"] = (m.get("pfp") or {}).get("value")
     else:
         for q in ("Q1_interface", "Q2_behavior", "Q3_breaking"):
             row[f"{q}_f1"] = m[q]["f1"]
     return row
 
 
-def _append_progress(mode: str, rows: List[Dict[str, Any]]) -> None:
-    path = RESULTS / f"progress_{mode}.csv"
+def _append_progress(path: Path, rows: List[Dict[str, Any]]) -> None:
     new = not path.exists()
     with open(path, "a", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))

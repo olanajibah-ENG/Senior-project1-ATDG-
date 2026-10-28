@@ -1,0 +1,53 @@
+sample_id,element,label,pair_id,source,notes
+docprism_pandas_001,<module>.is_monotonic_increasing,Inconsistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_pandas_002,<module>.putmask_without_repeat,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_pandas_003,<module>.should_use_regex,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_pandas_004,<module>.ravel_compat,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_pandas_005,<module>._generate_range_overflow_safe,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_pandas_006,DocPrismCase.ndim,Consistent,,"DocPrism (2 authors, consensus)",indentation repaired (source artifact)
+docprism_pandas_007,DocPrismCase.argmin,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_pandas_008,<module>.contains,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_pandas_009,DocPrismCase.remove_categories,Consistent,,"DocPrism (2 authors, consensus)",indentation repaired (source artifact)
+docprism_pandas_010,DocPrismCase.notna,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_pandas_011,DocPrismCase.min,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_pandas_012,<module>._preparse,Inconsistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_pandas_013,<module>.set_test_mode,Inconsistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_pandas_014,<module>._node_not_implemented,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_pandas_015,<module>._astype_float_to_int_nansafe,Consistent,,"DocPrism (2 authors, consensus)",top-level function; indentation repaired (source artifact)
+docprism_pandas_016,<module>._disallow_mismatched_datetimelike,Consistent,,"DocPrism (2 authors, consensus)",top-level function; indentation repaired (source artifact)
+docprism_pandas_017,<module>.maybe_downcast_to_dtype,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_pandas_018,<module>.infer_dtype_from,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_pandas_019,<module>.find_result_type,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_pandas_020,<module>.maybe_cast_to_integer_array,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_pandas_021,<module>.np_can_cast_scalar,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_requests_001,<module>.merge_setting,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_requests_002,<module>.merge_hooks,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_requests_003,DocPrismCase.get_redirect_target,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_004,DocPrismCase.should_strip_auth,Consistent,,"DocPrism (2 authors, consensus)",indentation repaired (source artifact)
+docprism_requests_005,DocPrismCase.resolve_redirects,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_006,DocPrismCase.rebuild_auth,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_007,DocPrismCase.rebuild_proxies,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_008,DocPrismCase.rebuild_method,Consistent,,"DocPrism (2 authors, consensus)",indentation repaired (source artifact)
+docprism_requests_009,DocPrismCase.prepare_request,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_010,DocPrismCase.request,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_011,DocPrismCase.get,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_012,DocPrismCase.options,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_013,DocPrismCase.head,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_014,DocPrismCase.post,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_015,DocPrismCase.put,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_016,DocPrismCase.patch,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_017,DocPrismCase.delete,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_018,DocPrismCase.send,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_019,DocPrismCase.merge_environment_settings,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_020,DocPrismCase.get_adapter,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_021,DocPrismCase.close,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_022,DocPrismCase.mount,Inconsistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_023,<module>.dispatch_hook,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_requests_024,<module>._implementation,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_requests_025,<module>.info,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_requests_026,<module>.main,Consistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_requests_027,DocPrismCase.__init__,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_028,<module>.put,Inconsistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_requests_029,<module>.patch,Inconsistent,,"DocPrism (2 authors, consensus)",top-level function
+docprism_requests_030,DocPrismCase._find,Consistent,,"DocPrism (2 authors, consensus)",
+docprism_requests_031,DocPrismCase.apparent_encoding,Consistent,,"DocPrism (2 authors, consensus)",indentation repaired (source artifact)

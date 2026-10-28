@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>بيانات التقييم والمقاييس</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  :root {
+    --ink: #1c2430; --muted: #5a6573; --line: #d9dee5; --accent: #1f5fa8;
+    --accent-bg: #eef4fb; --ok: #1e7d4f; --ok-bg: #e9f6ef; --bad: #b3261e; --bad-bg: #fdecea;
+    --warn: #8a5a00; --warn-bg: #fff6e0; --code-bg: #f4f6f8;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Tahoma, Arial, sans-serif; color: var(--ink); background: #fff;
+         font-size: 10.5pt; line-height: 1.75; margin: 0; }
+  h1 { font-size: 21pt; color: var(--accent); margin: 0 0 4px; line-height: 1.4; }
+  h2 { font-size: 15pt; color: var(--accent); border-bottom: 2px solid var(--accent);
+       padding-bottom: 4px; margin: 26px 0 10px; page-break-after: avoid; }
+  h3 { font-size: 12pt; margin: 18px 0 6px; page-break-after: avoid; }
+  h4 { font-size: 10.5pt; margin: 12px 0 4px; color: var(--muted); page-break-after: avoid; }
+  p { margin: 6px 0; }
+  ul, ol { margin: 6px 0; padding-right: 22px; padding-left: 0; }
+  li { margin: 2px 0; }
+  code, .ltr { font-family: Consolas, "Courier New", monospace; font-size: 9pt; direction: ltr;
+               unicode-bidi: isolate; }
+  code { background: var(--code-bg); padding: 0 4px; border-radius: 3px; }
+  pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px;
+        direction: ltr; text-align: left; font-family: Consolas, monospace; font-size: 8.6pt;
+        line-height: 1.5; white-space: pre-wrap; page-break-inside: avoid; margin: 8px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 9.4pt;
+          page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  th, td { border: 1px solid var(--line); padding: 5px 7px; vertical-align: top; text-align: right; }
+  th { background: var(--accent-bg); font-weight: 600; }
+  .cover { border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 14px; }
+  .subtitle { color: var(--muted); font-size: 11pt; }
+  .meta { display: flex; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: 9.5pt; margin-top: 8px; }
+  .box { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin: 10px 0;
+         page-break-inside: avoid; }
+  .box.ok { background: var(--ok-bg); border-color: #b7dfc8; }
+  .box.bad { background: var(--bad-bg); border-color: #f2c2bd; }
+  .box.warn { background: var(--warn-bg); border-color: #f0d9a0; }
+  .box.info { background: var(--accent-bg); border-color: #c8dbf0; }
+  .box b.t { display: block; margin-bottom: 2px; }
+  .ok-t { color: var(--ok); font-weight: 600; }
+  .bad-t { color: var(--bad); font-weight: 600; }
+  .warn-t { color: var(--warn); font-weight: 600; }
+  .kpis { display: flex; gap: 10px; margin: 10px 0; }
+  .kpi { flex: 1; border: 1px solid var(--line); border-radius: 8px; padding: 8px; text-align: center; }
+  .kpi .v { font-size: 17pt; font-weight: 700; color: var(--accent); line-height: 1.2; }
+  .kpi .l { font-size: 8.8pt; color: var(--muted); }
+  .toc ol { columns: 2; column-gap: 28px; }
+  .pb { page-break-before: always; }
+  .small { font-size: 9pt; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+  <h1>بيانات التقييم والمقاييس</h1>
+  <div class="subtitle">شو البيانات يلي رح نقيس عليها من الأوراق البحثية، وشو منقيس على كل وحدة، وكيف</div>
+  <div class="meta">
+    <span>التاريخ: 2026-10-28</span>
+    <span>المشروع: Senior-project1ATDG / Ai_project</span>
+    <span>مكان البيانات: <code>&lrm;evaluation/external/&lrm;</code></span>
+  </div>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="v">52</div><div class="l">DocPrism المعنونة (Python)</div></div>
+  <div class="kpi"><div class="v">885</div><div class="l">CASCADE (Java)، منهم 71 تناقض</div></div>
+  <div class="kpi"><div class="v">1991</div><div class="l">DocPrism الكبيرة (4 لغات، بدون وسم)</div></div>
+  <div class="kpi"><div class="v">—</div><div class="l">Code vs Code: بانتظار البيانات</div></div>
+</div>
+
+<div class="toc box info">
+  <b class="t">المحتويات</b>
+  <ol>
+    <li>المبادئ: ليش هيك ومنقيس متى</li>
+    <li>نظرة عامة على كل البيانات</li>
+    <li>DocPrism المعنونة (ablation): 52 دالة</li>
+    <li>CASCADE: 885 دالة جافا</li>
+    <li>DocPrism الكبيرة: 1991 دالة</li>
+    <li>بيانات Code vs Code</li>
+    <li>تعريف المقاييس</li>
+    <li>تحويل البيانات لشكل نظامنا</li>
+    <li>قواعد العدالة بالقياس</li>
+    <li>الميزانية: عدد الطلبات</li>
+    <li>القرارات المعلّقة</li>
+  </ol>
+</div>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>1. المبادئ: ليش هيك ومنقيس متى</h2>
+<ul>
+  <li><b>كل البيانات من الأوراق البحثية نفسها</b>: DocPrism و CASCADE لمسار Code vs Doc، و AexPy و NPM لمسار Code vs Code. مجموعة التطوير يلي كتبناها قبل ما عاد منستعملها بالتقارير.</li>
+  <li><b>منقيس بعد كل خطوة</b>، مش بالآخر بس، لحتى نشوف مدى التحسين خطوة بخطوة.</li>
+  <li><b>النسختين بيشوفوا نفس المدخل بالزبط</b>: القديمة المجمّدة (<code>&lrm;legacy_baseline&lrm;</code>) والحالية (<code>&lrm;core_ai&lrm;</code>).</li>
+  <li><b>ممنوع نفصّل النظام على بيانات القياس.</b> لهيك في مجموعة منسمح لحالنا نفتح أخطاءها ونتعلّم منها (DocPrism)، ومجموعة منشوف أرقامها بس (CASCADE). التفاصيل بالقسم 9.</li>
+</ul>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>2. نظرة عامة على كل البيانات</h2>
+<table>
+  <tr><th style="width:20%">المجموعة</th><th>اللغة</th><th>الحجم</th><th>الوسم</th><th>الدور</th><th>منقيس متى</th><th>طلبات LLM / قياس</th></tr>
+  <tr><td><b>DocPrism ablation</b></td><td>Python</td><td>52</td><td>✅ متوافق / متناقض</td><td>تطوير: <b>منفتح الأخطاء</b></td><td>بعد كل خطوة</td><td>52</td></tr>
+  <tr><td><b>CASCADE المتوازنة</b></td><td>Java</td><td>142 (71+71)</td><td>✅</td><td>تقرير: <b>أرقام بس</b></td><td>بعد كل خطوة</td><td>142</td></tr>
+  <tr><td><b>CASCADE الواقعية</b></td><td>Java</td><td>710 (71+639)</td><td>✅</td><td>تقرير: أرقام بس</td><td>بالمحطات المهمة</td><td>710</td></tr>
+  <tr><td><b>DocPrism الكبيرة</b></td><td>Py / TS / C++ / Java</td><td>1991</td><td>❌</td><td>Flag Rate بس</td><td>بالآخر (اختياري)</td><td>1991</td></tr>
+  <tr><td><b>AexPy-index</b></td><td>Python</td><td>يتحدد</td><td>⚠️ مخرجات أداة</td><td>Code vs Code (بنيوي)</td><td>بعد كل خطوة 7–11</td><td>حسب العدد</td></tr>
+  <tr><td><b>NPM (TOSEM 2025)</b></td><td>JS / TS</td><td>2724 تغيير</td><td>✅ بشري</td><td>Code vs Code (بنيوي + سلوكي)</td><td>بعد الموافقة</td><td>حسب العدد</td></tr>
+</table>
+<p class="small">النسخة القديمة من Code vs Doc ما بتستعمل LLM، فقياسها ببلاش. طلبات الـ LLM بالجدول هي للنسخة الحالية، بعد ما يدخل الـ LLM بالخطوة 5.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">3. DocPrism المعنونة (ablation): 52 دالة</h2>
+
+<h3>3.1 المصدر</h3>
+<ul>
+  <li><b>الورقة:</b> DocPrism (Xu وآخرين، arXiv 2511.00215). الأداة بتكشف التناقض بين الكود والتوثيق بمنهجية LCEF.</li>
+  <li><b>الملفات:</b> <code>&lrm;datasets/ablation_dataset/pandas_labeled.json&lrm;</code> و <code>&lrm;requests_labeled.json&lrm;</code> بمستودع <code>&lrm;SnowPhoebe/DocPrism&lrm;</code>، رخصة MIT.</li>
+  <li><b>شو هي:</b> المجموعة يلي استعملوها بدراسة الـ ablation بالورقة، يعني الجزء المعنون بالكامل من مجموعة البناء تبعهم. الوسم عملوه شخصين من المؤلفين، كل واحد لحاله، وحسموا الخلافات بالنقاش.</li>
+</ul>
+
+<h3>3.2 المحتوى</h3>
+<table>
+  <tr><th>المشروع</th><th>الدوال</th><th>متناقضة</th><th>متوافقة</th></tr>
+  <tr><td>pandas</td><td>21</td><td>3</td><td>18</td></tr>
+  <tr><td>Requests</td><td>31</td><td>3</td><td>28</td></tr>
+  <tr><td><b>المجموع</b></td><td><b>52</b></td><td><b>6</b></td><td><b>46</b></td></tr>
+</table>
+<p>الدوال المتناقضة الست: <code>&lrm;is_monotonic_increasing&lrm;</code> و <code>&lrm;_preparse&lrm;</code> و <code>&lrm;set_test_mode&lrm;</code> و <code>&lrm;mount&lrm;</code> و <code>&lrm;put&lrm;</code> و <code>&lrm;patch&lrm;</code>.</p>
+<p><b>شكل كل حالة:</b> <code>&lrm;{"id", "doc", "code", "label"}&lrm;</code>. الـ <code>&lrm;doc&lrm;</code> هو الـ docstring، والـ <code>&lrm;code&lrm;</code> هو الدالة كاملة، والـ <code>&lrm;label&lrm;</code> قيمته <code>&lrm;consistent&lrm;</code> أو <code>&lrm;inconsistent&lrm;</code>. الوسم <b>ثنائي بس</b>، ما فيه تصنيف Direct أو Over.</p>
+<p><b>ملاحظة:</b> 26 من الـ 52 دالة مستقلة، يعني مش جوا كلاس. القسم 8 بيشرح ليش هالشي مهم.</p>
+
+<h3>3.3 دورها: مجموعة التطوير</h3>
+<p>هي المجموعة الوحيدة يلي <b>منسمح لحالنا نفتح الحالات يلي غلط فيها النظام</b> ونفهم ليش، ومنستعمل هالشي لنحسّن. وهالشي متل يلي عمله مؤلفين DocPrism نفسهم بمجموعة البناء.</p>
+
+<h3>3.4 المقاييس</h3>
+<table>
+  <tr><th style="width:22%">المقياس</th><th>ليش</th></tr>
+  <tr><td>Precision</td><td>من التنبيهات، قديش صح. هاد الأهم لتجربة المطوّر</td></tr>
+  <tr><td>Recall</td><td>من الست المتناقضة، قديش لقى</td></tr>
+  <tr><td>F1</td><td>توازن بين الاثنين</td></tr>
+  <tr><td>Specificity</td><td>من الـ 46 المتوافقة، قديش تركها بحالها</td></tr>
+  <tr><td>Flag Rate</td><td>نسبة الدوال يلي نبّه عليها. الورقة بتقيس هاد</td></tr>
+</table>
+<div class="box warn">
+  <b class="t">تنبيه بالتفسير</b>
+  في <b>6 حالات متناقضة بس</b>، فكل حالة بتساوي 16.7% من الـ Recall. يعني تغيير حالة وحدة بيحرّك الرقم كتير. لهيك منكتب دايماً العدد مع النسبة، متل <span class="ltr">Recall = 0.50 (3/6)</span>.
+</div>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>4. CASCADE: 885 دالة جافا</h2>
+
+<h3>4.1 المصدر</h3>
+<ul>
+  <li><b>الورقة:</b> CASCADE (Kiecker وآخرين، FSE 2026، DOI 10.1145/3808175، arXiv 2604.19400).</li>
+  <li><b>الملف:</b> <code>&lrm;PaperEvaluation/dataset.zip&lrm;</code> بمستودع <code>&lrm;TobiasKiecker/CASCADE&lrm;</code>، فرع <code>&lrm;FSE26&lrm;</code>، حجمه 15 ميغا.</li>
+  <li><b>كيف انبنت:</b> من commits بمشاريع جافا كبيرة <b>صلّحت التوثيق</b>، يعني المطوّر نفسه اعترف إنه التوثيق كان غلط. انتقوا مشاريع بتشتغل وبتنبنى، وتأكدوا يدوياً من كل تناقض.</li>
+</ul>
+
+<h3>4.2 المحتوى حسب المشروع</h3>
+<table>
+  <tr><th>المشروع</th><th>متوافقة</th><th>متناقضة</th><th>المشروع</th><th>متوافقة</th><th>متناقضة</th></tr>
+  <tr><td>commons-lang</td><td>186</td><td>10</td><td>commons-codec</td><td>29</td><td>3</td></tr>
+  <tr><td>commons-math</td><td>176</td><td>13</td><td>commons-collections</td><td>27</td><td>2</td></tr>
+  <tr><td>jsoup</td><td>114</td><td>8</td><td>guava</td><td>26</td><td>2</td></tr>
+  <tr><td>joda-time</td><td>88</td><td>8</td><td>jackson-core</td><td>25</td><td>2</td></tr>
+  <tr><td>commons-cli</td><td>44</td><td>4</td><td>jfreechart</td><td>20</td><td>1</td></tr>
+  <tr><td>gson</td><td>30</td><td>3</td><td>jackson-databind</td><td>18</td><td>2</td></tr>
+  <tr><td>commons-csv</td><td>14</td><td>4</td><td>commons-compress</td><td>12</td><td>3</td></tr>
+  <tr><td>jsprit</td><td>3</td><td>3</td><td>assertj</td><td>3</td><td>2</td></tr>
+</table>
+<p class="small">هالأرقام حسب ملفات <code>&lrm;.txt&lrm;</code> كما هي: 815 متوافقة و 70 متناقضة. بعد التصحيح بالقسم 4.4 بيصيروا 814 و 71 (commons-codec بتصير 28 و 4).</p>
+
+<h3>4.3 شكل البيانات</h3>
+<table>
+  <tr><th style="width:30%">الملف</th><th>المحتوى</th></tr>
+  <tr><td><code>&lrm;&lt;project&gt;/&lt;commit&gt;/&lt;n&gt;/analyzed.json&lrm;</code></td><td>الدالة: <code>&lrm;code&lrm;</code> (الجسم)، و <code>&lrm;doc&lrm;</code> (Javadoc)، و <code>&lrm;signature&lrm;</code> (الاسم، والإرجاع، والمعاملات، والـ modifiers، والاستثناءات)، و <code>&lrm;parent&lrm;</code> (اسم الكلاس، وتوثيقه، والـ constructors، والحقول، وباقي الدوال)، و <code>&lrm;package&lrm;</code></td></tr>
+  <tr><td><code>&lrm;.../inconsistency.txt&lrm;</code></td><td><code>&lrm;True&lrm;</code> = متناقضة، <code>&lrm;False&lrm;</code> = متوافقة</td></tr>
+  <tr><td><code>&lrm;dataset_mapping_dict.py&lrm;</code></td><td>بيربط كل حالة متناقضة بنسختها المصلّحة (71 زوج)</td></tr>
+  <tr><td><code>&lrm;dataset_info.xlsx&lrm;</code></td><td>142 سطر (71 متناقضة + 71 مصلّحة)، مع ملاحظة المؤلفين عن نوع كل تصليح</td></tr>
+</table>
+<p><b>أمثلة من ملاحظات المؤلفين عن أنواع التناقض:</b> نوع الاستثناء تغيّر، والتوثيق بيقول "returns null" والكود بيرمي استثناء، وإشارة <code>&lrm;&lt;&lrm;</code> مكان <code>&lrm;&lt;=&lrm;</code>، والتوثيق بيقول "returns empty list" والكود بيرجّع null، ونسخ ولصق غلط بالوصف، وترميز مختلف عن المذكور.</p>
+
+<h3>4.4 فرق لقيناه بالبيانات</h3>
+<div class="box warn">
+  <b class="t">70 مقابل 71</b>
+  ملفات <code>&lrm;.txt&lrm;</code> فيها 70 <code>&lrm;True&lrm;</code>، بينما الورقة وملف الربط والجدول فيهم 71. السبب حالة وحدة (<code>&lrm;commons-codec/6175c99…/1&lrm;</code>) ملف <code>&lrm;.txt&lrm;</code> تبعها مكتوب فيه <code>&lrm;False&lrm;</code> بالغلط، مع إنها بملف الربط حالة متناقضة وبالجدول <code>&lrm;True&lrm;</code>. <b>القرار: منعتمد ملف الربط والجدول (71)</b>، ومنذكر هالشي بالتقرير.
+</div>
+<div class="box info">
+  <b class="t">كل التصليحات كانت بالتوثيق بس</b>
+  بالـ 71 زوج، الكود نفسه ما تغيّر بين النسخة المتناقضة والمصلّحة. فـ CASCADE بتنفع لـ Code vs Doc بس، <b>مش</b> لـ Code vs Code.
+</div>
+
+<h3>4.5 المجموعات الفرعية</h3>
+<table>
+  <tr><th style="width:22%">المجموعة</th><th>التكوين</th><th>شو بتقيس</th><th style="width:16%">متى</th></tr>
+  <tr><td><b>المتوازنة (142)</b></td><td>71 متناقضة + نسختهم المصلّحة (71)</td><td>القدرة على التمييز، و PFP</td><td>بعد كل خطوة</td></tr>
+  <tr><td><b>الواقعية (710)</b></td><td>71 متناقضة + 639 متوافقة منختارهم عشوائياً (seed ثابت = 42) من الـ 743. يعني 10% متناقضة</td><td>الأداء بتوزيع قريب من الواقع</td><td>بالمحطات المهمة</td></tr>
+  <tr><td>الكاملة (885)</td><td>كل شي</td><td>للمرجع</td><td>اختياري</td></tr>
+</table>
+<p class="small">الـ 743 المتوافقة الإضافية: الورقة نفسها بتقول إنها "متوافقة بشكل تقريبي"، لأنها دوال ما انلمس توثيقها، مش دوال حدا تأكد منها يدوياً. لهيك رقم الـ Specificity عليها تقريبي.</p>
+
+<h3>4.6 المقاييس</h3>
+<table>
+  <tr><th style="width:22%">المقياس</th><th>ليش</th></tr>
+  <tr><td>Precision / Recall / F1</td><td>الأساسية، وبتنقارن مع أرقام الورقة</td></tr>
+  <tr><td>Specificity</td><td>من المتوافقة، قديش تركها. الأقرب لتجربة المطوّر اليومية</td></tr>
+  <tr><td><b>PFP</b> (Pair-wise Fix Precision)</td><td>من الحالات يلي كشفها النظام صح، قديش منهم <b>صنّف نسختهم المصلّحة إنها سليمة</b>؟ إذا نبّه على النسختين، معناها عم يلقط شي سطحي مش التناقض نفسه</td></tr>
+  <tr><td>Flag Rate</td><td>نسبة التنبيهات</td></tr>
+</table>
+
+<h3>4.7 الأرقام المنشورة للمقارنة (على المجموعة المتوازنة)</h3>
+<table>
+  <tr><th>الأداة</th><th>Precision</th><th>Specificity</th><th>Recall</th></tr>
+  <tr><td>CASCADE</td><td>0.88</td><td>0.97</td><td>0.21</td></tr>
+  <tr><td>LLM-A (سؤال مباشر)</td><td>0.55–0.59</td><td>0.64–0.81</td><td>0.29–0.46</td></tr>
+  <tr><td>LLM-S (سؤال بسيط)</td><td>0.53–0.56</td><td>0.42–0.58</td><td>0.54–0.67</td></tr>
+  <tr><td>C4RLLaMA</td><td>0.45–0.53</td><td>0.63–0.64</td><td>0.31–0.41</td></tr>
+  <tr><td>DocChecker</td><td>0.48–0.49</td><td>0.03–0.19</td><td>0.77–0.96</td></tr>
+</table>
+<p class="small">المصدر: خطة الإثبات تبعكم، يلي نقلت أرقام ورقة CASCADE. نظامنا معتمد على prompt للـ LLM، فأقرب شي إله هو LLM-A و LLM-S. الهدف: Recall أعلى من CASCADE، مع Precision بمستوى خطوط LLM أو أعلى.</p>
+
+<h3>4.8 دورها: أرقام بس</h3>
+<p><b>منقيس عليها بعد كل خطوة ومنشوف الأرقام، بس ما منفتح الحالات يلي غلط فيها لنعدّل النظام عليها.</b> هيك بتضل الأرقام دليل صادق.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">5. DocPrism الكبيرة: 1991 دالة</h2>
+<table>
+  <tr><th>اللغة</th><th>العدد</th><th>المشاريع (100 دالة لكل مشروع تقريباً)</th><th>متوسط طول الكود</th></tr>
+  <tr><td>Python</td><td>500</td><td>django، flask، matplotlib، nltk، scrapy</td><td>8 أسطر</td></tr>
+  <tr><td>TypeScript</td><td>494</td><td>hoppscotch، n8n، nest (94)، puppeteer، socket.io</td><td>8 أسطر</td></tr>
+  <tr><td>C++</td><td>497</td><td>bitcoin، godot، llama.cpp (97)، tesseract، x64dbg</td><td>16 سطر</td></tr>
+  <tr><td>Java</td><td>500</td><td>cassandra، hadoop، kafka، spark، zeppelin</td><td>7 أسطر</td></tr>
+</table>
+<ul>
+  <li><b>الشكل:</b> <code>&lrm;{"id", "filename", "doc", "code"}&lrm;</code>، وكل مشروع مثبّت على commit محدد.</li>
+  <li><b>ما فيها وسم.</b> المؤلفين فحصوا يدوياً بس الحالات يلي نبّهت عليها أداتهم، فما بينحسب عليها Recall.</li>
+  <li><b>المقاييس:</b> Flag Rate بس. واختيارياً، منفحص يدوياً عينة من تنبيهات نظامنا ومنقدّر الـ Precision.</li>
+  <li><b>للمقارنة:</b> الورقة بتقول Flag Rate حوالي 15–17%، و Precision حوالي 0.62–0.64. الأرقام بتختلف شوي بين نسخ الورقة.</li>
+  <li><b>متى:</b> بالآخر، لأنها كبيرة (1991 طلب).</li>
+  <li>137 من 500 دالة بايثون مستقلة (برّا كلاس).</li>
+</ul>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>6. بيانات Code vs Code</h2>
+<div class="box warn">
+  <b class="t">الوضع الحالي</b>
+  ولا ورقة من الثلاث نشرت بيانات جاهزة موسومة يدوياً على مستوى الدالة (قبل وبعد).
+</div>
+<table>
+  <tr><th style="width:18%">المصدر</th><th>شو متاح</th><th>بينفع لـ</th><th style="width:20%">الحالة</th></tr>
+  <tr><td><b>AexPy</b> (ISSRE 2022)</td><td>الورقة اختبرت على 61 تغيير معروف بس ما نشرتهم كملف. متاح: الأداة، و <code>&lrm;aexpy-index&lrm;</code> فيه نتائجها على نسخ حقيقية من مكتبات بايثون</td><td>Q1 (الواجهة) و Q3 (بيكسر)، بس التغييرات الهيكلية</td><td>مرجع مؤقت (مخرجات أداة، دقتها حسب الورقة 93.5%)</td></tr>
+  <tr><td><b>NPM</b> (TOSEM 2025)</td><td>2724 تغيير موثّق من 381 مشروع، مع تصنيف للتغييرات الهيكلية والسلوكية</td><td>Q1 و Q2 و Q3، و<b>التغييرات السلوكية</b></td><td><b>مقفلة</b> على Zenodo، لازم طلب من المؤلفين</td></tr>
+  <tr><td><b>Safer Builders</b> (MSR 2026)</td><td>PRs من مجموعة AIDev، والتصنيف من أداتهم</td><td>مقارنة عامة</td><td>الوسم من أداة، مش بشري</td></tr>
+</table>
+<h3>المقاييس المخططة</h3>
+<ul>
+  <li><b>مع AexPy:</b> Precision و Recall و F1 للتغييرات الهيكلية و "بيكسر"، مقارنةً بمخرجات AexPy على نفس النسختين.</li>
+  <li><b>مع NPM:</b> Recall لكل نوع تغيير بالتصنيف، وخاصة السلوكي. ونسبة التنبيهات الغلط.</li>
+  <li><b>لكل القياسات:</b> عدد استدعاءات الـ LLM لكل عينة. الخطوة 11 هدفها تقليلهم.</li>
+</ul>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">7. تعريف المقاييس</h2>
+<table>
+  <tr><th style="width:18%">الرمز</th><th>المعنى</th></tr>
+  <tr><td>TP</td><td>نبّه، وفعلاً في تناقض</td></tr>
+  <tr><td>FP</td><td>نبّه، وما في تناقض (إنذار كاذب)</td></tr>
+  <tr><td>FN</td><td>ما نبّه، وفي تناقض (فاته)</td></tr>
+  <tr><td>TN</td><td>ما نبّه، وما في تناقض</td></tr>
+</table>
+<table>
+  <tr><th style="width:18%">المقياس</th><th style="width:30%">المعادلة</th><th>السؤال يلي بيجاوبه</th></tr>
+  <tr><td>Precision</td><td><span class="ltr">TP / (TP + FP)</span></td><td>من التنبيهات، قديش صح؟</td></tr>
+  <tr><td>Recall</td><td><span class="ltr">TP / (TP + FN)</span></td><td>من التناقضات الحقيقية، قديش لقى؟</td></tr>
+  <tr><td>F1</td><td><span class="ltr">2·P·R / (P + R)</span></td><td>توازن بين الاثنين</td></tr>
+  <tr><td>Specificity</td><td><span class="ltr">TN / (TN + FP)</span></td><td>من السليمة، قديش تركها؟</td></tr>
+  <tr><td>Flag Rate</td><td><span class="ltr">(TP + FP) / N</span></td><td>قديش بيزعج المطوّر؟</td></tr>
+  <tr><td>PFP</td><td>من الحالات يلي كشفها صح، نسبة يلي صنّف نسختها المصلّحة سليمة</td><td>عم يلقط التناقض الحقيقي أو شي سطحي؟</td></tr>
+</table>
+<p><b>متى منعتبر النظام "نبّه"؟</b> إذا طلّع أي تنبيه على هالدالة، ما عدا الإحصائيات العامة و "دالة غير موثّقة". هيدا الأخير بيصير تغطية من الخطوة 6. وبعد الخطوة 5، إذا النظام صنّف التنبيه <code>&lrm;Under_Promise&lrm;</code>، ما بينحسب تنبيه، لأنه حسب DocPrism ما بيتعرض للمستخدم.</p>
+<p><b>كيف منكتب الأرقام:</b> لكل مقياس منكتب النسبة والعدد مع بعض، متل <span class="ltr">0.50 (3/6)</span>، وعدد الطلبات، وعدد العينات يلي فشل فيها الـ LLM.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>8. تحويل البيانات لشكل نظامنا</h2>
+<p>كل حالة بالبيانات هي دالة لحالها مع توثيقها. ونظامنا بيستقبل <b>ملف كود</b> و<b>توثيق بشكل Markdown</b> (متل يلي بيولّده). فمنكتب محوّل:</p>
+<table>
+  <tr><th style="width:20%">البيانات</th><th>الكود</th><th>التوثيق</th></tr>
+  <tr><td>CASCADE (Java)</td><td>منعيد بناء الكلاس من <code>&lrm;parent&lrm;</code> و <code>&lrm;signature&lrm;</code> و <code>&lrm;code&lrm;</code></td><td rowspan="2">بيصير <code>&lrm;## Class: X&lrm;</code> ← <code>&lrm;### Method: name&lrm;</code> ← نص التوثيق. هاد نفس الشكل يلي بيستعمله <code>&lrm;run_baseline&lrm;</code> للـ docstrings</td></tr>
+  <tr><td>DocPrism (Python)</td><td>الدالة متل ما هي. إذا فيها <code>&lrm;self&lrm;</code>، منحطها جوا كلاس</td></tr>
+</table>
+<div class="box bad">
+  <b class="t">مشكلة بالنظام: الدوال المستقلة</b>
+  معالج بايثون <b>بيقرأ بس الدوال يلي جوا كلاس</b>. أي دالة على مستوى الملف ما بتظهر، فالنظام ما بيقارنها أبداً، لا بالتوثيق ولا بنسختها القديمة. نسبتها <b>26 من 52</b> بـ DocPrism المعنونة، و <b>137 من 500</b> بـ DocPrism الكبيرة. هاد خلل بالمنتج نفسه. منقيسها متل ما هي، لحتى <b>تبيّن المشكلة بالأرقام</b>، وإصلاحها مقترح كخطوة بالخطة.
+</div>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>9. قواعد العدالة بالقياس</h2>
+<ol>
+  <li><b>نفس المدخل للنسختين:</b> نفس المحوّل، ونفس التوثيق، ونفس الكود.</li>
+  <li><b>LLM حتمي:</b> موديل مثبّت (<code>&lrm;poolside/laguna-s-2.1:free&lrm;</code>)، و temperature 0، و seed 42، وبدون cache، وبدون fallback لموديل تاني. وكل رد بينسجّل.</li>
+  <li><b>النسخة القديمة مجمّدة:</b> بتنقاس مرة وحدة وبتنحفظ النتيجة، وبصمتها بتنسجّل مع كل قياس.</li>
+  <li><b>DocPrism المعنونة:</b> مسموح نفتح الأخطاء ونتعلّم منها.</li>
+  <li><b>CASCADE:</b> منشوف الأرقام بس، وما منعدّل النظام على حالات محددة منها. وما منحط أي مثال منها بالـ prompt.</li>
+  <li><b>أي فرق أو خلل بالبيانات منوثّقه</b>، متل فرق 70 مقابل 71.</li>
+</ol>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">10. الميزانية: عدد الطلبات</h2>
+<p>حسابكم على OpenRouter مجاني. والحد حسب <a href="https://openrouter.ai/docs/api-reference/limits">توثيق OpenRouter</a>:</p>
+<table>
+  <tr><th>الحالة</th><th>طلب / دقيقة</th><th>طلب / يوم</th></tr>
+  <tr><td>بدون شحن (الحالي)</td><td>20</td><td><b>50</b></td></tr>
+  <tr><td>بعد شحن $10 مرة وحدة</td><td>20</td><td><b>1000</b></td></tr>
+</table>
+<table>
+  <tr><th>القياس</th><th>الطلبات</th><th>بدون شحن</th><th>مع شحن</th></tr>
+  <tr><td>بعد كل خطوة (DocPrism 52 + CASCADE 142)</td><td>194</td><td>4 أيام</td><td>نفس اليوم</td></tr>
+  <tr><td>محطة (CASCADE الواقعية)</td><td>710</td><td>15 يوم</td><td>نفس اليوم</td></tr>
+  <tr><td>بالآخر (DocPrism الكبيرة)</td><td>1991</td><td>40 يوم</td><td>يومين</td></tr>
+</table>
+<p class="small">الموديلات المجانية بتضل مجانية بعد الشحن، والـ $10 بتضل رصيد بالحساب. والنسخة القديمة من Code vs Doc ما بتستعمل LLM، فما بتحسب من الحد.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>11. القرارات المعلّقة</h2>
+<table>
+  <tr><th style="width:6%">#</th><th>القرار</th><th style="width:28%">اقتراحنا</th></tr>
+  <tr><td>1</td><td>تقسيم الأدوار: DocPrism منفتح أخطاءها، و CASCADE أرقام بس</td><td>نعم</td></tr>
+  <tr><td>2</td><td>شحن حساب OpenRouter $10</td><td>نعم، وإلا منقيس على عينة أصغر</td></tr>
+  <tr><td>3</td><td>طلب بيانات NPM من المؤلفين (من حساب Zenodo لواحد منكم)</td><td>نعم، وبنكتب نص الطلب</td></tr>
+  <tr><td>4</td><td>AexPy-index كمرجع مؤقت لـ Code vs Code</td><td>نعم، مع ذكر إنه مخرجات أداة</td></tr>
+  <tr><td>5</td><td>إصلاح الدوال المستقلة كخطوة جديدة</td><td>نعم. وقتها حسب قراركم</td></tr>
+</table>
+
+<h3>المصادر</h3>
+<ul class="small">
+  <li>DocPrism: arxiv.org/abs/2511.00215 — github.com/SnowPhoebe/DocPrism</li>
+  <li>CASCADE: arxiv.org/abs/2604.19400 — github.com/TobiasKiecker/CASCADE (FSE2026-v1.0.0)</li>
+  <li>AexPy: github.com/stardustdl/aexpy — github.com/StardustDL-Labs/aexpy-index</li>
+  <li>NPM Breaking Changes: arxiv.org/abs/2408.14431 — zenodo.org/records/13219136</li>
+  <li>Safer Builders: arxiv.org/abs/2603.27524</li>
+  <li>OpenRouter limits: openrouter.ai/docs/api-reference/limits</li>
+</ul>
+
+</body>
+</html>

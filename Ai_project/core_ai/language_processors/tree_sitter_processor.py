@@ -311,7 +311,49 @@ class TreeSitterProcessor(ILanguageProcessorStrategy):
             classes.append(class_entry)
             all_relationships.extend(relationships)
 
-        return {"classes": classes, "relationships": all_relationships}
+        result = {"classes": classes, "relationships": all_relationships}
+        # الدوال المستقلة (على مستوى الملف) — مفتاح منفصل لحتى ما يتغيّر المخطط بالواجهة
+        module_functions = self._extract_module_functions(tree.root_node)
+        if module_functions:
+            result["module_functions"] = module_functions
+        return result
+
+    def _extract_module_functions(self, root) -> List[Dict]:
+        """
+        دوال على مستوى الملف:
+          function f() {}  /  export function f() {}  /  export default function f() {}
+          const f = () => {}  /  const f = function () {}   (ومع export)
+        """
+        function_types = set(self._config.get("function_types", [])) - {"method_definition", "method_signature"}
+        out = []
+
+        def add(fn_node, name):
+            # _get_name بيلزق الـ generics بالاسم (f<T = any>)؛ التوثيق بيذكر الدالة باسمها بس
+            name = (name or "").split("<", 1)[0].strip()
+            if name:
+                out.append({
+                    "name": name,
+                    "signature": self._build_method_signature(fn_node, name),
+                    "is_abstract": False,
+                    "is_constructor": False,
+                    "visibility": "public",
+                    "is_override": False,
+                    **self._method_details(fn_node),
+                })
+
+        for node in root.named_children:
+            if node.type == "export_statement":
+                node = node.child_by_field_name("declaration") or next(
+                    (c for c in node.named_children if c.type in function_types
+                     or c.type in ("lexical_declaration", "variable_declaration")), node)
+            if node.type in function_types and node.type not in ("arrow_function", "function_expression"):
+                add(node, self._get_name(node))
+            elif node.type in ("lexical_declaration", "variable_declaration"):
+                for decl in node.named_children:
+                    value = decl.child_by_field_name("value") if decl.type == "variable_declarator" else None
+                    if value is not None and value.type in ("arrow_function", "function_expression", "function"):
+                        add(value, self._node_text(decl.child_by_field_name("name")))
+        return out
 
     def generate_dependency_graph_data(self, ast_data: Dict[str, Any], features: Dict[str, Any]) -> Dict[str, Any]:
         deps = self.extract_dependencies(ast_data)

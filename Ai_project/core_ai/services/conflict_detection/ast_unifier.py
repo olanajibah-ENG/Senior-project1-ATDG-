@@ -1,9 +1,35 @@
 from typing import Dict, Any, List
-from .schemas import UnifiedClassDiagram, ClassDetail, MethodDetail, AttributeDetail
+from .schemas import UnifiedClassDiagram, ClassDetail, MethodDetail, AttributeDetail, MODULE_CLASS
 
 
 class ASTUnifier:
     """يوحد ناتج أي Processor إلى UnifiedClassDiagram"""
+
+    @staticmethod
+    def _methods(cls: Dict[str, Any]) -> List[MethodDetail]:
+        return [
+            MethodDetail(
+                name=m.get("name", ""),
+                signature=m.get("signature", ""),
+                is_abstract=m.get("is_abstract", False),
+                is_constructor=m.get("is_constructor", False),
+                visibility=m.get("visibility", "public"),
+                is_override=m.get("is_override", False),
+                # حقول الخطوة 1 — بتكون None بالتحليلات القديمة
+                parameters=m.get("parameters"),
+                return_type=m.get("return_type"),
+                decorators=m.get("decorators") or [],
+                docstring=m.get("docstring"),
+                is_async=m.get("is_async", False),
+                body=m.get("body"),
+                body_hash=m.get("body_hash"),
+                body_truncated=m.get("body_truncated", False),
+                line_start=m.get("line_start"),
+                line_end=m.get("line_end"),
+            )
+            for m in cls.get("methods", [])
+            if isinstance(m, dict)
+        ]
 
     @staticmethod
     def from_tree_sitter(result: Dict[str, Any]) -> UnifiedClassDiagram:
@@ -13,29 +39,7 @@ class ASTUnifier:
             if "name" not in cls:
                 continue
 
-            methods = [
-                MethodDetail(
-                    name=m.get("name", ""),
-                    signature=m.get("signature", ""),
-                    is_abstract=m.get("is_abstract", False),
-                    is_constructor=m.get("is_constructor", False),
-                    visibility=m.get("visibility", "public"),
-                    is_override=m.get("is_override", False),
-                    # حقول الخطوة 1 — بتكون None بالتحليلات القديمة
-                    parameters=m.get("parameters"),
-                    return_type=m.get("return_type"),
-                    decorators=m.get("decorators") or [],
-                    docstring=m.get("docstring"),
-                    is_async=m.get("is_async", False),
-                    body=m.get("body"),
-                    body_hash=m.get("body_hash"),
-                    body_truncated=m.get("body_truncated", False),
-                    line_start=m.get("line_start"),
-                    line_end=m.get("line_end"),
-                )
-                for m in cls.get("methods", [])
-                if isinstance(m, dict)
-            ]
+            methods = ASTUnifier._methods(cls)
 
             attributes = [
                 AttributeDetail(
@@ -61,6 +65,15 @@ class ASTUnifier:
                 is_abstract=cls.get("is_abstract", False),
                 is_interface=cls.get("is_interface", False),
                 constraints=constraints
+            ))
+
+        # الدوال المستقلة → كلاس وهمي واحد
+        module_functions = result.get("class_diagram_data", {}).get("module_functions") or []
+        if module_functions:
+            classes.append(ClassDetail(
+                name=MODULE_CLASS,
+                type="module",
+                methods=ASTUnifier._methods({"methods": module_functions}),
             ))
 
         return UnifiedClassDiagram(

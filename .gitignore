@@ -25,3 +25,10 @@ Ai_project/[0-9]*.[0-9]*
 
 # Old disabled repo inside the frontend
 autotest-docgen/.git_disabled/
+
+# Downloaded research datasets (raw, large)
+Ai_project/evaluation/external/
+# Generated from external datasets (rebuild: python -m evaluation.paper_sets.build_paper_sets)
+Ai_project/evaluation/paper_sets/docprism_ablation/
+Ai_project/evaluation/paper_sets/cascade_balanced/
+Ai_project/evaluation/paper_sets/cascade_realistic/

@@ -1,0 +1,2228 @@
+{
+ "snapshot_hash": "a8649b221ee7587b4516d5edfbd8963b05c3ccc44b003686b710048df1b387da",
+ "results": [
+  {
+   "id": "docprism_pandas_001",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: is_monotonic_increasing\nCheck if int64 values are monotonically increasing.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_002",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: putmask_without_repeat\nnp.putmask will truncate or repeat if `new` is a listlike with\nlen(new) != len(values).  We require an exact match.\n\nParameters\n----------\nvalues : np.ndarray\nmask : np.ndarray[bool]\nnew : Any\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_003",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: should_use_regex\nDecide whether to treat `to_replace` as a regular expression.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_004",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: ravel_compat\nDecorator to ravel a 2D array before passing it to a cython operation,\nthen reshape the result to our own shape.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_005",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: _generate_range_overflow_safe\nCalculate the second endpoint for passing to np.arange, checking\nto avoid an integer overflow.  Catch OverflowError and re-raise\nas OutOfBoundsDatetime.\n\nParameters\n----------\nendpoint : int\n    nanosecond timestamp of the known endpoint of the desired range\nperiods : int\n    number of periods in the desired range\nstride : int\n    nanoseconds between periods in the desired range\nside : {'start', 'end'}\n    which end of the range `endpoint` refers to\n\nReturns\n-------\nother_end : int\n\nRaises\n------\nOutOfBoundsDatetime\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_006",
+   "language": "python",
+   "status": "error",
+   "error": "RuntimeError: parse failed: unexpected indent (<unknown>, line 3)",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_007",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: argmin\nReturn the index of minimum value.\n\nIn case of multiple occurrences of the minimum value, the index\ncorresponding to the first occurrence is returned.\n\nParameters\n----------\nskipna : bool, default True\n\nReturns\n-------\nint\n\nSee Also\n--------\nExtensionArray.argmax : Return the index of the maximum value.\n\nExamples\n--------\n>>> arr = pd.array([3, 1, 2, 5, 4])\n>>> arr.argmin()\n1\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_008",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: contains\nHelper for membership check for ``key`` in ``cat``.\n\nThis is a helper method for :method:`__contains__`\nand :class:`CategoricalIndex.__contains__`.\n\nReturns True if ``key`` is in ``cat.categories`` and the\nlocation of ``key`` in ``categories`` is in ``container``.\n\nParameters\n----------\ncat : :class:`Categorical`or :class:`categoricalIndex`\nkey : a hashable object\n    The key to check membership for.\ncontainer : Container (e.g. list-like or mapping)\n    The container to check for membership in.\n\nReturns\n-------\nis_in : bool\n    True if ``key`` is in ``self.categories`` and location of\n    ``key`` in ``categories`` is in ``container``, else False.\n\nNotes\n-----\nThis method does not check for NaN values. Do that separately\nbefore calling this method.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_009",
+   "language": "python",
+   "status": "error",
+   "error": "RuntimeError: parse failed: unindent does not match any outer indentation level (<unknown>, line 5)",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_010",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: notna\nInverse of isna\n\nBoth missing values (-1 in .codes) and NA as a category are detected as\nnull.\n\nReturns\n-------\nnp.ndarray[bool] of whether my values are not null\n\nSee Also\n--------\nnotna : Top-level notna.\nnotnull : Alias of notna.\nCategorical.isna : Boolean inverse of Categorical.notna.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_011",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: min\nThe minimum value of the object.\n\nOnly ordered `Categoricals` have a minimum!\n\nRaises\n------\nTypeError\n    If the `Categorical` is not `ordered`.\n\nReturns\n-------\nmin : the minimum of this `Categorical`, NA value if empty\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_012",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: _preparse\nCompose a collection of tokenization functions.\n\nParameters\n----------\nsource : str\n    A Python source code string\nf : callable\n    This takes a tuple of (toknum, tokval) as its argument and returns a\n    tuple with the same structure but possibly different elements. Defaults\n    to the composition of ``_rewrite_assign``, ``_replace_booleans``, and\n    ``_replace_locals``.\n\nReturns\n-------\nstr\n    Valid Python source code\n\nNotes\n-----\nThe `f` parameter can be any callable that takes *and* returns input of the\nform ``(toknum, tokval)``, where ``toknum`` is one of the constants from\nthe ``tokenize`` module and ``tokval`` is a string\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_013",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: set_test_mode\nKeeps track of whether numexpr was used.\n\nStores an additional ``True`` for every successful use of evaluate with\nnumexpr since the last ``get_test_result``.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_014",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: _node_not_implemented\nReturn a function that raises a NotImplementedError with a passed node name.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_015",
+   "language": "python",
+   "status": "error",
+   "error": "RuntimeError: parse failed: expected an indented block after 'if' statement on line 4 (<unknown>, line 5)",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_016",
+   "language": "python",
+   "status": "error",
+   "error": "RuntimeError: parse failed: unindent does not match any outer indentation level (<unknown>, line 3)",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_017",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: maybe_downcast_to_dtype\ntry to cast to the specified dtype (e.g. convert back to bool/int\nor could be an astype of float64->float32)\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_018",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: infer_dtype_from\nInterpret the dtype from a scalar or array.\n\nParameters\n----------\nval : object\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_019",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: find_result_type\nFind the type/dtype for the result of an operation between objects.\n\nThis is similar to find_common_type, but looks at the right object instead\nof just its dtype. This can be useful in particular when the right\nobject does not have a `dtype`.\n\nParameters\n----------\nleft_dtype : np.dtype or ExtensionDtype\nright : Any\n\nReturns\n-------\nnp.dtype or ExtensionDtype\n\nSee also\n--------\nfind_common_type\nnumpy.result_type\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_020",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: maybe_cast_to_integer_array\nTakes any dtype and returns the casted version, raising for when data is\nincompatible with integer/unsigned integer dtypes.\n\nParameters\n----------\narr : np.ndarray or list\n    The array to cast.\ndtype : np.dtype\n    The integer dtype to cast the array to.\n\nReturns\n-------\nndarray\n    Array of integer or unsigned integer dtype.\n\nRaises\n------\nOverflowError : the dtype is incompatible with the data\nValueError : loss of precision has occurred during casting\n\nExamples\n--------\nIf you try to coerce negative values to unsigned integers, it raises:\n\n>>> pd.Series([-1], dtype=\"uint64\")\nTraceback (most recent call last):\n    ...\nOverflowError: Trying to coerce negative values to unsigned integers\n\nAlso, if you try to coerce float values to integers, it raises:\n\n>>> maybe_cast_to_integer_array([1, 2, 3.5], dtype=np.dtype(\"int64\"))\nTraceback (most recent call last):\n    ...\nValueError: Trying to coerce float values to integers\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_pandas_021",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: np_can_cast_scalar\nnp.can_cast pandas-equivalent for pre 2-0 behavior that allowed scalar\ninference\n\nParameters\n----------\nelement : Scalar\ndtype : np.dtype\n\nReturns\n-------\nbool\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_001",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: merge_setting\nDetermines appropriate setting for a given request, taking into account\nthe explicit setting on that request, and the setting in the session. If a\nsetting is a dictionary, they will be merged together using `dict_class`\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_002",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: merge_hooks\nProperly merges both requests and session hooks.\n\nThis is necessary because when request_hooks == {'response': []}, the\nmerge breaks Session hooks entirely.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_003",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: get_redirect_target\nReceives a Response. Returns a redirect URI or ``None``\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_004",
+   "language": "python",
+   "status": "error",
+   "error": "RuntimeError: parse failed: unindent does not match any outer indentation level (<unknown>, line 4)",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_005",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: resolve_redirects\nReceives a Response. Returns a generator of Responses or Requests.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_006",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: rebuild_auth\nWhen being redirected we may want to strip authentication from the\nrequest to avoid leaking credentials. This method intelligently removes\nand reapplies authentication where possible to avoid credential loss.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_007",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: rebuild_proxies\nThis method re-evaluates the proxy configuration by considering the\nenvironment variables. If we are redirected to a URL covered by\nNO_PROXY, we strip the proxy configuration. Otherwise, we set missing\nproxy keys for this URL (in case they were stripped by a previous\nredirect).\n\nThis method also replaces the Proxy-Authorization header where\nnecessary.\n\n:rtype: dict\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_008",
+   "language": "python",
+   "status": "error",
+   "error": "RuntimeError: parse failed: unindent does not match any outer indentation level (<unknown>, line 6)",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_009",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: prepare_request\nConstructs a :class:`PreparedRequest <PreparedRequest>` for\ntransmission and returns it. The :class:`PreparedRequest` has settings\nmerged from the :class:`Request <Request>` instance and those of the\n:class:`Session`.\n\n:param request: :class:`Request` instance to prepare with this\n    session's settings.\n:rtype: requests.PreparedRequest\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_010",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: request\nConstructs a :class:`Request <Request>`, prepares it and sends it.\nReturns :class:`Response <Response>` object.\n\n:param method: method for the new :class:`Request` object.\n:param url: URL for the new :class:`Request` object.\n:param params: (optional) Dictionary or bytes to be sent in the query\n    string for the :class:`Request`.\n:param data: (optional) Dictionary, list of tuples, bytes, or file-like\n    object to send in the body of the :class:`Request`.\n:param json: (optional) json to send in the body of the\n    :class:`Request`.\n:param headers: (optional) Dictionary of HTTP Headers to send with the\n    :class:`Request`.\n:param cookies: (optional) Dict or CookieJar object to send with the\n    :class:`Request`.\n:param files: (optional) Dictionary of ``'filename': file-like-objects``\n    for multipart encoding upload.\n:param auth: (optional) Auth tuple or callable to enable\n    Basic/Digest/Custom HTTP Auth.\n:param timeout: (optional) How long to wait for the server to send\n    data before giving up, as a float, or a :ref:`(connect timeout,\n    read timeout) <timeouts>` tuple.\n:type timeout: float or tuple\n:param allow_redirects: (optional) Set to True by default.\n:type allow_redirects: bool\n:param proxies: (optional) Dictionary mapping protocol or protocol and\n    hostname to the URL of the proxy.\n:param hooks: (optional) Dictionary mapping hook name to one event or\n    list of events, event must be callable.\n:param stream: (optional) whether to immediately download the response\n    content. Defaults to ``False``.\n:param verify: (optional) Either a boolean, in which case it controls whether we verify\n    the server's TLS certificate, or a string, in which case it must be a path\n    to a CA bundle to use. Defaults to ``True``. When set to\n    ``False``, requests will accept any TLS certificate presented by\n    the server, and will ignore hostname mismatches and/or expired\n    certificates, which will make your application vulnerable to\n    man-in-the-middle (MitM) attacks. Setting verify to ``False``\n    may be useful during local development or testing.\n:param cert: (optional) if String, path to ssl client cert file (.pem).\n    If Tuple, ('cert', 'key') pair.\n:rtype: requests.Response\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_011",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: get\nSends a GET request. Returns :class:`Response` object.\n\n:param url: URL for the new :class:`Request` object.\n:param \\*\\*kwargs: Optional arguments that ``request`` takes.\n:rtype: requests.Response\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_012",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: options\nSends a OPTIONS request. Returns :class:`Response` object.\n\n:param url: URL for the new :class:`Request` object.\n:param \\*\\*kwargs: Optional arguments that ``request`` takes.\n:rtype: requests.Response\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_013",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: head\nSends a HEAD request. Returns :class:`Response` object.\n\n:param url: URL for the new :class:`Request` object.\n:param \\*\\*kwargs: Optional arguments that ``request`` takes.\n:rtype: requests.Response\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_014",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: post\nSends a POST request. Returns :class:`Response` object.\n\n:param url: URL for the new :class:`Request` object.\n:param data: (optional) Dictionary, list of tuples, bytes, or file-like\n    object to send in the body of the :class:`Request`.\n:param json: (optional) json to send in the body of the :class:`Request`.\n:param \\*\\*kwargs: Optional arguments that ``request`` takes.\n:rtype: requests.Response\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_015",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: put\nSends a PUT request. Returns :class:`Response` object.\n\n:param url: URL for the new :class:`Request` object.\n:param data: (optional) Dictionary, list of tuples, bytes, or file-like\n    object to send in the body of the :class:`Request`.\n:param \\*\\*kwargs: Optional arguments that ``request`` takes.\n:rtype: requests.Response\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_016",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: patch\nSends a PATCH request. Returns :class:`Response` object.\n\n:param url: URL for the new :class:`Request` object.\n:param data: (optional) Dictionary, list of tuples, bytes, or file-like\n    object to send in the body of the :class:`Request`.\n:param \\*\\*kwargs: Optional arguments that ``request`` takes.\n:rtype: requests.Response\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_017",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: delete\nSends a DELETE request. Returns :class:`Response` object.\n\n:param url: URL for the new :class:`Request` object.\n:param \\*\\*kwargs: Optional arguments that ``request`` takes.\n:rtype: requests.Response\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_018",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: send\nSend a given PreparedRequest.\n\n:rtype: requests.Response\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_019",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: merge_environment_settings\nCheck the environment and merge it with some settings.\n\n:rtype: dict\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_020",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: get_adapter\nReturns the appropriate connection adapter for the given URL.\n\n:rtype: requests.adapters.BaseAdapter\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_021",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: close\nCloses all adapters and as such the session\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_022",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: mount\nRegisters a connection adapter to a prefix.\n\nAdapters are sorted in descending order by prefix length.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_023",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: dispatch_hook\nDispatches a hook dictionary on a given piece of data.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_024",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: _implementation\nReturn a dict with the Python implementation and version.\n\nProvide both the name and the version of the Python implementation\ncurrently running. For example, on CPython 3.10.3 it will return\n{'name': 'CPython', 'version': '3.10.3'}.\n\nThis function works best on CPython and PyPy: in particular, it probably\ndoesn't work for Jython or IronPython. Future investigation should be done\nto work out the correct shape of the code for those platforms.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_025",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: info\nGenerate information for a bug report.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_026",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: main\nPretty-print the bug information as JSON.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_027",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: __init__\nInitialize RequestException with `request` and `response` objects.\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_028",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: put\nr\"\"\"Sends a PUT request.\n\n:param url: URL for the new :class:`Request` object.\n:param data: (optional) Dictionary, list of tuples, bytes, or file-like\n    object to send in the body of the :class:`Request`.\n:param json: (optional) A JSON serializable Python object to send in the body of the :class:`Request`.\n:param \\*\\*kwargs: Optional arguments that ``request`` takes.\n:return: :class:`Response <Response>` object\n:rtype: requests.Response\n\"\"\"\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_029",
+   "language": "python",
+   "doc_input": {
+    "content": "### Function: patch\nSends a PATCH request.\n\n:param url: URL for the new :class:`Request` object.\n:param data: (optional) Dictionary, list of tuples, bytes, or file-like\n    object to send in the body of the :class:`Request`.\n:param json: (optional) A JSON serializable Python object to send in the body of the :class:`Request`.\n:param \\*\\*kwargs: Optional arguments that ``request`` takes.\n:return: :class:`Response <Response>` object\n:rtype: requests.Response\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 0.0,
+      "coverage_percentage": 0.0,
+      "total_elements": 0,
+      "fully_documented": 0,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 0.0%",
+     "old_value": null,
+     "new_value": "0.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "يُفضل إعادة توليد التوثيق",
+     "affected_files": [],
+     "recommendation": "يُفضل إعادة توليد التوثيق",
+     "auto_fix_available": false,
+     "ai_confidence": 0.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_030",
+   "language": "python",
+   "doc_input": {
+    "content": "## Class: DocPrismCase\n\n### Method: _find\nRequests uses this method internally to get cookie values.\n\nIf there are conflicting cookies, _find arbitrarily chooses one.\nSee _find_no_duplicates if you want an exception thrown if there are\nconflicting cookies.\n\n:param name: a string containing name of cookie\n:param domain: (optional) string containing domain of cookie\n:param path: (optional) string containing path of cookie\n:return: cookie.value\n",
+    "explanation_type": "low_level"
+   },
+   "doc_conflicts": [
+    {
+     "conflict_id": null,
+     "type": "documentation_drift",
+     "severity": "info",
+     "element": {
+      "compatibility_score": 100.0,
+      "coverage_percentage": 100.0,
+      "total_elements": 2,
+      "fully_documented": 2,
+      "partially_documented": 0,
+      "undocumented": 0,
+      "critical_conflicts": 0,
+      "undocumented_classes": [],
+      "undocumented_methods": []
+     },
+     "class_name": "Overall",
+     "member": null,
+     "line_number": null,
+     "description": "نسبة توافق التوثيق مع الكود الحالي: 100.0%",
+     "old_value": null,
+     "new_value": "100.0%",
+     "old_logic": null,
+     "new_logic": null,
+     "code_value": null,
+     "doc_value": null,
+     "impact": null,
+     "suggestion": "التوثيق جيد نسبياً",
+     "affected_files": [],
+     "recommendation": "التوثيق جيد نسبياً",
+     "auto_fix_available": false,
+     "ai_confidence": 1.0,
+     "doc_type": "low",
+     "category": null
+    }
+   ],
+   "status": "ok",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  },
+  {
+   "id": "docprism_requests_031",
+   "language": "python",
+   "status": "error",
+   "error": "RuntimeError: parse failed: unexpected indent (<unknown>, line 3)",
+   "llm_calls": [],
+   "llm_call_count": 0,
+   "semantic_failed": false
+  }
+ ]
+}

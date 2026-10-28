@@ -130,6 +130,12 @@ class ConflictMetadata(BaseModel):
 # 4. Diagram Schemas
 # ─────────────────────────────────────────────────────────────────────────────
 
+# كلاس وهمي بيجمع الدوال المستقلة (برّا أي كلاس) لحتى تنفحص متل الـ methods.
+# الـ processors بيحطوا هالدوال بـ class_diagram_data["module_functions"] (مش بـ classes،
+# لحتى ما يتغيّر المخطط بالواجهة)، و ASTUnifier بيحوّلها لهالكلاس.
+MODULE_CLASS = "<module>"
+
+
 class ParameterDetail(BaseModel):
     name:    Optional[str] = None
     type:    Optional[str] = None

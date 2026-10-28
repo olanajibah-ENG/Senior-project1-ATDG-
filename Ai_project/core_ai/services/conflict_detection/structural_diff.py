@@ -2,7 +2,7 @@
 from typing import List, Dict
 from .schemas import (
     UnifiedClassDiagram, ClassDetail, ConflictItem,
-    ChangeType, SeverityLevel
+    ChangeType, SeverityLevel, MODULE_CLASS
 )
 from .fingerprint_builder import FingerprintBuilder
 from .rename_detector import RenameDetector
@@ -35,6 +35,12 @@ class StructuralDiff:
 
         classes_a = {c.name: c for c in diagram_a.classes}
         classes_b = {c.name: c for c in diagram_b.classes}
+
+        # الكلاس الوهمي للدوال المستقلة ما بينحسب "كلاس انحذف/انضاف":
+        # إذا موجود بجهة وحدة، منقارنه مع كلاس فاضي لحتى تطلع كل دالة لحالها
+        for side, other in ((classes_a, classes_b), (classes_b, classes_a)):
+            if MODULE_CLASS in side and MODULE_CLASS not in other:
+                other[MODULE_CLASS] = ClassDetail(name=MODULE_CLASS, type="module")
 
         names_a = set(classes_a)
         names_b = set(classes_b)

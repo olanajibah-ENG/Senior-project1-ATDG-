@@ -290,8 +290,27 @@ class PythonProcessor(ILanguageProcessorStrategy):
                     m["signature"] = "+ " + m["signature"]
 
         result = {"classes": cleaned_classes, "relationships": final_relationships}
+
+        # الدوال المستقلة (على مستوى الملف) — مفتاح منفصل لحتى ما يتغيّر المخطط بالواجهة
+        module_functions = [self._function_entry(n) for n in tree.body
+                            if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))]
+        if module_functions:
+            result["module_functions"] = module_functions
+
         logger.info(f"[PythonProcessor] UML done — classes={len(cleaned_classes)}, relationships={len(final_relationships)}")
         return result
+
+    def _function_entry(self, func_node) -> Dict[str, Any]:
+        """دالة مستقلة بنفس شكل الـ method (signature بنفس الصيغة + حقول الخطوة 1)"""
+        params = [f"{a.arg}: {self._get_annotation_type(a.annotation) or 'Any'}" for a in func_node.args.args]
+        return {
+            "name": func_node.name,
+            "signature": f"{func_node.name}({', '.join(params)}): {self._infer_return_type(func_node)}",
+            "is_abstract": False,
+            "visibility": self._get_visibility(func_node.name),
+            "is_constructor": False,
+            **self._method_details(func_node),
+        }
 
     def _extract_class_info_enhanced(self, class_node, all_class_names, ast_data):
         base_classes = []
