@@ -12,7 +12,7 @@
 """
 import textwrap
 from collections import OrderedDict
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 from pydantic import BaseModel, Field
 
@@ -31,6 +31,7 @@ class CodeDocItem(BaseModel):
     class_name: str
     member:     Optional[str] = None          # None = بند الكلاس نفسه
     doc_text:   str                           # للتأكد بالخطوة 5 إنه الجملة المنسوخة موجودة فعلاً
+    code_lines: Dict[int, str] = Field(default_factory=dict)   # الأسطر يلي انعرضت (للتأكد من الأسطر المذكورة)
 
 
 class CodeDocRequest(BaseModel):
@@ -83,17 +84,23 @@ def reconstruct_method(m: MethodDetail, language: str, in_class: bool = True) ->
     return (_c_like_header(m) + " " + body).splitlines()
 
 
-def method_code(m: MethodDetail, language: str, source_lines: Optional[List[str]] = None,
-                in_class: bool = True) -> str:
-    """الكود مع أرقام الأسطر."""
+def method_lines(m: MethodDetail, language: str, source_lines: Optional[List[str]] = None,
+                 in_class: bool = True) -> Tuple[Dict[int, str], bool]:
+    """{رقم السطر: السطر} — من الكود الأصلي إذا متوفر، وإلا من إعادة البناء. + هل انقص؟"""
     if source_lines and m.line_start and m.line_end and m.line_end <= len(source_lines):
         lines, first = source_lines[m.line_start - 1:m.line_end], m.line_start
     else:
         lines, first = reconstruct_method(m, language, in_class), 1
-    truncated = len(lines) > MAX_ITEM_CODE_LINES
-    lines = lines[:MAX_ITEM_CODE_LINES]
-    out = "\n".join(f"{first + i:>4} | {l}" for i, l in enumerate(lines))
-    if truncated or m.body_truncated:
+    truncated = len(lines) > MAX_ITEM_CODE_LINES or m.body_truncated
+    return {first + i: l for i, l in enumerate(lines[:MAX_ITEM_CODE_LINES])}, truncated
+
+
+def method_code(m: MethodDetail, language: str, source_lines: Optional[List[str]] = None,
+                in_class: bool = True) -> str:
+    """الكود مع أرقام الأسطر."""
+    numbered, truncated = method_lines(m, language, source_lines, in_class)
+    out = "\n".join(f"{n:>4} | {l}" for n, l in numbered.items())
+    if truncated:
         out += "\n     | ... (code truncated)"
     return out
 
@@ -146,10 +153,13 @@ def build_code_doc_requests(mapping: DocMapping, diagram: UnifiedClassDiagram,
 
         for ms in data["methods"]:
             ms: MatchedSnippet
-            code = "\n\n".join(method_code(m, language, source_lines, class_name != MODULE_CLASS)
-                                 for m in ms.methods)
+            in_class = class_name != MODULE_CLASS
+            code = "\n\n".join(method_code(m, language, source_lines, in_class) for m in ms.methods)
+            shown_lines: Dict[int, str] = {}
+            for m in ms.methods:
+                shown_lines.update(method_lines(m, language, source_lines, in_class)[0])
             item = CodeDocItem(id=new_id(f"{class_name}.{ms.methods[0].name}"), class_name=class_name,
-                               member=ms.methods[0].name, doc_text=ms.snippet.text)
+                               member=ms.methods[0].name, doc_text=ms.snippet.text, code_lines=shown_lines)
             blocks.append((item, CODE_DOC_METHOD_ITEM.format(item_id=item.id, code=code, doc=ms.snippet.text)))
 
         # تقسيم على طلبات بحجم معقول
