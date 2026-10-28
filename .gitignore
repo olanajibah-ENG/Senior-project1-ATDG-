@@ -32,3 +32,5 @@ Ai_project/evaluation/external/
 Ai_project/evaluation/paper_sets/docprism_ablation/
 Ai_project/evaluation/paper_sets/cascade_balanced/
 Ai_project/evaluation/paper_sets/cascade_realistic/
+Ai_project/evaluation/paper_sets/cascade_dev/
+Ai_project/evaluation/paper_sets/cascade_test/

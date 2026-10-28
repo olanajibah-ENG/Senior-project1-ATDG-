@@ -11,6 +11,8 @@
   docprism_ablation  — 52 دالة Python معنونة (6 متناقضة)             ← مسموح نفتح الأخطاء
   cascade_balanced   — 71 متناقضة + نسختهم المصلّحة (142، Java)        ← أرقام بس
   cascade_realistic  — 71 متناقضة + 639 متوافقة (seed 42) = 10/90      ← أرقام بس
+  cascade_dev        — 25 زوج من cascade_balanced (50 حالة)            ← مسموح نفتح الأخطاء
+  cascade_test       — الـ 46 زوج الباقيين (92 حالة)                   ← أرقام بس، بالمحطات
 
 كل حالة بالمصدر = دالة وحدة + توثيقها. التحويل:
   الكود    → ملف فيه الدالة (جوا كلاس إذا كانت method)
@@ -29,6 +31,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 EXTERNAL = HERE.parent / "external"
 MODULE = "<module>"
+DEV_PAIRS = 25          # CASCADE: 25 زوج للتطوير، والباقي (46) للاختبار
 
 
 def _write_set(name: str, samples: list, labels: list) -> None:
@@ -188,6 +191,29 @@ def build_cascade() -> None:
         inco_rows.append((inco, "Inconsistent", f"p{i:02d}", note))
         inco_rows.append((fixed, "Consistent", f"p{i:02d}", "fixed version"))
     build("cascade_balanced", inco_rows)
+
+    # تقسيم تطوير / اختبار — أزواج كاملة، موزّعة على المشاريع بنسبة حجمها، seed ثابت
+    by_project = {}
+    for i in range(0, len(inco_rows), 2):
+        project = "/".join(inco_rows[i][0].split("/")[:2])
+        by_project.setdefault(project, []).append(inco_rows[i:i + 2])
+    rnd_split = random.Random(42)
+    total_pairs = sum(len(v) for v in by_project.values())
+    quota = {p: len(v) * DEV_PAIRS / total_pairs for p, v in by_project.items()}
+    take = {p: int(q) for p, q in quota.items()}
+    # التقريب: الباقي بيروح للمشاريع يلي إلها أكبر كسور
+    for p in sorted(quota, key=lambda p: quota[p] - take[p], reverse=True)[:DEV_PAIRS - sum(take.values())]:
+        take[p] += 1
+    dev_rows, test_rows = [], []
+    for p in sorted(by_project):
+        pairs_p = by_project[p][:]
+        rnd_split.shuffle(pairs_p)
+        for pair in pairs_p[:take[p]]:
+            dev_rows += pair
+        for pair in pairs_p[take[p]:]:
+            test_rows += pair
+    build("cascade_dev", dev_rows)
+    build("cascade_test", test_rows)
 
     rnd = random.Random(42)
     extra = rnd.sample(others, 639)

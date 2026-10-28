@@ -19,7 +19,7 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
-from .schemas import ClassDetail, MethodDetail, UnifiedClassDiagram
+from .schemas import MODULE_CLASS, ClassDetail, MethodDetail, UnifiedClassDiagram
 
 
 class DocSnippet(BaseModel):
@@ -251,6 +251,13 @@ class DocSplitter:
                 documented_classes.add(cls.name)
                 continue
             methods = DocSplitter._find_methods(s, cls)
+            if not methods:
+                # "### Function: f" بعد قسم كلاس بينحسب على الكلاس الأخير، بس ممكن تكون دالة مستقلة
+                # أو تابعة لكلاس تاني → منفتّش بباقي الكلاسات (الدوال المستقلة أول شي)
+                others = sorted((c for c in classes.values() if c is not cls),
+                                key=lambda c: c.name != MODULE_CLASS)
+                cls, methods = next(((c, ms) for c in others for ms in [DocSplitter._find_methods(s, c)] if ms),
+                                    (cls, []))
             if not methods:
                 mapping.unmatched.append(s)
                 continue

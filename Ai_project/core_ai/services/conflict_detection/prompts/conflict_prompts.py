@@ -116,3 +116,79 @@ Be thorough but practical — focus on conflicts that would actually impact the 
 IMPORTANT: If NO conflicts exist, return exactly: {"conflicts": []}
 Do NOT invent conflicts.
 """
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Code vs Doc (الخطوة 4)
+#
+# مبني على prompt ورقة DocPrism (LCEF، github.com/SnowPhoebe/DocPrism، MIT):
+# ملخص للتوثيق وللكود، وبعدين 3 أسئلة مستقلة، ولكل "نعم" نسخ حرفي للجملة من التوثيق
+# والسطر من الكود. الإضافات عليه:
+#   - درجة ثقة لكل نتيجة (METAMON)            - أرقام أسطر بالكود
+#   - كذا بند (دالة) بطلب واحد لكل كلاس       - بند للكلاس نفسه (ادعاءات عامة)
+# ما في أمثلة جاهزة (few-shot) — متل DocPrism، ولحتى ما يتعلّم الموديل حالات من بيانات القياس.
+#
+# الأسئلة الثلاثة ← تصنيف DocPrism:
+#   not_implemented ← Over_Promise    conflicting ← Direct_Mismatch    undocumented ← Under_Promise
+# ─────────────────────────────────────────────────────────────────────────────
+
+CODE_DOC_SYSTEM = """You are a code review expert who identifies inconsistencies between source code and its documentation.
+You only report what you can verify from the given code and documentation. Respond with valid JSON only, no markdown."""
+
+CODE_DOC_PROMPT = """You are reviewing {language} code from the class `{class_name}` against its documentation.
+
+Each ITEM below contains one function (or constructor) with its own documentation, or the
+class itself with its general documentation and its list of members. Analyze every ITEM
+independently: judge a function only against its own documentation.
+
+{items}
+
+For EACH item answer three independent questions:
+
+1. not_implemented: Does the documentation claim a behavior or guarantee that the code does
+   not implement at all? (For a CLASS item: does the documentation claim a capability that no
+   member of the class provides?)
+2. conflicting: Does the code do something DIFFERENT from what the documentation states about
+   the same thing (return value, exception, parameter, default value, condition, unit, example)?
+3. undocumented: Does the code have behavior a caller needs to know that the documentation does
+   not mention (an exception thrown, a special return value such as null/None, a side effect)?
+
+Rules:
+- Judge only specific claims. General or vague statements are not inconsistencies.
+- Missing low-level detail in short documentation is not an inconsistency.
+- If the code does something else instead of the claim, it is "conflicting"; if the code does
+  nothing about the claim, it is "not_implemented".
+- Copy "doc_snippet" and "code_snippet" EXACTLY (verbatim) from the input; do not paraphrase.
+- "code_lines" are the line numbers shown at the left of the code.
+- "confidence" is your confidence (0.0 to 1.0) that the finding is a real inconsistency.
+- If there is nothing to report for a question, return an empty list for it.
+
+Return ONLY this JSON:
+{{
+  "results": [
+    {{
+      "id": "<item id>",
+      "documentation_summary": "...",
+      "code_summary": "...",
+      "not_implemented": [{{"doc_snippet": "...", "explanation": "...", "confidence": 0.0}}],
+      "conflicting": [{{"doc_snippet": "...", "code_snippet": "...", "code_lines": [0], "explanation": "...", "confidence": 0.0}}],
+      "undocumented": [{{"code_snippet": "...", "code_lines": [0], "explanation": "...", "confidence": 0.0}}]
+    }}
+  ]
+}}"""
+
+CODE_DOC_METHOD_ITEM = """ITEM id={item_id}
+[CODE]
+{code}
+[/CODE]
+[DOCUMENTATION]
+{doc}
+[/DOCUMENTATION]"""
+
+CODE_DOC_CLASS_ITEM = """ITEM id={item_id}  (the class itself)
+[MEMBERS]
+{members}
+[/MEMBERS]
+[DOCUMENTATION]
+{doc}
+[/DOCUMENTATION]"""
