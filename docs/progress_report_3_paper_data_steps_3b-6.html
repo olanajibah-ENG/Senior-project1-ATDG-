@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>تقرير التقدّم 3</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  :root {
+    --ink: #1c2430; --muted: #5a6573; --line: #d9dee5; --accent: #1f5fa8;
+    --accent-bg: #eef4fb; --ok: #1e7d4f; --ok-bg: #e9f6ef; --bad: #b3261e; --bad-bg: #fdecea;
+    --warn: #8a5a00; --warn-bg: #fff6e0; --code-bg: #f4f6f8;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Tahoma, Arial, sans-serif; color: var(--ink); background: #fff;
+         font-size: 10.5pt; line-height: 1.75; margin: 0; }
+  h1 { font-size: 21pt; color: var(--accent); margin: 0 0 4px; line-height: 1.4; }
+  h2 { font-size: 15pt; color: var(--accent); border-bottom: 2px solid var(--accent);
+       padding-bottom: 4px; margin: 26px 0 10px; page-break-after: avoid; }
+  h3 { font-size: 12pt; margin: 18px 0 6px; page-break-after: avoid; }
+  h4 { font-size: 10.5pt; margin: 12px 0 4px; color: var(--muted); page-break-after: avoid; }
+  p { margin: 6px 0; }
+  ul, ol { margin: 6px 0; padding-right: 22px; padding-left: 0; }
+  li { margin: 2px 0; }
+  code, .ltr { font-family: Consolas, "Courier New", monospace; font-size: 9pt; direction: ltr;
+               unicode-bidi: isolate; }
+  code { background: var(--code-bg); padding: 0 4px; border-radius: 3px; }
+  pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px;
+        direction: ltr; text-align: left; font-family: Consolas, monospace; font-size: 8.6pt;
+        line-height: 1.5; white-space: pre-wrap; page-break-inside: avoid; margin: 8px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 9.4pt;
+          page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  th, td { border: 1px solid var(--line); padding: 5px 7px; vertical-align: top; text-align: right; }
+  th { background: var(--accent-bg); font-weight: 600; }
+  .cover { border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 14px; }
+  .subtitle { color: var(--muted); font-size: 11pt; }
+  .meta { display: flex; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: 9.5pt; margin-top: 8px; }
+  .box { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin: 10px 0;
+         page-break-inside: avoid; }
+  .box.ok { background: var(--ok-bg); border-color: #b7dfc8; }
+  .box.bad { background: var(--bad-bg); border-color: #f2c2bd; }
+  .box.warn { background: var(--warn-bg); border-color: #f0d9a0; }
+  .box.info { background: var(--accent-bg); border-color: #c8dbf0; }
+  .box b.t { display: block; margin-bottom: 2px; }
+  .ok-t { color: var(--ok); font-weight: 600; }
+  .bad-t { color: var(--bad); font-weight: 600; }
+  .warn-t { color: var(--warn); font-weight: 600; }
+  .kpis { display: flex; gap: 10px; margin: 10px 0; }
+  .kpi { flex: 1; border: 1px solid var(--line); border-radius: 8px; padding: 8px; text-align: center; }
+  .kpi .v { font-size: 17pt; font-weight: 700; color: var(--accent); line-height: 1.2; }
+  .kpi .l { font-size: 8.8pt; color: var(--muted); }
+  .toc ol { columns: 2; column-gap: 28px; }
+  .pb { page-break-before: always; }
+  .small { font-size: 9pt; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+  <h1>تقرير التقدّم 3: بيانات الأوراق والتحليل الدلالي</h1>
+  <div class="subtitle">شغل يوم 2026-10-28: بيانات الأوراق البحثية، الدوال المستقلة، والخطوات 4 و 5 و 6</div>
+  <div class="meta">
+    <span>التاريخ: 2026-10-28</span>
+    <span>يكمّل: progress_report_step3_evaluation.pdf</span>
+    <span>آخر commit: <code>&lrm;f9b2099&lrm;</code></span>
+  </div>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="v">97/97</div><div class="l">اختبار ناجح (كانوا 44 الصبح)</div></div>
+  <div class="kpi"><div class="v">5</div><div class="l">مصادر بيانات من أوراق بحثية</div></div>
+  <div class="kpi"><div class="v">4</div><div class="l">خطوات منجزة اليوم (3ب، 4، 5، 6)</div></div>
+  <div class="kpi"><div class="v">0</div><div class="l">إنذارات كاذبة على CASCADE (بدون LLM)</div></div>
+</div>
+
+<div class="toc box info">
+  <b class="t">المحتويات</b>
+  <ol>
+    <li>ملخص اليوم</li>
+    <li>التحوّل لبيانات الأوراق البحثية</li>
+    <li>البيانات يلي نزّلناها</li>
+    <li>أول قياس على بيانات الأوراق</li>
+    <li>توجيه الدكتور: ورقة وحدة لكل قسم</li>
+    <li>الخطوة 3ب: الدوال المستقلة</li>
+    <li>الخطوة 4: تعليمات الذكاء الاصطناعي</li>
+    <li>الخطوة 5: الإرسال والقراءة والفلترة</li>
+    <li>الخطوة 6: الربط بالنظام</li>
+    <li>جدول التقدّم على CASCADE</li>
+    <li>مشاكل انكشفت اليوم</li>
+    <li>الحسابات والمفاتيح</li>
+    <li>سجل الـ commits والملفات</li>
+    <li>الخطوات الجاية</li>
+  </ol>
+</div>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>1. ملخص اليوم</h2>
+<table>
+  <tr><th style="width:26%">الشغل</th><th>النتيجة</th></tr>
+  <tr><td>بيانات الأوراق البحثية</td><td>نزّلنا بيانات DocPrism و CASCADE و NPM و Safer Builders، وكتبنا محوّل لشكل نظامنا. وكشفنا إنه "نجاح" النظام القديم على CASCADE وهمي.</td></tr>
+  <tr><td>الخطوة 3ب</td><td>صار النظام يشوف الدوال يلي برّا الكلاسات (بايثون وجافاسكربت وتايبسكربت). نص بيانات DocPrism ما كان ينفحص.</td></tr>
+  <tr><td>الخطوة 4</td><td>تعليمات للذكاء الاصطناعي مبنية على تعليمات DocPrism المنشورة.</td></tr>
+  <tr><td>الخطوة 5</td><td>إرسال الطلب، وقراءة الجواب، والفلترة: نرمي يلي اخترعه الموديل، ونخفي الوعد الناقص.</td></tr>
+  <tr><td>الخطوة 6</td><td>ربط كل شي بالنظام. وشلنا مصادر الإنذارات الكاذبة القديمة، فصارت صفر على CASCADE.</td></tr>
+</table>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>2. التحوّل لبيانات الأوراق البحثية</h2>
+<p>الصبح كان عنا مجموعة تطوير كتبناها نحنا (66 عنصر). <b>القرار:</b> ما منستعملها بالتقارير، ومنقيس على <b>بيانات الأوراق البحثية نفسها</b> بعد كل خطوة.</p>
+<div class="box info">
+  <b class="t">قاعدة العدالة</b>
+  إذا ضلّينا نعدّل النظام ونقيس على نفس الحالات، بيتفصّل النظام عليها وبتطلع الأرقام أحلى من الحقيقة. لهيك بكل مجموعة في <b>قسم منفتح أخطاءه</b> ونتعلّم منه، و<b>قسم منشوف أرقامه بس</b>.
+</div>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">3. البيانات يلي نزّلناها</h2>
+<table>
+  <tr><th style="width:18%">المصدر</th><th style="width:22%">من وين</th><th>المحتوى</th><th style="width:16%">الوسم</th></tr>
+  <tr><td><b>DocPrism</b></td><td>GitHub (SnowPhoebe/DocPrism)، MIT. الرابط المجهول بالورقة كان منتهي</td><td>52 دالة بايثون موسومة (6 متناقضة)، و 1991 دالة بأربع لغات بدون وسم، وتعليمات الأداة المنشورة</td><td>بشري (شخصين)</td></tr>
+  <tr><td><b>CASCADE</b></td><td>GitHub (TobiasKiecker/CASCADE)، فرع FSE26، MIT</td><td>885 دالة جافا من 16 مشروع: 71 متناقضة مع نسختها المصلّحة، والباقي متوافق</td><td>بشري (متحقق يدوياً)</td></tr>
+  <tr><td><b>NPM</b></td><td>Zenodo 13857646 (النسخة v3 <b>مفتوحة</b>، CC BY 4.0). النسخة v4 مقفلة</td><td>1519 تغيير بيكسر الكود من 131 مشروع. منهم <b>1034 تغيير بالسلوك</b>، و 203 تغيير قيمة افتراضية</td><td>بشري</td></tr>
+  <tr><td><b>Safer Builders</b></td><td>figshare، CC BY 4.0</td><td>أداتهم (حوالي 8 قواعد، مش 17 متل ما بتقول الورقة)، و 110,047 تعديل ملف من PRs بشرية. ما فيها نتائج لكل تعديل، ولا الـ 94 حالة يلي فحصوها يدوياً</td><td>أداة</td></tr>
+  <tr><td><b>AexPy</b></td><td>GitHub، والأداة على PyPI</td><td>الـ 61 تغيير يلي بالورقة <b>مش منشورين</b>. متاح بس الأداة ونتائجها (aexpy-index)</td><td>أداة</td></tr>
+</table>
+
+<h3>ملاحظات على البيانات</h3>
+<ul>
+  <li><b>CASCADE:</b> ملفات <code>&lrm;.txt&lrm;</code> فيها 70 تناقض، بينما الورقة وملف الربط والجدول فيهم 71. حالة وحدة (<code>&lrm;commons-codec 6175c99&lrm;</code>) ملفها مكتوب فيه <code>&lrm;False&lrm;</code> بالغلط. <b>اعتمدنا 71.</b></li>
+  <li><b>CASCADE:</b> بكل الـ 71 تصليح، الكود ما تغيّر، بس التوثيق. فهي بتنفع للكود مقابل التوثيق بس.</li>
+  <li><b>DocPrism:</b> 7 من الـ 52 حالة كان فيها مسافات (indentation) مكسورة <b>من المصدر</b>، لأنه لما المؤلفين شالوا التوثيق من الكود ضل أثر. صلّحناهم ووثّقنا التصليح.</li>
+  <li><b>NPM:</b> الوسم لكل تعديل (commit)، مش لكل دالة، وكل الحالات تغييرات بتكسر الكود. فمنقيس فيها قديش النظام بيكشف من كل نوع.</li>
+</ul>
+
+<h3>تحويل البيانات لشكل نظامنا</h3>
+<ul>
+  <li><code>&lrm;build_paper_sets.py&lrm;</code>: كل حالة بتصير ملف كود، وتوثيق بنفس شكل يلي بيولّده نظامنا (<code>&lrm;## Class&lrm;</code> و <code>&lrm;### Method&lrm;</code>). الجافا بيرجع ينبني منها الكلاس، والبايثون بيتحط جوا كلاس إذا كانت method.</li>
+  <li><code>&lrm;fetch_npm_code.py&lrm;</code>: بيجيب الكود قبل التعديل وبعده من GitHub لكل تعديل. وصل لـ 550 من 1487، وبيكمّل من مطرح ما وقف إذا انقطع.</li>
+  <li>وثيقة منفصلة فيها شرح البيانات والمقاييس: <code>&lrm;docs/evaluation_datasets_and_metrics.pdf&lrm;</code>.</li>
+</ul>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">4. أول قياس على بيانات الأوراق</h2>
+<table>
+  <tr><th>المجموعة</th><th>النظام</th><th>انكشف</th><th>إنذارات كاذبة</th><th>Precision</th><th>Specificity</th><th>PFP</th></tr>
+  <tr><td rowspan="2">CASCADE المتوازنة (142)</td><td>القديم</td><td><b>49/71</b></td><td class="bad-t"><b>49/71</b></td><td>0.50</td><td>0.31</td><td class="bad-t">0.00</td></tr>
+  <tr><td>الحالي</td><td>1/71</td><td>1/71</td><td>0.50</td><td>0.99</td><td>0.00</td></tr>
+  <tr><td rowspan="2">CASCADE الواقعية (710)</td><td>القديم</td><td>49/71</td><td class="bad-t">429</td><td class="bad-t">0.10</td><td>0.33</td><td>—</td></tr>
+  <tr><td>الحالي</td><td>1/71</td><td>4</td><td>0.20</td><td>0.99</td><td>—</td></tr>
+  <tr><td rowspan="2">DocPrism (52)</td><td>القديم</td><td>0/6</td><td>1</td><td>—</td><td>0.98</td><td>—</td></tr>
+  <tr><td>الحالي</td><td>0/6</td><td>2</td><td>—</td><td>0.96</td><td>—</td></tr>
+</table>
+<div class="box bad">
+  <b class="t">"نجاح" النظام القديم على CASCADE وهمي</b>
+  نبّه على 49 نسخة متناقضة، ونبّه على <b>نفس العدد بالزبط (49)</b> من النسخ المصلّحة. كل تنبيهاته كانت "Signature mismatch"، وسببها خطأ بقراءة توقيعات الجافا. يعني تنبيهاته ما إلها علاقة بالتناقض: <b>PFP = 0</b>. وبالتوزيع الواقعي، 9 من كل 10 تنبيهات منه غلط (Precision = 0.10). هاد بالزبط الشي يلي مقياس PFP معمول ليكشفه.
+</div>
+<p><b>ومقابلها الأرقام المنشورة على CASCADE المتوازنة:</b> CASCADE نفسها: Precision 0.88 و Recall 0.21. وسؤال الذكاء الاصطناعي مباشرة: Precision تقريباً 0.55 و Recall بين 0.29 و 0.67.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>5. توجيه الدكتور: ورقة وحدة لكل قسم</h2>
+<table>
+  <tr><th style="width:22%">القسم</th><th style="width:16%">الورقة</th><th>ليش هي الأقرب لشغلنا</th></tr>
+  <tr><td>الكود مقابل التوثيق</td><td><b>CASCADE</b></td><td>ورقتها بتقارن مباشرة مع "سؤال الذكاء الاصطناعي"، وهاد يلي بيعمله نظامنا. وفيها 71 تناقض مع نسخها المصلّحة، فمنقدر نقيس PFP. أما DocPrism ففيها 6 تناقضات بس.</td></tr>
+  <tr><td>الكود مقابل الكود</td><td><b>NPM</b></td><td>الوحيدة يلي وسمها بشري، وفيها التغييرات بالتوقيع والتغييرات بالسلوك.</td></tr>
+</table>
+<h3>تقسيم CASCADE</h3>
+<table>
+  <tr><th>القسم</th><th>الحجم</th><th>الاستعمال</th></tr>
+  <tr><td><code>&lrm;cascade_dev&lrm;</code></td><td>25 زوج (50 حالة) من 15 مشروع</td><td>منفتح أخطاءه ومنحسّن عليه، ومنقيس عليه كل يوم</td></tr>
+  <tr><td><code>&lrm;cascade_test&lrm;</code></td><td>46 زوج (92 حالة) من 16 مشروع</td><td>أرقام بس، بالمحطات المهمة. <b>هاد الرقم النهائي للتقرير</b></td></tr>
+</table>
+<p class="small">التقسيم بالأزواج الكاملة، يعني الحالة المتناقضة ونسختها المصلّحة بنفس القسم. وموزّع على المشاريع بنسبة حجمها، و seed = 42، وما في تداخل. والنظام القديم طلّع نتيجة متشابهة بالقسمين (0.68 و 0.70)، يعني التقسيم عادل.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">6. الخطوة 3ب: الدوال المستقلة (برّا الكلاسات)</h2>
+<p><b>المشكلة:</b> قارئ الملفات كان يشوف بس الدوال يلي جوا كلاس. نسبة الدوال المستقلة: <b>26 من 52</b> بـ DocPrism، و <b>185 دالة</b> بمشروعنا نفسه، و <b>58 دالة</b> بواجهة المشروع.</p>
+<p><b>الحل:</b></p>
+<ul>
+  <li>قارئ الملفات بيجمعهم بمفتاح منفصل (<code>&lrm;module_functions&lrm;</code>)، فمخطط الكلاسات بالواجهة ما بيتغيّر.</li>
+  <li>النظام بيحطهم بكلاس وهمي اسمه <code>&lrm;&lt;module&gt;&lrm;</code>، وما بيطلع عليه تنبيهات على مستوى الكلاس.</li>
+  <li>بالجافاسكربت والتايبسكربت صار يقرأ: <code>&lrm;function&lrm;</code>، و <code>&lrm;export function&lrm;</code>، و <code>&lrm;export default function&lrm;</code>، و <code>&lrm;const f = () =&gt;&lrm;</code>.</li>
+</ul>
+<table>
+  <tr><th>الفحص</th><th>النتيجة</th></tr>
+  <tr><td>بايثون: 130 ملف من مشروعنا، قبل وبعد</td><td class="ok-t">الكلاسات والعلاقات متطابقة 130/130، وصار في 185 دالة مستقلة بتنشاف</td></tr>
+  <tr><td>تايبسكربت: 23 ملف من الواجهة</td><td class="ok-t">متطابق 23/23، وصار في 58 دالة مستقلة بتنشاف</td></tr>
+  <tr><td>DocPrism</td><td>الحالات يلي عم تنفحص صارت 52/52، بعد ما كانت 26/52</td></tr>
+  <tr><td>الاختبارات</td><td>12 اختبار جديد</td></tr>
+</table>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>7. الخطوة 4: تعليمات الذكاء الاصطناعي</h2>
+<p>مبنية على <b>تعليمات DocPrism المنشورة بمستودعهم</b>: ملخص للتوثيق وملخص للكود، وبعدين ثلاث أسئلة، ولكل جواب "نعم" نسخ حرفي من التوثيق ومن الكود، وبدون أمثلة جاهزة.</p>
+<table>
+  <tr><th style="width:30%">السؤال</th><th>التصنيف</th><th>هل بيتعرض؟</th></tr>
+  <tr><td><code>&lrm;conflicting&lrm;</code>: الكود بيعمل شي مختلف</td><td>تناقض مباشر</td><td class="ok-t">نعم</td></tr>
+  <tr><td><code>&lrm;not_implemented&lrm;</code>: مذكور وما انعمل</td><td>وعد زايد</td><td class="ok-t">نعم</td></tr>
+  <tr><td><code>&lrm;undocumented&lrm;</code>: الكود بيعمل شي ما انذكر</td><td>وعد ناقص</td><td>لأ (متل DocPrism)</td></tr>
+</table>
+<p><b>إضافاتنا:</b> درجة ثقة لكل نتيجة (من METAMON)، وأرقام الأسطر، وطلب واحد لكل كلاس، وبند للكلاس نفسه للادعاءات العامة. وإذا الكود الأصلي مش متوفر، منعيد بناء الدالة من المعلومات المحفوظة بالخطوة 1.</p>
+<p><b>تصليح انكشف:</b> <code>&lrm;### Function: f&lrm;</code> إذا إجت بعد قسم كلاس، كانت تضيع. صار يفتّش عليها بالكلاسات التانية.</p>
+<p><b>تجربة حقيقية</b> (طلبين، على مثال برّا بيانات القياس، زرعنا فيه تناقضين): الموديل لقى الاثنين بثقة 1.0، ولقى كمان ادعاء ثالث صحيح ما كان مزروع. والجواب كان JSON صحيح، وكل الجمل المنسوخة موجودة حرفياً بالتوثيق.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2 class="pb">8. الخطوة 5: الإرسال والقراءة والفلترة</h2>
+<p>ملف <code>&lrm;doc_semantic_analyzer.py&lrm;</code>، وهو الجزء التاني من طريقة DocPrism: <b>الفلترة الخارجية</b>.</p>
+<table>
+  <tr><th style="width:26%">المرحلة</th><th>شو بتعمل</th></tr>
+  <tr><td>الإرسال</td><td>لحد 3 محاولات، وإعادة المحاولة ما بتستعمل الجواب المحفوظ. إذا فشل كل شي: ما في crash، والكلاس بينسجّل إنه ما انفحص</td></tr>
+  <tr><td>الوعد الناقص</td><td>بينحفظ بس ما بيتعرض</td></tr>
+  <tr><td>النسخ من التوثيق</td><td>إذا الجملة مش موجودة <b>بتوثيق هالدالة نفسها</b>، بتنرمى (اختراع)</td></tr>
+  <tr><td>النسخ من الكود</td><td>إذا الأسطر مش من الكود يلي انعرض، أو السطر المنسوخ مش موجود، بتنرمى</td></tr>
+  <tr><td>عتبة الثقة</td><td>المعروض بس يلي ثقته 0.7 أو أكتر</td></tr>
+  <tr><td>التكرار</td><td>نتيجة وحدة لكل دالة ونوع</td></tr>
+  <tr><td>الإحصائيات</td><td>قديش انرمى ولأي سبب، وقديش انعرض</td></tr>
+</table>
+<p><b>الاختبارات:</b> 18 اختبار بأجوبة مكتوبة بإيدنا، لحتى ما نصرف من الحد اليومي. <b>والتجربة الحقيقية:</b> 3 تنبيهات انعرضت وكلها صحيحة، و 3 وعود ناقصة انخفت، وما انرمى ولا شي على إنه مخترع.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>9. الخطوة 6: الربط بالنظام</h2>
+<table>
+  <tr><th style="width:32%">التغيير</th><th>ليش</th></tr>
+  <tr><td>المحلّل الجديد صار يشتغل تلقائياً بكل مقارنة بين الكود والتوثيق</td><td>هاد الهدف</td></tr>
+  <tr><td>"الكلاس غير موثّق" و "الدالة غير موثّقة" راحوا لإحصائيات التغطية بس</td><td>تغطية، مش تناقض</td></tr>
+  <tr><td>الفحص البسيط للتوقيع انشال</td><td>سبب كل إنذارات النظام القديم الوهمية على CASCADE</td></tr>
+  <tr><td>الفحص الثابت للتوثيق المنظّم ضل، وصار يفهم توقيعات الجافا وما بيقارن نوع غير معروف</td><td>دقيق وما بيكلّف شي، وبيضل شغّال إذا الذكاء الاصطناعي فشل</td></tr>
+  <tr><td>إعدادين: تشغيل وإيقاف الذكاء الاصطناعي، وعتبة الثقة</td><td>للتحكم بالتكلفة والدقة</td></tr>
+  <tr><td>قسم "ميزات جديدة غير موثّقة" بالتحليل الكامل صار ياخد من الإحصائيات</td><td>لأنه قائمة المشاكل تغيّرت</td></tr>
+</table>
+<div class="box warn">
+  <b class="t">مشكلة مهمة انكشفت</b>
+  قراءة الملفات <b>ما بتسجّل لغة الملف</b> بالتحليل أبداً. فكود البايثون كان رح ينبعت للذكاء الاصطناعي كأنه جافا، وأرقام الأسطر رح تطلع غلط، والتنبيهات الصحيحة رح تنرمى. صار النظام يستنتج اللغة من شكل الكود.
+</div>
+<p><b>الواجهة ما تعدّلت:</b> قائمة المشاكل صار فيها تناقضات حقيقية، وقسم "Undocumented" الموجود أصلاً بيعرض الدوال غير الموثّقة، والألوان ونسبة التغطية متل ما هني.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>10. جدول التقدّم على CASCADE</h2>
+<table>
+  <tr><th>المرحلة</th><th>القسم</th><th>النظام</th><th>انكشف</th><th>إنذارات كاذبة</th><th>Specificity</th><th>PFP</th><th>طلبات</th></tr>
+  <tr><td>الأساس</td><td>تطوير</td><td>القديم</td><td>17/25</td><td class="bad-t">17/25</td><td>0.32</td><td class="bad-t">0.00</td><td>0</td></tr>
+  <tr><td>الأساس</td><td>تطوير</td><td>الحالي</td><td>1/25</td><td>1/25</td><td>0.96</td><td>0.00</td><td>0</td></tr>
+  <tr><td>الأساس</td><td>اختبار</td><td>القديم</td><td>32/46</td><td class="bad-t">32/46</td><td>0.30</td><td class="bad-t">0.00</td><td>0</td></tr>
+  <tr><td>الأساس</td><td>اختبار</td><td>الحالي</td><td>0/46</td><td>0/46</td><td>1.00</td><td>—</td><td>0</td></tr>
+  <tr><td>بعد الخطوة 6 (بدون LLM)</td><td>تطوير</td><td>الحالي</td><td>0/25</td><td class="ok-t"><b>0</b></td><td class="ok-t">1.00</td><td>—</td><td>0</td></tr>
+  <tr><td>بعد الخطوة 6 (بدون LLM)</td><td>اختبار</td><td>الحالي</td><td>0/46</td><td class="ok-t"><b>0</b></td><td class="ok-t">1.00</td><td>—</td><td>0</td></tr>
+</table>
+<p>هلق <b>ولا إنذار كاذب</b>. والتناقضات لسا ما انكشفت لأنه الذكاء الاصطناعي كان مسكّر بهالقياس، وهاد مقصود. <b>القياس الحقيقي مع الذكاء الاصطناعي</b> على قسم التطوير بيحتاج 50 طلب، يعني الحد اليومي كله، فبيكون ببداية يوم جديد.</p>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>11. مشاكل انكشفت اليوم</h2>
+<table>
+  <tr><th style="width:5%">#</th><th>المشكلة</th><th style="width:22%">الحالة</th></tr>
+  <tr><td>1</td><td>نجاح النظام القديم على CASCADE وهمي (PFP = 0)</td><td>موثّق، ورقم للمقارنة</td></tr>
+  <tr><td>2</td><td>الدوال المستقلة ما بتنفحص (بايثون وجافاسكربت وتايبسكربت)</td><td class="ok-t">انصلحت (3ب)</td></tr>
+  <tr><td>3</td><td>اسم الدالة مع الأنواع العامة (<code>&lrm;useRetry&lt;T&gt;&lrm;</code>) ما بينطابق مع التوثيق</td><td class="ok-t">انصلحت</td></tr>
+  <tr><td>4</td><td>دالة بالتوثيق بعد قسم كلاس كانت تضيع</td><td class="ok-t">انصلحت (4)</td></tr>
+  <tr><td>5</td><td>الفحص البسيط للتوقيع بيعدّ فواصل أمثلة الاستخدام</td><td class="ok-t">انشال (6)</td></tr>
+  <tr><td>6</td><td><code>&lrm;_parse_signature&lrm;</code> ما بتفهم توقيعات الجافا (<code>&lrm;+ name(..)&lrm;</code>)</td><td class="ok-t">انصلحت (6)</td></tr>
+  <tr><td>7</td><td>قراءة الملفات ما بتسجّل لغة الملف</td><td class="ok-t">النظام بيستنتجها (6)</td></tr>
+  <tr><td>8</td><td>فرق 70 مقابل 71 ببيانات CASCADE، و 7 حالات مسافاتها مكسورة بـ DocPrism</td><td>موثّق ومعالج</td></tr>
+</table>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>12. الحسابات والمفاتيح</h2>
+<ul>
+  <li><b>OpenRouter:</b> الحساب مجاني (50 طلب باليوم). المفتاح القديم ما كان موجود بحسابكم، فرجع 401 "User not found". <b>انعمل مفتاح جديد</b> وهو شغّال.</li>
+  <li><b>GitHub:</b> انعمل مفتاح قراءة للمشاريع العامة بس (5000 طلب بالساعة)، لتنزيل كود NPM.</li>
+  <li>المفاتيح محفوظة بملف <code>&lrm;.env&lrm;</code>، وهالملف مستثنى من git. والمساعد ما بيقرأ المفاتيح، وهاد إجراء أمان.</li>
+  <li><b>الموديل الثابت للقياس:</b> <code>&lrm;poolside/laguna-s-2.1:free&lrm;</code>، و temperature 0، و seed 42. والأجوبة بتنحفظ وبيعاد استعمالها إذا تكرر نفس الطلب.</li>
+</ul>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>13. سجل الـ commits والملفات</h2>
+<table>
+  <tr><th style="width:14%">commit</th><th>الوصف</th></tr>
+  <tr><td><code>&lrm;65532d0&lrm;</code></td><td>بيانات الأوراق، والخطوة 3ب (الدوال المستقلة)، ووثيقة البيانات والمقاييس، وإيميل NPM</td></tr>
+  <tr><td><code>&lrm;23202b3&lrm;</code></td><td>الخطوة 4: تعليمات الذكاء الاصطناعي ومجهّز الطلبات، وتقسيم CASCADE</td></tr>
+  <tr><td><code>&lrm;a87a00f&lrm;</code></td><td>الخطوة 5: الإرسال والقراءة والفلترة</td></tr>
+  <tr><td><code>&lrm;f9b2099&lrm;</code></td><td>الخطوة 6: الربط بالنظام</td></tr>
+</table>
+<h3>ملفات جديدة</h3>
+<ul>
+  <li><code>&lrm;core_ai/services/conflict_detection/&lrm;</code>: <code>&lrm;doc_prompt_builder.py&lrm;</code> و <code>&lrm;doc_semantic_analyzer.py&lrm;</code></li>
+  <li><code>&lrm;evaluation/paper_sets/&lrm;</code>: <code>&lrm;build_paper_sets.py&lrm;</code> و <code>&lrm;fetch_npm_code.py&lrm;</code> و <code>&lrm;PROGRESS.md&lrm;</code> وملفات الوسم</li>
+  <li>الاختبارات: <code>&lrm;test_module_functions.py&lrm;</code> و <code>&lrm;test_doc_prompt_builder.py&lrm;</code> و <code>&lrm;test_doc_semantic_analyzer.py&lrm;</code> و <code>&lrm;test_code_doc_integration.py&lrm;</code> و <code>&lrm;conftest.py&lrm;</code></li>
+  <li>التقارير: <code>&lrm;step3b&lrm;</code> و <code>&lrm;step4&lrm;</code> و <code>&lrm;step5&lrm;</code> و <code>&lrm;step6&lrm;</code> بمجلد <code>&lrm;core_ai/tests/reports/&lrm;</code></li>
+</ul>
+<table>
+  <tr><th>الاختبارات</th><th>الصبح</th><th>بعد 3ب</th><th>بعد 4</th><th>بعد 5</th><th>بعد 6</th></tr>
+  <tr><td>العدد (كلهم ناجحين)</td><td>44</td><td>56</td><td>69</td><td>87</td><td><b>97</b></td></tr>
+</table>
+
+<!-- ───────────────────────────────────────────── -->
+<h2>14. الخطوات الجاية</h2>
+<ol>
+  <li><b>أول قياس حقيقي مع الذكاء الاصطناعي</b> على قسم التطوير من CASCADE (50 طلب، ببداية يوم جديد). منشوف قديش تناقض انكشف، وقديش إنذار كاذب، وقيمة PFP، ومنقارن مع أرقام الورقة.</li>
+  <li><b>تحليل الأخطاء</b> على قسم التطوير، ومنعدّل عتبة الثقة إذا لزم.</li>
+  <li><b>قياس قسم الاختبار</b> (92 طلب، يومين) بالمحطة المهمة.</li>
+  <li><b>الكود مقابل الكود (الخطوات 7 لـ 11)</b> على بيانات NPM، بعد ما يخلص التنزيل.</li>
+</ol>
+
+</body>
+</html>
