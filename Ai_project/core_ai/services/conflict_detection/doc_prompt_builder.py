@@ -109,8 +109,17 @@ def method_code(m: MethodDetail, language: str, source_lines: Optional[List[str]
 # بناء الطلبات
 # ─────────────────────────────────────────────────────────────────────
 
+def _guess_language(diagram: UnifiedClassDiagram) -> str:
+    """إذا اللغة مش مسجّلة بالتحليل: جسم بيبلّش بـ '{' = لغة متل جافا، وإلا بايثون."""
+    bodies = [m.body for c in diagram.classes for m in c.methods if m.body]
+    if not bodies:
+        return ""
+    return "java" if sum(b.lstrip().startswith("{") for b in bodies) * 2 >= len(bodies) else "python"
+
+
 def build_code_doc_requests(mapping: DocMapping, diagram: UnifiedClassDiagram,
                             language: str = "", source_code: Optional[str] = None) -> List[CodeDocRequest]:
+    language = language or diagram.language or _guess_language(diagram)
     source_lines = source_code.splitlines() if source_code else None
     classes = {c.name: c for c in diagram.classes}
 

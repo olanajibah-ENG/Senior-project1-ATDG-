@@ -104,9 +104,12 @@ def test_documented_function_is_matched():
 
 def test_no_undocumented_class_alert_for_module():
     doc = "## Class: Store\n### Method: get\nGets.\n"
-    _, flags = _flags(PY, doc)
-    assert (MODULE_CLASS, None) not in flags                       # ما في "الكلاس <module> غير موثّق"
-    assert sorted(m for c, m in flags if c == MODULE_CLASS) == ["_helper", "fetch", "load"]
+    out, flags = _flags(PY, doc)
+    assert flags == []                                             # من الخطوة 6: "غير موثّق" مش تنبيه
+    overall = next(c for c in out if c.class_name == "Overall").element
+    assert MODULE_CLASS not in overall["undocumented_classes"]     # ما في "الكلاس <module> غير موثّق"
+    assert sorted(u["method"] for u in overall["undocumented_methods"] if u["class"] == MODULE_CLASS) \
+        == ["_helper", "fetch", "load"]
 
 
 def test_module_not_counted_as_class_in_score():

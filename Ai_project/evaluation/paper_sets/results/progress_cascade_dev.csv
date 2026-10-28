@@ -1,3 +1,5 @@
 stage,system,run_at,code_hash,model,elements,precision,recall,f1,specificity,tp,fp,fn,tn,unlabeled_flags,llm_calls,llm_replayed,llm_failed_samples,errors,flag_rate,label_accuracy,pfp
 baseline (after step 3b),legacy,2026-10-28T18:46:29,a8649b221ee7,offline,50,0.5,0.68,0.576,0.32,17,17,8,8,0,0,0,0,0,0.68,,0.0
 baseline (after step 3b),current,2026-10-28T18:46:29,68242e1174f3,offline,50,0.5,0.04,0.074,0.96,1,1,24,24,0,0,0,0,0,0.04,,0.0
+after step 6 (LLM off),legacy,2026-10-28T19:41:16,a8649b221ee7,offline,50,0.5,0.68,0.576,0.32,17,17,8,8,0,0,0,0,0,0.68,,0.0
+after step 6 (LLM off),current,2026-10-28T19:41:17,443f76a36ef1,offline,50,,0.0,,1.0,0,0,25,25,0,0,0,0,0,0.0,,

@@ -1,8 +1,12 @@
 # core_ai/services/conflict_detection/code_doc_consistency.py
+import os
 import re
-from typing import Dict, Any, List, Tuple
-from .schemas import ConflictItem, UnifiedClassDiagram, ChangeType, SeverityLevel, DocType, MODULE_CLASS
+from typing import Dict, Any, List, Optional, Tuple
+from .schemas import (ConflictItem, UnifiedClassDiagram, ChangeType, SeverityLevel, DocType,
+                      DocConsistencyLabel, MODULE_CLASS)
 from .doc_splitter import DocSplitter
+from .doc_prompt_builder import build_code_doc_requests
+from .doc_semantic_analyzer import DEFAULT_THRESHOLD, DocSemanticAnalyzer
 
 
 class CodeDocConsistencyChecker:
@@ -96,8 +100,10 @@ class CodeDocConsistencyChecker:
 
     @staticmethod
     def _parse_signature(sig: str):
-        """'f(self, a: int, b=1) -> X'  →  (['a', 'b'], 'X')  أو None إذا ما انفهم."""
-        m = re.match(r'\s*[\w.]+\s*\((.*)\)\s*(?:->\s*(.+?))?\s*$', sig or "", re.S)
+        """'f(self, a: int, b=1) -> X'  →  (['a', 'b'], 'X')  أو None إذا ما انفهم.
+        بيقبل كمان صيغة المخطط: '+ f(a: int): X' (رمز الـ visibility بالأول، والإرجاع بعد ':')."""
+        sig = re.sub(r'^\s*[+\-#~]\s*', '', sig or "")
+        m = re.match(r'\s*[\w.]+\s*\((.*)\)\s*(?:(?:->|:)\s*(.+?))?\s*$', sig, re.S)
         if not m:
             return None
         names = []
@@ -132,7 +138,10 @@ class CodeDocConsistencyChecker:
         out: List[ConflictItem] = []
         code_sig = CodeDocConsistencyChecker._parse_signature(method.signature)
         doc_sig = CodeDocConsistencyChecker._parse_signature(detail.get("signature", ""))
-        code_ret = code_sig[1] if code_sig else ""
+        # نوع الإرجاع المعلن (الخطوة 1) أدق من المخطط؛ "Any" بالمخطط = غير معروف (مستنتج)، مش نوع
+        code_ret = method.return_type or (code_sig[1] if code_sig else "")
+        if code_ret.strip() == "Any" and not method.return_type:
+            code_ret = ""
         doc_ret = doc_sig[1] if doc_sig else ""
 
         def item(severity, description, old, new, rec, conf):
@@ -142,6 +151,9 @@ class CodeDocConsistencyChecker:
                 description=description, old_value=old, new_value=new,
                 suggestion=rec, recommendation=rec,
                 doc_type=doc_type_value, ai_confidence=conf,
+                # التوثيق المنظّم بيقول شي، والكود بيعمل شي تاني بنفس النقطة
+                doc_label=DocConsistencyLabel.DIRECT_MISMATCH, is_flagged=True,
+                evidence=f'doc: "{old}" | code: "{new}"',
             )
 
         # 1) التوثيق بيقول يرمي استثناء، والكود بيرجّع Optional/None
@@ -182,7 +194,19 @@ class CodeDocConsistencyChecker:
         return out
 
     @staticmethod
-    def compare(current_diagram: UnifiedClassDiagram, old_explanation: Dict[str, Any]) -> List[ConflictItem]:
+    def compare(current_diagram: UnifiedClassDiagram, old_explanation: Dict[str, Any],
+                use_llm: Optional[bool] = None, threshold: Optional[float] = None) -> List[ConflictItem]:
+        """
+        الكود مقابل التوثيق (بعد الخطوة 6):
+          - التناقضات: من DocSemanticAnalyzer (LLM + فلترة خارجية) + الفحوصات الحتمية للتوثيق المنظّم.
+          - "غير موثّق" (كلاس/دالة): تغطية، مش تناقض → بالإحصائيات بس (عنصر Overall).
+        use_llm / threshold: إذا ما انعطوا، من متغيرات البيئة CODE_DOC_LLM_ENABLED و
+        CODE_DOC_CONFIDENCE_THRESHOLD (الافتراضي: مفعّل، 0.7).
+        """
+        if use_llm is None:
+            use_llm = os.environ.get("CODE_DOC_LLM_ENABLED", "1").strip().lower() not in ("0", "false", "no", "off")
+        if threshold is None:
+            threshold = float(os.environ.get("CODE_DOC_CONFIDENCE_THRESHOLD", DEFAULT_THRESHOLD))
         conflicts = []
 
         explanation_text = (
@@ -253,76 +277,32 @@ class CodeDocConsistencyChecker:
                     partial_doc_elements += 1
                     undoc_elements       += methods_total
             else:
+                # تغطية بس (undocumented_classes بالإحصائيات) — مش تناقض
                 undocumented_classes += 1
                 undoc_elements       += 1 + methods_total
-                conflicts.append(ConflictItem(
-                    type=ChangeType.DOC_DRIFT,
-                    severity=SeverityLevel.MEDIUM,
-                    class_name=class_name,
-                    member=None,
-                    description=f"الكلاس '{class_name}' موجود في الكود الحالي لكن غير موثق في التوثيق القديم",
-                    old_value=None,
-                    new_value=class_name,
-                    suggestion="إضافة توثيق لهذا الكلاس",
-                    recommendation="إضافة توثيق لهذا الكلاس",
-                    doc_type=doc_type_value,
-                    ai_confidence=0.85
-                ))
 
-            # كشف الدوال غير الموثقة
-            for method in cls.methods:
-                method_key = f"{class_name}.{method.name}".lower()
-                if method_key not in documented_methods and method.name.lower() not in documented_methods:
-                    severity = SeverityLevel.HIGH if not is_high_level else SeverityLevel.MEDIUM
-                    conflicts.append(ConflictItem(
-                        type=ChangeType.DOC_DRIFT,
-                        severity=severity,
-                        class_name=class_name,
-                        member=method.name,
-                        description=f"الدالة '{method.name}' موجودة في الكود لكن غير موثقة في التوثيق القديم",
-                        old_value=None,
-                        new_value=method.signature,
-                        suggestion="تحديث التوثيق ليشمل هذه الدالة",
-                        recommendation="تحديث التوثيق ليشمل هذه الدالة",
-                        doc_type=doc_type_value,
-                        ai_confidence=0.80
-                    ))
-
-            # فحص توافق الـ signature للدوال الموثقة
+            # الفحوصات الحتمية للتوثيق المنظّم (raises مقابل None، اختلاف التوقيع المكتوب صراحة)
+            # الفحص البسيط القديم (أول "name(" بالنص) انشال: كان يعدّ المعاملات من أمثلة الاستخدام،
+            # ويفشل بقراءة توقيعات الجافا ("+ name(...)") → إنذارات وهمية على النسخ المصلّحة
             for m in cls.methods:
-                method_key = f"{class_name}.{m.name}".lower()
-                method_documented = method_key in documented_methods or m.name.lower() in documented_methods
-                if method_documented:
-                    detail = structured["details"].get(method_key)
-                    if detail:
-                        conflicts.extend(CodeDocConsistencyChecker._check_structured_method(
-                            class_name, m, detail, doc_type_value))
-                        continue
-                    # حاول استخراج عدد الـ params من نص الشرح حول اسم الدالة
-                    sig_match = re.search(
-                        rf'{re.escape(m.name)}\s*\(([^)]*)\)',
-                        explanation_text,
-                        re.IGNORECASE
-                    )
-                    if sig_match:
-                        params_in_doc = [p.strip() for p in sig_match.group(1).split(",") if p.strip()]
-                        # MethodDetail ما فيه حقل parameters — منستخرجها من الـ signature
-                        # (قبل: كانت دايماً [] فكل دالة موثقة بـ params انحسبت mismatch غلط)
-                        parsed = CodeDocConsistencyChecker._parse_signature(m.signature)
-                        params_in_code = parsed[0] if parsed else (getattr(m, "parameters", []) or [])
-                        params_in_doc = [p for p in params_in_doc if p.split(":")[0].strip() not in ("self", "cls")]
-                        if len(params_in_doc) != len(params_in_code):
-                            conflicts.append(ConflictItem(
-                                type=ChangeType.DOC_DRIFT,
-                                severity=SeverityLevel.MEDIUM,
-                                class_name=class_name,
-                                member=m.name,
-                                description=f"Signature mismatch: doc mentions {len(params_in_doc)} params, code has {len(params_in_code)}",
-                                recommendation="تحديث التوثيق ليتوافق مع التوقيع الحالي",
-                                doc_type=doc_type_value,
-                                ai_confidence=0.75
-                            ))
+                detail = structured["details"].get(f"{class_name}.{m.name}".lower())
+                if detail:
+                    conflicts.extend(CodeDocConsistencyChecker._check_structured_method(
+                        class_name, m, detail, doc_type_value))
 
+        # التحليل الدلالي (الخطوات 4–5)
+        semantic_stats, hidden = None, []
+        if use_llm:
+            requests = build_code_doc_requests(
+                mapping, current_diagram, language=current_diagram.language,
+                source_code=old_explanation.get("code_content") if isinstance(old_explanation, dict) else None)
+            if requests:
+                analyzer = DocSemanticAnalyzer(threshold=threshold)
+                findings = analyzer.analyze(requests, doc_type=doc_type_value)
+                conflicts.extend(c for c in findings if c.is_flagged)
+                hidden = [{"class": c.class_name, "member": c.member, "label": c.doc_label.value,
+                           "confidence": c.ai_confidence} for c in findings if not c.is_flagged]
+                semantic_stats = analyzer.stats.model_dump()
 
         total_classes        = sum(c.name != MODULE_CLASS for c in current_diagram.classes)
         compatibility_score  = round((documented_classes / total_classes * 100), 1) if total_classes > 0 else 0.0
@@ -351,6 +331,9 @@ class CodeDocConsistencyChecker:
                 "partially_documented":  partial_doc_elements,
                 "undocumented":          undoc_elements,
                 "critical_conflicts":    critical_conflicts,
+                "contradictions":        sum(1 for c in conflicts if c.doc_label is not None),
+                "semantic_analysis":     semantic_stats,      # None = ما اشتغل الـ LLM
+                "hidden_findings":       hidden,              # Under_Promise + تحت العتبة (مش معروضين)
                 "undocumented_classes":  [
                     c.name for c in current_diagram.classes
                     if c.name != MODULE_CLASS and c.name.lower() not in documented_class_names

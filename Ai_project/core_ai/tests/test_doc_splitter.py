@@ -49,8 +49,10 @@ def real(doc_id_suffix: str) -> dict:
 
 
 def undocumented_flags(doc: dict, diagram) -> list:
+    """من الخطوة 6: "غير موثّق" صار بإحصائيات التغطية (عنصر Overall)، مش تنبيه."""
     out = CodeDocConsistencyChecker.compare(diagram, {"content": doc["content"], "explanation_type": doc["explanation_type"]})
-    return sorted(c.member or c.class_name for c in out if c.class_name != "Overall" and "غير موثق" in c.description)
+    overall = next(c for c in out if c.class_name == "Overall").element
+    return sorted([u["method"] for u in overall["undocumented_methods"]] + overall["undocumented_classes"])
 
 
 # ─────────────────────────────────────────────────────────────────────

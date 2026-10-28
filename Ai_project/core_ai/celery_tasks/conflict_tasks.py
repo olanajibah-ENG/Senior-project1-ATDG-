@@ -379,9 +379,11 @@ def detect_conflict_task(
         migration_guide = None
         if analysis_type == "full_analysis":
             doc_conflicts = getattr(result, 'doc_conflicts', [])
+            # "غير موثّق" صار بإحصائيات التغطية (عنصر Overall)، مش بقائمة التناقضات
+            overall = next((c for c in doc_conflicts if c.class_name == "Overall"), None)
             undoc_methods = [
-                c for c in doc_conflicts
-                if c.class_name != "Overall" and c.member
+                {"class": u["class"], "method": u["method"]}
+                for u in ((overall.element or {}).get("undocumented_methods", []) if overall else [])
             ]
             cross_reference = {
                 "changes_affecting_documentation": [
@@ -395,11 +397,11 @@ def detect_conflict_task(
                 ],
                 "undocumented_new_features": [
                     {
-                        "feature":     f"{c.member} in {c.class_name}",
-                        "description": c.description,
-                        "priority":    c.severity.value if hasattr(c.severity, 'value') else "medium"
+                        "feature":     f"{u['method']} in {u['class']}",
+                        "description": f"الدالة '{u['method']}' موجودة في الكود لكن غير موثقة في التوثيق",
+                        "priority":    "medium"
                     }
-                    for c in undoc_methods[:5]
+                    for u in undoc_methods[:5]
                 ]
             }
             # بناء migration guide من الـ structural conflicts
