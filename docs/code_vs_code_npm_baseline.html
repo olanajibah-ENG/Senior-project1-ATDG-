@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>نتائج Code vs Code الأولى</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1f2328; --muted:#57606a; --card:#f6f8fa; --accent:#0969da; --good:#1a7f37; --bad:#cf222e; --border:#d0d7de; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0d1117; --fg:#e6edf3; --muted:#8d96a0; --card:#161b22; --accent:#4493f8; --good:#3fb950; --bad:#f85149; --border:#30363d; } }
+  body { background:var(--bg); color:var(--fg); font-family:"Segoe UI",Tahoma,Arial,sans-serif; line-height:1.9; margin:0; padding:24px 16px; }
+  main { max-width:820px; margin:auto; }
+  h1 { font-size:1.5rem; } h2 { font-size:1.15rem; color:var(--accent); margin-top:1.8em; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px 18px; }
+  .wrap { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; margin:10px 0; }
+  th, td { border:1px solid var(--border); padding:7px 9px; text-align:right; white-space:nowrap; }
+  th { background:var(--card); }
+  .en { direction:ltr; unicode-bidi:isolate; font-family:Consolas,monospace; }
+  .good { color:var(--good); font-weight:bold; } .bad { color:var(--bad); font-weight:bold; }
+  .note { color:var(--muted); }
+</style>
+</head>
+<body>
+<main>
+<h1>أول نتائج <span class="en">Code vs Code</span> على بيانات ورقة <span class="en">NPM</span></h1>
+
+<div class="card">
+<p><b>البيانات:</b> 1460 تعديل بيكسر الكود، موسومين من مؤلفين الورقة. ومعهم 338 تعديل عادي جبناهم من نفس المشاريع، وهدول "سليمين على الأرجح" مش موسومين من المؤلفين.</p>
+<p><b>القياس:</b> بدون ذكاء اصطناعي، يعني الفحص البنيوي بس، وما كلّف ولا طلب. قسّمنا البيانات 20% تطوير و 80% اختبار.</p>
+</div>
+
+<h2>النتائج على قسم الاختبار (الأكبر)</h2>
+<div class="wrap"><table>
+  <tr><th>النظام</th><th>كشف الكل</th><th>كشف التغييرات البنيوية</th><th>كشف التغييرات السلوكية</th><th>السكوت عن السليم</th></tr>
+  <tr><td>القديم</td><td>0.22</td><td>0.39</td><td>0.14</td><td>0.89</td></tr>
+  <tr><td><b>الحالي</b></td><td class="good">0.35</td><td class="good">0.55</td><td>0.25</td><td>0.82</td></tr>
+</table></div>
+<p class="note">"كشف" = <span class="en">Recall</span>، و"السكوت عن السليم" = <span class="en">Specificity</span>. وقسم التطوير طلّع نفس الصورة تقريباً.</p>
+
+<h2>شو بتعني هالأرقام</h2>
+<ol>
+  <li><b>النظام الحالي بيكشف أكتر بكتير من القديم:</b> لقى <b>169 تعديل بيكسر</b> ما كان القديم يشوفهم، وخسر 2 بس. والسبب الأساسي إنه صار يشوف الدوال يلي برّا الكلاسات، وهي كتير منتشرة بـ <span class="en">JavaScript</span> و <span class="en">TypeScript</span>.</li>
+  <li><b>الثمن:</b> 22 إنذار كاذب زيادة، فنزل "السكوت عن السليم" من 0.89 لـ 0.82.</li>
+  <li><b>التغييرات السلوكية</b>، وهي تقريباً ثلثين البيانات، ما بتنكشف فعلياً بدون ذكاء اصطناعي. يلي انكشف منها انكشف لأنه صادف في تغيير بنيوي بنفس التعديل. وهون بيبيّن ليش بدنا الخطوات 8 لـ 11.</li>
+  <li><b>أكتر سبب للإنذارات الكاذبة:</b> النظام بيعتبر <b>أي تغيير بالتوقيع</b> كسر، حتى لو كان إضافة معامل اختياري. وهاد بالزبط يلي بتصلّحه <b>الخطوة 7</b>.</li>
+</ol>
+
+<h2>ملاحظة صريحة للمناقشة</h2>
+<p class="note">الـ <span class="en">Precision</span> طالعة عالية (0.85 لـ 0.91)، بس هي <b>مضخّمة</b> لأنه 83% من العينات بتكسر الكود. فالرقم الأصدق للإنذارات الكاذبة هو "السكوت عن السليم". كمان 165 تعديل ما انفحصوا، لأنه كل ملفاتهم كانت اختبارات أو ملفات جديدة أو محذوفة.</p>
+
+<h2>الخطوة الجاية</h2>
+<p>بكرا ببداية اليوم، منقيس <span class="en">Code vs Code</span> مع الذكاء الاصطناعي على عينة صغيرة من قسم التطوير، حوالي 25 تعديل. ومنختار تعديلات فيها ملفات قليلة، لأنه كل ملف بياخد طلب. وبعدها، إذا ضل وقت قبل السبت، منطبّق الخطوة 7.</p>
+</main>
+</body>
+</html>

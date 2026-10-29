@@ -72,7 +72,7 @@ def is_code(path: str) -> bool:
     return path.endswith(CODE_EXT) and not SKIP_DIRS.search(path)
 
 
-def fetch_commit(gh: GitHub, project: str, sha: str) -> dict:
+def fetch_commit(gh: GitHub, project: str, sha: str, out: Path = OUT) -> dict:
     owner_repo = project.strip()
     r = gh.get(f"https://api.github.com/repos/{owner_repo}/commits/{sha}")
     if r is None or r.status_code != 200:
@@ -89,7 +89,7 @@ def fetch_commit(gh: GitHub, project: str, sha: str) -> dict:
         meta["files"] = [{"filename": f["filename"], "status": f["status"]} for f in files]
         return meta
 
-    base = OUT / owner_repo.replace("/", "__") / sha
+    base = out / owner_repo.replace("/", "__") / sha
     for f in files:
         entry = {"filename": f["filename"], "previous_filename": f.get("previous_filename"),
                  "status": f["status"], "additions": f.get("additions"), "deletions": f.get("deletions"),
@@ -103,8 +103,12 @@ def fetch_commit(gh: GitHub, project: str, sha: str) -> dict:
                 entry[side] = f"unavailable ({getattr(rr, 'status_code', None)}, {len(rr.content) if rr is not None else 0} bytes)"
                 continue
             dest = base / side / path
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            dest.write_bytes(rr.content)
+            try:
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                dest.write_bytes(rr.content)
+            except OSError:                    # مسار أطول من حد ويندوز
+                entry[side] = "unavailable (path too long)"
+                continue
             entry[side] = f"{side}/{path}"
         meta["files"].append(entry)
     return meta

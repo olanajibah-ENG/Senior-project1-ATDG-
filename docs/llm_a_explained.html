@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>شو يعني LLM-A</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1f2328; --muted:#57606a; --card:#f6f8fa; --accent:#0969da; --border:#d0d7de; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0d1117; --fg:#e6edf3; --muted:#8d96a0; --card:#161b22; --accent:#4493f8; --border:#30363d; } }
+  body { background:var(--bg); color:var(--fg); font-family:"Segoe UI",Tahoma,Arial,sans-serif; line-height:1.9; margin:0; padding:24px 16px; }
+  main { max-width:760px; margin:auto; }
+  h1 { font-size:1.5rem; } h2 { font-size:1.15rem; color:var(--accent); margin-top:1.8em; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px 18px; }
+  table { border-collapse:collapse; width:100%; margin:10px 0; }
+  th, td { border:1px solid var(--border); padding:8px 10px; text-align:right; }
+  th { background:var(--card); }
+  .en { direction:ltr; unicode-bidi:isolate; font-family:Consolas,monospace; }
+  .note { color:var(--muted); }
+</style>
+</head>
+<body>
+<main>
+<h1>شو يعني <span class="en">LLM-A</span>؟</h1>
+
+<div class="card">
+<p><span class="en">LLM-A</span> هو واحد من الأنظمة يلي قارن فيها مؤلفين ورقة <span class="en">CASCADE</span> أداتهم.</p>
+<p>الفكرة ببساطة: <b>بيعطوا الموديل كود الدالة والتوثيق تبعها، وبيسألوه بشكل مباشر: هل الكود والتوثيق متناقضين؟</b> يعني بدون أي تجهيز أو فلترة، سؤال وجواب بس.</p>
+</div>
+
+<h2>ليش الرقم مجال مش رقم واحد؟</h2>
+<p>لأنهم جرّبوا هالطريقة على كذا موديل ذكاء اصطناعي، وكل موديل طلّع رقم مختلف شوي. فالمجال هو من أسوأ موديل لأحسن موديل.</p>
+<p>وفي كمان <span class="en">LLM-S</span>: نفس الفكرة بس بسؤال أبسط، ونتايجه أضعف.</p>
+
+<h2>ليش هالمقارنة مهمة إلنا؟</h2>
+<p><span class="en">LLM-A</span> هو أقرب شي لفكرة "نسأل الذكاء الاصطناعي وبس". نحنا كمان منستعمل ذكاء اصطناعي، بس منضيف عليه:</p>
+<ol>
+  <li>تقسيم التوثيق وربط كل جزء بدالته.</li>
+  <li>ثلاث أسئلة محددة بدل سؤال عام.</li>
+  <li>منطلب منه ينسخ الجملة من التوثيق والسطر من الكود كما هم، ومنتأكد إنهم موجودين فعلاً.</li>
+  <li>عتبة ثقة، ومنخفي التنبيهات الضعيفة.</li>
+</ol>
+<p>فالمقارنة بتجاوب على سؤال: <b>هل هالإضافات بتفرق عن السؤال المباشر؟</b></p>
+
+<h2>النتيجة الأولى</h2>
+<table>
+  <tr><th>النظام</th><th>الدقة <span class="en">Precision</span></th><th>الكشف <span class="en">Recall</span></th></tr>
+  <tr><td><b>نظامنا الجديد</b></td><td><b>0.58</b></td><td><b>0.44</b></td></tr>
+  <tr><td><span class="en">LLM-A</span> (من الورقة)</td><td>0.55 لـ 0.59</td><td>0.29 لـ 0.46</td></tr>
+  <tr><td><span class="en">CASCADE</span> (من الورقة)</td><td>0.88</td><td>0.21</td></tr>
+</table>
+<ul>
+  <li><b>الدقة:</b> بنفس مستوى <span class="en">LLM-A</span>.</li>
+  <li><b>الكشف:</b> قد أعلى رقم عندهم، وتقريباً ضعف <span class="en">CASCADE</span>.</li>
+  <li>نحنا استعملنا <b>موديل مجاني صغير</b>، وهنن غالباً استعملوا موديلات أقوى.</li>
+</ul>
+
+<h2>ملاحظات صريحة للمناقشة</h2>
+<ul class="note">
+  <li>أرقامنا على 25 زوج بس (قسم التطوير)، وأرقام الورقة على كل الـ 71.</li>
+  <li>اسم "<span class="en">LLM-A</span>" وشرح طريقته كتبتهم من قراءتي للورقة وقت نزّلنا البيانات. إذا بدك تذكرهم بالمناقشة، الأفضل ترجع للورقة وتتأكد من التعريف الدقيق والموديلات يلي استعملوها.</li>
+</ul>
+</main>
+</body>
+</html>

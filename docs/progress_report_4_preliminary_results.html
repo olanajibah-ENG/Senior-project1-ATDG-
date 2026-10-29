@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>تقرير التقدّم 4</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  :root {
+    --ink: #1c2430; --muted: #5a6573; --line: #d9dee5; --accent: #1f5fa8;
+    --accent-bg: #eef4fb; --ok: #1e7d4f; --ok-bg: #e9f6ef; --bad: #b3261e; --bad-bg: #fdecea;
+    --warn: #8a5a00; --warn-bg: #fff6e0; --code-bg: #f4f6f8;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Tahoma, Arial, sans-serif; color: var(--ink); background: #fff;
+         font-size: 10.5pt; line-height: 1.75; margin: 0; }
+  h1 { font-size: 21pt; color: var(--accent); margin: 0 0 4px; line-height: 1.4; }
+  h2 { font-size: 15pt; color: var(--accent); border-bottom: 2px solid var(--accent);
+       padding-bottom: 4px; margin: 26px 0 10px; page-break-after: avoid; }
+  h3 { font-size: 12pt; margin: 18px 0 6px; page-break-after: avoid; }
+  p { margin: 6px 0; }
+  ul, ol { margin: 6px 0; padding-right: 22px; padding-left: 0; }
+  li { margin: 2px 0; }
+  code, .ltr { font-family: Consolas, "Courier New", monospace; font-size: 9pt; direction: ltr;
+               unicode-bidi: isolate; }
+  code { background: var(--code-bg); padding: 0 4px; border-radius: 3px; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 9.4pt; }
+  tr { page-break-inside: avoid; }
+  th, td { border: 1px solid var(--line); padding: 5px 7px; vertical-align: top; text-align: right; }
+  th { background: var(--accent-bg); font-weight: 600; }
+  .cover { border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 14px; }
+  .subtitle { color: var(--muted); font-size: 11pt; }
+  .meta { display: flex; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: 9.5pt; margin-top: 8px; }
+  .box { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin: 10px 0;
+         page-break-inside: avoid; }
+  .box.ok { background: var(--ok-bg); border-color: #b7dfc8; }
+  .box.bad { background: var(--bad-bg); border-color: #f2c2bd; }
+  .box.warn { background: var(--warn-bg); border-color: #f0d9a0; }
+  .box.info { background: var(--accent-bg); border-color: #c8dbf0; }
+  .box b.t { display: block; margin-bottom: 2px; }
+  .kpis { display: flex; gap: 10px; margin: 10px 0; }
+  .kpi { flex: 1; border: 1px solid var(--line); border-radius: 8px; padding: 8px; text-align: center; }
+  .kpi .v { font-size: 17pt; font-weight: 700; color: var(--accent); line-height: 1.2; }
+  .kpi .l { font-size: 8.8pt; color: var(--muted); }
+  .best { font-weight: 700; color: var(--ok); }
+  .pb { page-break-before: always; }
+  .small { font-size: 9pt; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+  <h1>تقرير التقدّم 4: النتائج الأولية للجهتين</h1>
+  <div class="subtitle">ملخّص كل الشغل من البداية، ونتائج القياس على بيانات الأوراق البحثية لقسمي <span class="ltr">Code vs Doc</span> و <span class="ltr">Code vs Code</span></div>
+  <div class="meta"><span>التاريخ: 2026-10-29</span><span>الموديل: <span class="ltr">poolside/laguna-s-2.1:free</span></span><span>البيئة: حاوية <span class="ltr">ai_web</span> (Docker)</span></div>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="v">0.44</div><div class="l">كشف التناقضات بالتوثيق<br>(CASCADE نفسها: 0.21)</div></div>
+  <div class="kpi"><div class="v">0.55</div><div class="l">PFP: التنبيه بيروح لما يتصلّح التوثيق<br>(القديم: 0.00)</div></div>
+  <div class="kpi"><div class="v">0.35</div><div class="l">كشف التعديلات يلي بتكسر الكود<br>(القديم: 0.22)</div></div>
+  <div class="kpi"><div class="v">+169</div><div class="l">تعديل بيكسر انكشف<br>وما كان القديم يشوفه</div></div>
+</div>
+
+<h2>1. الفكرة باختصار</h2>
+<p>المشروع فيه قسمين لكشف المشاكل:</p>
+<ul>
+  <li><b><span class="ltr">Code vs Doc</span>:</b> هل التوثيق بيوصف الكود صح؟</li>
+  <li><b><span class="ltr">Code vs Code</span>:</b> بين نسختين من الكود، شو تغيّر؟ وهل التغيير بيكسر يلي عم يستعملوا الكود؟</li>
+</ul>
+<p>عم نحسّن القسمين خطوة خطوة حسب خطط مبنية على أوراق بحثية (<span class="ltr">DocPrism</span> و <span class="ltr">METAMON</span> للتوثيق، و <span class="ltr">AexPy</span> و <span class="ltr">NPM</span> و <span class="ltr">Safer Builders</span> للكود). وبعد كل خطوة منقيس على <b>بيانات الأوراق نفسها</b>، مش على بيانات عملناها نحنا. وبتوجيه الدكتور، اخترنا <b>ورقة وحدة لكل قسم</b>: <span class="ltr">CASCADE</span> للتوثيق، و <span class="ltr">NPM</span> للكود.</p>
+
+<h2>2. الخطوات يلي خلصت</h2>
+<table>
+  <tr><th style="width:12%">الخطوة</th><th style="width:28%">شو عملنا</th><th>ليش</th></tr>
+  <tr><td>0</td><td>تجميد النسخة القديمة، وأداة قياس ثابتة</td><td>لحتى نقارن القديم بالجديد بعدل. النسخة القديمة محفوظة وما بتنلمس (منتأكد منها ببصمة)، وكل طلبات الذكاء الاصطناعي ثابتة (<span class="ltr">temperature 0</span>، <span class="ltr">seed 42</span>، موديل واحد مثبّت)</td></tr>
+  <tr><td>1</td><td>معلومات كاملة عن كل دالة</td><td>صار النظام يقرأ الجسم والمعاملات والقيم الافتراضية ونوع الإرجاع والتوثيق الداخلي والـ <span class="ltr">async</span> والـ <span class="ltr">constructors</span>. قبل كان عنده الاسم والتوقيع بس</td></tr>
+  <tr><td>2</td><td>تعديل بنية البيانات</td><td>تصنيفات <span class="ltr">DocPrism</span> (تناقض مباشر، وعد زيادة، نقص بالتوثيق) ومستويات الخطر. وصلّحنا خطأ كان يوقّف كل <span class="ltr">Code vs Code</span></td></tr>
+  <tr><td>3</td><td>تقسيم التوثيق وربط كل جزء بدالته</td><td>بدل ما ينبعت التوثيق كله دفعة وحدة، كل دالة بتنفحص مع الجزء يلي بيحكي عنها</td></tr>
+  <tr><td>3ب</td><td>الدوال يلي برّا الكلاسات</td><td>كان النظام ما يشوفها أبداً، وهي نص بيانات <span class="ltr">DocPrism</span> وكتير منتشرة بـ <span class="ltr">JavaScript</span></td></tr>
+  <tr><td>4</td><td>سؤال جديد للذكاء الاصطناعي</td><td>3 أسئلة محددة متل <span class="ltr">DocPrism</span>، مع طلب نسخ الجملة من التوثيق والسطر من الكود كما هم، ودرجة ثقة</td></tr>
+  <tr><td>5</td><td>محلّل التوثيق الجديد</td><td>إعادة المحاولة، ورمي أي جواب جملته مش موجودة فعلاً، وعتبة ثقة 0.7، وإخفاء "النقص بالتوثيق" عن المستخدم</td></tr>
+  <tr><td>6</td><td>ربط المحلّل بالنظام</td><td>صار يشتغل تلقائياً. وشلنا الفحص القديم للتوقيع يلي كان سبب كل الإنذارات الكاذبة، وصار "غير موثّق" إحصائية مش تنبيه</td></tr>
+</table>
+<p class="small">كل خطوة إلها اختبارات وتقرير بـ <code>core_ai/tests/reports/</code>. المجموع 97 اختبار، وكلهم ناجحين.</p>
+
+<h2 class="pb">3. Code vs Doc على بيانات CASCADE</h2>
+<h3>البيانات والمقياس</h3>
+<p>بيانات <span class="ltr">CASCADE</span> فيها 71 دالة جافا توثيقها متناقض مع الكود، ومع كل وحدة <b>نفس الدالة بعد ما تصلّح التوثيق</b>. قسّمناها: 25 زوج للتطوير (منفتح أخطاءه)، و46 زوج للاختبار (أرقام بس، بالمحطات المهمة).</p>
+<p><b>PFP</b> هو أهم مقياس هون: من التناقضات يلي انكشفت، بكم حالة التنبيه راح لما تصلّح التوثيق؟ إذا التنبيه ضل، معناها النظام عم ينبّه لسبب ما إله علاقة بالتناقض.</p>
+
+<h3>النتائج على قسم التطوير (25 زوج = 50 حالة)</h3>
+<table>
+  <tr><th>النظام</th><th>Precision</th><th>Recall</th><th>F1</th><th>Specificity</th><th>PFP</th><th>TP</th><th>FP</th><th>FN</th><th>TN</th></tr>
+  <tr><td>القديم</td><td>0.50</td><td>0.68 (وهمية)</td><td>0.58</td><td>0.32</td><td>0.00</td><td>17</td><td>17</td><td>8</td><td>8</td></tr>
+  <tr><td>الحالي بدون ذكاء اصطناعي</td><td>—</td><td>0.00</td><td>—</td><td class="best">1.00</td><td>—</td><td>0</td><td>0</td><td>25</td><td>25</td></tr>
+  <tr><td><b>الحالي مع الذكاء الاصطناعي</b></td><td class="best">0.58</td><td>0.44</td><td>0.50</td><td>0.68</td><td class="best">0.55</td><td>11</td><td>8</td><td>14</td><td>17</td></tr>
+</table>
+
+<h3>مقارنة مع الأرقام المنشورة بورقة CASCADE</h3>
+<table>
+  <tr><th>النظام</th><th>Precision</th><th>Recall</th><th>Specificity</th></tr>
+  <tr><td>أداة <span class="ltr">CASCADE</span></td><td>0.88</td><td>0.21</td><td>0.97</td></tr>
+  <tr><td><span class="ltr">LLM-A</span>: سؤال مباشر للموديل</td><td>0.55–0.59</td><td>0.29–0.46</td><td>0.64–0.81</td></tr>
+  <tr><td><span class="ltr">LLM-S</span>: سؤال أبسط</td><td>0.53–0.56</td><td>0.54–0.67</td><td>0.42–0.58</td></tr>
+  <tr><td><b>نظامنا (قسم التطوير)</b></td><td>0.58</td><td>0.44</td><td>0.68</td></tr>
+</table>
+
+<div class="box ok"><b class="t">شو بيعني هاد</b>
+<ul>
+  <li><b>القديم كان "بيكشف" بالصدفة.</b> نبّه على 17 نسخة متناقضة، و<b>نفس العدد بالزبط</b> من النسخ المصلّحة، يعني PFP = 0. والسبب خطأ بقراءة توقيعات الجافا.</li>
+  <li><b>الجديد بيكشف تقريباً ضعف أداة CASCADE</b>، ودقّته بنفس مستوى أفضل نتيجة ذكاء اصطناعي بالورقة.</li>
+  <li><b>وبأكتر من نص الحالات يلي كشفها، التنبيه راح لما تصلّح التوثيق.</b> يعني تنبيهاته فعلاً إلها علاقة بالتناقض.</li>
+</ul></div>
+<div class="box warn"><b class="t">يلي لسا ناقص</b>
+<ul>
+  <li>8 إنذارات كاذبة من 25 حالة سليمة (Specificity = 0.68). منفتحها ومنشوف سببها بالمرحلة الجاية.</li>
+  <li>الأرقام على 25 زوج بس، وأرقام الورقة على كل الـ 71. وقسم الاختبار لسا ما انقاس مع الذكاء الاصطناعي، لأنه بدّه 92 طلب (يومين من الحد المجاني).</li>
+  <li>عينة وحدة ما اشتغل عليها الذكاء الاصطناعي لأنه خلص الحد اليومي، فاشتغل عليها الفحص الثابت بس.</li>
+</ul></div>
+
+<h2 class="pb">4. Code vs Code على بيانات NPM</h2>
+<h3>البيانات</h3>
+<ul>
+  <li><b>ورقة NPM (النسخة 3، مفتوحة على Zenodo):</b> فيها 1519 تغيير بيكسر الكود، موسومين يدوياً من المؤلفين بـ 131 مشروع <span class="ltr">JavaScript/TypeScript</span>. ثلثينهم تقريباً تغييرات <b>سلوكية</b> (نفس التوقيع بس الشغل تغيّر)، والباقي <b>بنيوية</b> (حذف، إعادة تسمية، تغيير توقيع).</li>
+  <li><b>الكود:</b> الورقة ما فيها الكود نفسه، فنزّلناه من GitHub لكل تعديل، قبل وبعد. نزل كود <b>1460</b> تعديل من 1487.</li>
+  <li><b>أمثلة سليمة:</b> الورقة فيها بس تعديلات بتكسر، فما في طريقة نقيس فيها الإنذارات الكاذبة. لهيك جبنا <b>338 تعديل عادي</b> من نفس المشاريع ونفس الفترة، رسالتهم ما فيها أي إشارة لكسر. هدول <b>"سليمين على الأرجح"</b>، مش موسومين من المؤلفين.</li>
+  <li><b>التقسيم:</b> 20% تطوير و 80% اختبار، ثابت (<span class="ltr">seed 42</span>).</li>
+</ul>
+
+<h3>طريقة القياس</h3>
+<ul>
+  <li><b>الوحدة هي التعديل كله</b>، لأنه وسم الورقة على مستوى التعديل مش الملف.</li>
+  <li>لكل ملف كود تغيّر، منقارن النسخة قبل وبعد. والتعديل بينحسب "منبَّه عليه" إذا طلع فيه تغيير بيكسر أو إعادة تسمية أو تغيير سلوكي.</li>
+  <li>ملفات الاختبارات والأمثلة منتجاهلها، لأنها ما بتأثر على يلي عم يستعملوا المكتبة. والتعديلات يلي ما ضل فيها ملف ينفحص بتطلع من المقاييس (165 تعديل).</li>
+  <li><b>هالقياس بدون ذكاء اصطناعي</b>، يعني الفحص البنيوي بس، وما كلّف ولا طلب.</li>
+</ul>
+
+<h3>النتائج</h3>
+<table>
+  <tr><th>المجموعة</th><th>النظام</th><th>Precision</th><th>Recall</th><th>Specificity</th><th>كشف البنيوي</th><th>كشف السلوكي</th><th>TP</th><th>FP</th><th>FN</th><th>TN</th></tr>
+  <tr><td>تطوير</td><td>القديم</td><td>0.85</td><td>0.19</td><td>0.82</td><td>0.40</td><td>0.10</td><td>51</td><td>9</td><td>215</td><td>40</td></tr>
+  <tr><td>تطوير</td><td><b>الحالي</b></td><td>0.85</td><td class="best">0.30</td><td>0.71</td><td class="best">0.53</td><td>0.20</td><td>79</td><td>14</td><td>187</td><td>35</td></tr>
+  <tr><td>اختبار</td><td>القديم</td><td>0.91</td><td>0.22</td><td>0.89</td><td>0.39</td><td>0.14</td><td>246</td><td>24</td><td>851</td><td>200</td></tr>
+  <tr><td>اختبار</td><td><b>الحالي</b></td><td>0.90</td><td class="best">0.35</td><td>0.82</td><td class="best">0.55</td><td>0.25</td><td>385</td><td>41</td><td>712</td><td>183</td></tr>
+</table>
+
+<h3>الكشف حسب نوع التغيير (كل البيانات)</h3>
+<table>
+  <tr><th>نوع التغيير بالورقة</th><th>العدد</th><th>القديم</th><th>الحالي</th></tr>
+  <tr><td>تغيير سلوكي</td><td>922</td><td>126</td><td>223</td></tr>
+  <tr><td>تغيير التوقيع</td><td>130</td><td>44</td><td>78</td></tr>
+  <tr><td>حذف دالة</td><td>117</td><td>52</td><td>69</td></tr>
+  <tr><td>إعادة تسمية دالة</td><td>47</td><td>15</td><td>26</td></tr>
+  <tr><td>حذف حقل</td><td>27</td><td>14</td><td>17</td></tr>
+  <tr><td>إعادة تسمية حقل</td><td>27</td><td>8</td><td>11</td></tr>
+  <tr><td>حذف كلاس</td><td>21</td><td>12</td><td>13</td></tr>
+  <tr><td>إعادة تسمية كلاس</td><td>20</td><td>18</td><td>18</td></tr>
+  <tr><td>حذف ملف كامل</td><td>15</td><td>1</td><td>1</td></tr>
+  <tr><td>نقل دالة</td><td>12</td><td>2</td><td>2</td></tr>
+</table>
+<p class="small">التعديل الواحد ممكن يكون فيه أكتر من نوع، فالمجموع أكبر من عدد التعديلات.</p>
+
+<div class="box ok"><b class="t">شو بيعني هاد</b>
+<ul>
+  <li><b>الحالي لقى 169 تعديل بيكسر ما كان القديم يشوفهم، وخسر 2 بس.</b> السبب الأساسي الخطوة 3ب: صار النظام يشوف الدوال يلي برّا الكلاسات، وهي الشكل الأشيع بـ <span class="ltr">JavaScript</span>.</li>
+  <li>بالتغييرات البنيوية، الكشف طلع من 0.39 لـ 0.55.</li>
+</ul></div>
+<div class="box warn"><b class="t">يلي لسا ناقص</b>
+<ul>
+  <li><b>الثمن:</b> 22 إنذار كاذب زيادة، فنزلت الـ Specificity من 0.89 لـ 0.82. وأكتر سبب إلها إنه النظام بيعتبر <b>أي تغيير بالتوقيع</b> كسر، حتى إضافة معامل اختياري. وهاد بالزبط يلي بتصلّحه <b>الخطوة 7</b>.</li>
+  <li><b>التغييرات السلوكية ما بتنكشف فعلياً بدون ذكاء اصطناعي.</b> يلي انكشف منها انكشف لأنه صادف في تغيير بنيوي بنفس التعديل. وهون دور الخطوات 8 لـ 11.</li>
+  <li><b>حذف ملف كامل ما بينكشف:</b> الأداة حالياً بتتجاهل الملفات المحذوفة كلها.</li>
+</ul></div>
+<div class="box info"><b class="t">ملاحظة على الـ Precision</b>
+الـ Precision طالعة عالية (0.85 لـ 0.91)، بس هي <b>مضخّمة</b>، لأنه 83% من العينات بتكسر الكود. فالرقم الأصدق للإنذارات الكاذبة هو الـ Specificity.</div>
+
+<h2 class="pb">5. الأدوات يلي انبنت للقياس</h2>
+<table>
+  <tr><th style="width:38%">الملف</th><th>شو بيعمل</th></tr>
+  <tr><td><code>evaluation/harness/evaluate.py</code></td><td>قياس <span class="ltr">Code vs Doc</span> للنظامين، مع حساب كل المقاييس والـ PFP، وحفظ ردود الذكاء الاصطناعي لحتى إعادة القياس ما تكلّف</td></tr>
+  <tr><td><code>evaluation/harness/evaluate_npm.py</code> (جديد)</td><td>قياس <span class="ltr">Code vs Code</span> على NPM على مستوى التعديل، مع الكشف حسب نوع التغيير</td></tr>
+  <tr><td><code>evaluation/paper_sets/build_paper_sets.py</code></td><td>بيبني عينات <span class="ltr">CASCADE</span> و <span class="ltr">DocPrism</span> من البيانات الأصلية</td></tr>
+  <tr><td><code>evaluation/paper_sets/fetch_npm_code.py</code></td><td>بينزّل كود كل تعديل بورقة NPM من GitHub، قبل وبعد</td></tr>
+  <tr><td><code>evaluation/paper_sets/fetch_npm_negatives.py</code> (جديد)</td><td>بينزّل التعديلات العادية من نفس المشاريع</td></tr>
+  <tr><td><code>evaluation/paper_sets/PROGRESS.md</code></td><td>جدول التقدّم بعد كل خطوة</td></tr>
+</table>
+
+<h2>6. الخطوات الجاية</h2>
+<ol>
+  <li><b>بكرا:</b> قياس <span class="ltr">Code vs Code</span> مع الذكاء الاصطناعي على حوالي 25 تعديل من قسم التطوير. منختار تعديلات فيها ملفات قليلة، لأنه كل ملف بياخد طلب.</li>
+  <li><b>الخطوة 7:</b> مقارنة توقيعات أذكى، متل إنه إضافة معامل اختياري ما بتكسر. المتوقّع إنها تقلّل الإنذارات الكاذبة بـ NPM.</li>
+  <li><b>الخطوات 8 لـ 11:</b> مقارنة الأجسام، وتصنيف التغيير، ومستوى الخطر، وما منبعت للذكاء الاصطناعي غير يلي فعلاً تغيّر جسمه.</li>
+  <li>نفتح الـ 8 إنذارات الكاذبة بـ <span class="ltr">Code vs Doc</span> ومنشوف سببها.</li>
+  <li>بالمحطات المهمة، منقيس على قسم الاختبار تبع <span class="ltr">CASCADE</span> مع الذكاء الاصطناعي.</li>
+</ol>
+<p class="small">كل الشغل ضمن الحد المجاني (50 طلب باليوم). النتائج التفصيلية لكل حالة بـ <code>evaluation/paper_sets/results/</code>.</p>
+</body>
+</html>
