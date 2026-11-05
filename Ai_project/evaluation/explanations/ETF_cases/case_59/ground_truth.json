@@ -1,0 +1,256 @@
+{
+  "case_id": "case_59",
+  "source": "CodeSumEval",
+  "model_name": "llama3_70b",
+  "scope": "method",
+  "row_index": 58,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "processevent",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "blockreads",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "writethread",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "unblockreads",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalwritten",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalbytestransferred",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injectionhandler",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ioexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "processevent",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "blockreads",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "writethread",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "unblockreads",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalwritten",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalbytestransferred",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injectionhandler",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ioexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\nHere is a detailed summary of the Java code:\r\n\r\n**1. Inputs and Outputs of the Method:**\r\n\r\n* Inputs: None\r\n* Outputs: None (void method)\r\n* Exceptions: IOException\r\n\r\n**2. Business Purpose:**\r\n\r\nThe purpose of this `flush()` method is to ensure that all the data written to a buffered output stream is transferred to the underlying output stream and flushed. This method is part of a custom implementation of a buffered output stream, which provides a mechanism to buffer data before writing it to an underlying output stream. The method is designed to be thread-safe and handles errors that may occur during the flushing process.\r\n\r\n**3. Detailed Functional Summary of the Method:**\r\n\r\nHere's a step-by-step breakdown of what the method does:\r\n\r\n1. **Check for errors**: The method starts by call"
+}

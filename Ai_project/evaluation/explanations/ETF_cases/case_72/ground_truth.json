@@ -1,0 +1,116 @@
+{
+  "case_id": "case_72",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_34b",
+  "scope": "method",
+  "row_index": 71,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "finder_class_name_entity",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_list_with_pagination",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "entitycache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "commercenotificationtemplateimpl",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "commercenotificationtemplateimpl",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "findercache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "clearcache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "clearcache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "clearcache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_list_without_pagination",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "finder_class_name_entity",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_list_with_pagination",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "entitycache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "commercenotificationtemplateimpl",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "commercenotificationtemplateimpl",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "findercache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "clearcache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "clearcache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "clearcache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_list_without_pagination",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs and outputs of the method:\r\n\r\n- Input: None\r\n- Output: None\r\n\r\n2. Business purpose:\r\n\r\nThe `clearCache` method is used to clear the cache for the `CommerceNotificationTemplateImpl` class and three types of finder caches: `FINDER_CLASS_NAME_ENTITY`, `FINDER_CLASS_NAME_LIST_WITH_PAGINATION`, and `FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION`.\r\n\r\n3. Detailed functional summary of the method:\r\n\r\nThe `clearCache` method first clears the cache for the `CommerceNotificationTemplateImpl` class using the `entityCache.clearCache(CommerceNotificationTemplateImpl.class)` statement. Then, it clears the caches for the three types of finder classes using the `finderCache.clearCache()` statements.\r\n\r\n\r\n\r\n"
+}

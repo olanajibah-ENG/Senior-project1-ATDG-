@@ -1,0 +1,116 @@
+{
+  "case_id": "case_86",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_34b",
+  "scope": "method",
+  "row_index": 85,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systeminitializer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injector",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injector",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systeminitializer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injector",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injector",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\nThis Java method is part of a utility class that provides a global instance of a system.\r\n\r\n**Inputs and outputs of the method:**\r\n\r\n- **Input:** A `Properties` object named `config` that is used to initialize the system.\r\n- **Output:** A `SystemMain` object that represents the global instance of the system.\r\n\r\n**Business purpose:**\r\n\r\nThe purpose of this method is to provide a global instance of the system, which can be used by other parts of the application. The method uses dependency injection to create the instance, which allows for easier testing and modularity.\r\n\r\n**Detailed functional summary of the method:**\r\n\r\n- The method uses the Guice framework to create an injector object that is configured with a `SystemInitializer` object that takes the `config` object as a parameter.\r\n- T"
+}

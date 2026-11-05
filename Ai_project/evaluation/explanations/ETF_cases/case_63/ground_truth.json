@@ -1,0 +1,186 @@
+{
+  "case_id": "case_63",
+  "source": "CodeSumEval",
+  "model_name": "codellama_7b",
+  "scope": "method",
+  "row_index": 62,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "underlyingoutputstream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "processevent",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injectionhandler",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "blockreads",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalwritten",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "writethread",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalbytestransferred",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "unblockreads",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "underlyingoutputstream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "processevent",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injectionhandler",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "blockreads",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalwritten",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "writethread",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalbytestransferred",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "unblockreads",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n\r\n1. Inputs and outputs of the method:\r\n\t* The method takes no input parameters.\r\n\t* It returns void.\r\n2. Business purpose:\r\n\t* The method is part of the `BufferedByteOutputSteam` class, which is a subclass of `ByteOutputSteam`.\r\n\t* The purpose of the method is to flush the buffer of the `BufferedByteOutputSteam` object, which means to write all the bytes in the buffer to the underlying output stream.\r\n3. Detailed functional summary of the method:\r\n\t* The method first checks if the stream has been closed by calling the `checkError()` method.\r\n\t* It then retrieves the total number of bytes written to the buffer by calling the `totalWritten()` method on the `buffer` object.\r\n\t* It then unblocks reads from the buffer by calling the `unblockReads()` method on the `buffer` object.\r\n\t* It then"
+}

@@ -1,0 +1,166 @@
+{
+  "case_id": "case_22",
+  "source": "CodeSumEval",
+  "model_name": "codellama_34b",
+  "scope": "method",
+  "row_index": 21,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "spliterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "spliterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "t",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "t",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "t",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "spliterators",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "spliterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "spliterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "t",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "t",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "t",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "spliterators",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n\r\n1. Inputs:\r\n* values: an array of type T\r\n2. Output:\r\n* A StreamEx object\r\n3. Business Purpose:\r\n* The method is used to create a StreamEx object from an array of type T.\r\n* If the array is empty, the method returns an empty StreamEx object.\r\n* If the array is not empty, the method returns a StreamEx object containing the elements of the array.\r\n\r\n4. Detailed Functional Summary:\r\n* The method is annotated with @SafeVarargs, which indicates that the method is safe to use with varargs.\r\n* The method takes an array of type T as input and returns a StreamEx object.\r\n* If the array is empty, the method returns an empty StreamEx object.\r\n* If the array is not empty, the method uses the Spliterators.spliterator() method to create a spliterator from the array.\r\n* The spliterator is then used t"
+}

@@ -1,0 +1,336 @@
+{
+  "case_id": "case_45",
+  "source": "CodeSumEval",
+  "model_name": "llama3_70b",
+  "scope": "method",
+  "row_index": 44,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "byte",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "byte",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "computeiv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "byte",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "byte",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "computeiv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\nHere is a detailed summary of the Java code:\r\n\r\n**1. Inputs and Outputs of the Method:**\r\n\r\n* Inputs:\r\n\t+ `label`: a `long` value\r\n\t+ `index`: a `long` value\r\n\t+ `keyDerivationRate`: an instance variable of type `long` (not passed as a method parameter, but used within the method)\r\n\t+ `masterSalt`: an instance variable of type `byte[]` (not passed as a method parameter, but used within the method)\r\n* Outputs:\r\n\t+ `ivStore`: an instance variable of type `byte[]` that is modified by the method\r\n\r\n**2. Business Purpose:**\r\n\r\nThe purpose of this method is to compute an Initialization Vector (IV) for cryptographic purposes. The IV is a random value used to initialize the encryption algorithm, and it is typically derived from a key and other parameters. In this case, the IV is computed based o"
+}

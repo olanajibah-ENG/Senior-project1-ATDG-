@@ -1,0 +1,41 @@
+{
+  "case_id": "case_15",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "execute",
+    "filter",
+    "healthcheck",
+    "healthcheckfilter",
+    "healthchecks",
+    "matches",
+    "result"
+  ],
+  "metrics": {
+    "TP": [
+      "execute",
+      "filter",
+      "healthcheck",
+      "healthcheckfilter",
+      "healthchecks",
+      "matches",
+      "result"
+    ],
+    "FP": [
+      "execute",
+      "matches",
+      "result"
+    ],
+    "FN": [
+      "sortedmap"
+    ],
+    "precision": 0.7,
+    "recall": 0.875,
+    "f1": 0.7778,
+    "hallucination_rate": 0.3,
+    "counts": {
+      "tp": 7,
+      "fp": 3,
+      "fn": 1
+    }
+  }
+}

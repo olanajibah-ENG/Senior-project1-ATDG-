@@ -1,0 +1,35 @@
+{
+  "case_id": "case_84",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "class",
+    "config",
+    "getinstance",
+    "guice",
+    "properties",
+    "systeminitializer",
+    "systemmain"
+  ],
+  "metrics": {
+    "TP": [
+      "class",
+      "config",
+      "getinstance",
+      "guice",
+      "properties",
+      "systeminitializer",
+      "systemmain"
+    ],
+    "FP": [],
+    "FN": [],
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0
+    }
+  }
+}

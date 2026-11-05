@@ -1,0 +1,276 @@
+{
+  "case_id": "case_38",
+  "source": "CodeSumEval",
+  "model_name": "llama3_70b",
+  "scope": "method",
+  "row_index": 37,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredtypes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertrequiredcontainertriples",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredtypes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertrequiredcontainertriples",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\nHere is a detailed summary of the Java code:\r\n\r\n**1. Inputs and Outputs of the Method:**\r\n\r\n* **Inputs:**\r\n\t+ `model`: an object of type `Model`, which is the input data to be validated.\r\n* **Outputs:**\r\n\t+ None (the method returns `void`), but it may throw a `ConstraintViolationException` if the validation fails.\r\n\r\n**2. Business Purpose:**\r\n\r\nThe business purpose of this method is to validate a `Model` object to ensure it contains the required properties and types for a container. This method is likely part of a data validation process, ensuring that the input data meets the necessary conditions to be processed further.\r\n\r\n**3. Detailed Functional Summary of the Method:**\r\n\r\nThis method, `assertRequiredContainerTriples`, takes a `Model` object as input and performs two validation check"
+}

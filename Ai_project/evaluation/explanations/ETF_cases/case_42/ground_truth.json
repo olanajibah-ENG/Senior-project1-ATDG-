@@ -1,0 +1,166 @@
+{
+  "case_id": "case_42",
+  "source": "CodeSumEval",
+  "model_name": "codellama_7b",
+  "scope": "method",
+  "row_index": 41,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredtypes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredtypes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n\r\n1. Inputs and outputs of the method:\r\n* Inputs:\r\n\t+ `model`: a `Model` object that represents the data to be validated.\r\n* Outputs:\r\n\t+ None (void method)\r\n2. Business purpose:\r\nThe purpose of this method is to validate that the data represented by the `model` object contains the required properties and types for a container.\r\n3. Detailed functional summary of the method:\r\n\r\nThis method performs two checks on the data represented by the `model` object:\r\n\r\n1. `assertContainsRequiredProperties`: This method checks that the `model` object contains the required properties for a container. The required properties are defined in the `REQUIRED_PROPERTIES` array. If the `model` object does not contain all of the required properties, a `ConstraintViolationException` is thrown.\r\n2. `assertContai"
+}

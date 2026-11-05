@@ -1,0 +1,38 @@
+{
+  "case_id": "case_87",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "class",
+    "config",
+    "guice",
+    "injector",
+    "properties",
+    "systeminitializer",
+    "systemmain"
+  ],
+  "metrics": {
+    "TP": [
+      "class",
+      "config",
+      "guice",
+      "injector",
+      "properties",
+      "systeminitializer",
+      "systemmain"
+    ],
+    "FP": [
+      "class",
+      "systemmain"
+    ],
+    "FN": [],
+    "precision": 0.7778,
+    "recall": 1.0,
+    "f1": 0.875,
+    "hallucination_rate": 0.2222,
+    "counts": {
+      "tp": 7,
+      "fp": 2,
+      "fn": 0
+    }
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "case_id": "case_106",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_20b",
+  "scope": "method",
+  "row_index": 105,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "connectionspecificheaderlist",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "h2headerfield",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "h2headerfield",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hpackconstants",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "compressionexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "compressionexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "compressionexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "compressionexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "compressionexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "compressionexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "trailers",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "te",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "te",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "te",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "connection",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "connection",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "boolean",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "te",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "connectionspecificheaderlist",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "h2headerfield",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "h2headerfield",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hpackconstants",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "compressionexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "compressionexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "compressionexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "compressionexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "compressionexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "compressionexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "trailers",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "te",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "te",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "te",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "connection",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "connection",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "boolean",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "te",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs and outputs of the method:\r\n- Inputs: A H2HeaderField object representing the header field and a boolean value indicating whether the field is a trailer field.\r\n- Outputs: A CompressionException is thrown if the header field is invalid.\r\n\r\n2. Business purpose:\r\n- This method is used to validate the format and content of a H2HeaderField object.\r\n\r\n3. Detailed functional summary of the method:\r\n- The method first checks if the header name starts with a colon (:), and if so, it throws a CompressionException.\r\n- If the header name does not start with a colon, it proceeds to check if the header name is one of the connection-specific headers defined in the HpackConstants.connectionSpecificHeaderList. If it is, a CompressionException is thrown.\r\n- If the header name is \"Connection\" an"
+}

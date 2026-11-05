@@ -1,0 +1,49 @@
+{
+  "case_id": "case_101",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "arrays",
+    "aslist",
+    "collections",
+    "config",
+    "emptylist",
+    "getqualifiedname",
+    "keywords",
+    "list",
+    "mdle",
+    "module",
+    "moduleelement",
+    "string"
+  ],
+  "metrics": {
+    "TP": [
+      "arrays",
+      "aslist",
+      "collections",
+      "config",
+      "emptylist",
+      "getqualifiedname",
+      "keywords",
+      "list",
+      "mdle",
+      "module",
+      "moduleelement",
+      "string"
+    ],
+    "FP": [
+      "keywords",
+      "list",
+      "module"
+    ],
+    "FN": [],
+    "precision": 0.8,
+    "recall": 1.0,
+    "f1": 0.8889,
+    "hallucination_rate": 0.2,
+    "counts": {
+      "tp": 12,
+      "fp": 3,
+      "fn": 0
+    }
+  }
+}

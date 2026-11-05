@@ -1,0 +1,44 @@
+{
+  "case_id": "case_75",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "getframelength",
+    "getlength",
+    "id3v2frame",
+    "it",
+    "iterator",
+    "length",
+    "next",
+    "values"
+  ],
+  "metrics": {
+    "TP": [
+      "getframelength",
+      "getlength",
+      "id3v2frame",
+      "it",
+      "iterator",
+      "length",
+      "next",
+      "values"
+    ],
+    "FP": [
+      "it",
+      "length"
+    ],
+    "FN": [
+      "0",
+      "hasnext",
+      "public"
+    ],
+    "precision": 0.8,
+    "recall": 0.7273,
+    "f1": 0.7619,
+    "hallucination_rate": 0.2,
+    "counts": {
+      "tp": 8,
+      "fp": 2,
+      "fn": 3
+    }
+  }
+}

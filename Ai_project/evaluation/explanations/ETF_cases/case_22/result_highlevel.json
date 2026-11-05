@@ -1,0 +1,30 @@
+{
+  "case_id": "case_22",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "spliterator",
+    "streamex",
+    "values"
+  ],
+  "metrics": {
+    "TP": [
+      "spliterator",
+      "streamex",
+      "values"
+    ],
+    "FP": [],
+    "FN": [
+      "spliterators",
+      "t"
+    ],
+    "precision": 1.0,
+    "recall": 0.6,
+    "f1": 0.75,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 2
+    }
+  }
+}

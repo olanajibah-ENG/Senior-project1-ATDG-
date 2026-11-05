@@ -1,0 +1,29 @@
+{
+  "case_id": "case_80",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "getframelength",
+    "id3v2frame",
+    "length",
+    "values"
+  ],
+  "metrics": {
+    "TP": [
+      "getframelength",
+      "id3v2frame",
+      "length",
+      "values"
+    ],
+    "FP": [],
+    "FN": [],
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    }
+  }
+}

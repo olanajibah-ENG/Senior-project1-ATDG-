@@ -1,0 +1,6405 @@
+[
+  {
+    "case_id": "case_01",
+    "high": {
+      "TP": [
+        "columnint16",
+        "int16",
+        "name",
+        "rowbuilder",
+        "string"
+      ],
+      "FP": [
+        "name"
+      ],
+      "FN": [
+        "_columns",
+        "_offset",
+        "size",
+        "this"
+      ],
+      "precision": 0.8333,
+      "recall": 0.5556,
+      "f1": 0.6667,
+      "hallucination_rate": 0.1667,
+      "counts": {
+        "tp": 5,
+        "fp": 1,
+        "fn": 4
+      }
+    },
+    "low": {
+      "TP": [
+        "columnint16",
+        "int16",
+        "name",
+        "rowbuilder",
+        "size",
+        "this"
+      ],
+      "FP": [
+        "name"
+      ],
+      "FN": [
+        "_columns",
+        "_offset",
+        "string"
+      ],
+      "precision": 0.8571,
+      "recall": 0.6667,
+      "f1": 0.75,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 3
+      }
+    }
+  },
+  {
+    "case_id": "case_02",
+    "high": {
+      "TP": [
+        "columnint16",
+        "int16",
+        "name",
+        "rowbuilder",
+        "string"
+      ],
+      "FP": [
+        "int16",
+        "name",
+        "string"
+      ],
+      "FN": [
+        "_columns",
+        "_offset",
+        "size"
+      ],
+      "precision": 0.625,
+      "recall": 0.625,
+      "f1": 0.625,
+      "hallucination_rate": 0.375,
+      "counts": {
+        "tp": 5,
+        "fp": 3,
+        "fn": 3
+      }
+    },
+    "low": {
+      "TP": [
+        "columnint16",
+        "int16",
+        "name",
+        "rowbuilder",
+        "size"
+      ],
+      "FP": [
+        "int16",
+        "name"
+      ],
+      "FN": [
+        "_columns",
+        "_offset",
+        "string"
+      ],
+      "precision": 0.7143,
+      "recall": 0.625,
+      "f1": 0.6667,
+      "hallucination_rate": 0.2857,
+      "counts": {
+        "tp": 5,
+        "fp": 2,
+        "fn": 3
+      }
+    }
+  },
+  {
+    "case_id": "case_03",
+    "high": {
+      "TP": [
+        "columnint16",
+        "int16",
+        "name",
+        "rowbuilder",
+        "string"
+      ],
+      "FP": [
+        "name"
+      ],
+      "FN": [
+        "_columns"
+      ],
+      "precision": 0.8333,
+      "recall": 0.8333,
+      "f1": 0.8333,
+      "hallucination_rate": 0.1667,
+      "counts": {
+        "tp": 5,
+        "fp": 1,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "columnint16",
+        "int16",
+        "name",
+        "rowbuilder"
+      ],
+      "FP": [
+        "name"
+      ],
+      "FN": [
+        "_columns",
+        "string"
+      ],
+      "precision": 0.8,
+      "recall": 0.6667,
+      "f1": 0.7273,
+      "hallucination_rate": 0.2,
+      "counts": {
+        "tp": 4,
+        "fp": 1,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_04",
+    "high": {
+      "TP": [
+        "columnint16",
+        "name",
+        "rowbuilder",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "_offset"
+      ],
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.8889,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "columnint16",
+        "name",
+        "rowbuilder"
+      ],
+      "FP": [],
+      "FN": [
+        "_offset",
+        "string"
+      ],
+      "precision": 1.0,
+      "recall": 0.6,
+      "f1": 0.75,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_05",
+    "high": {
+      "TP": [
+        "column",
+        "columnint16",
+        "int16",
+        "name",
+        "offset",
+        "rowbuilder"
+      ],
+      "FP": [
+        "int16",
+        "name",
+        "string"
+      ],
+      "FN": [],
+      "precision": 0.6667,
+      "recall": 1.0,
+      "f1": 0.8,
+      "hallucination_rate": 0.3333,
+      "counts": {
+        "tp": 6,
+        "fp": 3,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "column",
+        "columnint16",
+        "int16",
+        "name",
+        "offset",
+        "rowbuilder"
+      ],
+      "FP": [
+        "int16",
+        "name"
+      ],
+      "FN": [],
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 6,
+        "fp": 2,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_06",
+    "high": {
+      "TP": [
+        "columnint16",
+        "int16",
+        "length",
+        "name",
+        "rowbuilder",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "this"
+      ],
+      "precision": 1.0,
+      "recall": 0.8571,
+      "f1": 0.9231,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "columnint16",
+        "int16",
+        "length",
+        "name",
+        "rowbuilder",
+        "this"
+      ],
+      "FP": [],
+      "FN": [
+        "string"
+      ],
+      "precision": 1.0,
+      "recall": 0.8571,
+      "f1": 0.9231,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_07",
+    "high": {
+      "TP": [
+        "column",
+        "columnint16",
+        "columns",
+        "int16",
+        "name",
+        "offset",
+        "string"
+      ],
+      "FP": [
+        "column",
+        "name"
+      ],
+      "FN": [],
+      "precision": 0.7778,
+      "recall": 1.0,
+      "f1": 0.875,
+      "hallucination_rate": 0.2222,
+      "counts": {
+        "tp": 7,
+        "fp": 2,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "column",
+        "columnint16",
+        "columns",
+        "int16",
+        "name",
+        "offset"
+      ],
+      "FP": [
+        "column",
+        "name"
+      ],
+      "FN": [
+        "string"
+      ],
+      "precision": 0.75,
+      "recall": 0.8571,
+      "f1": 0.8,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 6,
+        "fp": 2,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_08",
+    "high": {
+      "TP": [
+        "dog",
+        "input",
+        "process"
+      ],
+      "FP": [
+        "dog"
+      ],
+      "FN": [
+        "detectfeatures",
+        "detections",
+        "getnumscales",
+        "grayf32",
+        "scalespace",
+        "void"
+      ],
+      "precision": 0.75,
+      "recall": 0.3333,
+      "f1": 0.4615,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 3,
+        "fp": 1,
+        "fn": 6
+      }
+    },
+    "low": {
+      "TP": [
+        "detectfeatures",
+        "detections",
+        "dog",
+        "grayf32",
+        "input",
+        "process",
+        "scalespace",
+        "void"
+      ],
+      "FP": [
+        "dog"
+      ],
+      "FN": [
+        "getnumscales"
+      ],
+      "precision": 0.8889,
+      "recall": 0.8889,
+      "f1": 0.8889,
+      "hallucination_rate": 0.1111,
+      "counts": {
+        "tp": 8,
+        "fp": 1,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_09",
+    "high": {
+      "TP": [
+        "execute",
+        "filter",
+        "for",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "matches",
+        "result",
+        "results",
+        "runhealthchecks",
+        "treemap"
+      ],
+      "FP": [
+        "execute",
+        "matches",
+        "result"
+      ],
+      "FN": [
+        "collections",
+        "put",
+        "sortedmap",
+        "string",
+        "unmodifiablesortedmap"
+      ],
+      "precision": 0.7857,
+      "recall": 0.6875,
+      "f1": 0.7333,
+      "hallucination_rate": 0.2143,
+      "counts": {
+        "tp": 11,
+        "fp": 3,
+        "fn": 5
+      }
+    },
+    "low": {
+      "TP": [
+        "collections",
+        "execute",
+        "filter",
+        "for",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "matches",
+        "result",
+        "results",
+        "runhealthchecks",
+        "sortedmap",
+        "string",
+        "treemap"
+      ],
+      "FP": [
+        "execute",
+        "matches",
+        "result"
+      ],
+      "FN": [
+        "put",
+        "unmodifiablesortedmap"
+      ],
+      "precision": 0.8235,
+      "recall": 0.875,
+      "f1": 0.8485,
+      "hallucination_rate": 0.1765,
+      "counts": {
+        "tp": 14,
+        "fp": 3,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_10",
+    "high": {
+      "TP": [
+        "entry",
+        "execute",
+        "filter",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "map",
+        "matches",
+        "result",
+        "results"
+      ],
+      "FP": [
+        "execute",
+        "filter",
+        "map"
+      ],
+      "FN": [
+        "collections",
+        "entryset",
+        "sortedmap",
+        "string",
+        "unmodifiablesortedmap"
+      ],
+      "precision": 0.7692,
+      "recall": 0.6667,
+      "f1": 0.7143,
+      "hallucination_rate": 0.2308,
+      "counts": {
+        "tp": 10,
+        "fp": 3,
+        "fn": 5
+      }
+    },
+    "low": {
+      "TP": [
+        "collections",
+        "entry",
+        "execute",
+        "filter",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "map",
+        "matches",
+        "result",
+        "results",
+        "sortedmap",
+        "string"
+      ],
+      "FP": [
+        "execute",
+        "filter",
+        "map"
+      ],
+      "FN": [
+        "entryset",
+        "unmodifiablesortedmap"
+      ],
+      "precision": 0.8125,
+      "recall": 0.8667,
+      "f1": 0.8387,
+      "hallucination_rate": 0.1875,
+      "counts": {
+        "tp": 13,
+        "fp": 3,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_100",
+    "high": {
+      "TP": [
+        "keywords",
+        "list",
+        "mdle",
+        "module",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [
+        "keywords",
+        "moduleelement"
+      ],
+      "FN": [],
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 6,
+        "fp": 2,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "keywords",
+        "list",
+        "mdle",
+        "module",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [
+        "keywords",
+        "moduleelement"
+      ],
+      "FN": [],
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 6,
+        "fp": 2,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_101",
+    "high": {
+      "TP": [
+        "collections",
+        "config",
+        "emptylist",
+        "keywords",
+        "list",
+        "mdle",
+        "module",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [
+        "keywords",
+        "list",
+        "module"
+      ],
+      "FN": [
+        "arrays",
+        "aslist",
+        "getqualifiedname"
+      ],
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 9,
+        "fp": 3,
+        "fn": 3
+      }
+    },
+    "low": {
+      "TP": [
+        "arrays",
+        "aslist",
+        "collections",
+        "config",
+        "emptylist",
+        "getqualifiedname",
+        "keywords",
+        "list",
+        "mdle",
+        "module",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [
+        "keywords",
+        "list",
+        "module"
+      ],
+      "FN": [],
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1": 0.8889,
+      "hallucination_rate": 0.2,
+      "counts": {
+        "tp": 12,
+        "fp": 3,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_102",
+    "high": {
+      "TP": [
+        "config",
+        "keywords",
+        "list",
+        "mdle",
+        "module",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [
+        "module"
+      ],
+      "FN": [],
+      "precision": 0.875,
+      "recall": 1.0,
+      "f1": 0.9333,
+      "hallucination_rate": 0.125,
+      "counts": {
+        "tp": 7,
+        "fp": 1,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "config",
+        "keywords",
+        "list",
+        "mdle",
+        "module",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [
+        "module"
+      ],
+      "FN": [],
+      "precision": 0.875,
+      "recall": 1.0,
+      "f1": 0.9333,
+      "hallucination_rate": 0.125,
+      "counts": {
+        "tp": 7,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_103",
+    "high": {
+      "TP": [
+        "boolean",
+        "compressionexception",
+        "connection",
+        "h2headerfield",
+        "header",
+        "istrailerfield",
+        "te",
+        "trailers"
+      ],
+      "FP": [],
+      "FN": [
+        "connectionspecificheaderlist",
+        "hpackconstants"
+      ],
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.8889,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "boolean",
+        "compressionexception",
+        "connection",
+        "connectionspecificheaderlist",
+        "h2headerfield",
+        "header",
+        "hpackconstants",
+        "istrailerfield",
+        "te",
+        "trailers"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_104",
+    "high": {
+      "TP": [
+        "boolean",
+        "checkisvalidh2header",
+        "compressionexception",
+        "connection",
+        "h2headerfield",
+        "header",
+        "istrailerfield",
+        "te",
+        "trailers"
+      ],
+      "FP": [],
+      "FN": [
+        "connectionspecificheaderlist",
+        "hpackconstants",
+        "void"
+      ],
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 9,
+        "fp": 0,
+        "fn": 3
+      }
+    },
+    "low": {
+      "TP": [
+        "boolean",
+        "checkisvalidh2header",
+        "compressionexception",
+        "connection",
+        "connectionspecificheaderlist",
+        "h2headerfield",
+        "header",
+        "hpackconstants",
+        "istrailerfield",
+        "te",
+        "trailers",
+        "void"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 12,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_105",
+    "high": {
+      "TP": [
+        "boolean",
+        "checkisvalidh2header",
+        "compressionexception",
+        "connection",
+        "h2headerfield",
+        "header",
+        "istrailerfield",
+        "te"
+      ],
+      "FP": [
+        "header"
+      ],
+      "FN": [
+        "connectionspecificheaderlist",
+        "hpackconstants"
+      ],
+      "precision": 0.8889,
+      "recall": 0.8,
+      "f1": 0.8421,
+      "hallucination_rate": 0.1111,
+      "counts": {
+        "tp": 8,
+        "fp": 1,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "boolean",
+        "checkisvalidh2header",
+        "compressionexception",
+        "connection",
+        "connectionspecificheaderlist",
+        "h2headerfield",
+        "header",
+        "hpackconstants",
+        "istrailerfield",
+        "te"
+      ],
+      "FP": [
+        "header"
+      ],
+      "FN": [],
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "hallucination_rate": 0.0909,
+      "counts": {
+        "tp": 10,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_106",
+    "high": {
+      "TP": [
+        "boolean",
+        "compressionexception",
+        "connection",
+        "h2headerfield",
+        "te",
+        "trailers"
+      ],
+      "FP": [],
+      "FN": [
+        "connectionspecificheaderlist",
+        "hpackconstants"
+      ],
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "boolean",
+        "compressionexception",
+        "connection",
+        "connectionspecificheaderlist",
+        "h2headerfield",
+        "hpackconstants",
+        "te",
+        "trailers"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_107",
+    "high": {
+      "TP": [
+        "boolean",
+        "compressionexception",
+        "connection",
+        "h2headerfield",
+        "header",
+        "istrailerfield",
+        "te",
+        "trailers",
+        "value"
+      ],
+      "FP": [],
+      "FN": [
+        "psuedo-header"
+      ],
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 9,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "boolean",
+        "compressionexception",
+        "connection",
+        "h2headerfield",
+        "header",
+        "istrailerfield",
+        "te",
+        "trailers",
+        "value"
+      ],
+      "FP": [],
+      "FN": [
+        "psuedo-header"
+      ],
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 9,
+        "fp": 0,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_108",
+    "high": {
+      "TP": [
+        "boolean",
+        "compressionexception",
+        "connection",
+        "h2headerfield",
+        "header",
+        "istrailerfield",
+        "te",
+        "trailers"
+      ],
+      "FP": [
+        "connection",
+        "te"
+      ],
+      "FN": [],
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1": 0.8889,
+      "hallucination_rate": 0.2,
+      "counts": {
+        "tp": 8,
+        "fp": 2,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "boolean",
+        "compressionexception",
+        "connection",
+        "h2headerfield",
+        "header",
+        "istrailerfield",
+        "te",
+        "trailers"
+      ],
+      "FP": [
+        "connection",
+        "te"
+      ],
+      "FN": [],
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1": 0.8889,
+      "hallucination_rate": 0.2,
+      "counts": {
+        "tp": 8,
+        "fp": 2,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_109",
+    "high": {
+      "TP": [
+        "boolean",
+        "compressionexception",
+        "connection",
+        "h2headerfield",
+        "header",
+        "istrailerfield",
+        "te",
+        "trailers"
+      ],
+      "FP": [
+        "te"
+      ],
+      "FN": [],
+      "precision": 0.8889,
+      "recall": 1.0,
+      "f1": 0.9412,
+      "hallucination_rate": 0.1111,
+      "counts": {
+        "tp": 8,
+        "fp": 1,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "boolean",
+        "compressionexception",
+        "connection",
+        "h2headerfield",
+        "header",
+        "istrailerfield",
+        "te",
+        "trailers"
+      ],
+      "FP": [
+        "te"
+      ],
+      "FN": [],
+      "precision": 0.8889,
+      "recall": 1.0,
+      "f1": 0.9412,
+      "hallucination_rate": 0.1111,
+      "counts": {
+        "tp": 8,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_11",
+    "high": {
+      "TP": [
+        "execute",
+        "filter",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "matches",
+        "result",
+        "results",
+        "runhealthchecks",
+        "treemap",
+        "unmodifiable"
+      ],
+      "FP": [
+        "filter",
+        "result"
+      ],
+      "FN": [
+        "sortedmap",
+        "string"
+      ],
+      "precision": 0.8462,
+      "recall": 0.8462,
+      "f1": 0.8462,
+      "hallucination_rate": 0.1538,
+      "counts": {
+        "tp": 11,
+        "fp": 2,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "execute",
+        "filter",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "matches",
+        "result",
+        "results",
+        "runhealthchecks",
+        "sortedmap",
+        "string",
+        "treemap",
+        "unmodifiable"
+      ],
+      "FP": [
+        "filter",
+        "result"
+      ],
+      "FN": [],
+      "precision": 0.8667,
+      "recall": 1.0,
+      "f1": 0.9286,
+      "hallucination_rate": 0.1333,
+      "counts": {
+        "tp": 13,
+        "fp": 2,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_110",
+    "high": {
+      "TP": [
+        "iops",
+        "size",
+        "uuid"
+      ],
+      "FP": [],
+      "FN": [
+        "allmockvolumes",
+        "availabilityzone",
+        "createvolume",
+        "mockvolume",
+        "randomuuid",
+        "ret",
+        "snapshotid",
+        "volume_id_postfix_length",
+        "volumeid",
+        "volumetype"
+      ],
+      "precision": 1.0,
+      "recall": 0.2308,
+      "f1": 0.375,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 10
+      }
+    },
+    "low": {
+      "TP": [
+        "allmockvolumes",
+        "availabilityzone",
+        "createvolume",
+        "iops",
+        "mockvolume",
+        "randomuuid",
+        "size",
+        "snapshotid",
+        "uuid",
+        "volume_id_postfix_length",
+        "volumetype"
+      ],
+      "FP": [],
+      "FN": [
+        "ret",
+        "volumeid"
+      ],
+      "precision": 1.0,
+      "recall": 0.8462,
+      "f1": 0.9167,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 11,
+        "fp": 0,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_111",
+    "high": {
+      "TP": [
+        "iops",
+        "size",
+        "uuid"
+      ],
+      "FP": [],
+      "FN": [
+        "allmockvolumes",
+        "availabilityzone",
+        "int",
+        "mockvolume",
+        "ret",
+        "snapshotid",
+        "string",
+        "volume_id_postfix_length",
+        "volumeid",
+        "volumetype"
+      ],
+      "precision": 1.0,
+      "recall": 0.2308,
+      "f1": 0.375,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 10
+      }
+    },
+    "low": {
+      "TP": [
+        "allmockvolumes",
+        "availabilityzone",
+        "iops",
+        "mockvolume",
+        "size",
+        "snapshotid",
+        "string",
+        "uuid",
+        "volume_id_postfix_length",
+        "volumetype"
+      ],
+      "FP": [],
+      "FN": [
+        "int",
+        "ret",
+        "volumeid"
+      ],
+      "precision": 1.0,
+      "recall": 0.7692,
+      "f1": 0.8696,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 3
+      }
+    }
+  },
+  {
+    "case_id": "case_112",
+    "high": {
+      "TP": [
+        "iops",
+        "size",
+        "uuid"
+      ],
+      "FP": [],
+      "FN": [
+        "allmockvolumes",
+        "availabilityzone",
+        "getvolumeid",
+        "mockvolume",
+        "put",
+        "ret",
+        "setavailabilityzone",
+        "setiops",
+        "setsize",
+        "setsnapshotid",
+        "setvolumeid",
+        "setvolumetype",
+        "snapshotid",
+        "string",
+        "volume_id_postfix_length",
+        "volumeid",
+        "volumetype"
+      ],
+      "precision": 1.0,
+      "recall": 0.15,
+      "f1": 0.2609,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 17
+      }
+    },
+    "low": {
+      "TP": [
+        "allmockvolumes",
+        "availabilityzone",
+        "iops",
+        "mockvolume",
+        "size",
+        "snapshotid",
+        "string",
+        "uuid",
+        "volume_id_postfix_length",
+        "volumetype"
+      ],
+      "FP": [],
+      "FN": [
+        "getvolumeid",
+        "put",
+        "ret",
+        "setavailabilityzone",
+        "setiops",
+        "setsize",
+        "setsnapshotid",
+        "setvolumeid",
+        "setvolumetype",
+        "volumeid"
+      ],
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6667,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 10
+      }
+    }
+  },
+  {
+    "case_id": "case_113",
+    "high": {
+      "TP": [
+        "iops",
+        "size",
+        "volume"
+      ],
+      "FP": [],
+      "FN": [
+        "allmockvolumes",
+        "availabilityzone",
+        "int",
+        "mockvolume",
+        "snapshotid",
+        "string",
+        "volumeid",
+        "volumetype"
+      ],
+      "precision": 1.0,
+      "recall": 0.2727,
+      "f1": 0.4286,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 8
+      }
+    },
+    "low": {
+      "TP": [
+        "allmockvolumes",
+        "availabilityzone",
+        "iops",
+        "mockvolume",
+        "size",
+        "snapshotid",
+        "string",
+        "volume",
+        "volumetype"
+      ],
+      "FP": [],
+      "FN": [
+        "int",
+        "volumeid"
+      ],
+      "precision": 1.0,
+      "recall": 0.8182,
+      "f1": 0.9,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 9,
+        "fp": 0,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_114",
+    "high": {
+      "TP": [
+        "iops",
+        "size",
+        "uuid"
+      ],
+      "FP": [],
+      "FN": [
+        "availabilityzone",
+        "createvolume",
+        "mockvolume",
+        "snapshotid",
+        "substring",
+        "volumetype"
+      ],
+      "precision": 1.0,
+      "recall": 0.3333,
+      "f1": 0.5,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 6
+      }
+    },
+    "low": {
+      "TP": [
+        "availabilityzone",
+        "createvolume",
+        "iops",
+        "mockvolume",
+        "size",
+        "snapshotid",
+        "uuid",
+        "volumetype"
+      ],
+      "FP": [],
+      "FN": [
+        "substring"
+      ],
+      "precision": 1.0,
+      "recall": 0.8889,
+      "f1": 0.9412,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_115",
+    "high": {
+      "TP": [
+        "iops",
+        "size",
+        "uuid"
+      ],
+      "FP": [],
+      "FN": [
+        "allmockvolumes",
+        "availabilityzone",
+        "mockvolume",
+        "snapshotid",
+        "volumetype"
+      ],
+      "precision": 1.0,
+      "recall": 0.375,
+      "f1": 0.5455,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 5
+      }
+    },
+    "low": {
+      "TP": [
+        "allmockvolumes",
+        "availabilityzone",
+        "iops",
+        "mockvolume",
+        "size",
+        "snapshotid",
+        "uuid",
+        "volumetype"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_116",
+    "high": {
+      "TP": [
+        "iops",
+        "size",
+        "uuid"
+      ],
+      "FP": [],
+      "FN": [
+        "availabilityzone",
+        "mockvolume",
+        "snapshotid",
+        "string",
+        "volumetype"
+      ],
+      "precision": 1.0,
+      "recall": 0.375,
+      "f1": 0.5455,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 5
+      }
+    },
+    "low": {
+      "TP": [
+        "availabilityzone",
+        "iops",
+        "mockvolume",
+        "size",
+        "snapshotid",
+        "string",
+        "uuid",
+        "volumetype"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_117",
+    "high": {
+      "TP": [
+        "handletimeouterror",
+        "rpc",
+        "status",
+        "streamwaittimeoutexception"
+      ],
+      "FP": [],
+      "FN": [
+        "exhaustedretriesexception",
+        "failedcount",
+        "finalizestats",
+        "getexhaustedretriesexception",
+        "getrpcmetrics",
+        "markfailure",
+        "performretry",
+        "resetstatusbasedbackoff",
+        "retryoptions",
+        "rpctimercontext",
+        "setexception"
+      ],
+      "precision": 1.0,
+      "recall": 0.2667,
+      "f1": 0.4211,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 11
+      }
+    },
+    "low": {
+      "TP": [
+        "failedcount",
+        "finalizestats",
+        "getexhaustedretriesexception",
+        "getrpcmetrics",
+        "handletimeouterror",
+        "markfailure",
+        "performretry",
+        "resetstatusbasedbackoff",
+        "retryoptions",
+        "rpc",
+        "rpctimercontext",
+        "setexception",
+        "status",
+        "streamwaittimeoutexception"
+      ],
+      "FP": [],
+      "FN": [
+        "exhaustedretriesexception"
+      ],
+      "precision": 1.0,
+      "recall": 0.9333,
+      "f1": 0.9655,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 14,
+        "fp": 0,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_118",
+    "high": {
+      "TP": [
+        "rpc",
+        "status",
+        "streamwaittimeoutexception"
+      ],
+      "FP": [],
+      "FN": [
+        "e",
+        "failedcount",
+        "finalizestats",
+        "getexhaustedretriesexception",
+        "getrpcmetrics",
+        "markfailure",
+        "maxretries",
+        "performretry",
+        "resetstatusbasedbackoff",
+        "rpctimercontext",
+        "void"
+      ],
+      "precision": 1.0,
+      "recall": 0.2143,
+      "f1": 0.3529,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 11
+      }
+    },
+    "low": {
+      "TP": [
+        "e",
+        "failedcount",
+        "finalizestats",
+        "getexhaustedretriesexception",
+        "getrpcmetrics",
+        "markfailure",
+        "maxretries",
+        "performretry",
+        "resetstatusbasedbackoff",
+        "rpc",
+        "rpctimercontext",
+        "status",
+        "streamwaittimeoutexception",
+        "void"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 14,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_119",
+    "high": {
+      "TP": [
+        "handletimeouterror",
+        "rpc",
+        "status",
+        "streamwaittimeoutexception"
+      ],
+      "FP": [],
+      "FN": [
+        "checkargument",
+        "close",
+        "failedcount",
+        "finalizestats",
+        "getrpcmetrics",
+        "maxretries",
+        "preconditions",
+        "rpctimercontext",
+        "setexception",
+        "timeoutretrycount"
+      ],
+      "precision": 1.0,
+      "recall": 0.2857,
+      "f1": 0.4444,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 10
+      }
+    },
+    "low": {
+      "TP": [
+        "checkargument",
+        "failedcount",
+        "finalizestats",
+        "getrpcmetrics",
+        "handletimeouterror",
+        "maxretries",
+        "preconditions",
+        "rpc",
+        "rpctimercontext",
+        "setexception",
+        "status",
+        "streamwaittimeoutexception",
+        "timeoutretrycount"
+      ],
+      "FP": [],
+      "FN": [
+        "close"
+      ],
+      "precision": 1.0,
+      "recall": 0.9286,
+      "f1": 0.963,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 13,
+        "fp": 0,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_12",
+    "high": {
+      "TP": [
+        "execute",
+        "filter",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "matches",
+        "result",
+        "results"
+      ],
+      "FP": [
+        "matches",
+        "result",
+        "results"
+      ],
+      "FN": [
+        "sortedmap",
+        "string"
+      ],
+      "precision": 0.7273,
+      "recall": 0.8,
+      "f1": 0.7619,
+      "hallucination_rate": 0.2727,
+      "counts": {
+        "tp": 8,
+        "fp": 3,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "execute",
+        "filter",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "matches",
+        "result",
+        "results",
+        "sortedmap",
+        "string"
+      ],
+      "FP": [
+        "matches",
+        "result",
+        "results"
+      ],
+      "FN": [],
+      "precision": 0.7692,
+      "recall": 1.0,
+      "f1": 0.8696,
+      "hallucination_rate": 0.2308,
+      "counts": {
+        "tp": 10,
+        "fp": 3,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_120",
+    "high": {
+      "TP": [
+        "status",
+        "streamwaittimeoutexception"
+      ],
+      "FP": [],
+      "FN": [
+        "failedcount",
+        "getexhaustedretriesexception",
+        "maxretries",
+        "performretry"
+      ],
+      "precision": 1.0,
+      "recall": 0.3333,
+      "f1": 0.5,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 4
+      }
+    },
+    "low": {
+      "TP": [
+        "failedcount",
+        "getexhaustedretriesexception",
+        "maxretries",
+        "performretry",
+        "status",
+        "streamwaittimeoutexception"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_13",
+    "high": {
+      "TP": [
+        "execute",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "matches",
+        "result",
+        "results"
+      ],
+      "FP": [
+        "execute",
+        "results"
+      ],
+      "FN": [
+        "collections",
+        "put",
+        "sortedmap",
+        "string",
+        "unmodifiablesortedmap"
+      ],
+      "precision": 0.7778,
+      "recall": 0.5833,
+      "f1": 0.6667,
+      "hallucination_rate": 0.2222,
+      "counts": {
+        "tp": 7,
+        "fp": 2,
+        "fn": 5
+      }
+    },
+    "low": {
+      "TP": [
+        "collections",
+        "execute",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "matches",
+        "result",
+        "results",
+        "sortedmap",
+        "string"
+      ],
+      "FP": [
+        "execute",
+        "results"
+      ],
+      "FN": [
+        "put",
+        "unmodifiablesortedmap"
+      ],
+      "precision": 0.8333,
+      "recall": 0.8333,
+      "f1": 0.8333,
+      "hallucination_rate": 0.1667,
+      "counts": {
+        "tp": 10,
+        "fp": 2,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_14",
+    "high": {
+      "TP": [
+        "filter",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "result",
+        "results",
+        "runhealthchecks"
+      ],
+      "FP": [
+        "result",
+        "results"
+      ],
+      "FN": [
+        "sortedmap",
+        "string"
+      ],
+      "precision": 0.7778,
+      "recall": 0.7778,
+      "f1": 0.7778,
+      "hallucination_rate": 0.2222,
+      "counts": {
+        "tp": 7,
+        "fp": 2,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "filter",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "result",
+        "results",
+        "runhealthchecks",
+        "sortedmap",
+        "string"
+      ],
+      "FP": [
+        "result",
+        "results"
+      ],
+      "FN": [],
+      "precision": 0.8182,
+      "recall": 1.0,
+      "f1": 0.9,
+      "hallucination_rate": 0.1818,
+      "counts": {
+        "tp": 9,
+        "fp": 2,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_15",
+    "high": {
+      "TP": [
+        "execute",
+        "filter",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "matches",
+        "result"
+      ],
+      "FP": [
+        "execute",
+        "matches",
+        "result"
+      ],
+      "FN": [
+        "sortedmap"
+      ],
+      "precision": 0.7,
+      "recall": 0.875,
+      "f1": 0.7778,
+      "hallucination_rate": 0.3,
+      "counts": {
+        "tp": 7,
+        "fp": 3,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "execute",
+        "filter",
+        "healthcheck",
+        "healthcheckfilter",
+        "healthchecks",
+        "matches",
+        "result",
+        "sortedmap"
+      ],
+      "FP": [
+        "execute",
+        "matches",
+        "result"
+      ],
+      "FN": [],
+      "precision": 0.7273,
+      "recall": 1.0,
+      "f1": 0.8421,
+      "hallucination_rate": 0.2727,
+      "counts": {
+        "tp": 8,
+        "fp": 3,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_16",
+    "high": {
+      "TP": [
+        "ifempty",
+        "ordered",
+        "spliterator",
+        "streamex",
+        "t",
+        "values"
+      ],
+      "FP": [
+        "values"
+      ],
+      "FN": [
+        "spliterators"
+      ],
+      "precision": 0.8571,
+      "recall": 0.8571,
+      "f1": 0.8571,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "ifempty",
+        "ordered",
+        "spliterator",
+        "spliterators",
+        "streamex",
+        "t",
+        "values"
+      ],
+      "FP": [
+        "values"
+      ],
+      "FN": [],
+      "precision": 0.875,
+      "recall": 1.0,
+      "f1": 0.9333,
+      "hallucination_rate": 0.125,
+      "counts": {
+        "tp": 7,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_17",
+    "high": {
+      "TP": [
+        "ifempty",
+        "ordered",
+        "spliterator",
+        "stream",
+        "streamex",
+        "t",
+        "values"
+      ],
+      "FP": [
+        "stream"
+      ],
+      "FN": [
+        "null",
+        "spliterators"
+      ],
+      "precision": 0.875,
+      "recall": 0.7778,
+      "f1": 0.8235,
+      "hallucination_rate": 0.125,
+      "counts": {
+        "tp": 7,
+        "fp": 1,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "ifempty",
+        "null",
+        "ordered",
+        "spliterator",
+        "spliterators",
+        "stream",
+        "streamex",
+        "t",
+        "values"
+      ],
+      "FP": [
+        "stream"
+      ],
+      "FN": [],
+      "precision": 0.9,
+      "recall": 1.0,
+      "f1": 0.9474,
+      "hallucination_rate": 0.1,
+      "counts": {
+        "tp": 9,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_18",
+    "high": {
+      "TP": [
+        "ifempty",
+        "spliterator",
+        "stream",
+        "streamex",
+        "t",
+        "values",
+        "varargs"
+      ],
+      "FP": [
+        "ifempty",
+        "stream",
+        "varargs"
+      ],
+      "FN": [
+        "spliterators"
+      ],
+      "precision": 0.7,
+      "recall": 0.875,
+      "f1": 0.7778,
+      "hallucination_rate": 0.3,
+      "counts": {
+        "tp": 7,
+        "fp": 3,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "ifempty",
+        "spliterator",
+        "spliterators",
+        "stream",
+        "streamex",
+        "t",
+        "values",
+        "varargs"
+      ],
+      "FP": [
+        "ifempty",
+        "stream",
+        "varargs"
+      ],
+      "FN": [],
+      "precision": 0.7273,
+      "recall": 1.0,
+      "f1": 0.8421,
+      "hallucination_rate": 0.2727,
+      "counts": {
+        "tp": 8,
+        "fp": 3,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_19",
+    "high": {
+      "TP": [
+        "ifempty",
+        "spliterator",
+        "stream",
+        "streamex",
+        "values"
+      ],
+      "FP": [
+        "stream",
+        "values"
+      ],
+      "FN": [
+        "spliterators"
+      ],
+      "precision": 0.7143,
+      "recall": 0.8333,
+      "f1": 0.7692,
+      "hallucination_rate": 0.2857,
+      "counts": {
+        "tp": 5,
+        "fp": 2,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "ifempty",
+        "spliterator",
+        "spliterators",
+        "stream",
+        "streamex",
+        "values"
+      ],
+      "FP": [
+        "stream",
+        "values"
+      ],
+      "FN": [],
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 6,
+        "fp": 2,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_20",
+    "high": {
+      "TP": [
+        "ifempty",
+        "ordered",
+        "spliterator",
+        "streamex",
+        "t",
+        "values"
+      ],
+      "FP": [
+        "ifempty",
+        "ordered",
+        "spliterator",
+        "values"
+      ],
+      "FN": [
+        "final",
+        "null",
+        "public",
+        "spliterators"
+      ],
+      "precision": 0.6,
+      "recall": 0.6,
+      "f1": 0.6,
+      "hallucination_rate": 0.4,
+      "counts": {
+        "tp": 6,
+        "fp": 4,
+        "fn": 4
+      }
+    },
+    "low": {
+      "TP": [
+        "final",
+        "ifempty",
+        "null",
+        "ordered",
+        "spliterator",
+        "spliterators",
+        "streamex",
+        "t",
+        "values"
+      ],
+      "FP": [
+        "ifempty",
+        "null",
+        "ordered",
+        "spliterator",
+        "spliterators",
+        "values"
+      ],
+      "FN": [
+        "public"
+      ],
+      "precision": 0.6,
+      "recall": 0.9,
+      "f1": 0.72,
+      "hallucination_rate": 0.4,
+      "counts": {
+        "tp": 9,
+        "fp": 6,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_21",
+    "high": {
+      "TP": [
+        "spliterator",
+        "streamex",
+        "values",
+        "varargs"
+      ],
+      "FP": [
+        "values"
+      ],
+      "FN": [
+        "spliterators",
+        "t"
+      ],
+      "precision": 0.8,
+      "recall": 0.6667,
+      "f1": 0.7273,
+      "hallucination_rate": 0.2,
+      "counts": {
+        "tp": 4,
+        "fp": 1,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "spliterator",
+        "spliterators",
+        "streamex",
+        "t",
+        "values",
+        "varargs"
+      ],
+      "FP": [
+        "values"
+      ],
+      "FN": [],
+      "precision": 0.8571,
+      "recall": 1.0,
+      "f1": 0.9231,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_22",
+    "high": {
+      "TP": [
+        "spliterator",
+        "streamex",
+        "values"
+      ],
+      "FP": [],
+      "FN": [
+        "spliterators",
+        "t"
+      ],
+      "precision": 1.0,
+      "recall": 0.6,
+      "f1": 0.75,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "spliterator",
+        "spliterators",
+        "streamex",
+        "t",
+        "values"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_23",
+    "high": {
+      "TP": [
+        "e",
+        "setcurrentbusinessdate",
+        "setstartdate",
+        "startdate"
+      ],
+      "FP": [],
+      "FN": [
+        "datecalculator",
+        "this"
+      ],
+      "precision": 1.0,
+      "recall": 0.6667,
+      "f1": 0.8,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "datecalculator",
+        "e",
+        "setcurrentbusinessdate",
+        "setstartdate",
+        "startdate",
+        "this"
+      ],
+      "FP": [
+        "this"
+      ],
+      "FN": [],
+      "precision": 0.8571,
+      "recall": 1.0,
+      "f1": 0.9231,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_24",
+    "high": {
+      "TP": [
+        "e",
+        "setcurrentbusinessdate",
+        "setstartdate",
+        "startdate"
+      ],
+      "FP": [],
+      "FN": [
+        "datecalculator",
+        "this"
+      ],
+      "precision": 1.0,
+      "recall": 0.6667,
+      "f1": 0.8,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "datecalculator",
+        "e",
+        "setcurrentbusinessdate",
+        "setstartdate",
+        "startdate",
+        "this"
+      ],
+      "FP": [
+        "this"
+      ],
+      "FN": [],
+      "precision": 0.8571,
+      "recall": 1.0,
+      "f1": 0.9231,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_25",
+    "high": {
+      "TP": [
+        "e",
+        "setcurrentbusinessdate",
+        "startdate"
+      ],
+      "FP": [],
+      "FN": [
+        "datecalculator"
+      ],
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "datecalculator",
+        "e",
+        "setcurrentbusinessdate",
+        "startdate"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_26",
+    "high": {
+      "TP": [
+        "e",
+        "setcurrentbusinessdate",
+        "startdate"
+      ],
+      "FP": [],
+      "FN": [
+        "datecalculator"
+      ],
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "datecalculator",
+        "e",
+        "setcurrentbusinessdate",
+        "startdate"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_27",
+    "high": {
+      "TP": [
+        "e",
+        "setcurrentbusinessdate",
+        "startdate"
+      ],
+      "FP": [],
+      "FN": [
+        "datecalculator"
+      ],
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "datecalculator",
+        "e",
+        "setcurrentbusinessdate",
+        "startdate"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_28",
+    "high": {
+      "TP": [
+        "e",
+        "setcurrentbusinessdate",
+        "startdate"
+      ],
+      "FP": [],
+      "FN": [
+        "currentbusinessdate",
+        "datecalculator",
+        "final",
+        "this"
+      ],
+      "precision": 1.0,
+      "recall": 0.4286,
+      "f1": 0.6,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 4
+      }
+    },
+    "low": {
+      "TP": [
+        "datecalculator",
+        "e",
+        "final",
+        "setcurrentbusinessdate",
+        "startdate",
+        "this"
+      ],
+      "FP": [],
+      "FN": [
+        "currentbusinessdate"
+      ],
+      "precision": 1.0,
+      "recall": 0.8571,
+      "f1": 0.9231,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_29",
+    "high": {
+      "TP": [
+        "date",
+        "e",
+        "setcurrentbusinessdate",
+        "setstartdate",
+        "startdate"
+      ],
+      "FP": [
+        "date"
+      ],
+      "FN": [
+        "datecalculator"
+      ],
+      "precision": 0.8333,
+      "recall": 0.8333,
+      "f1": 0.8333,
+      "hallucination_rate": 0.1667,
+      "counts": {
+        "tp": 5,
+        "fp": 1,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "date",
+        "datecalculator",
+        "e",
+        "setcurrentbusinessdate",
+        "setstartdate",
+        "startdate"
+      ],
+      "FP": [
+        "date"
+      ],
+      "FN": [],
+      "precision": 0.8571,
+      "recall": 1.0,
+      "f1": 0.9231,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_30",
+    "high": {
+      "TP": [
+        "createsetfromproperty",
+        "hashset",
+        "matcher",
+        "null",
+        "pattern",
+        "property",
+        "string"
+      ],
+      "FP": [
+        "pattern"
+      ],
+      "FN": [
+        "add",
+        "find",
+        "properties"
+      ],
+      "precision": 0.875,
+      "recall": 0.7,
+      "f1": 0.7778,
+      "hallucination_rate": 0.125,
+      "counts": {
+        "tp": 7,
+        "fp": 1,
+        "fn": 3
+      }
+    },
+    "low": {
+      "TP": [
+        "createsetfromproperty",
+        "find",
+        "hashset",
+        "null",
+        "pattern",
+        "property",
+        "string"
+      ],
+      "FP": [
+        "pattern"
+      ],
+      "FN": [
+        "add",
+        "matcher",
+        "properties"
+      ],
+      "precision": 0.875,
+      "recall": 0.7,
+      "f1": 0.7778,
+      "hallucination_rate": 0.125,
+      "counts": {
+        "tp": 7,
+        "fp": 1,
+        "fn": 3
+      }
+    }
+  },
+  {
+    "case_id": "case_31",
+    "high": {
+      "TP": [
+        "1",
+        "group",
+        "hashset",
+        "matcher",
+        "pattern",
+        "property",
+        "string"
+      ],
+      "FP": [
+        "1",
+        "property",
+        "string"
+      ],
+      "FN": [
+        "find",
+        "properties"
+      ],
+      "precision": 0.7,
+      "recall": 0.7778,
+      "f1": 0.7368,
+      "hallucination_rate": 0.3,
+      "counts": {
+        "tp": 7,
+        "fp": 3,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "1",
+        "find",
+        "group",
+        "hashset",
+        "pattern",
+        "property",
+        "string"
+      ],
+      "FP": [
+        "1",
+        "property",
+        "string"
+      ],
+      "FN": [
+        "matcher",
+        "properties"
+      ],
+      "precision": 0.7,
+      "recall": 0.7778,
+      "f1": 0.7368,
+      "hallucination_rate": 0.3,
+      "counts": {
+        "tp": 7,
+        "fp": 3,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_32",
+    "high": {
+      "TP": [
+        "createsetfromproperty",
+        "hashset",
+        "matcher",
+        "pattern",
+        "property",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "add",
+        "compile",
+        "find",
+        "params",
+        "properties"
+      ],
+      "precision": 1.0,
+      "recall": 0.5455,
+      "f1": 0.7059,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 5
+      }
+    },
+    "low": {
+      "TP": [
+        "compile",
+        "createsetfromproperty",
+        "find",
+        "hashset",
+        "pattern",
+        "property",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "add",
+        "matcher",
+        "params",
+        "properties"
+      ],
+      "precision": 1.0,
+      "recall": 0.6364,
+      "f1": 0.7778,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 4
+      }
+    }
+  },
+  {
+    "case_id": "case_33",
+    "high": {
+      "TP": [
+        "hashset",
+        "null",
+        "property",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "properties"
+      ],
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.8889,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "hashset",
+        "null",
+        "property",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "properties"
+      ],
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.8889,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_34",
+    "high": {
+      "TP": [
+        "hashset",
+        "matcher",
+        "null",
+        "pattern",
+        "property",
+        "string"
+      ],
+      "FP": [
+        "pattern",
+        "property",
+        "string"
+      ],
+      "FN": [
+        "properties"
+      ],
+      "precision": 0.6667,
+      "recall": 0.8571,
+      "f1": 0.75,
+      "hallucination_rate": 0.3333,
+      "counts": {
+        "tp": 6,
+        "fp": 3,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "hashset",
+        "null",
+        "pattern",
+        "property",
+        "string"
+      ],
+      "FP": [
+        "pattern",
+        "property",
+        "string"
+      ],
+      "FN": [
+        "matcher",
+        "properties"
+      ],
+      "precision": 0.625,
+      "recall": 0.7143,
+      "f1": 0.6667,
+      "hallucination_rate": 0.375,
+      "counts": {
+        "tp": 5,
+        "fp": 3,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_35",
+    "high": {
+      "TP": [
+        "hashset",
+        "matcher",
+        "null",
+        "property",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "properties"
+      ],
+      "precision": 1.0,
+      "recall": 0.8333,
+      "f1": 0.9091,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "hashset",
+        "null",
+        "property",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "matcher",
+        "properties"
+      ],
+      "precision": 1.0,
+      "recall": 0.6667,
+      "f1": 0.8,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_36",
+    "high": {
+      "TP": [
+        "hashset",
+        "matcher",
+        "null",
+        "property",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "find",
+        "properties"
+      ],
+      "precision": 1.0,
+      "recall": 0.7143,
+      "f1": 0.8333,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "find",
+        "hashset",
+        "null",
+        "property",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "matcher",
+        "properties"
+      ],
+      "precision": 1.0,
+      "recall": 0.7143,
+      "f1": 0.8333,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_37",
+    "high": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "assertrequiredcontainertriples",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties",
+        "static"
+      ],
+      "FP": [],
+      "FN": [
+        "void"
+      ],
+      "precision": 1.0,
+      "recall": 0.8889,
+      "f1": 0.9412,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "assertrequiredcontainertriples",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties",
+        "static",
+        "void"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 9,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_38",
+    "high": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "assertrequiredcontainertriples",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties"
+      ],
+      "FP": [],
+      "FN": [
+        "void"
+      ],
+      "precision": 1.0,
+      "recall": 0.875,
+      "f1": 0.9333,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "assertrequiredcontainertriples",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties",
+        "void"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_39",
+    "high": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "assertrequiredcontainertriples",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties",
+        "static"
+      ],
+      "FP": [
+        "constraintviolationexception",
+        "required_properties"
+      ],
+      "FN": [
+        "public",
+        "void"
+      ],
+      "precision": 0.8,
+      "recall": 0.8,
+      "f1": 0.8,
+      "hallucination_rate": 0.2,
+      "counts": {
+        "tp": 8,
+        "fp": 2,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "assertrequiredcontainertriples",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties",
+        "static",
+        "void"
+      ],
+      "FP": [
+        "constraintviolationexception",
+        "required_properties"
+      ],
+      "FN": [
+        "public"
+      ],
+      "precision": 0.8182,
+      "recall": 0.9,
+      "f1": 0.8571,
+      "hallucination_rate": 0.1818,
+      "counts": {
+        "tp": 9,
+        "fp": 2,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_40",
+    "high": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_41",
+    "high": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "assertrequiredcontainertriples",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "assertrequiredcontainertriples",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_42",
+    "high": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties"
+      ],
+      "FP": [],
+      "FN": [
+        "void"
+      ],
+      "precision": 1.0,
+      "recall": 0.8571,
+      "f1": 0.9231,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties",
+        "void"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_43",
+    "high": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "assertcontainsrequiredproperties",
+        "assertcontainsrequiredtypes",
+        "constraintviolationexception",
+        "container_types",
+        "model",
+        "required_properties"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_44",
+    "high": {
+      "TP": [
+        "48",
+        "computeiv",
+        "index",
+        "iv",
+        "ivstore",
+        "key_id",
+        "keyderivationrate",
+        "label",
+        "long",
+        "mastersalt"
+      ],
+      "FP": [
+        "iv"
+      ],
+      "FN": [
+        "0",
+        "0xff",
+        "8",
+        "void"
+      ],
+      "precision": 0.9091,
+      "recall": 0.7143,
+      "f1": 0.8,
+      "hallucination_rate": 0.0909,
+      "counts": {
+        "tp": 10,
+        "fp": 1,
+        "fn": 4
+      }
+    },
+    "low": {
+      "TP": [
+        "0",
+        "0xff",
+        "48",
+        "8",
+        "computeiv",
+        "index",
+        "iv",
+        "ivstore",
+        "key_id",
+        "keyderivationrate",
+        "label",
+        "mastersalt",
+        "void"
+      ],
+      "FP": [
+        "iv"
+      ],
+      "FN": [
+        "long"
+      ],
+      "precision": 0.9286,
+      "recall": 0.9286,
+      "f1": 0.9286,
+      "hallucination_rate": 0.0714,
+      "counts": {
+        "tp": 13,
+        "fp": 1,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_45",
+    "high": {
+      "TP": [
+        "byte",
+        "computeiv",
+        "index",
+        "ivstore",
+        "key_id",
+        "keyderivationrate",
+        "label",
+        "long",
+        "mastersalt"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 9,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "byte",
+        "computeiv",
+        "index",
+        "ivstore",
+        "key_id",
+        "keyderivationrate",
+        "label",
+        "mastersalt"
+      ],
+      "FP": [],
+      "FN": [
+        "long"
+      ],
+      "precision": 1.0,
+      "recall": 0.8889,
+      "f1": 0.9412,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_46",
+    "high": {
+      "TP": [
+        "index",
+        "iv",
+        "ivstore",
+        "key_id",
+        "keyderivationrate",
+        "label",
+        "long",
+        "mastersalt"
+      ],
+      "FP": [
+        "computeiv",
+        "iv",
+        "ivstore",
+        "key_id",
+        "long"
+      ],
+      "FN": [],
+      "precision": 0.6154,
+      "recall": 1.0,
+      "f1": 0.7619,
+      "hallucination_rate": 0.3846,
+      "counts": {
+        "tp": 8,
+        "fp": 5,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "index",
+        "iv",
+        "ivstore",
+        "key_id",
+        "keyderivationrate",
+        "label",
+        "mastersalt"
+      ],
+      "FP": [
+        "computeiv",
+        "iv",
+        "ivstore",
+        "key_id"
+      ],
+      "FN": [
+        "long"
+      ],
+      "precision": 0.6364,
+      "recall": 0.875,
+      "f1": 0.7368,
+      "hallucination_rate": 0.3636,
+      "counts": {
+        "tp": 7,
+        "fp": 4,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_47",
+    "high": {
+      "TP": [
+        "byte",
+        "index",
+        "ivstore",
+        "key_id",
+        "keyderivationrate",
+        "label",
+        "long",
+        "mastersalt"
+      ],
+      "FP": [
+        "iv",
+        "ivstore",
+        "mastersalt"
+      ],
+      "FN": [],
+      "precision": 0.7273,
+      "recall": 1.0,
+      "f1": 0.8421,
+      "hallucination_rate": 0.2727,
+      "counts": {
+        "tp": 8,
+        "fp": 3,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "byte",
+        "index",
+        "ivstore",
+        "key_id",
+        "keyderivationrate",
+        "label",
+        "mastersalt"
+      ],
+      "FP": [
+        "iv",
+        "ivstore",
+        "mastersalt"
+      ],
+      "FN": [
+        "long"
+      ],
+      "precision": 0.7,
+      "recall": 0.875,
+      "f1": 0.7778,
+      "hallucination_rate": 0.3,
+      "counts": {
+        "tp": 7,
+        "fp": 3,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_48",
+    "high": {
+      "TP": [
+        "computeiv",
+        "index",
+        "iv",
+        "ivstore",
+        "key_id",
+        "keyderivationrate",
+        "label",
+        "long",
+        "mastersalt"
+      ],
+      "FP": [
+        "iv"
+      ],
+      "FN": [],
+      "precision": 0.9,
+      "recall": 1.0,
+      "f1": 0.9474,
+      "hallucination_rate": 0.1,
+      "counts": {
+        "tp": 9,
+        "fp": 1,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "computeiv",
+        "index",
+        "iv",
+        "ivstore",
+        "key_id",
+        "keyderivationrate",
+        "label",
+        "mastersalt"
+      ],
+      "FP": [
+        "iv"
+      ],
+      "FN": [
+        "long"
+      ],
+      "precision": 0.8889,
+      "recall": 0.8889,
+      "f1": 0.8889,
+      "hallucination_rate": 0.1111,
+      "counts": {
+        "tp": 8,
+        "fp": 1,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_49",
+    "high": {
+      "TP": [
+        "computeiv",
+        "index",
+        "iv",
+        "ivstore",
+        "key_id",
+        "keyderivationrate",
+        "label",
+        "long",
+        "mastersalt"
+      ],
+      "FP": [
+        "iv"
+      ],
+      "FN": [],
+      "precision": 0.9,
+      "recall": 1.0,
+      "f1": 0.9474,
+      "hallucination_rate": 0.1,
+      "counts": {
+        "tp": 9,
+        "fp": 1,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "computeiv",
+        "index",
+        "iv",
+        "ivstore",
+        "key_id",
+        "keyderivationrate",
+        "label",
+        "mastersalt"
+      ],
+      "FP": [
+        "iv"
+      ],
+      "FN": [
+        "long"
+      ],
+      "precision": 0.8889,
+      "recall": 0.8889,
+      "f1": 0.8889,
+      "hallucination_rate": 0.1111,
+      "counts": {
+        "tp": 8,
+        "fp": 1,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_50",
+    "high": {
+      "TP": [
+        "index",
+        "iv",
+        "ivstore",
+        "key_id",
+        "label",
+        "long"
+      ],
+      "FP": [
+        "iv"
+      ],
+      "FN": [],
+      "precision": 0.8571,
+      "recall": 1.0,
+      "f1": 0.9231,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "index",
+        "iv",
+        "ivstore",
+        "key_id",
+        "label"
+      ],
+      "FP": [
+        "iv"
+      ],
+      "FN": [
+        "long"
+      ],
+      "precision": 0.8333,
+      "recall": 0.8333,
+      "f1": 0.8333,
+      "hallucination_rate": 0.1667,
+      "counts": {
+        "tp": 5,
+        "fp": 1,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_51",
+    "high": {
+      "TP": [
+        "context",
+        "string",
+        "toast"
+      ],
+      "FP": [
+        "context"
+      ],
+      "FN": [
+        "length_short",
+        "maketext",
+        "mcontext",
+        "r",
+        "show",
+        "wings_facebook__error_facebook_app"
+      ],
+      "precision": 0.75,
+      "recall": 0.3333,
+      "f1": 0.4615,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 3,
+        "fp": 1,
+        "fn": 6
+      }
+    },
+    "low": {
+      "TP": [
+        "context",
+        "length_short",
+        "maketext",
+        "mcontext",
+        "r",
+        "show",
+        "string",
+        "toast",
+        "wings_facebook__error_facebook_app"
+      ],
+      "FP": [
+        "context"
+      ],
+      "FN": [],
+      "precision": 0.9,
+      "recall": 1.0,
+      "f1": 0.9474,
+      "hallucination_rate": 0.1,
+      "counts": {
+        "tp": 9,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_52",
+    "high": {
+      "TP": [
+        "showfacebookapperror",
+        "string",
+        "toast"
+      ],
+      "FP": [
+        "string",
+        "toast"
+      ],
+      "FN": [
+        "getstring",
+        "length_short",
+        "maketext",
+        "mcontext",
+        "r",
+        "show",
+        "wings_facebook__error_facebook_app"
+      ],
+      "precision": 0.6,
+      "recall": 0.3,
+      "f1": 0.4,
+      "hallucination_rate": 0.4,
+      "counts": {
+        "tp": 3,
+        "fp": 2,
+        "fn": 7
+      }
+    },
+    "low": {
+      "TP": [
+        "length_short",
+        "maketext",
+        "mcontext",
+        "r",
+        "show",
+        "showfacebookapperror",
+        "string",
+        "toast",
+        "wings_facebook__error_facebook_app"
+      ],
+      "FP": [
+        "mcontext",
+        "string",
+        "toast",
+        "wings_facebook__error_facebook_app"
+      ],
+      "FN": [
+        "getstring"
+      ],
+      "precision": 0.6923,
+      "recall": 0.9,
+      "f1": 0.7826,
+      "hallucination_rate": 0.3077,
+      "counts": {
+        "tp": 9,
+        "fp": 4,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_53",
+    "high": {
+      "TP": [
+        "context",
+        "showfacebookapperror",
+        "toast"
+      ],
+      "FP": [],
+      "FN": [
+        "length_short",
+        "maketext",
+        "mcontext",
+        "show"
+      ],
+      "precision": 1.0,
+      "recall": 0.4286,
+      "f1": 0.6,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 4
+      }
+    },
+    "low": {
+      "TP": [
+        "context",
+        "length_short",
+        "maketext",
+        "mcontext",
+        "show",
+        "showfacebookapperror",
+        "toast"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_54",
+    "high": {
+      "TP": [
+        "string",
+        "toast"
+      ],
+      "FP": [
+        "toast"
+      ],
+      "FN": [
+        "length_short",
+        "maketext",
+        "r",
+        "wings_facebook__error_facebook_app"
+      ],
+      "precision": 0.6667,
+      "recall": 0.3333,
+      "f1": 0.4444,
+      "hallucination_rate": 0.3333,
+      "counts": {
+        "tp": 2,
+        "fp": 1,
+        "fn": 4
+      }
+    },
+    "low": {
+      "TP": [
+        "length_short",
+        "maketext",
+        "r",
+        "string",
+        "toast",
+        "wings_facebook__error_facebook_app"
+      ],
+      "FP": [
+        "toast"
+      ],
+      "FN": [],
+      "precision": 0.8571,
+      "recall": 1.0,
+      "f1": 0.9231,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_55",
+    "high": {
+      "TP": [
+        "showfacebookapperror"
+      ],
+      "FP": [],
+      "FN": [
+        "length_short",
+        "mcontext"
+      ],
+      "precision": 1.0,
+      "recall": 0.3333,
+      "f1": 0.5,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "length_short",
+        "mcontext",
+        "showfacebookapperror"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_56",
+    "high": {
+      "TP": [
+        "string",
+        "toast"
+      ],
+      "FP": [
+        "string",
+        "toast"
+      ],
+      "FN": [
+        "length_short",
+        "maketext",
+        "mcontext",
+        "r",
+        "show",
+        "void",
+        "wings_facebook__error_facebook_app"
+      ],
+      "precision": 0.5,
+      "recall": 0.2222,
+      "f1": 0.3077,
+      "hallucination_rate": 0.5,
+      "counts": {
+        "tp": 2,
+        "fp": 2,
+        "fn": 7
+      }
+    },
+    "low": {
+      "TP": [
+        "length_short",
+        "maketext",
+        "mcontext",
+        "r",
+        "show",
+        "string",
+        "toast",
+        "void",
+        "wings_facebook__error_facebook_app"
+      ],
+      "FP": [
+        "string",
+        "toast"
+      ],
+      "FN": [],
+      "precision": 0.8182,
+      "recall": 1.0,
+      "f1": 0.9,
+      "hallucination_rate": 0.1818,
+      "counts": {
+        "tp": 9,
+        "fp": 2,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_57",
+    "high": {
+      "TP": [
+        "context",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "id",
+        "r",
+        "wings_facebook__error_facebook_app"
+      ],
+      "precision": 1.0,
+      "recall": 0.4,
+      "f1": 0.5714,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 3
+      }
+    },
+    "low": {
+      "TP": [
+        "context",
+        "id",
+        "r",
+        "string",
+        "wings_facebook__error_facebook_app"
+      ],
+      "FP": [
+        "mcontext"
+      ],
+      "FN": [],
+      "precision": 0.8333,
+      "recall": 1.0,
+      "f1": 0.9091,
+      "hallucination_rate": 0.1667,
+      "counts": {
+        "tp": 5,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_58",
+    "high": {
+      "TP": [
+        "1",
+        "buffer",
+        "checkerror",
+        "flush",
+        "injectionhandler",
+        "processevent",
+        "totalwritten",
+        "underlyingoutputstream"
+      ],
+      "FP": [],
+      "FN": [
+        "bufferedbyteinputoutput",
+        "bufferedbyteoutputstream_flush",
+        "injectioneventcore",
+        "sleep",
+        "unblockreads"
+      ],
+      "precision": 1.0,
+      "recall": 0.6154,
+      "f1": 0.7619,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 5
+      }
+    },
+    "low": {
+      "TP": [
+        "1",
+        "buffer",
+        "bufferedbyteoutputstream_flush",
+        "checkerror",
+        "flush",
+        "injectioneventcore",
+        "injectionhandler",
+        "processevent",
+        "totalwritten",
+        "underlyingoutputstream"
+      ],
+      "FP": [],
+      "FN": [
+        "bufferedbyteinputoutput",
+        "sleep",
+        "unblockreads"
+      ],
+      "precision": 1.0,
+      "recall": 0.7692,
+      "f1": 0.8696,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 3
+      }
+    }
+  },
+  {
+    "case_id": "case_59",
+    "high": {
+      "TP": [
+        "buffer",
+        "checkerror",
+        "flush",
+        "injectionhandler",
+        "processevent",
+        "stream",
+        "totalbytestransferred",
+        "totalwritten",
+        "writethread"
+      ],
+      "FP": [],
+      "FN": [
+        "blockreads",
+        "ioexception",
+        "unblockreads"
+      ],
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 9,
+        "fp": 0,
+        "fn": 3
+      }
+    },
+    "low": {
+      "TP": [
+        "buffer",
+        "checkerror",
+        "flush",
+        "injectionhandler",
+        "ioexception",
+        "processevent",
+        "stream",
+        "totalbytestransferred",
+        "totalwritten",
+        "writethread"
+      ],
+      "FP": [],
+      "FN": [
+        "blockreads",
+        "unblockreads"
+      ],
+      "precision": 1.0,
+      "recall": 0.8333,
+      "f1": 0.9091,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_60",
+    "high": {
+      "TP": [
+        "checkerror",
+        "flush",
+        "injectionhandler",
+        "processevent",
+        "totalbytestransferred",
+        "totalbyteswritten",
+        "totalwritten"
+      ],
+      "FP": [],
+      "FN": [
+        "bufferedbyteoutputstream"
+      ],
+      "precision": 1.0,
+      "recall": 0.875,
+      "f1": 0.9333,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "bufferedbyteoutputstream",
+        "checkerror",
+        "flush",
+        "injectionhandler",
+        "processevent",
+        "totalbytestransferred",
+        "totalbyteswritten",
+        "totalwritten"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_61",
+    "high": {
+      "TP": [
+        "buffer",
+        "bytes",
+        "flush",
+        "stream"
+      ],
+      "FP": [],
+      "FN": [
+        "ioexception"
+      ],
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.8889,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "buffer",
+        "bytes",
+        "flush",
+        "ioexception",
+        "stream"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_62",
+    "high": {
+      "TP": [
+        "buffer",
+        "flush",
+        "injectionhandler",
+        "stream",
+        "totalbytestransferred",
+        "underlyingoutputstream",
+        "writethread"
+      ],
+      "FP": [],
+      "FN": [
+        "ioexception"
+      ],
+      "precision": 1.0,
+      "recall": 0.875,
+      "f1": 0.9333,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "buffer",
+        "flush",
+        "injectionhandler",
+        "ioexception",
+        "stream",
+        "totalbytestransferred",
+        "underlyingoutputstream",
+        "writethread"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_63",
+    "high": {
+      "TP": [
+        "buffer",
+        "checkerror",
+        "flush",
+        "injectionhandler",
+        "processevent",
+        "totalbytestransferred",
+        "totalwritten",
+        "underlyingoutputstream",
+        "writethread"
+      ],
+      "FP": [],
+      "FN": [
+        "blockreads",
+        "unblockreads"
+      ],
+      "precision": 1.0,
+      "recall": 0.8182,
+      "f1": 0.9,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 9,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "buffer",
+        "checkerror",
+        "flush",
+        "injectionhandler",
+        "processevent",
+        "totalbytestransferred",
+        "totalwritten",
+        "underlyingoutputstream",
+        "writethread"
+      ],
+      "FP": [],
+      "FN": [
+        "blockreads",
+        "unblockreads"
+      ],
+      "precision": 1.0,
+      "recall": 0.8182,
+      "f1": 0.9,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 9,
+        "fp": 0,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_64",
+    "high": {
+      "TP": [
+        "buffer",
+        "flush",
+        "injectionhandler",
+        "processevent",
+        "totalwritten",
+        "underlyingoutputstream"
+      ],
+      "FP": [],
+      "FN": [
+        "blockreads",
+        "bufferedbyteinputoutput",
+        "ioexception",
+        "unblockreads"
+      ],
+      "precision": 1.0,
+      "recall": 0.6,
+      "f1": 0.75,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 4
+      }
+    },
+    "low": {
+      "TP": [
+        "buffer",
+        "flush",
+        "injectionhandler",
+        "ioexception",
+        "processevent",
+        "totalwritten",
+        "underlyingoutputstream"
+      ],
+      "FP": [],
+      "FN": [
+        "blockreads",
+        "bufferedbyteinputoutput",
+        "unblockreads"
+      ],
+      "precision": 1.0,
+      "recall": 0.7,
+      "f1": 0.8235,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 3
+      }
+    }
+  },
+  {
+    "case_id": "case_65",
+    "high": {
+      "TP": [
+        "comment",
+        "logger",
+        "logproperties",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "get",
+        "getkeyset"
+      ],
+      "precision": 1.0,
+      "recall": 0.6667,
+      "f1": 0.8,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "comment",
+        "get",
+        "getkeyset",
+        "logger",
+        "logproperties",
+        "string"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_66",
+    "high": {
+      "TP": [
+        "comment",
+        "key",
+        "logger",
+        "string",
+        "value"
+      ],
+      "FP": [
+        "comment",
+        "logger",
+        "string"
+      ],
+      "FN": [
+        "get",
+        "getkeyset",
+        "info",
+        "void"
+      ],
+      "precision": 0.625,
+      "recall": 0.5556,
+      "f1": 0.5882,
+      "hallucination_rate": 0.375,
+      "counts": {
+        "tp": 5,
+        "fp": 3,
+        "fn": 4
+      }
+    },
+    "low": {
+      "TP": [
+        "comment",
+        "get",
+        "getkeyset",
+        "info",
+        "key",
+        "logger",
+        "string",
+        "value",
+        "void"
+      ],
+      "FP": [
+        "comment",
+        "info",
+        "logger",
+        "string"
+      ],
+      "FN": [],
+      "precision": 0.6923,
+      "recall": 1.0,
+      "f1": 0.8182,
+      "hallucination_rate": 0.3077,
+      "counts": {
+        "tp": 9,
+        "fp": 4,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_67",
+    "high": {
+      "TP": [
+        "comment",
+        "key",
+        "keys",
+        "logger",
+        "logproperties",
+        "string"
+      ],
+      "FP": [
+        "key"
+      ],
+      "FN": [
+        "getkeyset",
+        "info"
+      ],
+      "precision": 0.8571,
+      "recall": 0.75,
+      "f1": 0.8,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "comment",
+        "getkeyset",
+        "info",
+        "key",
+        "keys",
+        "logger",
+        "logproperties",
+        "string"
+      ],
+      "FP": [
+        "key"
+      ],
+      "FN": [],
+      "precision": 0.8889,
+      "recall": 1.0,
+      "f1": 0.9412,
+      "hallucination_rate": 0.1111,
+      "counts": {
+        "tp": 8,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_68",
+    "high": {
+      "TP": [
+        "comment",
+        "key",
+        "logger",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "info"
+      ],
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.8889,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "comment",
+        "info",
+        "key",
+        "logger",
+        "string"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_69",
+    "high": {
+      "TP": [
+        "comment",
+        "logger",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "get",
+        "getkeyset",
+        "info"
+      ],
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6667,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 3
+      }
+    },
+    "low": {
+      "TP": [
+        "comment",
+        "get",
+        "getkeyset",
+        "info",
+        "logger",
+        "string"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_70",
+    "high": {
+      "TP": [
+        "clearcache",
+        "commercenotificationtemplateimpl",
+        "finder_class_name_entity",
+        "finder_class_name_list_with_pagination",
+        "finder_class_name_list_without_pagination"
+      ],
+      "FP": [],
+      "FN": [
+        "entitycache",
+        "void"
+      ],
+      "precision": 1.0,
+      "recall": 0.7143,
+      "f1": 0.8333,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "clearcache",
+        "commercenotificationtemplateimpl",
+        "entitycache",
+        "finder_class_name_entity",
+        "finder_class_name_list_with_pagination",
+        "finder_class_name_list_without_pagination",
+        "void"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_71",
+    "high": {
+      "TP": [
+        "class",
+        "clearcache",
+        "commercenotificationtemplateimpl"
+      ],
+      "FP": [
+        "class"
+      ],
+      "FN": [
+        "entitycache",
+        "findercache"
+      ],
+      "precision": 0.75,
+      "recall": 0.6,
+      "f1": 0.6667,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 3,
+        "fp": 1,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "class",
+        "clearcache",
+        "commercenotificationtemplateimpl",
+        "entitycache",
+        "findercache"
+      ],
+      "FP": [
+        "class"
+      ],
+      "FN": [],
+      "precision": 0.8333,
+      "recall": 1.0,
+      "f1": 0.9091,
+      "hallucination_rate": 0.1667,
+      "counts": {
+        "tp": 5,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_72",
+    "high": {
+      "TP": [
+        "clearcache",
+        "commercenotificationtemplateimpl",
+        "finder_class_name_entity",
+        "finder_class_name_list_with_pagination",
+        "finder_class_name_list_without_pagination"
+      ],
+      "FP": [],
+      "FN": [
+        "entitycache",
+        "findercache"
+      ],
+      "precision": 1.0,
+      "recall": 0.7143,
+      "f1": 0.8333,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "clearcache",
+        "commercenotificationtemplateimpl",
+        "entitycache",
+        "finder_class_name_entity",
+        "finder_class_name_list_with_pagination",
+        "finder_class_name_list_without_pagination",
+        "findercache"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_73",
+    "high": {
+      "TP": [
+        "clearcache",
+        "commercenotificationtemplateimpl",
+        "finder_class_name_entity",
+        "finder_class_name_list_with_pagination",
+        "finder_class_name_list_without_pagination"
+      ],
+      "FP": [],
+      "FN": [
+        "entitycache",
+        "findercache"
+      ],
+      "precision": 1.0,
+      "recall": 0.7143,
+      "f1": 0.8333,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "clearcache",
+        "commercenotificationtemplateimpl",
+        "entitycache",
+        "finder_class_name_entity",
+        "finder_class_name_list_with_pagination",
+        "finder_class_name_list_without_pagination",
+        "findercache"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_74",
+    "high": {
+      "TP": [
+        "clearcache",
+        "commercenotificationtemplateimpl",
+        "finder_class_name_entity",
+        "finder_class_name_list_with_pagination",
+        "finder_class_name_list_without_pagination"
+      ],
+      "FP": [],
+      "FN": [
+        "entitycache",
+        "findercache"
+      ],
+      "precision": 1.0,
+      "recall": 0.7143,
+      "f1": 0.8333,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "clearcache",
+        "commercenotificationtemplateimpl",
+        "entitycache",
+        "finder_class_name_entity",
+        "finder_class_name_list_with_pagination",
+        "finder_class_name_list_without_pagination",
+        "findercache"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_75",
+    "high": {
+      "TP": [
+        "getframelength",
+        "getlength",
+        "id3v2frame",
+        "it",
+        "iterator",
+        "length",
+        "next",
+        "values"
+      ],
+      "FP": [
+        "it",
+        "length"
+      ],
+      "FN": [
+        "0",
+        "hasnext",
+        "public"
+      ],
+      "precision": 0.8,
+      "recall": 0.7273,
+      "f1": 0.7619,
+      "hallucination_rate": 0.2,
+      "counts": {
+        "tp": 8,
+        "fp": 2,
+        "fn": 3
+      }
+    },
+    "low": {
+      "TP": [
+        "getframelength",
+        "getlength",
+        "id3v2frame",
+        "it",
+        "iterator",
+        "length",
+        "next",
+        "values"
+      ],
+      "FP": [
+        "it",
+        "length"
+      ],
+      "FN": [
+        "0",
+        "hasnext",
+        "public"
+      ],
+      "precision": 0.8,
+      "recall": 0.7273,
+      "f1": 0.7619,
+      "hallucination_rate": 0.2,
+      "counts": {
+        "tp": 8,
+        "fp": 2,
+        "fn": 3
+      }
+    }
+  },
+  {
+    "case_id": "case_76",
+    "high": {
+      "TP": [
+        "getframelength",
+        "getlength",
+        "id3v2frame",
+        "it",
+        "length",
+        "next",
+        "values"
+      ],
+      "FP": [
+        "length"
+      ],
+      "FN": [
+        "hasnext",
+        "v"
+      ],
+      "precision": 0.875,
+      "recall": 0.7778,
+      "f1": 0.8235,
+      "hallucination_rate": 0.125,
+      "counts": {
+        "tp": 7,
+        "fp": 1,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "getframelength",
+        "getlength",
+        "id3v2frame",
+        "it",
+        "length",
+        "next",
+        "v",
+        "values"
+      ],
+      "FP": [
+        "length"
+      ],
+      "FN": [
+        "hasnext"
+      ],
+      "precision": 0.8889,
+      "recall": 0.8889,
+      "f1": 0.8889,
+      "hallucination_rate": 0.1111,
+      "counts": {
+        "tp": 8,
+        "fp": 1,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_77",
+    "high": {
+      "TP": [
+        "getframelength",
+        "id3v2frame",
+        "it",
+        "iterator",
+        "length"
+      ],
+      "FP": [
+        "length"
+      ],
+      "FN": [],
+      "precision": 0.8333,
+      "recall": 1.0,
+      "f1": 0.9091,
+      "hallucination_rate": 0.1667,
+      "counts": {
+        "tp": 5,
+        "fp": 1,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "getframelength",
+        "id3v2frame",
+        "it",
+        "iterator",
+        "length"
+      ],
+      "FP": [
+        "length"
+      ],
+      "FN": [],
+      "precision": 0.8333,
+      "recall": 1.0,
+      "f1": 0.9091,
+      "hallucination_rate": 0.1667,
+      "counts": {
+        "tp": 5,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_78",
+    "high": {
+      "TP": [
+        "getframelength",
+        "id3v2frame",
+        "it",
+        "iterator",
+        "length"
+      ],
+      "FP": [],
+      "FN": [
+        "id3v2",
+        "value"
+      ],
+      "precision": 1.0,
+      "recall": 0.7143,
+      "f1": 0.8333,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "getframelength",
+        "id3v2",
+        "id3v2frame",
+        "it",
+        "iterator",
+        "length"
+      ],
+      "FP": [],
+      "FN": [
+        "value"
+      ],
+      "precision": 1.0,
+      "recall": 0.8571,
+      "f1": 0.9231,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_79",
+    "high": {
+      "TP": [
+        "getframelength",
+        "id3v2frame",
+        "it",
+        "iterator",
+        "length",
+        "values"
+      ],
+      "FP": [
+        "length"
+      ],
+      "FN": [
+        "id3v2"
+      ],
+      "precision": 0.8571,
+      "recall": 0.8571,
+      "f1": 0.8571,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "getframelength",
+        "id3v2",
+        "id3v2frame",
+        "it",
+        "iterator",
+        "length",
+        "values"
+      ],
+      "FP": [
+        "id3v2",
+        "length"
+      ],
+      "FN": [],
+      "precision": 0.7778,
+      "recall": 1.0,
+      "f1": 0.875,
+      "hallucination_rate": 0.2222,
+      "counts": {
+        "tp": 7,
+        "fp": 2,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_80",
+    "high": {
+      "TP": [
+        "getframelength",
+        "id3v2frame",
+        "length",
+        "values"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "getframelength",
+        "id3v2frame",
+        "length",
+        "values"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_81",
+    "high": {
+      "TP": [
+        "getframelength",
+        "getlength",
+        "id3v2frame",
+        "it",
+        "iterator",
+        "length"
+      ],
+      "FP": [
+        "it",
+        "next"
+      ],
+      "FN": [
+        "value"
+      ],
+      "precision": 0.75,
+      "recall": 0.8571,
+      "f1": 0.8,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 6,
+        "fp": 2,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "getframelength",
+        "getlength",
+        "id3v2frame",
+        "it",
+        "iterator",
+        "length"
+      ],
+      "FP": [
+        "it",
+        "next"
+      ],
+      "FN": [
+        "value"
+      ],
+      "precision": 0.75,
+      "recall": 0.8571,
+      "f1": 0.8,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 6,
+        "fp": 2,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_82",
+    "high": {
+      "TP": [
+        "config",
+        "getinstance",
+        "guice",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [],
+      "FN": [
+        "createinjector"
+      ],
+      "precision": 1.0,
+      "recall": 0.8571,
+      "f1": 0.9231,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "config",
+        "getinstance",
+        "guice",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [],
+      "FN": [
+        "createinjector"
+      ],
+      "precision": 1.0,
+      "recall": 0.8571,
+      "f1": 0.9231,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_83",
+    "high": {
+      "TP": [
+        "class",
+        "config",
+        "getinstance",
+        "guice",
+        "injector",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "class",
+        "config",
+        "getinstance",
+        "guice",
+        "injector",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_84",
+    "high": {
+      "TP": [
+        "class",
+        "config",
+        "getinstance",
+        "guice",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "class",
+        "config",
+        "getinstance",
+        "guice",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_85",
+    "high": {
+      "TP": [
+        "config",
+        "guice",
+        "injector",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [
+        "properties"
+      ],
+      "FN": [],
+      "precision": 0.8571,
+      "recall": 1.0,
+      "f1": 0.9231,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "config",
+        "guice",
+        "injector",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [
+        "properties"
+      ],
+      "FN": [],
+      "precision": 0.8571,
+      "recall": 1.0,
+      "f1": 0.9231,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_86",
+    "high": {
+      "TP": [
+        "config",
+        "guice",
+        "injector",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "config",
+        "guice",
+        "injector",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_87",
+    "high": {
+      "TP": [
+        "class",
+        "config",
+        "guice",
+        "injector",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [
+        "class",
+        "systemmain"
+      ],
+      "FN": [],
+      "precision": 0.7778,
+      "recall": 1.0,
+      "f1": 0.875,
+      "hallucination_rate": 0.2222,
+      "counts": {
+        "tp": 7,
+        "fp": 2,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "class",
+        "config",
+        "guice",
+        "injector",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [
+        "class",
+        "systemmain"
+      ],
+      "FN": [],
+      "precision": 0.7778,
+      "recall": 1.0,
+      "f1": 0.875,
+      "hallucination_rate": 0.2222,
+      "counts": {
+        "tp": 7,
+        "fp": 2,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_88",
+    "high": {
+      "TP": [
+        "getinstance",
+        "guice",
+        "injector",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [
+        "systemmain"
+      ],
+      "FN": [],
+      "precision": 0.8571,
+      "recall": 1.0,
+      "f1": 0.9231,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "getinstance",
+        "guice",
+        "injector",
+        "properties",
+        "systeminitializer",
+        "systemmain"
+      ],
+      "FP": [
+        "systemmain"
+      ],
+      "FN": [],
+      "precision": 0.8571,
+      "recall": 1.0,
+      "f1": 0.9231,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_89",
+    "high": {
+      "TP": [
+        "duration",
+        "failuretimeout",
+        "setfailuretimeout",
+        "swimmembershipprotocolconfig"
+      ],
+      "FP": [],
+      "FN": [
+        "checknotnull",
+        "isnegative",
+        "iszero",
+        "this"
+      ],
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6667,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 4
+      }
+    },
+    "low": {
+      "TP": [
+        "checknotnull",
+        "duration",
+        "failuretimeout",
+        "setfailuretimeout",
+        "swimmembershipprotocolconfig",
+        "this"
+      ],
+      "FP": [
+        "this"
+      ],
+      "FN": [
+        "isnegative",
+        "iszero"
+      ],
+      "precision": 0.8571,
+      "recall": 0.75,
+      "f1": 0.8,
+      "hallucination_rate": 0.1429,
+      "counts": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_90",
+    "high": {
+      "TP": [
+        "duration",
+        "failuretimeout",
+        "swimmembershipprotocolconfig"
+      ],
+      "FP": [
+        "duration"
+      ],
+      "FN": [
+        "checkargument",
+        "checknotnull",
+        "this"
+      ],
+      "precision": 0.75,
+      "recall": 0.5,
+      "f1": 0.6,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 3,
+        "fp": 1,
+        "fn": 3
+      }
+    },
+    "low": {
+      "TP": [
+        "checkargument",
+        "checknotnull",
+        "duration",
+        "failuretimeout",
+        "swimmembershipprotocolconfig",
+        "this"
+      ],
+      "FP": [
+        "duration",
+        "this"
+      ],
+      "FN": [],
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 6,
+        "fp": 2,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_91",
+    "high": {
+      "TP": [
+        "duration",
+        "failuretimeout",
+        "setfailuretimeout",
+        "swimmembershipprotocolconfig"
+      ],
+      "FP": [
+        "duration"
+      ],
+      "FN": [
+        "checkargument",
+        "checknotnull",
+        "this"
+      ],
+      "precision": 0.8,
+      "recall": 0.5714,
+      "f1": 0.6667,
+      "hallucination_rate": 0.2,
+      "counts": {
+        "tp": 4,
+        "fp": 1,
+        "fn": 3
+      }
+    },
+    "low": {
+      "TP": [
+        "checkargument",
+        "checknotnull",
+        "duration",
+        "failuretimeout",
+        "setfailuretimeout",
+        "swimmembershipprotocolconfig",
+        "this"
+      ],
+      "FP": [
+        "duration"
+      ],
+      "FN": [],
+      "precision": 0.875,
+      "recall": 1.0,
+      "f1": 0.9333,
+      "hallucination_rate": 0.125,
+      "counts": {
+        "tp": 7,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_92",
+    "high": {
+      "TP": [
+        "duration",
+        "failuretimeout",
+        "swimmembershipprotocolconfig"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "duration",
+        "failuretimeout",
+        "swimmembershipprotocolconfig"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_93",
+    "high": {
+      "TP": [
+        "duration",
+        "failuretimeout",
+        "setfailuretimeout",
+        "swimmembershipprotocolconfig"
+      ],
+      "FP": [
+        "failuretimeout"
+      ],
+      "FN": [
+        "checknotnull",
+        "isnegative",
+        "iszero"
+      ],
+      "precision": 0.8,
+      "recall": 0.5714,
+      "f1": 0.6667,
+      "hallucination_rate": 0.2,
+      "counts": {
+        "tp": 4,
+        "fp": 1,
+        "fn": 3
+      }
+    },
+    "low": {
+      "TP": [
+        "checknotnull",
+        "duration",
+        "failuretimeout",
+        "setfailuretimeout",
+        "swimmembershipprotocolconfig"
+      ],
+      "FP": [
+        "failuretimeout"
+      ],
+      "FN": [
+        "isnegative",
+        "iszero"
+      ],
+      "precision": 0.8333,
+      "recall": 0.7143,
+      "f1": 0.7692,
+      "hallucination_rate": 0.1667,
+      "counts": {
+        "tp": 5,
+        "fp": 1,
+        "fn": 2
+      }
+    }
+  },
+  {
+    "case_id": "case_94",
+    "high": {
+      "TP": [
+        "duration",
+        "failuretimeout",
+        "swimmembershipprotocolconfig"
+      ],
+      "FP": [
+        "duration",
+        "failuretimeout"
+      ],
+      "FN": [
+        "checkargument",
+        "checknotnull",
+        "this"
+      ],
+      "precision": 0.6,
+      "recall": 0.5,
+      "f1": 0.5455,
+      "hallucination_rate": 0.4,
+      "counts": {
+        "tp": 3,
+        "fp": 2,
+        "fn": 3
+      }
+    },
+    "low": {
+      "TP": [
+        "checkargument",
+        "checknotnull",
+        "duration",
+        "failuretimeout",
+        "swimmembershipprotocolconfig",
+        "this"
+      ],
+      "FP": [
+        "duration",
+        "failuretimeout"
+      ],
+      "FN": [],
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571,
+      "hallucination_rate": 0.25,
+      "counts": {
+        "tp": 6,
+        "fp": 2,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_95",
+    "high": {
+      "TP": [
+        "duration",
+        "failuretimeout",
+        "swimmembershipprotocolconfig"
+      ],
+      "FP": [],
+      "FN": [
+        "swimmembershipprotocol"
+      ],
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "duration",
+        "failuretimeout",
+        "swimmembershipprotocolconfig"
+      ],
+      "FP": [],
+      "FN": [
+        "swimmembershipprotocol"
+      ],
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 1
+      }
+    }
+  },
+  {
+    "case_id": "case_96",
+    "high": {
+      "TP": [
+        "collections",
+        "config",
+        "emptylist",
+        "getmetakeywordsformodule",
+        "keywords",
+        "list",
+        "mdle",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [],
+      "FN": [
+        "arrays",
+        "aslist"
+      ],
+      "precision": 1.0,
+      "recall": 0.8182,
+      "f1": 0.9,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 9,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "low": {
+      "TP": [
+        "arrays",
+        "aslist",
+        "collections",
+        "config",
+        "emptylist",
+        "getmetakeywordsformodule",
+        "keywords",
+        "list",
+        "mdle",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [],
+      "FN": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "hallucination_rate": 0.0,
+      "counts": {
+        "tp": 11,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_97",
+    "high": {
+      "TP": [
+        "collections",
+        "config",
+        "emptylist",
+        "getmetakeywordsformodule",
+        "keywords",
+        "list",
+        "mdle",
+        "module",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [
+        "keywords",
+        "list",
+        "module",
+        "moduleelement"
+      ],
+      "FN": [
+        "arrays",
+        "aslist",
+        "getqualifiedname"
+      ],
+      "precision": 0.7143,
+      "recall": 0.7692,
+      "f1": 0.7407,
+      "hallucination_rate": 0.2857,
+      "counts": {
+        "tp": 10,
+        "fp": 4,
+        "fn": 3
+      }
+    },
+    "low": {
+      "TP": [
+        "arrays",
+        "aslist",
+        "collections",
+        "config",
+        "emptylist",
+        "getmetakeywordsformodule",
+        "getqualifiedname",
+        "keywords",
+        "list",
+        "mdle",
+        "module",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [
+        "keywords",
+        "list",
+        "module",
+        "moduleelement"
+      ],
+      "FN": [],
+      "precision": 0.7647,
+      "recall": 1.0,
+      "f1": 0.8667,
+      "hallucination_rate": 0.2353,
+      "counts": {
+        "tp": 13,
+        "fp": 4,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_98",
+    "high": {
+      "TP": [
+        "collections",
+        "config",
+        "getmetakeywordsformodule",
+        "keywords",
+        "list",
+        "mdle",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [
+        "keywords"
+      ],
+      "FN": [
+        "arrays"
+      ],
+      "precision": 0.8889,
+      "recall": 0.8889,
+      "f1": 0.8889,
+      "hallucination_rate": 0.1111,
+      "counts": {
+        "tp": 8,
+        "fp": 1,
+        "fn": 1
+      }
+    },
+    "low": {
+      "TP": [
+        "arrays",
+        "collections",
+        "config",
+        "getmetakeywordsformodule",
+        "keywords",
+        "list",
+        "mdle",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [
+        "keywords"
+      ],
+      "FN": [],
+      "precision": 0.9,
+      "recall": 1.0,
+      "f1": 0.9474,
+      "hallucination_rate": 0.1,
+      "counts": {
+        "tp": 9,
+        "fp": 1,
+        "fn": 0
+      }
+    }
+  },
+  {
+    "case_id": "case_99",
+    "high": {
+      "TP": [
+        "keywords",
+        "list",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [
+        "list",
+        "string"
+      ],
+      "FN": [],
+      "precision": 0.6667,
+      "recall": 1.0,
+      "f1": 0.8,
+      "hallucination_rate": 0.3333,
+      "counts": {
+        "tp": 4,
+        "fp": 2,
+        "fn": 0
+      }
+    },
+    "low": {
+      "TP": [
+        "keywords",
+        "list",
+        "moduleelement",
+        "string"
+      ],
+      "FP": [
+        "list",
+        "string"
+      ],
+      "FN": [],
+      "precision": 0.6667,
+      "recall": 1.0,
+      "f1": 0.8,
+      "hallucination_rate": 0.3333,
+      "counts": {
+        "tp": 4,
+        "fp": 2,
+        "fn": 0
+      }
+    }
+  }
+]

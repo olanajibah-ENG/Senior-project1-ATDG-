@@ -1,0 +1,41 @@
+{
+  "case_id": "case_117",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "handletimeouterror",
+    "rpc",
+    "status",
+    "streamwaittimeoutexception"
+  ],
+  "metrics": {
+    "TP": [
+      "handletimeouterror",
+      "rpc",
+      "status",
+      "streamwaittimeoutexception"
+    ],
+    "FP": [],
+    "FN": [
+      "exhaustedretriesexception",
+      "failedcount",
+      "finalizestats",
+      "getexhaustedretriesexception",
+      "getrpcmetrics",
+      "markfailure",
+      "performretry",
+      "resetstatusbasedbackoff",
+      "retryoptions",
+      "rpctimercontext",
+      "setexception"
+    ],
+    "precision": 1.0,
+    "recall": 0.2667,
+    "f1": 0.4211,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 11
+    }
+  }
+}

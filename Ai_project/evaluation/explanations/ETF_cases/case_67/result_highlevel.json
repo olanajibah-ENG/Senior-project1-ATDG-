@@ -1,0 +1,38 @@
+{
+  "case_id": "case_67",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "comment",
+    "key",
+    "keys",
+    "logger",
+    "logproperties",
+    "string"
+  ],
+  "metrics": {
+    "TP": [
+      "comment",
+      "key",
+      "keys",
+      "logger",
+      "logproperties",
+      "string"
+    ],
+    "FP": [
+      "key"
+    ],
+    "FN": [
+      "getkeyset",
+      "info"
+    ],
+    "precision": 0.8571,
+    "recall": 0.75,
+    "f1": 0.8,
+    "hallucination_rate": 0.1429,
+    "counts": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 2
+    }
+  }
+}

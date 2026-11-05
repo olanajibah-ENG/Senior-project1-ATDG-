@@ -1,0 +1,186 @@
+{
+  "case_id": "case_28",
+  "source": "CodeSumEval",
+  "model_name": "codellama_7b",
+  "scope": "method",
+  "row_index": 27,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "setcurrentbusinessdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "currentbusinessdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "final",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "setcurrentbusinessdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "currentbusinessdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "final",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n\r\n1. Inputs and outputs of the method:\r\n* Input: `startDate` of type `E`\r\n* Output: `this` of type `DateCalculator<E>`\r\n2. Business purpose:\r\n* The method sets the start date for the `DateCalculator` object.\r\n* The start date is used as the current business date when calculating dates.\r\n3. Detailed functional summary of the method:\r\n* The method takes a single input, `startDate`, of type `E`.\r\n* The method sets the `startDate` field of the `DateCalculator` object to the input value.\r\n* The method also sets the `currentBusinessDate` field of the `DateCalculator` object to the input value.\r\n* The method returns `this`, which allows the method to be used in a fluent API.\r\n* The method is annotated with `@Override`, indicating that it overrides a method in a superclass.\r\n* The method is gene"
+}

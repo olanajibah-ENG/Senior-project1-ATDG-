@@ -1,0 +1,41 @@
+{
+  "case_id": "case_30",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "createsetfromproperty",
+    "hashset",
+    "matcher",
+    "null",
+    "pattern",
+    "property",
+    "string"
+  ],
+  "metrics": {
+    "TP": [
+      "createsetfromproperty",
+      "hashset",
+      "matcher",
+      "null",
+      "pattern",
+      "property",
+      "string"
+    ],
+    "FP": [
+      "pattern"
+    ],
+    "FN": [
+      "add",
+      "find",
+      "properties"
+    ],
+    "precision": 0.875,
+    "recall": 0.7,
+    "f1": 0.7778,
+    "hallucination_rate": 0.125,
+    "counts": {
+      "tp": 7,
+      "fp": 1,
+      "fn": 3
+    }
+  }
+}

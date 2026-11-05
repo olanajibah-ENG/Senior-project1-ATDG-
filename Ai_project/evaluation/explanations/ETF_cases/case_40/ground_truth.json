@@ -1,0 +1,116 @@
+{
+  "case_id": "case_40",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_20b",
+  "scope": "method",
+  "row_index": 39,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredtypes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredtypes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs and outputs of the method:\r\n- The method takes a single parameter, a Model object, which represents the RDF graph.\r\n- The method does not have any outputs.\r\n\r\n2. Business purpose:\r\n- The purpose of this method is to assert that the provided Model object contains the required properties and types as specified in the REQUIRED_PROPERTIES and CONTAINER_TYPES constants.\r\n\r\n3. Detailed functional summary of the method:\r\n- The method first calls the assertContainsRequiredProperties method to check if the Model object contains the required properties.\r\n- If the required properties are not present, a ConstraintViolationException is thrown.\r\n- Next, the method calls the assertContainsRequiredTypes method to check if the Model object contains the required types.\r\n- If the required types a"
+}

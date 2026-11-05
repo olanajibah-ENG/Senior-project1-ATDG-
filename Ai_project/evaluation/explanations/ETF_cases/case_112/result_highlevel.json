@@ -1,0 +1,45 @@
+{
+  "case_id": "case_112",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "iops",
+    "size",
+    "uuid"
+  ],
+  "metrics": {
+    "TP": [
+      "iops",
+      "size",
+      "uuid"
+    ],
+    "FP": [],
+    "FN": [
+      "allmockvolumes",
+      "availabilityzone",
+      "getvolumeid",
+      "mockvolume",
+      "put",
+      "ret",
+      "setavailabilityzone",
+      "setiops",
+      "setsize",
+      "setsnapshotid",
+      "setvolumeid",
+      "setvolumetype",
+      "snapshotid",
+      "string",
+      "volume_id_postfix_length",
+      "volumeid",
+      "volumetype"
+    ],
+    "precision": 1.0,
+    "recall": 0.15,
+    "f1": 0.2609,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 17
+    }
+  }
+}

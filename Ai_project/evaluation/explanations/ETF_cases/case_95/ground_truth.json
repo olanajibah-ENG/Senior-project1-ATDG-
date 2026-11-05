@@ -1,0 +1,106 @@
+{
+  "case_id": "case_95",
+  "source": "CodeSumEval",
+  "model_name": "codellama_34b",
+  "scope": "method",
+  "row_index": 94,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocol",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocol",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocol",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocol",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n\r\n1. Inputs and outputs of the method:\r\nThe method takes a single input parameter, `failureTimeout`, which is an instance of the `Duration` class. The method returns an instance of the `SwimMembershipProtocolConfig` class.\r\n\r\n2. Business purpose:\r\nThe method is used to set the failure timeout for the `SwimMembershipProtocol` class. The failure timeout is the amount of time that the protocol will wait before considering a node to have failed.\r\n\r\n3. Detailed functional summary of the method:\r\nThe method starts by checking that the `failureTimeout` parameter is not null and that it is a positive value. If either of these conditions is not met, an `IllegalArgumentException` is thrown.\r\n\r\nNext, the method sets the `failureTimeout` field of the `SwimMembershipProtocolConfig` class to the value"
+}

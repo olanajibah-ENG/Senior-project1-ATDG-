@@ -1,0 +1,436 @@
+{
+  "case_id": "case_96",
+  "source": "CodeSumEval",
+  "model_name": "llama3_8b",
+  "scope": "method",
+  "row_index": 95,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getmetakeywordsformodule",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "arrays",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "collections",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mdle",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mdle",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mdle",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "aslist",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "emptylist",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getmetakeywordsformodule",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "arrays",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "collections",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mdle",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mdle",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mdle",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "aslist",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "emptylist",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\nHere is a detailed summary of the provided Java code:\r\n\r\n**1. Inputs and Outputs of the Method:**\r\n\r\n* Input: `mdle` of type `ModuleElement`\r\n* Output: A `List<String>` containing meta keywords for the given `ModuleElement`\r\n\r\n**2. Business Purpose:**\r\n\r\nThe purpose of this method is to generate a list of meta keywords for a given `ModuleElement`. The meta keywords are used to describe the module and are used for search, filtering, or other purposes.\r\n\r\n**3. Detailed Functional Summary of the Method:**\r\n\r\nThe method `getMetaKeywordsForModule` takes a `ModuleElement` object `mdle` as input and returns a list of meta keywords for that module. The method checks a configuration flag `config.keywords`. If the flag is `true`, it generates a list of meta keywords by concatenating the qualified "
+}

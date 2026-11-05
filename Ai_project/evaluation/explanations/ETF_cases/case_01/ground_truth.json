@@ -1,0 +1,241 @@
+{
+  "case_id": "case_01",
+  "source": "CodeSumEval (ETF)",
+  "model_name": "llama3_8b",
+  "scope": "method",
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "in summary, the `int16` method is used to add a new column of type `int16` to a row, with a given name, and returns the "
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "* input: `name` - a `string` parameter"
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` takes a `string` parameter `name` and uses it to create a new `columnint16` object."
+      },
+      {
+        "entity": "_columns",
+        "verdict": "CORRECT",
+        "sentence": "* `_columns.size()`: the size of the `_columns` collection, which is likely a list of columns in the row."
+      },
+      {
+        "entity": "_columns",
+        "verdict": "CORRECT",
+        "sentence": "the new `columnint16` object is then added to the `_columns` collection, which is likely a list of columns in the row."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` takes a `string` parameter `name` and uses it to create a new `columnint16` object."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the `columnint16` object is initialized with the following parameters:"
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the new `columnint16` object is then added to the `_columns` collection, which is likely a list of columns in the row."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "* input: `name` - a `string` parameter"
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` takes a `string` parameter `name` and uses it to create a new `columnint16` object."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "* `name`: the name of the column, passed as a parameter."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` is part of a `rowbuilder` class, which appears to be responsible for building a row in a database or "
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` is used to add a new column of type `int16` to the row."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` takes a `string` parameter `name` and uses it to create a new `columnint16` object."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the `int16` method is used to add a new column of type `int16` to a row, with a given name, and returns the "
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "* output: `this` - the current instance of the `rowbuilder` class"
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` is part of a `rowbuilder` class, which appears to be responsible for building a row in a database or "
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method returns the current instance of the `rowbuilder` class, allowing the caller to chain method calls to"
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the `int16` method is used to add a new column of type `int16` to a row, with a given name, and returns the "
+      },
+      {
+        "entity": "_offset",
+        "verdict": "CORRECT",
+        "sentence": "* `_offset`: the offset of the column in the row, which is incremented by the length of the new column."
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": "* output: `this` - the current instance of the `rowbuilder` class"
+      },
+      {
+        "entity": "size",
+        "verdict": "CORRECT",
+        "sentence": "* `_columns.size()`: the size of the `_columns` collection, which is likely a list of columns in the row."
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "* input: `name` - a `string` parameter"
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` takes a `string` parameter `name` and uses it to create a new `columnint16` object."
+      },
+      {
+        "entity": "_columns",
+        "verdict": "CORRECT",
+        "sentence": "* `_columns.size()`: the size of the `_columns` collection, which is likely a list of columns in the row."
+      },
+      {
+        "entity": "_columns",
+        "verdict": "CORRECT",
+        "sentence": "the new `columnint16` object is then added to the `_columns` collection, which is likely a list of columns in the row."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` takes a `string` parameter `name` and uses it to create a new `columnint16` object."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the `columnint16` object is initialized with the following parameters:"
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the new `columnint16` object is then added to the `_columns` collection, which is likely a list of columns in the row."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "* input: `name` - a `string` parameter"
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` takes a `string` parameter `name` and uses it to create a new `columnint16` object."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "* `name`: the name of the column, passed as a parameter."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` is part of a `rowbuilder` class, which appears to be responsible for building a row in a database or "
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` is used to add a new column of type `int16` to the row."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` takes a `string` parameter `name` and uses it to create a new `columnint16` object."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the `int16` method is used to add a new column of type `int16` to a row, with a given name, and returns the "
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "* output: `this` - the current instance of the `rowbuilder` class"
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the method `int16` is part of a `rowbuilder` class, which appears to be responsible for building a row in a database or "
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method returns the current instance of the `rowbuilder` class, allowing the caller to chain method calls to"
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the `int16` method is used to add a new column of type `int16` to a row, with a given name, and returns the "
+      },
+      {
+        "entity": "_offset",
+        "verdict": "CORRECT",
+        "sentence": "* `_offset`: the offset of the column in the row, which is incremented by the length of the new column."
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": "* output: `this` - the current instance of the `rowbuilder` class"
+      },
+      {
+        "entity": "size",
+        "verdict": "CORRECT",
+        "sentence": "* `_columns.size()`: the size of the `_columns` collection, which is likely a list of columns in the row."
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "in summary, the `int16` method is used to add a new column of type `int16` to a row, with a given name, and returns the "
+      }
+    ]
+  },
+  "stats": {
+    "n_all": 22,
+    "n_correct": 21,
+    "n_incorrect": 0,
+    "n_irrelevant": 1
+  }
+}

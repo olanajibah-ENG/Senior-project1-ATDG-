@@ -1,0 +1,377 @@
+{
+  "case_id": "case_98",
+  "source": "CodeSumEval",
+  "model_name": "mistral_7b",
+  "scope": "method",
+  "row_index": 97,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "arrays",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "collections",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mdle",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mdle",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getmetakeywordsformodule",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "arrays",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "collections",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mdle",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mdle",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "moduleelement",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getmetakeywordsformodule",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "list",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keywords",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "keywords",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs:\r\n- `ModuleElement mdle`: An instance of the `ModuleElement` class, which presumably represents some information about a Java module.\r\n\r\n2. Outputs:\r\n- A `List` of `String` objects. If the `config` object's `keywords` property is set to `true`, the list will contain a single string, which is the qualified name of the `ModuleElement` followed by the string \" module\". If the `config` object's `keywords` property is `false`, the list will be an empty list.\r\n\r\n3. Business Purpose:\r\nThe purpose of this method is to return a list of meta keywords for a given Java module. The meta keywords are simply the qualified name of the module followed by the string \" module\". If the configuration object does not have the `keywords` property set to `true`, then an empty list is returned instead."
+}

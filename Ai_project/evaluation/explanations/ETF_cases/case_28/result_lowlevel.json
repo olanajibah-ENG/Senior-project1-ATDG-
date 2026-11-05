@@ -1,0 +1,35 @@
+{
+  "case_id": "case_28",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "datecalculator",
+    "e",
+    "final",
+    "setcurrentbusinessdate",
+    "startdate",
+    "this"
+  ],
+  "metrics": {
+    "TP": [
+      "datecalculator",
+      "e",
+      "final",
+      "setcurrentbusinessdate",
+      "startdate",
+      "this"
+    ],
+    "FP": [],
+    "FN": [
+      "currentbusinessdate"
+    ],
+    "precision": 1.0,
+    "recall": 0.8571,
+    "f1": 0.9231,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 1
+    }
+  }
+}

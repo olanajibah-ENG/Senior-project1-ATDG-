@@ -1,0 +1,211 @@
+{
+  "case_id": "case_08",
+  "source": "CodeSumEval (ETF)",
+  "model_name": "llama3_8b",
+  "scope": "method",
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "scalespace",
+        "verdict": "CORRECT",
+        "sentence": "1. initializes the `scalespace` object with the input image."
+      },
+      {
+        "entity": "scalespace",
+        "verdict": "CORRECT",
+        "sentence": "* iterates through each scale in the scale space (from 1 to `scalespace.getnumscales()`)."
+      },
+      {
+        "entity": "input",
+        "verdict": "CORRECT",
+        "sentence": "* input: `grayf32 input` - a grayscale image"
+      },
+      {
+        "entity": "input",
+        "verdict": "CORRECT",
+        "sentence": "the method `process(grayf32 input)` performs the following steps:"
+      },
+      {
+        "entity": "input",
+        "verdict": "CORRECT",
+        "sentence": "1. initializes the `scalespace` object with the input image."
+      },
+      {
+        "entity": "input",
+        "verdict": "CORRECT",
+        "sentence": "* computes the current pixel scale relative to the input image."
+      },
+      {
+        "entity": "detections",
+        "verdict": "CORRECT",
+        "sentence": "2. resets the `detections` object."
+      },
+      {
+        "entity": "detections",
+        "verdict": "CORRECT",
+        "sentence": "the detected features are stored in the `detections` object."
+      },
+      {
+        "entity": "process",
+        "verdict": "CORRECT",
+        "sentence": "the purpose of this method is to process a grayscale image using a feature detection algorithm, likely a scale-space app"
+      },
+      {
+        "entity": "process",
+        "verdict": "CORRECT",
+        "sentence": "the method `process(grayf32 input)` performs the following steps:"
+      },
+      {
+        "entity": "grayf32",
+        "verdict": "CORRECT",
+        "sentence": "* input: `grayf32 input` - a grayscale image"
+      },
+      {
+        "entity": "grayf32",
+        "verdict": "CORRECT",
+        "sentence": "the method `process(grayf32 input)` performs the following steps:"
+      },
+      {
+        "entity": "detectfeatures",
+        "verdict": "CORRECT",
+        "sentence": "+ calls the `detectfeatures` method to detect features in the current dog image."
+      },
+      {
+        "entity": "detectfeatures",
+        "verdict": "CORRECT",
+        "sentence": "the `detectfeatures` method is not shown in the provided code, but it is likely responsible for detecting features (e.g."
+      },
+      {
+        "entity": "dog",
+        "verdict": "CORRECT",
+        "sentence": "+ retrieves the corresponding difference of gaussian (dog) images for the current scale."
+      },
+      {
+        "entity": "dog",
+        "verdict": "IRRELEVANT",
+        "sentence": "+ calls the `detectfeatures` method to detect features in the current dog image."
+      },
+      {
+        "entity": "dog",
+        "verdict": "IRRELEVANT",
+        "sentence": "the `detectfeatures` method is not shown in the provided code, but it is likely responsible for detecting features (e.g."
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": "* output: none (void method)"
+      },
+      {
+        "entity": "getnumscales",
+        "verdict": "CORRECT",
+        "sentence": "* iterates through each scale in the scale space (from 1 to `scalespace.getnumscales()`)."
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "scalespace",
+        "verdict": "CORRECT",
+        "sentence": "1. initializes the `scalespace` object with the input image."
+      },
+      {
+        "entity": "scalespace",
+        "verdict": "CORRECT",
+        "sentence": "* iterates through each scale in the scale space (from 1 to `scalespace.getnumscales()`)."
+      },
+      {
+        "entity": "input",
+        "verdict": "CORRECT",
+        "sentence": "* input: `grayf32 input` - a grayscale image"
+      },
+      {
+        "entity": "input",
+        "verdict": "CORRECT",
+        "sentence": "the method `process(grayf32 input)` performs the following steps:"
+      },
+      {
+        "entity": "input",
+        "verdict": "CORRECT",
+        "sentence": "1. initializes the `scalespace` object with the input image."
+      },
+      {
+        "entity": "input",
+        "verdict": "CORRECT",
+        "sentence": "* computes the current pixel scale relative to the input image."
+      },
+      {
+        "entity": "detections",
+        "verdict": "CORRECT",
+        "sentence": "2. resets the `detections` object."
+      },
+      {
+        "entity": "detections",
+        "verdict": "CORRECT",
+        "sentence": "the detected features are stored in the `detections` object."
+      },
+      {
+        "entity": "process",
+        "verdict": "CORRECT",
+        "sentence": "the purpose of this method is to process a grayscale image using a feature detection algorithm, likely a scale-space app"
+      },
+      {
+        "entity": "process",
+        "verdict": "CORRECT",
+        "sentence": "the method `process(grayf32 input)` performs the following steps:"
+      },
+      {
+        "entity": "grayf32",
+        "verdict": "CORRECT",
+        "sentence": "* input: `grayf32 input` - a grayscale image"
+      },
+      {
+        "entity": "grayf32",
+        "verdict": "CORRECT",
+        "sentence": "the method `process(grayf32 input)` performs the following steps:"
+      },
+      {
+        "entity": "detectfeatures",
+        "verdict": "CORRECT",
+        "sentence": "+ calls the `detectfeatures` method to detect features in the current dog image."
+      },
+      {
+        "entity": "detectfeatures",
+        "verdict": "CORRECT",
+        "sentence": "the `detectfeatures` method is not shown in the provided code, but it is likely responsible for detecting features (e.g."
+      },
+      {
+        "entity": "dog",
+        "verdict": "CORRECT",
+        "sentence": "+ retrieves the corresponding difference of gaussian (dog) images for the current scale."
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": "* output: none (void method)"
+      },
+      {
+        "entity": "getnumscales",
+        "verdict": "CORRECT",
+        "sentence": "* iterates through each scale in the scale space (from 1 to `scalespace.getnumscales()`)."
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "dog",
+        "verdict": "IRRELEVANT",
+        "sentence": "+ calls the `detectfeatures` method to detect features in the current dog image."
+      },
+      {
+        "entity": "dog",
+        "verdict": "IRRELEVANT",
+        "sentence": "the `detectfeatures` method is not shown in the provided code, but it is likely responsible for detecting features (e.g."
+      }
+    ]
+  },
+  "stats": {
+    "n_all": 19,
+    "n_correct": 17,
+    "n_incorrect": 0,
+    "n_irrelevant": 2
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "case_id": "case_51",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "context",
+    "string",
+    "toast"
+  ],
+  "metrics": {
+    "TP": [
+      "context",
+      "string",
+      "toast"
+    ],
+    "FP": [
+      "context"
+    ],
+    "FN": [
+      "length_short",
+      "maketext",
+      "mcontext",
+      "r",
+      "show",
+      "wings_facebook__error_facebook_app"
+    ],
+    "precision": 0.75,
+    "recall": 0.3333,
+    "f1": 0.4615,
+    "hallucination_rate": 0.25,
+    "counts": {
+      "tp": 3,
+      "fp": 1,
+      "fn": 6
+    }
+  }
+}

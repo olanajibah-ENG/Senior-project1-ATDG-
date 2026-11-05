@@ -1,0 +1,43 @@
+{
+  "case_id": "case_46",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "computeiv",
+    "index",
+    "iv",
+    "ivstore",
+    "key_id",
+    "keyderivationrate",
+    "label",
+    "mastersalt"
+  ],
+  "metrics": {
+    "TP": [
+      "index",
+      "iv",
+      "ivstore",
+      "key_id",
+      "keyderivationrate",
+      "label",
+      "mastersalt"
+    ],
+    "FP": [
+      "computeiv",
+      "iv",
+      "ivstore",
+      "key_id"
+    ],
+    "FN": [
+      "long"
+    ],
+    "precision": 0.6364,
+    "recall": 0.875,
+    "f1": 0.7368,
+    "hallucination_rate": 0.3636,
+    "counts": {
+      "tp": 7,
+      "fp": 4,
+      "fn": 1
+    }
+  }
+}

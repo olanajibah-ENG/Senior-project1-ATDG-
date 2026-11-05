@@ -1,0 +1,311 @@
+{
+  "case_id": "case_11",
+  "source": "CodeSumEval (ETF)",
+  "model_name": "mistral_7b",
+  "scope": "method",
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "result",
+        "verdict": "IRRELEVANT",
+        "sentence": "- if the filter matches, the corresponding healthcheck is executed using the `execute()` method, and the result object i"
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "- `sortedmap<string, healthcheck.result> results`: a sorted map containing key-value pairs, where the keys represent the"
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "the `runhealthchecks` method is responsible for filtering and executing a subset of registered healthchecks based on a g"
+      },
+      {
+        "entity": "treemap",
+        "verdict": "CORRECT",
+        "sentence": "- the method initializes an empty sorted map called `results` using a treemap."
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "- `sortedmap<string, healthcheck.result> results`: a sorted map containing key-value pairs, where the keys represent the"
+      },
+      {
+        "entity": "result",
+        "verdict": "CORRECT",
+        "sentence": "- `sortedmap<string, healthcheck.result> results`: a sorted map containing key-value pairs, where the keys represent the"
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "- `healthchecks`: a map containing key-value pairs, where the keys represent the names of healthchecks and the values re"
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "- `sortedmap<string, healthcheck.result> results`: a sorted map containing key-value pairs, where the keys represent the"
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "- for each entry, it checks if the given filter matches the name and the instance of the healthcheck using the `matches`"
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "- if the filter matches, the corresponding healthcheck is executed using the `execute()` method, and the result object i"
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "- `healthchecks`: a map containing key-value pairs, where the keys represent the names of healthchecks and the values re"
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "the `runhealthchecks` method is responsible for filtering and executing a subset of registered healthchecks based on a g"
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "it returns an immutable sorted map containing the results of the executed healthchecks."
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "- it iterates through each entry in the `healthchecks` map."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "- `filter`: an instance of healthcheckfilter, which is an interface or a class that implements the healthcheckfilter int"
+      },
+      {
+        "entity": "filter",
+        "verdict": "IRRELEVANT",
+        "sentence": "- for each entry, it checks if the given filter matches the name and the instance of the healthcheck using the `matches`"
+      },
+      {
+        "entity": "filter",
+        "verdict": "IRRELEVANT",
+        "sentence": "- if the filter matches, the corresponding healthcheck is executed using the `execute()` method, and the result object i"
+      },
+      {
+        "entity": "matches",
+        "verdict": "CORRECT",
+        "sentence": "- for each entry, it checks if the given filter matches the name and the instance of the healthcheck using the `matches`"
+      },
+      {
+        "entity": "matches",
+        "verdict": "CORRECT",
+        "sentence": "- if the filter matches, the corresponding healthcheck is executed using the `execute()` method, and the result object i"
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- `sortedmap<string, healthcheck.result> results`: a sorted map containing key-value pairs, where the keys represent the"
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "it returns an immutable sorted map containing the results of the executed healthchecks."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- the method initializes an empty sorted map called `results` using a treemap."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- if the filter matches, the corresponding healthcheck is executed using the `execute()` method, and the result object i"
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- the method returns the `results` map as an unmodifiable sorted map."
+      },
+      {
+        "entity": "unmodifiable",
+        "verdict": "CORRECT",
+        "sentence": "- the method returns the `results` map as an unmodifiable sorted map."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "- `sortedmap<string, healthcheck.result> results`: a sorted map containing key-value pairs, where the keys represent the"
+      },
+      {
+        "entity": "healthcheckfilter",
+        "verdict": "CORRECT",
+        "sentence": "- `filter`: an instance of healthcheckfilter, which is an interface or a class that implements the healthcheckfilter int"
+      },
+      {
+        "entity": "execute",
+        "verdict": "CORRECT",
+        "sentence": "- if the filter matches, the corresponding healthcheck is executed using the `execute()` method, and the result object i"
+      },
+      {
+        "entity": "runhealthchecks",
+        "verdict": "CORRECT",
+        "sentence": "the `runhealthchecks` method is responsible for filtering and executing a subset of registered healthchecks based on a g"
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "- `sortedmap<string, healthcheck.result> results`: a sorted map containing key-value pairs, where the keys represent the"
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "the `runhealthchecks` method is responsible for filtering and executing a subset of registered healthchecks based on a g"
+      },
+      {
+        "entity": "treemap",
+        "verdict": "CORRECT",
+        "sentence": "- the method initializes an empty sorted map called `results` using a treemap."
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "- `sortedmap<string, healthcheck.result> results`: a sorted map containing key-value pairs, where the keys represent the"
+      },
+      {
+        "entity": "result",
+        "verdict": "CORRECT",
+        "sentence": "- `sortedmap<string, healthcheck.result> results`: a sorted map containing key-value pairs, where the keys represent the"
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "- `healthchecks`: a map containing key-value pairs, where the keys represent the names of healthchecks and the values re"
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "- `sortedmap<string, healthcheck.result> results`: a sorted map containing key-value pairs, where the keys represent the"
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "- for each entry, it checks if the given filter matches the name and the instance of the healthcheck using the `matches`"
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "- if the filter matches, the corresponding healthcheck is executed using the `execute()` method, and the result object i"
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "- `healthchecks`: a map containing key-value pairs, where the keys represent the names of healthchecks and the values re"
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "the `runhealthchecks` method is responsible for filtering and executing a subset of registered healthchecks based on a g"
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "it returns an immutable sorted map containing the results of the executed healthchecks."
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "- it iterates through each entry in the `healthchecks` map."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "- `filter`: an instance of healthcheckfilter, which is an interface or a class that implements the healthcheckfilter int"
+      },
+      {
+        "entity": "matches",
+        "verdict": "CORRECT",
+        "sentence": "- for each entry, it checks if the given filter matches the name and the instance of the healthcheck using the `matches`"
+      },
+      {
+        "entity": "matches",
+        "verdict": "CORRECT",
+        "sentence": "- if the filter matches, the corresponding healthcheck is executed using the `execute()` method, and the result object i"
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- `sortedmap<string, healthcheck.result> results`: a sorted map containing key-value pairs, where the keys represent the"
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "it returns an immutable sorted map containing the results of the executed healthchecks."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- the method initializes an empty sorted map called `results` using a treemap."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- if the filter matches, the corresponding healthcheck is executed using the `execute()` method, and the result object i"
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- the method returns the `results` map as an unmodifiable sorted map."
+      },
+      {
+        "entity": "unmodifiable",
+        "verdict": "CORRECT",
+        "sentence": "- the method returns the `results` map as an unmodifiable sorted map."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "- `sortedmap<string, healthcheck.result> results`: a sorted map containing key-value pairs, where the keys represent the"
+      },
+      {
+        "entity": "healthcheckfilter",
+        "verdict": "CORRECT",
+        "sentence": "- `filter`: an instance of healthcheckfilter, which is an interface or a class that implements the healthcheckfilter int"
+      },
+      {
+        "entity": "execute",
+        "verdict": "CORRECT",
+        "sentence": "- if the filter matches, the corresponding healthcheck is executed using the `execute()` method, and the result object i"
+      },
+      {
+        "entity": "runhealthchecks",
+        "verdict": "CORRECT",
+        "sentence": "the `runhealthchecks` method is responsible for filtering and executing a subset of registered healthchecks based on a g"
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "result",
+        "verdict": "IRRELEVANT",
+        "sentence": "- if the filter matches, the corresponding healthcheck is executed using the `execute()` method, and the result object i"
+      },
+      {
+        "entity": "filter",
+        "verdict": "IRRELEVANT",
+        "sentence": "- for each entry, it checks if the given filter matches the name and the instance of the healthcheck using the `matches`"
+      },
+      {
+        "entity": "filter",
+        "verdict": "IRRELEVANT",
+        "sentence": "- if the filter matches, the corresponding healthcheck is executed using the `execute()` method, and the result object i"
+      }
+    ]
+  },
+  "stats": {
+    "n_all": 29,
+    "n_correct": 26,
+    "n_incorrect": 0,
+    "n_irrelevant": 3
+  }
+}

@@ -1,0 +1,281 @@
+{
+  "case_id": "case_12",
+  "source": "CodeSumEval (ETF)",
+  "model_name": "ibm_granite_20b",
+  "scope": "method",
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "result",
+        "verdict": "CORRECT",
+        "sentence": "- the result is then added to the results map using the health check name as the key."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- it initializes an empty results map to store the health check results."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- the result is then added to the results map using the health check name as the key."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "- output: a sortedmap<string, healthcheck.result> object containing the results of the health checks that match the prov"
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "- output: a sortedmap<string, healthcheck.result> object containing the results of the health checks that match the prov"
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "the method is used to run health checks and return the results that match the provided filter."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "it iterates through all the health checks in the healthchecks map and checks if they match the filter."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "if a health check matches the filter, its execute() method is called to obtain the result, which is then added to the re"
+      },
+      {
+        "entity": "result",
+        "verdict": "CORRECT",
+        "sentence": "- output: a sortedmap<string, healthcheck.result> object containing the results of the health checks that match the prov"
+      },
+      {
+        "entity": "result",
+        "verdict": "IRRELEVANT",
+        "sentence": "if a health check matches the filter, its execute() method is called to obtain the result, which is then added to the re"
+      },
+      {
+        "entity": "result",
+        "verdict": "IRRELEVANT",
+        "sentence": "- if a match is found, it calls the execute() method of the health check object to obtain the result."
+      },
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "- output: a sortedmap<string, healthcheck.result> object containing the results of the health checks that match the prov"
+      },
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "the method is used to run health checks and return the results that match the provided filter."
+      },
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "if a health check matches the filter, its execute() method is called to obtain the result, which is then added to the re"
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method returns an unmodifiable view of the results map."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- finally, the method returns an unmodifiable view of the results map."
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "- output: a sortedmap<string, healthcheck.result> object containing the results of the health checks that match the prov"
+      },
+      {
+        "entity": "healthcheckfilter",
+        "verdict": "CORRECT",
+        "sentence": "- input: a healthcheckfilter object"
+      },
+      {
+        "entity": "execute",
+        "verdict": "CORRECT",
+        "sentence": "if a health check matches the filter, its execute() method is called to obtain the result, which is then added to the re"
+      },
+      {
+        "entity": "execute",
+        "verdict": "CORRECT",
+        "sentence": "- if a match is found, it calls the execute() method of the health check object to obtain the result."
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "it iterates through all the health checks in the healthchecks map and checks if they match the filter."
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "- it iterates through the entries in the healthchecks map."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "- for each entry, it checks if the health check name and health check object match the filter using the filter.matches()"
+      },
+      {
+        "entity": "matches",
+        "verdict": "IRRELEVANT",
+        "sentence": "if a health check matches the filter, its execute() method is called to obtain the result, which is then added to the re"
+      },
+      {
+        "entity": "matches",
+        "verdict": "CORRECT",
+        "sentence": "- for each entry, it checks if the health check name and health check object match the filter using the filter.matches()"
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "- output: a sortedmap<string, healthcheck.result> object containing the results of the health checks that match the prov"
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "result",
+        "verdict": "CORRECT",
+        "sentence": "- the result is then added to the results map using the health check name as the key."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- it initializes an empty results map to store the health check results."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- the result is then added to the results map using the health check name as the key."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "- output: a sortedmap<string, healthcheck.result> object containing the results of the health checks that match the prov"
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "- output: a sortedmap<string, healthcheck.result> object containing the results of the health checks that match the prov"
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "the method is used to run health checks and return the results that match the provided filter."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "it iterates through all the health checks in the healthchecks map and checks if they match the filter."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "if a health check matches the filter, its execute() method is called to obtain the result, which is then added to the re"
+      },
+      {
+        "entity": "result",
+        "verdict": "CORRECT",
+        "sentence": "- output: a sortedmap<string, healthcheck.result> object containing the results of the health checks that match the prov"
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method returns an unmodifiable view of the results map."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "- finally, the method returns an unmodifiable view of the results map."
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "- output: a sortedmap<string, healthcheck.result> object containing the results of the health checks that match the prov"
+      },
+      {
+        "entity": "healthcheckfilter",
+        "verdict": "CORRECT",
+        "sentence": "- input: a healthcheckfilter object"
+      },
+      {
+        "entity": "execute",
+        "verdict": "CORRECT",
+        "sentence": "if a health check matches the filter, its execute() method is called to obtain the result, which is then added to the re"
+      },
+      {
+        "entity": "execute",
+        "verdict": "CORRECT",
+        "sentence": "- if a match is found, it calls the execute() method of the health check object to obtain the result."
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "it iterates through all the health checks in the healthchecks map and checks if they match the filter."
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "- it iterates through the entries in the healthchecks map."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "- for each entry, it checks if the health check name and health check object match the filter using the filter.matches()"
+      },
+      {
+        "entity": "matches",
+        "verdict": "CORRECT",
+        "sentence": "- for each entry, it checks if the health check name and health check object match the filter using the filter.matches()"
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "- output: a sortedmap<string, healthcheck.result> object containing the results of the health checks that match the prov"
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "result",
+        "verdict": "IRRELEVANT",
+        "sentence": "if a health check matches the filter, its execute() method is called to obtain the result, which is then added to the re"
+      },
+      {
+        "entity": "result",
+        "verdict": "IRRELEVANT",
+        "sentence": "- if a match is found, it calls the execute() method of the health check object to obtain the result."
+      },
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "- output: a sortedmap<string, healthcheck.result> object containing the results of the health checks that match the prov"
+      },
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "the method is used to run health checks and return the results that match the provided filter."
+      },
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "if a health check matches the filter, its execute() method is called to obtain the result, which is then added to the re"
+      },
+      {
+        "entity": "matches",
+        "verdict": "IRRELEVANT",
+        "sentence": "if a health check matches the filter, its execute() method is called to obtain the result, which is then added to the re"
+      }
+    ]
+  },
+  "stats": {
+    "n_all": 26,
+    "n_correct": 20,
+    "n_incorrect": 0,
+    "n_irrelevant": 6
+  }
+}

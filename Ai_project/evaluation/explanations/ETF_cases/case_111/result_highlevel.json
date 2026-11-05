@@ -1,0 +1,38 @@
+{
+  "case_id": "case_111",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "iops",
+    "size",
+    "uuid"
+  ],
+  "metrics": {
+    "TP": [
+      "iops",
+      "size",
+      "uuid"
+    ],
+    "FP": [],
+    "FN": [
+      "allmockvolumes",
+      "availabilityzone",
+      "int",
+      "mockvolume",
+      "ret",
+      "snapshotid",
+      "string",
+      "volume_id_postfix_length",
+      "volumeid",
+      "volumetype"
+    ],
+    "precision": 1.0,
+    "recall": 0.2308,
+    "f1": 0.375,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 10
+    }
+  }
+}

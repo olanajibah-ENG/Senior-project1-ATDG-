@@ -1,0 +1,200 @@
+{
+  "case_id": "case_06",
+  "source": "CodeSumEval (ETF)",
+  "model_name": "codellama_7b",
+  "scope": "method",
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "+ `this`: a reference to the current `rowbuilder` object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a new column to the current `rowbuilder` object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "* adds the new column to the list of columns in the `rowbuilder` object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "* returns a reference to the current `rowbuilder` object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the `rowbuilder` class is used to build a row of a table, and is responsible for adding columns to the row."
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": "+ `this`: a reference to the current `rowbuilder` object."
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": "the `length` method of the `columnint16` class returns the number of bytes required to store the column's data."
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "+ `name`: a `string` representing the name of the column."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "+ `name`: a `string` representing the name of the column."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "the column is represented by a `columnint16` object, which is created with the given `name` and the current offset."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "* creates a new `columnint16` object with the given `name` and the current offset."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the column is represented by a `columnint16` object, which is created with the given `name` and the current offset."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "* creates a new `columnint16` object with the given `name` and the current offset."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the `columnint16` class represents a column in a row of a table, and is used to store integer values."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the `length` method of the `columnint16` class returns the number of bytes required to store the column's data."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a new column to the current `rowbuilder` object."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method performs the following steps:"
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a new column to the row, and is called when a new integer column is required."
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "+ `this`: a reference to the current `rowbuilder` object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a new column to the current `rowbuilder` object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "* adds the new column to the list of columns in the `rowbuilder` object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "* returns a reference to the current `rowbuilder` object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the `rowbuilder` class is used to build a row of a table, and is responsible for adding columns to the row."
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": "+ `this`: a reference to the current `rowbuilder` object."
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": "the `length` method of the `columnint16` class returns the number of bytes required to store the column's data."
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "+ `name`: a `string` representing the name of the column."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "+ `name`: a `string` representing the name of the column."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "the column is represented by a `columnint16` object, which is created with the given `name` and the current offset."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "* creates a new `columnint16` object with the given `name` and the current offset."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the column is represented by a `columnint16` object, which is created with the given `name` and the current offset."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "* creates a new `columnint16` object with the given `name` and the current offset."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the `columnint16` class represents a column in a row of a table, and is used to store integer values."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the `length` method of the `columnint16` class returns the number of bytes required to store the column's data."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a new column to the current `rowbuilder` object."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method performs the following steps:"
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a new column to the row, and is called when a new integer column is required."
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "stats": {
+    "n_all": 18,
+    "n_correct": 18,
+    "n_incorrect": 0,
+    "n_irrelevant": 0
+  }
+}

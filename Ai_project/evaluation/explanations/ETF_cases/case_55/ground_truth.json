@@ -1,0 +1,56 @@
+{
+  "case_id": "case_55",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_34b",
+  "scope": "method",
+  "row_index": 54,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "showfacebookapperror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mcontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "showfacebookapperror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length_short",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "showfacebookapperror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mcontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "showfacebookapperror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length_short",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\nSure, I'd be happy to help!\r\n\r\n**Inputs and outputs of the method**\r\n\r\n```\r\nprivate void showFacebookAppError()\r\n```\r\n\r\n**Inputs:**\r\n\r\n- `this.mContext`: A context object that is used to access resources and services.\r\n\r\n**Output:**\r\n\r\n- A toast message is displayed to the user with the error message \"Error with Facebook app\".\r\n\r\n**Business purpose**\r\n\r\nThis method is used to display an error message to the user when there is an issue with the Facebook app.\r\n\r\n**Detailed functional summary of the method**\r\n\r\nThe `showFacebookAppError` method is a private method that is used to display an error message to the user when there is an issue with the Facebook app. It takes a context object as a parameter and uses it to access resources and services. The method then creates a toast message with"
+}

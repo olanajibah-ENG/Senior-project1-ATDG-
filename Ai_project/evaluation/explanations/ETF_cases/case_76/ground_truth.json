@@ -1,0 +1,247 @@
+{
+  "case_id": "case_76",
+  "source": "CodeSumEval",
+  "model_name": "llama3_70b",
+  "scope": "method",
+  "row_index": 75,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "length",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getlength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "v",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getframelength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hasnext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "next",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getlength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "v",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getframelength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hasnext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "next",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "length",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ]
+  },
+  "original_summary": "\r\nHere is a detailed summary of the Java code:\r\n\r\n**1. Inputs and Outputs of the Method:**\r\n\r\n* Inputs: None (no parameters are passed to the method)\r\n* Outputs: An integer value representing the total length of the frames\r\n\r\n**2. Business Purpose:**\r\n\r\nThe business purpose of this method is to calculate and return the total length of all frames in a collection of ID3v2 frames. ID3v2 is a metadata format used to store information such as title, artist, and album in audio files. This method is likely part of a class that manages a collection of ID3v2 frames.\r\n\r\n**3. Detailed Functional Summary of the Method:**\r\n\r\nThe `getLength()` method iterates over a collection of `ID3v2Frame` objects and calculates the total length of all frames. Here's a step-by-step breakdown of the method:\r\n\r\n1. The "
+}

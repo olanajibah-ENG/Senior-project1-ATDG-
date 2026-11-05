@@ -1,0 +1,41 @@
+{
+  "case_id": "case_98",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "collections",
+    "config",
+    "getmetakeywordsformodule",
+    "keywords",
+    "list",
+    "mdle",
+    "moduleelement",
+    "string"
+  ],
+  "metrics": {
+    "TP": [
+      "collections",
+      "config",
+      "getmetakeywordsformodule",
+      "keywords",
+      "list",
+      "mdle",
+      "moduleelement",
+      "string"
+    ],
+    "FP": [
+      "keywords"
+    ],
+    "FN": [
+      "arrays"
+    ],
+    "precision": 0.8889,
+    "recall": 0.8889,
+    "f1": 0.8889,
+    "hallucination_rate": 0.1111,
+    "counts": {
+      "tp": 8,
+      "fp": 1,
+      "fn": 1
+    }
+  }
+}

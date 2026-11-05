@@ -1,0 +1,34 @@
+{
+  "case_id": "case_57",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "context",
+    "id",
+    "mcontext",
+    "r",
+    "string",
+    "wings_facebook__error_facebook_app"
+  ],
+  "metrics": {
+    "TP": [
+      "context",
+      "id",
+      "r",
+      "string",
+      "wings_facebook__error_facebook_app"
+    ],
+    "FP": [
+      "mcontext"
+    ],
+    "FN": [],
+    "precision": 0.8333,
+    "recall": 1.0,
+    "f1": 0.9091,
+    "hallucination_rate": 0.1667,
+    "counts": {
+      "tp": 5,
+      "fp": 1,
+      "fn": 0
+    }
+  }
+}

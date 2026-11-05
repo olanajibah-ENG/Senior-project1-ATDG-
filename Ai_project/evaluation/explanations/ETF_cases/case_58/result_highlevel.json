@@ -1,0 +1,43 @@
+{
+  "case_id": "case_58",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "1",
+    "buffer",
+    "checkerror",
+    "flush",
+    "injectionhandler",
+    "processevent",
+    "totalwritten",
+    "underlyingoutputstream"
+  ],
+  "metrics": {
+    "TP": [
+      "1",
+      "buffer",
+      "checkerror",
+      "flush",
+      "injectionhandler",
+      "processevent",
+      "totalwritten",
+      "underlyingoutputstream"
+    ],
+    "FP": [],
+    "FN": [
+      "bufferedbyteinputoutput",
+      "bufferedbyteoutputstream_flush",
+      "injectioneventcore",
+      "sleep",
+      "unblockreads"
+    ],
+    "precision": 1.0,
+    "recall": 0.6154,
+    "f1": 0.7619,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 5
+    }
+  }
+}

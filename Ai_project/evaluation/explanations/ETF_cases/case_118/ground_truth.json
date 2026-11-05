@@ -1,0 +1,216 @@
+{
+  "case_id": "case_118",
+  "source": "CodeSumEval",
+  "model_name": "llama3_70b",
+  "scope": "method",
+  "row_index": 117,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getexhaustedretriesexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "rpc",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "rpc",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "rpctimercontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "maxretries",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failedcount",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finalizestats",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamwaittimeoutexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamwaittimeoutexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamwaittimeoutexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "resetstatusbasedbackoff",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "performretry",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getrpcmetrics",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "markfailure",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getexhaustedretriesexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "rpc",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "rpc",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "rpctimercontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "maxretries",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failedcount",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finalizestats",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamwaittimeoutexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamwaittimeoutexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamwaittimeoutexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "resetstatusbasedbackoff",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "performretry",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getrpcmetrics",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "markfailure",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\nHere is a detailed summary of the Java code:\r\n\r\n**1. Inputs and Outputs of the method:**\r\n\r\n* Input: \r\n\t+ `status`: an object of type `Status` that represents the status of an operation.\r\n* Output: \r\n\t+ None (void method), but it modifies some internal state and logs warning messages.\r\n\r\n**2. Business Purpose:**\r\n\r\nThe purpose of this method is to handle a timeout error that occurred during a scan operation. It checks if the error is caused by a `StreamWaitTimeoutException`, and if so, it attempts to retry the operation up to a certain number of times. If all retries fail, it marks the operation as failed and sets an exception.\r\n\r\n**3. Detailed Functional Summary of the method:**\r\n\r\nHere's a step-by-step breakdown of what the method does:\r\n\r\n1. **Validation**: The method first checks tha"
+}

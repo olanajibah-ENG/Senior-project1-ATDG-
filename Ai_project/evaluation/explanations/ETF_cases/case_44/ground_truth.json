@@ -1,0 +1,367 @@
+{
+  "case_id": "case_44",
+  "source": "CodeSumEval",
+  "model_name": "llama3_8b",
+  "scope": "method",
+  "row_index": 43,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "computeiv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "computeiv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "48",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "0xff",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "8",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "0",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "0",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "computeiv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "computeiv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "48",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "0xff",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "8",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "0",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "0",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "iv",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\nHere is the summary of the Java code:\r\n\r\n**Inputs and Outputs of the method:**\r\n\r\n* Input:\r\n\t+ `label`: a `long` value\r\n\t+ `index`: a `long` value\r\n* Output: None (void method)\r\n\r\n**Business Purpose:**\r\n\r\nThe method `computeIv` appears to be part of a cryptographic algorithm, specifically a key derivation function. Its purpose is to generate an Initialization Vector (IV) for encryption or decryption operations.\r\n\r\n**Detailed Functional Summary of the method:**\r\n\r\nThe method `computeIv` generates an Initialization Vector (IV) based on the input `label` and `index` values. Here's a step-by-step breakdown of the method:\r\n\r\n1. It calculates a `key_id` value based on the `label` and `index` values. If `keyDerivationRate` is 0, it sets `key_id` to the left-shifted `label` value (48 bits). Othe"
+}

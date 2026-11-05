@@ -1,0 +1,288 @@
+{
+  "case_id": "case_39",
+  "source": "CodeSumEval",
+  "model_name": "mistral_7b",
+  "scope": "method",
+  "row_index": 38,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "required_properties",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredtypes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredtypes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "static",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "public",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertrequiredcontainertriples",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "required_properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredtypes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertcontainsrequiredtypes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "static",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "public",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "assertrequiredcontainertriples",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "model",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "container_types",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "constraintviolationexception",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": [
+      {
+        "entity": "required_properties",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ]
+  },
+  "original_summary": "\r\n1. Inputs:\r\n- model: An instance of the Apache Jena Model interface, which represents an RDF (Resource Description Framework) graph.\r\n\r\n2. Outputs:\r\n- None, this method is declared as void and does not return any value. However, it can throw a ConstraintViolationException if any of the assertions fail.\r\n\r\n3. Business Purpose:\r\nThis method is designed to check if the given RDF model contains all the required properties and types as defined in the constants REQUIRED_PROPERTIES and CONTAINER_TYPES, respectively. If any missing required property or type is found, it throws a ConstraintViolationException.\r\n\r\n4. Detailed Functional Summary:\r\n\r\nThe method `assertRequiredContainerTriples` is declared as a static public void method that takes a single argument, an RDF model represented by the Mod"
+}

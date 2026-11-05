@@ -1,0 +1,97 @@
+{
+  "case_id": "case_57",
+  "source": "CodeSumEval",
+  "model_name": "codellama_34b",
+  "scope": "method",
+  "row_index": 56,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "r",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "wings_facebook__error_facebook_app",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "context",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "context",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mcontext",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "r",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "wings_facebook__error_facebook_app",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "context",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "context",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "mcontext",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n\r\n1. Inputs:\r\n\r\n* mContext: The context of the application.\r\n* R.string.wings_facebook__error_facebook_app: A string resource that contains the error message to be displayed.\r\n\r\n\r\n2. Outputs:\r\n\r\n* A toast message that displays the error message.\r\n\r\n\r\n3. Business Purpose:\r\n\r\n* This method is used to display an error message to the user when there is an issue with the Facebook app.\r\n\r\n\r\n4. Detailed Functional Summary:\r\n\r\n* The method first retrieves the error message from the string resource file using the context and the resource ID.\r\n* It then creates a toast message using the error message and displays it to the user.\r\n* The toast message is displayed for a short duration before it is automatically dismissed.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r"
+}

@@ -1,0 +1,51 @@
+{
+  "case_id": "case_10",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "entry",
+    "execute",
+    "filter",
+    "healthcheck",
+    "healthcheckfilter",
+    "healthchecks",
+    "map",
+    "matches",
+    "result",
+    "results"
+  ],
+  "metrics": {
+    "TP": [
+      "entry",
+      "execute",
+      "filter",
+      "healthcheck",
+      "healthcheckfilter",
+      "healthchecks",
+      "map",
+      "matches",
+      "result",
+      "results"
+    ],
+    "FP": [
+      "execute",
+      "filter",
+      "map"
+    ],
+    "FN": [
+      "collections",
+      "entryset",
+      "sortedmap",
+      "string",
+      "unmodifiablesortedmap"
+    ],
+    "precision": 0.7692,
+    "recall": 0.6667,
+    "f1": 0.7143,
+    "hallucination_rate": 0.2308,
+    "counts": {
+      "tp": 10,
+      "fp": 3,
+      "fn": 5
+    }
+  }
+}

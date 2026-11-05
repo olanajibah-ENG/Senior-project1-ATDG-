@@ -1,0 +1,38 @@
+{
+  "case_id": "case_79",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "getframelength",
+    "id3v2",
+    "id3v2frame",
+    "it",
+    "iterator",
+    "length",
+    "values"
+  ],
+  "metrics": {
+    "TP": [
+      "getframelength",
+      "id3v2",
+      "id3v2frame",
+      "it",
+      "iterator",
+      "length",
+      "values"
+    ],
+    "FP": [
+      "id3v2",
+      "length"
+    ],
+    "FN": [],
+    "precision": 0.7778,
+    "recall": 1.0,
+    "f1": 0.875,
+    "hallucination_rate": 0.2222,
+    "counts": {
+      "tp": 7,
+      "fp": 2,
+      "fn": 0
+    }
+  }
+}

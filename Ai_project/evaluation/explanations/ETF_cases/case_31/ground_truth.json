@@ -1,0 +1,428 @@
+{
+  "case_id": "case_31",
+  "source": "CodeSumEval",
+  "model_name": "llama3_70b",
+  "scope": "method",
+  "row_index": 30,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "find",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "group",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "matcher",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "matcher",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "1",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "1",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "1",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "find",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "group",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "matcher",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "matcher",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "1",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "1",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "property",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": [
+      {
+        "entity": "1",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ]
+  },
+  "original_summary": "\r\nHere is a detailed summary of the Java code:\r\n\r\n**1. Inputs and Outputs of the Method:**\r\n\r\n* **Input:** The method takes a single input parameter `property` of type `String`.\r\n* **Output:** The method returns a `HashSet<String>` object, which is a collection of unique strings.\r\n\r\n**2. Business Purpose:**\r\n\r\nThe business purpose of this method is to extract and return a set of unique property names from a given input string. The input string is expected to contain a list of properties in a specific format, where each property is separated by a semicolon (`;`) and consists of a name-value pair (e.g., \"name=value;\"). The method extracts the property names from the input string and returns them as a set of unique strings.\r\n\r\n**3. Detailed Functional Summary of the Method:**\r\n\r\nHere is a ste"
+}

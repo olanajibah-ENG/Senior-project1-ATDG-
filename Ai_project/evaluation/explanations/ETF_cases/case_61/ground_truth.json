@@ -1,0 +1,176 @@
+{
+  "case_id": "case_61",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_20b",
+  "scope": "method",
+  "row_index": 60,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "ioexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bytes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bytes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bytes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "ioexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bytes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bytes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bytes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs and outputs of the method:\r\n- Inputs: The method takes no input parameters.\r\n- Outputs: The method may throw an IOException if an error occurs while writing to the stream.\r\n\r\n2. Business purpose:\r\n- The purpose of the method is to ensure that all the bytes written to the buffer are transferred to the stream before proceeding. This is important for maintaining the integrity of the stream.\r\n\r\n3. Detailed functional summary of the method:\r\n- The method first checks if the stream has been closed.\r\n- It then calculates the total number of bytes written to the buffer.\r\n- The method unblocks reads from the buffer.\r\n- It waits until the write thread transfers all the bytes from the buffer to the stream.\r\n- It processes an injection event related to the flush operation.\r\n- The method ch"
+}

@@ -1,0 +1,30 @@
+{
+  "case_id": "case_120",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "status",
+    "streamwaittimeoutexception"
+  ],
+  "metrics": {
+    "TP": [
+      "status",
+      "streamwaittimeoutexception"
+    ],
+    "FP": [],
+    "FN": [
+      "failedcount",
+      "getexhaustedretriesexception",
+      "maxretries",
+      "performretry"
+    ],
+    "precision": 1.0,
+    "recall": 0.3333,
+    "f1": 0.5,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 4
+    }
+  }
+}

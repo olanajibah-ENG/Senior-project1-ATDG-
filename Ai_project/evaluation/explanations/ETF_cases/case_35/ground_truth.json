@@ -1,0 +1,276 @@
+{
+  "case_id": "case_35",
+  "source": "CodeSumEval",
+  "model_name": "codellama_7b",
+  "scope": "method",
+  "row_index": 34,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "null",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "matcher",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "null",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "matcher",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n\r\n1. Inputs and outputs of the method:\r\n\r\nInputs:\r\n\r\n* `property`: a `String` that represents a property value.\r\n\r\nOutputs:\r\n\r\n* `properties`: a `HashSet<String>` that contains the property values.\r\n\r\n1. Business purpose:\r\n\r\nThis method is used to create a `HashSet<String>` from a given property value. The property value is a `String` that contains a list of property values separated by semicolons. The method parses the property value and adds each property value to the `HashSet<String>`.\r\n\r\n1. Detailed functional summary of the method:\r\n\r\nThe method starts by creating a new `HashSet<String>` called `properties`. It then checks if the `property` input is not null and not equal to \"null\". If it is not, the method uses a regular expression to parse the property value and extract the proper"
+}

@@ -1,0 +1,44 @@
+{
+  "case_id": "case_66",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "comment",
+    "get",
+    "getkeyset",
+    "info",
+    "key",
+    "logger",
+    "string",
+    "value",
+    "void"
+  ],
+  "metrics": {
+    "TP": [
+      "comment",
+      "get",
+      "getkeyset",
+      "info",
+      "key",
+      "logger",
+      "string",
+      "value",
+      "void"
+    ],
+    "FP": [
+      "comment",
+      "info",
+      "logger",
+      "string"
+    ],
+    "FN": [],
+    "precision": 0.6923,
+    "recall": 1.0,
+    "f1": 0.8182,
+    "hallucination_rate": 0.3077,
+    "counts": {
+      "tp": 9,
+      "fp": 4,
+      "fn": 0
+    }
+  }
+}

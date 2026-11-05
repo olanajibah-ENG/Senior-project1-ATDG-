@@ -1,0 +1,247 @@
+{
+  "case_id": "case_58",
+  "source": "CodeSumEval",
+  "model_name": "llama3_8b",
+  "scope": "method",
+  "row_index": 57,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "1",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "1",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "underlyingoutputstream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bufferedbyteoutputstream_flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injectionhandler",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "processevent",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injectioneventcore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "unblockreads",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bufferedbyteinputoutput",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "sleep",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalwritten",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "blockreads",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "1",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "1",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "underlyingoutputstream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bufferedbyteoutputstream_flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injectionhandler",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "processevent",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injectioneventcore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "unblockreads",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bufferedbyteinputoutput",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "sleep",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalwritten",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "blockreads",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\nHere is the summary of the Java code:\r\n\r\n**Inputs and Outputs of the method:**\r\n\r\n* Input: None\r\n* Output: None\r\n\r\n**Business Purpose:**\r\n\r\nThe purpose of this method is to flush the contents of a buffer to the underlying output stream, ensuring that all written data is transferred and processed correctly.\r\n\r\n**Detailed Functional Summary of the method:**\r\n\r\n1. The method starts by checking if the stream has been closed using the `checkError()` method.\r\n2. It then retrieves the total number of bytes written to the buffer using the `buffer.totalWritten()` method.\r\n3. The method unblocks reads from the buffer using the `buffer.unblockReads()` method.\r\n4. It then enters a loop that waits until the write thread has transferred all the bytes from the buffer to the stream. The loop uses the `B"
+}

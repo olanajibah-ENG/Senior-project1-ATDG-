@@ -1,0 +1,37 @@
+{
+  "case_id": "case_91",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "checkargument",
+    "checknotnull",
+    "duration",
+    "failuretimeout",
+    "setfailuretimeout",
+    "swimmembershipprotocolconfig",
+    "this"
+  ],
+  "metrics": {
+    "TP": [
+      "checkargument",
+      "checknotnull",
+      "duration",
+      "failuretimeout",
+      "setfailuretimeout",
+      "swimmembershipprotocolconfig",
+      "this"
+    ],
+    "FP": [
+      "duration"
+    ],
+    "FN": [],
+    "precision": 0.875,
+    "recall": 1.0,
+    "f1": 0.9333,
+    "hallucination_rate": 0.125,
+    "counts": {
+      "tp": 7,
+      "fp": 1,
+      "fn": 0
+    }
+  }
+}

@@ -1,0 +1,366 @@
+{
+  "case_id": "case_84",
+  "source": "CodeSumEval",
+  "model_name": "mistral_7b",
+  "scope": "method",
+  "row_index": 83,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systeminitializer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systeminitializer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getinstance",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getinstance",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getinstance",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systeminitializer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systeminitializer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getinstance",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getinstance",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getinstance",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs:\r\n- `config`: An instance of the Java `Properties` class, which is a collection of key-value pairs used to store configuration data.\r\n\r\n2. Output:\r\n- An instance of the `SystemMain` class.\r\n\r\n3. Business Purpose:\r\nThis method is a static factory method used to create an instance of the `SystemMain` class using the Guice dependency injection framework. The method takes a `Properties` object as an argument, which is used to configure the Guice injector. The method returns an instance of the `SystemMain` class, which is created by the injector using the provided configuration.\r\n\r\n4. Detailed Functional Summary:\r\nThe method `getInstance` is a static factory method that creates an instance of the `SystemMain` class using the Guice dependency injection framework. The method takes a s"
+}

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>إضافات البرزنتيشن</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1f2328; --muted:#57606a; --card:#f6f8fa; --accent:#1f5fa8; --ok:#1a7f37; --okbg:#e9f6ef;
+          --bad:#b3261e; --badbg:#fdecea; --border:#d0d7de; --slide:#ffffff; --code:#f4f6f8; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+          --bg:#0d1117; --fg:#e6edf3; --muted:#8d96a0; --card:#161b22; --accent:#4493f8; --ok:#3fb950; --okbg:#12261b;
+          --bad:#f85149; --badbg:#2d1214; --border:#30363d; --slide:#0f141b; --code:#1b222c; } }
+  :root[data-theme="dark"] { --bg:#0d1117; --fg:#e6edf3; --muted:#8d96a0; --card:#161b22; --accent:#4493f8; --ok:#3fb950; --okbg:#12261b;
+          --bad:#f85149; --badbg:#2d1214; --border:#30363d; --slide:#0f141b; --code:#1b222c; }
+  body { background:var(--bg); color:var(--fg); font-family:"Segoe UI",Tahoma,Arial,sans-serif; line-height:1.8; margin:0; padding:24px 16px; }
+  main { max-width:900px; margin:auto; }
+  h1 { font-size:1.5rem; } h2 { font-size:1.2rem; color:var(--accent); margin-top:2.2em; border-bottom:2px solid var(--accent); padding-bottom:4px; }
+  .guide { color:var(--muted); }
+  /* محتوى الشريحة نفسه بالإنجليزي، من اليسار لليمين */
+  .slide { direction:ltr; text-align:left; background:var(--slide); border:1px solid var(--border); border-radius:10px;
+           padding:16px 20px; margin:12px 0; line-height:1.6; }
+  .slide h3 { margin:0 0 4px; font-size:1.15rem; } .slide .kicker { color:var(--muted); font-size:.85rem; }
+  .slide table { border-collapse:collapse; width:100%; margin:8px 0; font-size:.92rem; }
+  .slide th, .slide td { border:1px solid var(--border); padding:6px 8px; text-align:left; vertical-align:top; }
+  .slide th { background:var(--card); }
+  .slide code, .slide pre { font-family:Consolas,monospace; background:var(--code); border-radius:4px; }
+  .slide pre { padding:8px 10px; white-space:pre-wrap; margin:6px 0; font-size:.85rem; }
+  .flow { display:flex; flex-wrap:wrap; align-items:stretch; gap:6px; margin:8px 0; }
+  .step { flex:1 1 120px; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:8px; font-size:.85rem; }
+  .step b { display:block; color:var(--accent); }
+  .arrow { align-self:center; color:var(--muted); font-size:1.2rem; }
+  .pair { display:flex; gap:10px; flex-wrap:wrap; }
+  .pair > div { flex:1 1 260px; border-radius:8px; padding:10px; border:1px solid var(--border); }
+  .bad { background:var(--badbg); } .ok { background:var(--okbg); }
+  .tag { font-weight:700; } .bad .tag { color:var(--bad); } .ok .tag { color:var(--ok); }
+  .slide-wrap { overflow-x:auto; }
+</style>
+</head>
+<body>
+<main>
+<h1>محتوى الشرائح الجديدة للبرزنتيشن</h1>
+<p class="guide">كل شريحة إلها شرح بالعربي فوقها (وين تحطها وليش)، وتحته المحتوى نفسه <b>بالإنجليزي</b> متل باقي البرزنتيشن، جاهز للنسخ. الأرقام والأمثلة كلها من نتائج القياس الحقيقية (<code>cascade_dev</code> يوم 2026-10-29).</p>
+
+<!-- ───────────────────────── 1 ───────────────────────── -->
+<h2>1. شريحة المقاييس (حطّها قبل شريحة 16)</h2>
+<p class="guide">الـ PFP هو أهم رقم عندكم، وهو مش معروف، فلازم يتعرّف قبل ما يظهر بالنتائج.</p>
+<div class="slide-wrap"><div class="slide">
+  <div class="kicker">06 · Inconsistency detection · Metrics</div>
+  <h3>How we measure</h3>
+  <table>
+    <tr><th>Metric</th><th>Question it answers</th><th>Formula</th></tr>
+    <tr><td><b>Precision</b></td><td>When we raise an alert, how often is it real?</td><td>TP / (TP + FP)</td></tr>
+    <tr><td><b>Recall</b></td><td>Of all real problems, how many did we catch?</td><td>TP / (TP + FN)</td></tr>
+    <tr><td><b>Specificity</b></td><td>Of all correct cases, how many did we leave alone?</td><td>TN / (TN + FP)</td></tr>
+    <tr><td><b>F1</b></td><td>One number balancing precision and recall</td><td>2·P·R / (P + R)</td></tr>
+    <tr><td><b>PFP</b> (pair-wise fix precision, from CASCADE)</td><td>Of the contradictions we caught, in how many does the alert <b>disappear once the doc is fixed</b>?</td><td>caught pairs with a silent fixed version / caught pairs</td></tr>
+  </table>
+  <p><b>Why PFP matters:</b> CASCADE gives every contradiction together with its fixed version. An alert that stays after the fix was not about the contradiction. The old system scored PFP = 0: it flagged the broken and the fixed version alike.</p>
+  <p style="color:var(--muted);font-size:.85rem">Code vs Code on NPM uses the same Precision / Recall / Specificity, counted per commit.</p>
+</div></div>
+
+<!-- ───────────────────────── 2 ───────────────────────── -->
+<h2>2. شريحة طريقة الشغل (حطّها بعد شريحة 15 أو بدالها)</h2>
+<p class="guide">رسمة المسارين. فيكن تاخدوا لقطة شاشة للمربعات هون مباشرة، أو ترسموها بنفس الترتيب بالبرزنتيشن.</p>
+<div class="slide-wrap"><div class="slide">
+  <div class="kicker">06 · Inconsistency detection · Pipeline</div>
+  <h3>How the detector works</h3>
+  <p><b>Code vs Doc</b></p>
+  <div class="flow">
+    <div class="step"><b>1 · Parse code</b>AST: every function with body, parameters, return type</div><div class="arrow">→</div>
+    <div class="step"><b>2 · Split docs</b>Each doc section is matched to the function it describes</div><div class="arrow">→</div>
+    <div class="step"><b>3 · Ask the AI</b>Numbered code + its doc; 3 questions: conflicting? not implemented? undocumented?</div><div class="arrow">→</div>
+    <div class="step"><b>4 · Filter</b>Quote must exist verbatim in doc and code; confidence ≥ 0.7; under-promise hidden</div><div class="arrow">→</div>
+    <div class="step"><b>5 · Alert</b>Direct mismatch or over-promise, with the doc sentence and code line as evidence</div>
+  </div>
+  <p><b>Code vs Code</b></p>
+  <div class="flow">
+    <div class="step"><b>1 · Parse both versions</b>AST of before and after, incl. top-level functions</div><div class="arrow">→</div>
+    <div class="step"><b>2 · Structural diff</b>Removed, renamed, signature or field changes</div><div class="arrow">→</div>
+    <div class="step"><b>3 · Semantic check</b>AI on the diagram (today: names only, not bodies)</div><div class="arrow">→</div>
+    <div class="step"><b>4 · Report</b>Breaking / behaviour change with severity</div>
+  </div>
+  <p style="color:var(--muted);font-size:.85rem">Steps 8 → 11 will send function bodies (before and after) to step 3 of Code vs Code, as done for Code vs Doc.</p>
+</div></div>
+
+<!-- ───────────────────────── 3 ───────────────────────── -->
+<h2>3. شريحة المثال الحقيقي (حطّها بعد شريحة 16)</h2>
+<p class="guide">حالة حقيقية من CASCADE (مكتبة <code>gson</code> من Google). النظام نبّه على النسخة المتناقضة بثقة 1.0، ونسخ الجملة والسطر كما هم، ولما المطوّرين صلّحوا التوثيق، التنبيه راح. هاد بالزبط معنى الـ PFP.</p>
+<div class="slide-wrap"><div class="slide">
+  <div class="kicker">06 · Code vs Doc · A real case from CASCADE</div>
+  <h3>The alert follows the contradiction</h3>
+  <p><code>com.google.gson.JsonPrimitive.getAsDouble()</code></p>
+<pre>public double getAsDouble() {
+    return isNumber() ? getAsNumber().doubleValue() : Double.parseDouble(getAsString());
+}</pre>
+  <div class="pair">
+    <div class="bad"><span class="tag">Original doc: alert raised</span>
+<pre>@throws ClassCastException if the value
+        contained is not a valid double.</pre>
+      <b>Our system:</b> Direct mismatch, confidence 1.0<br>
+      “The doc says ClassCastException, but <code>Double.parseDouble</code> throws NumberFormatException.”<br>
+      <span style="font-size:.85rem">Evidence: the doc sentence + code line 3, both quoted verbatim and verified.</span>
+    </div>
+    <div class="ok"><span class="tag">Fixed doc (real commit): no alert</span>
+<pre>@throws NumberFormatException if the value
+        contained is not a valid double.</pre>
+      <b>Our system:</b> silent. ✔<br>
+      <b>Old system:</b> silent on both versions: it never saw the contradiction.
+    </div>
+  </div>
+  <p style="color:var(--muted);font-size:.85rem">6 of the 11 contradictions we caught behave like this (PFP 0.55).</p>
+</div></div>
+
+<p class="guide"><b>مثال احتياطي</b> إذا بدكن تانيين، أو إذا انسألتوا عن مثال تاني: <code>StopWatch.formatTime()</code> من <code>commons-lang</code>. التوثيق بيقول "Returns the <b>split</b> time"، والكود بيرجّع <code>getTime()</code>، يعني الوقت الكلي. نبّه النظام بثقة 0.95، والتصليح الحقيقي شال كلمة "split"، فراح التنبيه.</p>
+
+<!-- ───────────────────────── 4 ───────────────────────── -->
+<h2>4. سطر لشريحة 18 (Code vs Code): مين الأساس للمقارنة</h2>
+<p class="guide">ضيفوه تحت الجدول، أو كملاحظة بأسفل الشريحة. بيجاوب على سؤال أكيد رح ينسأل.</p>
+<div class="slide-wrap"><div class="slide">
+  <p><b>Baseline:</b> the NPM paper is an empirical study with no detection tool or published detection scores, so we compare the old system with the current one. The only published detector, AexPy, targets Python; it is planned as a second baseline after this phase.</p>
+</div></div>
+
+<!-- ───────────────────────── 5 ───────────────────────── -->
+<h2>5. شريحة حدود النتائج (حطّها قبل "Next steps")</h2>
+<p class="guide">بتجمع كل الملاحظات الصريحة الموزّعة بشريحة وحدة. اللجنة بتحترم هالشي كتير.</p>
+<div class="slide-wrap"><div class="slide">
+  <div class="kicker">06 · Inconsistency detection · Threats to validity</div>
+  <h3>What these results do not show yet</h3>
+  <ul>
+    <li><b>Small dev samples:</b> Code vs Doc on 25 CASCADE pairs (the paper uses all 71); Code vs Code with AI on 22 commits.</li>
+    <li><b>Held-out test splits not run with AI yet:</b> CASCADE test needs 92 requests (≈ 2 days of free quota).</li>
+    <li><b>NPM safe commits are ours:</b> 338 commits from the same projects with no breaking-change signal, not labelled by the paper’s authors.</li>
+    <li><b>One small free model</b> (poolside/laguna-s-2.1); the papers used stronger models. Results may improve with a stronger one.</li>
+    <li><b>LLM-S has higher recall</b> (0.54–0.67) than ours, at much lower specificity (0.42–0.58): our gain is fewer false alarms at good recall, not the highest recall.</li>
+  </ul>
+</div></div>
+
+<!-- ───────────────────────── 6 ───────────────────────── -->
+<h2>6. تصحيحات صغيرة</h2>
+<ul>
+  <li><b>شريحة 15، العنوان:</b> بدّلوا "Seven steps, each measured on paper data" بـ <span dir="ltr"><b>"Steps 0 → 6, each measured on paper data"</b></span>.</li>
+  <li><b>شريحة 17:</b> إذا ما بدكن تضيفوا شريحة الحدود، ضيفوا تحت "What it means" هالجملة: <span dir="ltr"><b>"LLM-S finds more, but with far more false alarms (specificity 0.42–0.58)."</b></span></li>
+  <li><b>شريحة 14:</b> تأكّدوا من الأوراق نفسها من الأرقام يلي ما استخرجناها نحنا: نتيجة DocPrism (0.22 لـ 0.77، و 98% لـ 14%)، ونتائج METAMON و AexPy و C4RLLaMA و Safer Builders، وسنين المؤتمرات، وتعريف LLM-A و LLM-S.</li>
+</ul>
+</main>
+</body>
+</html>

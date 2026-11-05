@@ -1,0 +1,36 @@
+{
+  "case_id": "case_08",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "dog",
+    "input",
+    "process"
+  ],
+  "metrics": {
+    "TP": [
+      "dog",
+      "input",
+      "process"
+    ],
+    "FP": [
+      "dog"
+    ],
+    "FN": [
+      "detectfeatures",
+      "detections",
+      "getnumscales",
+      "grayf32",
+      "scalespace",
+      "void"
+    ],
+    "precision": 0.75,
+    "recall": 0.3333,
+    "f1": 0.4615,
+    "hallucination_rate": 0.25,
+    "counts": {
+      "tp": 3,
+      "fp": 1,
+      "fn": 6
+    }
+  }
+}

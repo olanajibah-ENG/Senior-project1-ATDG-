@@ -1,0 +1,76 @@
+{
+  "case_id": "case_27",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_34b",
+  "scope": "method",
+  "row_index": 26,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "setcurrentbusinessdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "setcurrentbusinessdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\nSure, here is a detailed summary of the given Java code:\r\n\r\n1. Inputs and outputs of the method:\r\n- Input: The method takes a parameter of type E, which represents the start date.\r\n- Output: The method returns an instance of the DateCalculator class, allowing for method chaining.\r\n\r\n2. Business purpose:\r\nThe purpose of this method is to set the start date for a date calculation. It also sets the current business date to the start date. This method is part of a larger class, DateCalculator, which likely contains additional methods for performing calculations based on the start date.\r\n\r\n3. Detailed functional summary of the method:\r\n- The method takes a start date as a parameter and assigns it to the `startDate` instance variable.\r\n- It then calls the `setCurrentBusinessDate` method to set"
+}

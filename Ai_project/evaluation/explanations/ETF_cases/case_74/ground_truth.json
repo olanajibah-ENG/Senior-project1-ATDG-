@@ -1,0 +1,156 @@
+{
+  "case_id": "case_74",
+  "source": "CodeSumEval",
+  "model_name": "codellama_34b",
+  "scope": "method",
+  "row_index": 73,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "clearcache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "clearcache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "clearcache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_list_with_pagination",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_list_with_pagination",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_entity",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_entity",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_list_without_pagination",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_list_without_pagination",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "commercenotificationtemplateimpl",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "commercenotificationtemplateimpl",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "findercache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "findercache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "entitycache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "clearcache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "clearcache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "clearcache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_list_with_pagination",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_list_with_pagination",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_entity",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_entity",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_list_without_pagination",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "finder_class_name_list_without_pagination",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "commercenotificationtemplateimpl",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "commercenotificationtemplateimpl",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "findercache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "findercache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "entitycache",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n\r\n1. Inputs and outputs of the method:\r\n\r\nThe method `clearCache` takes no inputs and has no outputs. It is a void method.\r\n\r\n2. Business purpose:\r\n\r\nThe business purpose of the method `clearCache` is to clear the cache of the entity `CommerceNotificationTemplateImpl` and the finder caches for the classes `FINDER_CLASS_NAME_ENTITY`, `FINDER_CLASS_NAME_LIST_WITH_PAGINATION`, and `FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION`. This method is likely used to ensure that the cache is up-to-date and to prevent stale data from being returned to the user.\r\n\r\n3. Detailed functional summary of the method:\r\n\r\nThe method `clearCache` first clears the cache of the entity `CommerceNotificationTemplateImpl` using the `entityCache` object. It then clears the finder caches for the classes `FINDER_CLASS_NAME"
+}

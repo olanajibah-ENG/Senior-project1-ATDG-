@@ -1,0 +1,50 @@
+{
+  "case_id": "case_97",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "collections",
+    "config",
+    "emptylist",
+    "getmetakeywordsformodule",
+    "keywords",
+    "list",
+    "mdle",
+    "module",
+    "moduleelement",
+    "string"
+  ],
+  "metrics": {
+    "TP": [
+      "collections",
+      "config",
+      "emptylist",
+      "getmetakeywordsformodule",
+      "keywords",
+      "list",
+      "mdle",
+      "module",
+      "moduleelement",
+      "string"
+    ],
+    "FP": [
+      "keywords",
+      "list",
+      "module",
+      "moduleelement"
+    ],
+    "FN": [
+      "arrays",
+      "aslist",
+      "getqualifiedname"
+    ],
+    "precision": 0.7143,
+    "recall": 0.7692,
+    "f1": 0.7407,
+    "hallucination_rate": 0.2857,
+    "counts": {
+      "tp": 10,
+      "fp": 4,
+      "fn": 3
+    }
+  }
+}

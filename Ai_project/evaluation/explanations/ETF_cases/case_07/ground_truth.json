@@ -1,0 +1,242 @@
+{
+  "case_id": "case_07",
+  "source": "CodeSumEval (ETF)",
+  "model_name": "codellama_34b",
+  "scope": "method",
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "the `int16` method is used to add a column of type `int16` to the table, with the specified name."
+      },
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "the method starts by creating a new `columnint16` object with the specified name and the current offset of the table."
+      },
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "in summary, the `int16` method is used to add a column of type `int16` to a table, with the specified name, and updates "
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a single input parameter, `name`, which is a `string` representing the name of the column to be added t"
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a single input parameter, `name`, which is a `string` representing the name of the column to be added t"
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a column of type `int16` to the table, with the specified name."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the `int16` method is used to add a column of type `int16` to a table, with the specified name, and updates "
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the method creates a new `columnint16` object, which represents the column, and adds it to a list of columns that make u"
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the method starts by creating a new `columnint16` object with the specified name and the current offset of the table."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a single input parameter, `name`, which is a `string` representing the name of the column to be added t"
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a column of type `int16` to the table, with the specified name."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the method creates a new `columnint16` object, which represents the column, and adds it to a list of columns that make u"
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the offset is used to determine the position of the column within the table."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method adds the new column to a list of columns that make up the table."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the `int16` method is used to add a column of type `int16` to a table, with the specified name, and updates "
+      },
+      {
+        "entity": "offset",
+        "verdict": "CORRECT",
+        "sentence": "the method starts by creating a new `columnint16` object with the specified name and the current offset of the table."
+      },
+      {
+        "entity": "offset",
+        "verdict": "CORRECT",
+        "sentence": "the offset is used to determine the position of the column within the table."
+      },
+      {
+        "entity": "offset",
+        "verdict": "CORRECT",
+        "sentence": "the method then increments the offset by the length of the column, which is assumed to be 2 bytes."
+      },
+      {
+        "entity": "offset",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the `int16` method is used to add a column of type `int16` to a table, with the specified name, and updates "
+      },
+      {
+        "entity": "columns",
+        "verdict": "CORRECT",
+        "sentence": "the method creates a new `columnint16` object, which represents the column, and adds it to a list of columns that make u"
+      },
+      {
+        "entity": "columns",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method adds the new column to a list of columns that make up the table."
+      },
+      {
+        "entity": "column",
+        "verdict": "INCORRECT",
+        "sentence": "the method then increments the offset by the length of the column, which is assumed to be 2 bytes."
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a single input parameter, `name`, which is a `string` representing the name of the column to be added t"
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a single input parameter, `name`, which is a `string` representing the name of the column to be added t"
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a column of type `int16` to the table, with the specified name."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the `int16` method is used to add a column of type `int16` to a table, with the specified name, and updates "
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the method creates a new `columnint16` object, which represents the column, and adds it to a list of columns that make u"
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the method starts by creating a new `columnint16` object with the specified name and the current offset of the table."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a single input parameter, `name`, which is a `string` representing the name of the column to be added t"
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a column of type `int16` to the table, with the specified name."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the method creates a new `columnint16` object, which represents the column, and adds it to a list of columns that make u"
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the offset is used to determine the position of the column within the table."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method adds the new column to a list of columns that make up the table."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the `int16` method is used to add a column of type `int16` to a table, with the specified name, and updates "
+      },
+      {
+        "entity": "offset",
+        "verdict": "CORRECT",
+        "sentence": "the method starts by creating a new `columnint16` object with the specified name and the current offset of the table."
+      },
+      {
+        "entity": "offset",
+        "verdict": "CORRECT",
+        "sentence": "the offset is used to determine the position of the column within the table."
+      },
+      {
+        "entity": "offset",
+        "verdict": "CORRECT",
+        "sentence": "the method then increments the offset by the length of the column, which is assumed to be 2 bytes."
+      },
+      {
+        "entity": "offset",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the `int16` method is used to add a column of type `int16` to a table, with the specified name, and updates "
+      },
+      {
+        "entity": "columns",
+        "verdict": "CORRECT",
+        "sentence": "the method creates a new `columnint16` object, which represents the column, and adds it to a list of columns that make u"
+      },
+      {
+        "entity": "columns",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method adds the new column to a list of columns that make up the table."
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "column",
+        "verdict": "INCORRECT",
+        "sentence": "the method then increments the offset by the length of the column, which is assumed to be 2 bytes."
+      }
+    ],
+    "irrelevant_entities": [
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "the `int16` method is used to add a column of type `int16` to the table, with the specified name."
+      },
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "the method starts by creating a new `columnint16` object with the specified name and the current offset of the table."
+      },
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "in summary, the `int16` method is used to add a column of type `int16` to a table, with the specified name, and updates "
+      }
+    ]
+  },
+  "stats": {
+    "n_all": 22,
+    "n_correct": 18,
+    "n_incorrect": 1,
+    "n_irrelevant": 3
+  }
+}

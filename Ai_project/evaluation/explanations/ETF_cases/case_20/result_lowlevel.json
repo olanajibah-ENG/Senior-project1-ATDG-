@@ -1,0 +1,48 @@
+{
+  "case_id": "case_20",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "final",
+    "ifempty",
+    "null",
+    "ordered",
+    "spliterator",
+    "spliterators",
+    "streamex",
+    "t",
+    "values"
+  ],
+  "metrics": {
+    "TP": [
+      "final",
+      "ifempty",
+      "null",
+      "ordered",
+      "spliterator",
+      "spliterators",
+      "streamex",
+      "t",
+      "values"
+    ],
+    "FP": [
+      "ifempty",
+      "null",
+      "ordered",
+      "spliterator",
+      "spliterators",
+      "values"
+    ],
+    "FN": [
+      "public"
+    ],
+    "precision": 0.6,
+    "recall": 0.9,
+    "f1": 0.72,
+    "hallucination_rate": 0.4,
+    "counts": {
+      "tp": 9,
+      "fp": 6,
+      "fn": 1
+    }
+  }
+}

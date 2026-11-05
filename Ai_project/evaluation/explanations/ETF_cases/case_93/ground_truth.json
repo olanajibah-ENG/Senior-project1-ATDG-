@@ -1,0 +1,167 @@
+{
+  "case_id": "case_93",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_34b",
+  "scope": "method",
+  "row_index": 92,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "setfailuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checknotnull",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iszero",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "isnegative",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "setfailuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checknotnull",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iszero",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "isnegative",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "failuretimeout",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs and outputs of the method:\r\n\r\n- Input: A Duration object representing the failure timeout.\r\n- Output: The method returns the updated SwimMembershipProtocolConfig object.\r\n\r\n2. Business purpose:\r\n\r\nThe method `setFailureTimeout` is used to set the failure timeout for the SwimMembershipProtocolConfig object.\r\n\r\n3. Detailed functional summary of the method:\r\n\r\n- The method first checks if the provided `failureTimeout` is not null using the `checkNotNull` method. If it is null, it throws an `IllegalArgumentException` with the message \"failureTimeout cannot be null\".\r\n- Then, the method checks if the `failureTimeout` is not negative or zero using the `isNegative` and `isZero` methods of the Duration object. If it is negative or zero, it throws an `IllegalArgumentException` with the "
+}

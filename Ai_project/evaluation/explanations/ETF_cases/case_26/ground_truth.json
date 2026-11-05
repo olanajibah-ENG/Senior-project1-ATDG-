@@ -1,0 +1,66 @@
+{
+  "case_id": "case_26",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_20b",
+  "scope": "method",
+  "row_index": 25,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "setcurrentbusinessdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "setcurrentbusinessdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs and outputs of the method: The method takes in a generic type `E` and sets it as the start date. It also sets the current business date to the start date. The method returns the `DateCalculator` object itself.\r\n\r\n2. Business purpose: The purpose of this method is to set the start date for the date calculator. It also sets the current business date to the start date.\r\n\r\n3. Detailed functional summary of the method: The method first sets the start date to the input parameter `startDate`. Then, it calls the `setCurrentBusinessDate` method to set the current business date to the start date. Finally, it returns the `DateCalculator` object itself.\r\n\r\n\r\n\r\n"
+}

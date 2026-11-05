@@ -1,0 +1,27 @@
+{
+  "case_id": "case_55",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "length_short",
+    "mcontext",
+    "showfacebookapperror"
+  ],
+  "metrics": {
+    "TP": [
+      "length_short",
+      "mcontext",
+      "showfacebookapperror"
+    ],
+    "FP": [],
+    "FN": [],
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "case_id": "case_43",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "assertcontainsrequiredproperties",
+    "assertcontainsrequiredtypes",
+    "constraintviolationexception",
+    "container_types",
+    "model",
+    "required_properties"
+  ],
+  "metrics": {
+    "TP": [
+      "assertcontainsrequiredproperties",
+      "assertcontainsrequiredtypes",
+      "constraintviolationexception",
+      "container_types",
+      "model",
+      "required_properties"
+    ],
+    "FP": [],
+    "FN": [],
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0
+    }
+  }
+}

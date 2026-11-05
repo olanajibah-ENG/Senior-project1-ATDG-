@@ -1,0 +1,287 @@
+{
+  "case_id": "case_67",
+  "source": "CodeSumEval",
+  "model_name": "mistral_7b",
+  "scope": "method",
+  "row_index": 66,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "getkeyset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getkeyset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keys",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keys",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getkeyset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getkeyset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keys",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keys",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "key",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ]
+  },
+  "original_summary": "\r\n1. Inputs:\r\n- logger: An instance of the Java logging API's Logger class, used for logging messages.\r\n- comment: A String representing a comment or message to be logged before the properties are printed.\r\n\r\n2. Business Purpose:\r\nThe logProperties() method is designed to log information about the properties of an object to the console or a log file, preceded by a given comment.\r\n\r\n3. Functional Summary:\r\nThe logProperties() method takes two arguments: a Logger object and a String comment. The method begins by logging the comment using the info() method of the Logger object. Then, it iterates through the keys in the object using the getKeySet() method and logs each key-value pair using the info() method as well. The key and value are concatenated with the appropriate labels and logged as s"
+}

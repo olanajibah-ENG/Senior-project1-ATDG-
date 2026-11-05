@@ -1,0 +1,45 @@
+{
+  "case_id": "case_104",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "boolean",
+    "checkisvalidh2header",
+    "compressionexception",
+    "connection",
+    "connectionspecificheaderlist",
+    "h2headerfield",
+    "header",
+    "hpackconstants",
+    "istrailerfield",
+    "te",
+    "trailers",
+    "void"
+  ],
+  "metrics": {
+    "TP": [
+      "boolean",
+      "checkisvalidh2header",
+      "compressionexception",
+      "connection",
+      "connectionspecificheaderlist",
+      "h2headerfield",
+      "header",
+      "hpackconstants",
+      "istrailerfield",
+      "te",
+      "trailers",
+      "void"
+    ],
+    "FP": [],
+    "FN": [],
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 12,
+      "fp": 0,
+      "fn": 0
+    }
+  }
+}

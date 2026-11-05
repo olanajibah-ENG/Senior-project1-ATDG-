@@ -1,0 +1,86 @@
+{
+  "case_id": "case_92",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_20b",
+  "scope": "method",
+  "row_index": 91,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs and outputs of the method:\r\n- Input: `Duration failureTimeout`\r\n- Output: `SwimMembershipProtocolConfig`\r\n\r\n2. Business purpose:\r\n- This method sets the failure timeout for the Swim Membership Protocol.\r\n\r\n3. Detailed functional summary of the method:\r\n- The method first checks if the `failureTimeout` is not null and if it is not negative or zero.\r\n- If the `failureTimeout` passes the checks, it is set to the `failureTimeout` field of the `SwimMembershipProtocolConfig` object.\r\n- The method then returns the `SwimMembershipProtocolConfig` object.\r\n\r\n\r\n\r\n"
+}

@@ -1,0 +1,49 @@
+{
+  "case_id": "case_119",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "checkargument",
+    "failedcount",
+    "finalizestats",
+    "getrpcmetrics",
+    "handletimeouterror",
+    "maxretries",
+    "preconditions",
+    "rpc",
+    "rpctimercontext",
+    "setexception",
+    "status",
+    "streamwaittimeoutexception",
+    "timeoutretrycount"
+  ],
+  "metrics": {
+    "TP": [
+      "checkargument",
+      "failedcount",
+      "finalizestats",
+      "getrpcmetrics",
+      "handletimeouterror",
+      "maxretries",
+      "preconditions",
+      "rpc",
+      "rpctimercontext",
+      "setexception",
+      "status",
+      "streamwaittimeoutexception",
+      "timeoutretrycount"
+    ],
+    "FP": [],
+    "FN": [
+      "close"
+    ],
+    "precision": 1.0,
+    "recall": 0.9286,
+    "f1": 0.963,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 13,
+      "fp": 0,
+      "fn": 1
+    }
+  }
+}

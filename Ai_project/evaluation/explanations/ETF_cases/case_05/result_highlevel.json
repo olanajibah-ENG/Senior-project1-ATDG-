@@ -1,0 +1,38 @@
+{
+  "case_id": "case_05",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "column",
+    "columnint16",
+    "int16",
+    "name",
+    "offset",
+    "rowbuilder",
+    "string"
+  ],
+  "metrics": {
+    "TP": [
+      "column",
+      "columnint16",
+      "int16",
+      "name",
+      "offset",
+      "rowbuilder"
+    ],
+    "FP": [
+      "int16",
+      "name",
+      "string"
+    ],
+    "FN": [],
+    "precision": 0.6667,
+    "recall": 1.0,
+    "f1": 0.8,
+    "hallucination_rate": 0.3333,
+    "counts": {
+      "tp": 6,
+      "fp": 3,
+      "fn": 0
+    }
+  }
+}

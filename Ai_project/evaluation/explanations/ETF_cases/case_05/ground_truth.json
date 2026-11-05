@@ -1,0 +1,192 @@
+{
+  "case_id": "case_05",
+  "source": "CodeSumEval (ETF)",
+  "model_name": "ibm_granite_34b",
+  "scope": "method",
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "string",
+        "verdict": "IRRELEVANT",
+        "sentence": "- a string `name` representing the name of the column."
+      },
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "the `int16` method creates a new `columnint16` object with the given name and adds it to the list of columns in the `row"
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "- a reference to the `rowbuilder` object itself, allowing method chaining."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a new column of type `int16` to a `rowbuilder` object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the column will be added to the end of the list of columns in the `rowbuilder`."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method creates a new `columnint16` object with the given name and adds it to the list of columns in the `row"
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the method also updates the offset of the `rowbuilder` by adding the length of the new column."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method returns a reference to the `rowbuilder` itself, allowing method chaining."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "- a string `name` representing the name of the column."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method creates a new `columnint16` object with the given name and adds it to the list of columns in the `row"
+      },
+      {
+        "entity": "int16",
+        "verdict": "INCORRECT",
+        "sentence": "the `int16` method is used to add a new column of type `int16` to a `rowbuilder` object."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method creates a new `columnint16` object with the given name and adds it to the list of columns in the `row"
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "- a string `name` representing the name of the column."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a new column of type `int16` to a `rowbuilder` object."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the column will be added to the end of the list of columns in the `rowbuilder`."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the method also updates the offset of the `rowbuilder` by adding the length of the new column."
+      },
+      {
+        "entity": "offset",
+        "verdict": "CORRECT",
+        "sentence": "the method also updates the offset of the `rowbuilder` by adding the length of the new column."
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "- a reference to the `rowbuilder` object itself, allowing method chaining."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a new column of type `int16` to a `rowbuilder` object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the column will be added to the end of the list of columns in the `rowbuilder`."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method creates a new `columnint16` object with the given name and adds it to the list of columns in the `row"
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the method also updates the offset of the `rowbuilder` by adding the length of the new column."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method returns a reference to the `rowbuilder` itself, allowing method chaining."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "- a string `name` representing the name of the column."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method creates a new `columnint16` object with the given name and adds it to the list of columns in the `row"
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method creates a new `columnint16` object with the given name and adds it to the list of columns in the `row"
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "- a string `name` representing the name of the column."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the `int16` method is used to add a new column of type `int16` to a `rowbuilder` object."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the column will be added to the end of the list of columns in the `rowbuilder`."
+      },
+      {
+        "entity": "column",
+        "verdict": "CORRECT",
+        "sentence": "the method also updates the offset of the `rowbuilder` by adding the length of the new column."
+      },
+      {
+        "entity": "offset",
+        "verdict": "CORRECT",
+        "sentence": "the method also updates the offset of the `rowbuilder` by adding the length of the new column."
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "int16",
+        "verdict": "INCORRECT",
+        "sentence": "the `int16` method is used to add a new column of type `int16` to a `rowbuilder` object."
+      }
+    ],
+    "irrelevant_entities": [
+      {
+        "entity": "string",
+        "verdict": "IRRELEVANT",
+        "sentence": "- a string `name` representing the name of the column."
+      },
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "the `int16` method creates a new `columnint16` object with the given name and adds it to the list of columns in the `row"
+      }
+    ]
+  },
+  "stats": {
+    "n_all": 17,
+    "n_correct": 14,
+    "n_incorrect": 1,
+    "n_irrelevant": 2
+  }
+}

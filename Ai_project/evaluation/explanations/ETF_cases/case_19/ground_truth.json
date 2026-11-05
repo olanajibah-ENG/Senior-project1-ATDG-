@@ -1,0 +1,182 @@
+{
+  "case_id": "case_19",
+  "source": "CodeSumEval (ETF)",
+  "model_name": "ibm_granite_20b",
+  "scope": "method",
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "spliterator",
+        "verdict": "CORRECT",
+        "sentence": "it takes in a variable number of values and creates a spliterator from them using the spliterators.spliterator method."
+      },
+      {
+        "entity": "spliterator",
+        "verdict": "CORRECT",
+        "sentence": "then, it calls the ifempty method with the spliterator as an argument."
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": "the method takes in a variable number of values and returns a streamex object."
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": "the method uses the ifempty method from the streamex class to handle the empty stream case."
+      },
+      {
+        "entity": "ifempty",
+        "verdict": "CORRECT",
+        "sentence": "the method uses the ifempty method from the streamex class to handle the empty stream case."
+      },
+      {
+        "entity": "ifempty",
+        "verdict": "CORRECT",
+        "sentence": "then, it calls the ifempty method with the spliterator as an argument."
+      },
+      {
+        "entity": "spliterators",
+        "verdict": "CORRECT",
+        "sentence": "it takes in a variable number of values and creates a spliterator from them using the spliterators.spliterator method."
+      },
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": "the method takes in a variable number of values and returns a streamex object."
+      },
+      {
+        "entity": "values",
+        "verdict": "IRRELEVANT",
+        "sentence": "if the stream is empty, it will return a new stream containing the provided values."
+      },
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": "it takes in a variable number of values and creates a spliterator from them using the spliterators.spliterator method."
+      },
+      {
+        "entity": "values",
+        "verdict": "IRRELEVANT",
+        "sentence": "this will return a new stream containing the provided values if the original stream is empty."
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": "the purpose of this method is to provide a way to handle the case where the stream is empty."
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": "if the stream is empty, it will return a new stream containing the provided values."
+      },
+      {
+        "entity": "stream",
+        "verdict": "INCORRECT",
+        "sentence": "the method uses the ifempty method from the streamex class to handle the empty stream case."
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": "this will return a new stream containing the provided values if the original stream is empty."
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": "if the stream is not empty, it will return the original stream."
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "spliterator",
+        "verdict": "CORRECT",
+        "sentence": "it takes in a variable number of values and creates a spliterator from them using the spliterators.spliterator method."
+      },
+      {
+        "entity": "spliterator",
+        "verdict": "CORRECT",
+        "sentence": "then, it calls the ifempty method with the spliterator as an argument."
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": "the method takes in a variable number of values and returns a streamex object."
+      },
+      {
+        "entity": "streamex",
+        "verdict": "CORRECT",
+        "sentence": "the method uses the ifempty method from the streamex class to handle the empty stream case."
+      },
+      {
+        "entity": "ifempty",
+        "verdict": "CORRECT",
+        "sentence": "the method uses the ifempty method from the streamex class to handle the empty stream case."
+      },
+      {
+        "entity": "ifempty",
+        "verdict": "CORRECT",
+        "sentence": "then, it calls the ifempty method with the spliterator as an argument."
+      },
+      {
+        "entity": "spliterators",
+        "verdict": "CORRECT",
+        "sentence": "it takes in a variable number of values and creates a spliterator from them using the spliterators.spliterator method."
+      },
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": "the method takes in a variable number of values and returns a streamex object."
+      },
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": "it takes in a variable number of values and creates a spliterator from them using the spliterators.spliterator method."
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": "the purpose of this method is to provide a way to handle the case where the stream is empty."
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": "if the stream is empty, it will return a new stream containing the provided values."
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": "this will return a new stream containing the provided values if the original stream is empty."
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": "if the stream is not empty, it will return the original stream."
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "stream",
+        "verdict": "INCORRECT",
+        "sentence": "the method uses the ifempty method from the streamex class to handle the empty stream case."
+      }
+    ],
+    "irrelevant_entities": [
+      {
+        "entity": "values",
+        "verdict": "IRRELEVANT",
+        "sentence": "if the stream is empty, it will return a new stream containing the provided values."
+      },
+      {
+        "entity": "values",
+        "verdict": "IRRELEVANT",
+        "sentence": "this will return a new stream containing the provided values if the original stream is empty."
+      }
+    ]
+  },
+  "stats": {
+    "n_all": 16,
+    "n_correct": 13,
+    "n_incorrect": 1,
+    "n_irrelevant": 2
+  }
+}

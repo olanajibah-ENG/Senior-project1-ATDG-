@@ -1,0 +1,31 @@
+{
+  "case_id": "case_68",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "comment",
+    "info",
+    "key",
+    "logger",
+    "string"
+  ],
+  "metrics": {
+    "TP": [
+      "comment",
+      "info",
+      "key",
+      "logger",
+      "string"
+    ],
+    "FP": [],
+    "FN": [],
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    }
+  }
+}

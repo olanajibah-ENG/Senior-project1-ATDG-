@@ -1,0 +1,45 @@
+{
+  "case_id": "case_111",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "allmockvolumes",
+    "availabilityzone",
+    "iops",
+    "mockvolume",
+    "size",
+    "snapshotid",
+    "string",
+    "uuid",
+    "volume_id_postfix_length",
+    "volumetype"
+  ],
+  "metrics": {
+    "TP": [
+      "allmockvolumes",
+      "availabilityzone",
+      "iops",
+      "mockvolume",
+      "size",
+      "snapshotid",
+      "string",
+      "uuid",
+      "volume_id_postfix_length",
+      "volumetype"
+    ],
+    "FP": [],
+    "FN": [
+      "int",
+      "ret",
+      "volumeid"
+    ],
+    "precision": 1.0,
+    "recall": 0.7692,
+    "f1": 0.8696,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 3
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "case_id": "case_77",
+  "source": "CodeSumEval",
+  "model_name": "mistral_7b",
+  "scope": "method",
+  "row_index": 76,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "length",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getframelength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getframelength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "length",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ]
+  },
+  "original_summary": "\r\n1. Inputs:\r\nThis method does not take any input parameters.\r\n\r\n2. Business Purpose:\r\nThe business purpose of this method is to calculate and return the total length of all ID3v2Frames in the Hashmap. ID3v2Frames are metadata frames in an MP3 file that store information such as artist name, album name, genre, etc.\r\n\r\n3. Functional Summary:\r\n- Declare an integer variable 'length' and initialize it to 0.\r\n- Get an iterator 'it' from the values of the Hashmap.\r\n- Use a while loop to iterate through each element in the iterator.\r\n- Cast each element to ID3v2Frame type.\r\n- Add the length of the current ID3v2Frame to the 'length' variable using the getFrameLength() method.\r\n- Once all elements have been iterated through, return the total length.\r\n\r\nIn summary, this method calculates the total l"
+}

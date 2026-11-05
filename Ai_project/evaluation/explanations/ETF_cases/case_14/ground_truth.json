@@ -1,0 +1,241 @@
+{
+  "case_id": "case_14",
+  "source": "CodeSumEval (ETF)",
+  "model_name": "codellama_7b",
+  "scope": "method",
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "the method returns a sorted map of health check names to their results, where the keys are the names of the health check"
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "a. creates a new sorted map, `results`, to store the results of the health checks."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "c. for each entry, it checks if the filter matches the health check name and the health check itself."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "if the filter matches, it executes the health check and adds the result to the `results` map."
+      },
+      {
+        "entity": "result",
+        "verdict": "CORRECT",
+        "sentence": "+ `sortedmap<string, healthcheck.result>`: a map of health check names to their results, sorted by name."
+      },
+      {
+        "entity": "result",
+        "verdict": "IRRELEVANT",
+        "sentence": "if the filter matches, it executes the health check and adds the result to the `results` map."
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "+ `sortedmap<string, healthcheck.result>`: a map of health check names to their results, sorted by name."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "+ `sortedmap<string, healthcheck.result>`: a map of health check names to their results, sorted by name."
+      },
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "+ `sortedmap<string, healthcheck.result>`: a map of health check names to their results, sorted by name."
+      },
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "the method `runhealthchecks` is used to execute a set of health checks and return their results in a sorted map."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "if the filter matches, it executes the health check and adds the result to the `results` map."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "d. returns the `results` map as an unmodifiable sorted map."
+      },
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "in summary, the method `runhealthchecks` takes a `healthcheckfilter` object as input, which determines which health chec"
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "+ `sortedmap<string, healthcheck.result>`: a map of health check names to their results, sorted by name."
+      },
+      {
+        "entity": "healthcheckfilter",
+        "verdict": "CORRECT",
+        "sentence": "+ `healthcheckfilter filter`: a filter object that determines which health checks to run."
+      },
+      {
+        "entity": "healthcheckfilter",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a `healthcheckfilter` object as input, which determines which health checks to run."
+      },
+      {
+        "entity": "healthcheckfilter",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the method `runhealthchecks` takes a `healthcheckfilter` object as input, which determines which health chec"
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "b. iterates over the entries in the `healthchecks` map, which contains a list of health checks to run."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "+ `healthcheckfilter filter`: a filter object that determines which health checks to run."
+      },
+      {
+        "entity": "runhealthchecks",
+        "verdict": "CORRECT",
+        "sentence": "the method `runhealthchecks` is used to execute a set of health checks and return their results in a sorted map."
+      },
+      {
+        "entity": "runhealthchecks",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the method `runhealthchecks` takes a `healthcheckfilter` object as input, which determines which health chec"
+      },
+      {
+        "entity": "runhealthchecks",
+        "verdict": "CORRECT",
+        "sentence": "the method `runhealthchecks` performs the following steps:"
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "a. creates a new sorted map, `results`, to store the results of the health checks."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "c. for each entry, it checks if the filter matches the health check name and the health check itself."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "if the filter matches, it executes the health check and adds the result to the `results` map."
+      },
+      {
+        "entity": "result",
+        "verdict": "CORRECT",
+        "sentence": "+ `sortedmap<string, healthcheck.result>`: a map of health check names to their results, sorted by name."
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "+ `sortedmap<string, healthcheck.result>`: a map of health check names to their results, sorted by name."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "+ `sortedmap<string, healthcheck.result>`: a map of health check names to their results, sorted by name."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "if the filter matches, it executes the health check and adds the result to the `results` map."
+      },
+      {
+        "entity": "results",
+        "verdict": "CORRECT",
+        "sentence": "d. returns the `results` map as an unmodifiable sorted map."
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "+ `sortedmap<string, healthcheck.result>`: a map of health check names to their results, sorted by name."
+      },
+      {
+        "entity": "healthcheckfilter",
+        "verdict": "CORRECT",
+        "sentence": "+ `healthcheckfilter filter`: a filter object that determines which health checks to run."
+      },
+      {
+        "entity": "healthcheckfilter",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a `healthcheckfilter` object as input, which determines which health checks to run."
+      },
+      {
+        "entity": "healthcheckfilter",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the method `runhealthchecks` takes a `healthcheckfilter` object as input, which determines which health chec"
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "b. iterates over the entries in the `healthchecks` map, which contains a list of health checks to run."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "+ `healthcheckfilter filter`: a filter object that determines which health checks to run."
+      },
+      {
+        "entity": "runhealthchecks",
+        "verdict": "CORRECT",
+        "sentence": "the method `runhealthchecks` is used to execute a set of health checks and return their results in a sorted map."
+      },
+      {
+        "entity": "runhealthchecks",
+        "verdict": "CORRECT",
+        "sentence": "in summary, the method `runhealthchecks` takes a `healthcheckfilter` object as input, which determines which health chec"
+      },
+      {
+        "entity": "runhealthchecks",
+        "verdict": "CORRECT",
+        "sentence": "the method `runhealthchecks` performs the following steps:"
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "the method returns a sorted map of health check names to their results, where the keys are the names of the health check"
+      },
+      {
+        "entity": "result",
+        "verdict": "IRRELEVANT",
+        "sentence": "if the filter matches, it executes the health check and adds the result to the `results` map."
+      },
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "+ `sortedmap<string, healthcheck.result>`: a map of health check names to their results, sorted by name."
+      },
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "the method `runhealthchecks` is used to execute a set of health checks and return their results in a sorted map."
+      },
+      {
+        "entity": "results",
+        "verdict": "IRRELEVANT",
+        "sentence": "in summary, the method `runhealthchecks` takes a `healthcheckfilter` object as input, which determines which health chec"
+      }
+    ]
+  },
+  "stats": {
+    "n_all": 22,
+    "n_correct": 17,
+    "n_incorrect": 0,
+    "n_irrelevant": 5
+  }
+}

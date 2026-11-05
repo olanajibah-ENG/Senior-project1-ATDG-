@@ -1,0 +1,216 @@
+{
+  "case_id": "case_113",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_20b",
+  "scope": "method",
+  "row_index": 112,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "iops",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iops",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volumetype",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volumetype",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "snapshotid",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "snapshotid",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "availabilityzone",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "availabilityzone",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "allmockvolumes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "size",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "size",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mockvolume",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mockvolume",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volumeid",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volume",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volume",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "int",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volumeid",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volume",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "iops",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iops",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volumetype",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volumetype",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "snapshotid",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "snapshotid",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "availabilityzone",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "availabilityzone",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "allmockvolumes",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "size",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "size",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mockvolume",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mockvolume",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volumeid",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volume",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volume",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "int",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volumeid",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "volume",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs and outputs of the method:\r\n- Inputs: volumeType (String), size (String), availabilityZone (String), iops (int), snapshotId (String)\r\n- Output: MockVolume object\r\n\r\n2. Business purpose:\r\n- This method is used to create a new volume in the mock environment.\r\n\r\n3. Detailed functional summary of the method:\r\n- It creates a new MockVolume object and sets the volumeType, volumeId, size, availabilityZone, iops, and snapshotId using the input parameters.\r\n- It then adds the newly created volume to the allMockVolumes map using the volumeId as the key.\r\n- Finally, it returns the newly created volume.\r\n\r\n\r\n\r\n"
+}

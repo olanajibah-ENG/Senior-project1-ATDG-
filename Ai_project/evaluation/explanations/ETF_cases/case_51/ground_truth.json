@@ -1,0 +1,197 @@
+{
+  "case_id": "case_51",
+  "source": "CodeSumEval",
+  "model_name": "llama3_8b",
+  "scope": "method",
+  "row_index": 50,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length_short",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "r",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "r",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "wings_facebook__error_facebook_app",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "wings_facebook__error_facebook_app",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mcontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mcontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "maketext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "show",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "context",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "context",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length_short",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "r",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "r",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "wings_facebook__error_facebook_app",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "wings_facebook__error_facebook_app",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mcontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mcontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "maketext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "show",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "context",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "context",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\nHere is the summary of the provided Java code:\r\n\r\n**Inputs:**\r\n\r\n* `mContext`: This is an instance variable of type `Context` that represents the current context of the application.\r\n* `R.string.wings_facebook__error_facebook_app`: This is a string resource that contains the error message for the Facebook app.\r\n\r\n**Outputs:**\r\n\r\n* A toast message with the error message for the Facebook app is displayed to the user.\r\n\r\n**Business Purpose:**\r\n\r\nThe purpose of this method is to display an error message to the user when there is an issue with the Facebook app. This could be due to various reasons such as authentication failure, network connectivity issues, or other errors.\r\n\r\n**Detailed Functional Summary:**\r\n\r\nThis method is a private method that belongs to a class. It uses the `Toast.makeT"
+}

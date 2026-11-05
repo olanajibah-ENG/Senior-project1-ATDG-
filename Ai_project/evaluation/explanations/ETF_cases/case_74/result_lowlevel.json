@@ -1,0 +1,35 @@
+{
+  "case_id": "case_74",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "clearcache",
+    "commercenotificationtemplateimpl",
+    "entitycache",
+    "finder_class_name_entity",
+    "finder_class_name_list_with_pagination",
+    "finder_class_name_list_without_pagination",
+    "findercache"
+  ],
+  "metrics": {
+    "TP": [
+      "clearcache",
+      "commercenotificationtemplateimpl",
+      "entitycache",
+      "finder_class_name_entity",
+      "finder_class_name_list_with_pagination",
+      "finder_class_name_list_without_pagination",
+      "findercache"
+    ],
+    "FP": [],
+    "FN": [],
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0
+    }
+  }
+}

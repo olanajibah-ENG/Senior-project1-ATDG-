@@ -1,0 +1,207 @@
+{
+  "case_id": "case_90",
+  "source": "CodeSumEval",
+  "model_name": "llama3_70b",
+  "scope": "method",
+  "row_index": 89,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "this",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "duration",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checknotnull",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkargument",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checknotnull",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkargument",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "this",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "duration",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ]
+  },
+  "original_summary": "\r\nHere is a detailed summary of the Java code:\r\n\r\n**1. Inputs and Outputs of the Method:**\r\n\r\n* Input: \r\n\t+ `failureTimeout` of type `Duration` (a class that represents a time duration)\r\n* Output: \r\n\t+ `this` (the current object of type `SwimMembershipProtocolConfig`)\r\n\r\n**2. Business Purpose:**\r\n\r\nThe business purpose of this method is to set the failure timeout for a Swim Membership Protocol configuration. This timeout determines how long the system should wait before considering a failure has occurred.\r\n\r\n**3. Detailed Functional Summary of the Method:**\r\n\r\nThis method sets the `failureTimeout` property of the `SwimMembershipProtocolConfig` object. Here's a step-by-step breakdown of what the method does:\r\n\r\n1. **Input Validation**: The method first checks if the `failureTimeout` paramet"
+}

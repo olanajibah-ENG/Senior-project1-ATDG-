@@ -1,0 +1,41 @@
+{
+  "case_id": "case_08",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "detectfeatures",
+    "detections",
+    "dog",
+    "grayf32",
+    "input",
+    "process",
+    "scalespace",
+    "void"
+  ],
+  "metrics": {
+    "TP": [
+      "detectfeatures",
+      "detections",
+      "dog",
+      "grayf32",
+      "input",
+      "process",
+      "scalespace",
+      "void"
+    ],
+    "FP": [
+      "dog"
+    ],
+    "FN": [
+      "getnumscales"
+    ],
+    "precision": 0.8889,
+    "recall": 0.8889,
+    "f1": 0.8889,
+    "hallucination_rate": 0.1111,
+    "counts": {
+      "tp": 8,
+      "fp": 1,
+      "fn": 1
+    }
+  }
+}

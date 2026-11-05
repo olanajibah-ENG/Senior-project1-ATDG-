@@ -1,0 +1,637 @@
+{
+ "set": "npm_dev_limit22",
+ "system": "current",
+ "stage": "baseline (LLM, 22 single-file commits)",
+ "model": "poolside/laguna-s-2.1:free",
+ "legacy_snapshot": "a8649b221ee7587b4516d5edfbd8963b05c3ccc44b003686b710048df1b387da",
+ "metrics": {
+  "commits": 22,
+  "checked": 22,
+  "not_checked": 0,
+  "positives": 17,
+  "negatives": 5,
+  "TP": 5,
+  "FP": 0,
+  "FN": 12,
+  "TN": 5,
+  "precision": 1.0,
+  "recall": 0.294,
+  "f1": 0.454,
+  "specificity": 1.0,
+  "flag_rate": 0.227,
+  "recall_by_group": {
+   "structural": {
+    "found": 2,
+    "total": 7,
+    "recall": 0.286
+   },
+   "behavioral": {
+    "found": 3,
+    "total": 10,
+    "recall": 0.3
+   }
+  },
+  "recall_by_category": {
+   "change_behavior": {
+    "found": 3,
+    "total": 10,
+    "recall": 0.3
+   },
+   "remove method": {
+    "found": 1,
+    "total": 4,
+    "recall": 0.25
+   },
+   "change_signature": {
+    "found": 0,
+    "total": 2,
+    "recall": 0.0
+   },
+   "rename method": {
+    "found": 1,
+    "total": 1,
+    "recall": 1.0
+   }
+  },
+  "file_errors": 0,
+  "llm_calls": 23
+ },
+ "results": [
+  {
+   "id": "reactivex/rxjs@26e6e5c59d",
+   "label": "breaking",
+   "categories": [
+    "change_behavior"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": true,
+   "files": [
+    {
+     "file": "src/internal/observable/bindNodeCallback.ts",
+     "status": "ok",
+     "error": null,
+     "conflicts": [
+      {
+       "type": "breaking_change",
+       "category": "method_signature_changed",
+       "severity": "critical",
+       "class_name": "<module>",
+       "member": "bindNodeCallback"
+      },
+      {
+       "type": "breaking_change",
+       "category": null,
+       "severity": "high",
+       "class_name": "<module>",
+       "member": "bindNodeCallback"
+      }
+     ],
+     "flagged": true
+    }
+   ]
+  },
+  {
+   "id": "panva/node-oidc-provider@52000d55a2",
+   "label": "breaking",
+   "categories": [
+    "remove method"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "lib/helpers/oidc_context.js",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "panva/node-oidc-provider@a333aaa0bd",
+   "label": "breaking",
+   "categories": [
+    "change_behavior"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "lib/actions/introspection.js",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "panva/node-oidc-provider@db31d32e04",
+   "label": "breaking",
+   "categories": [
+    "change_behavior"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "lib/provider.js",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "gajus/eslint-plugin-jsdoc@2605705204",
+   "label": "breaking",
+   "categories": [
+    "change_behavior"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "src/rules/checkTypes.js",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "d3fc/d3fc@044fb1a737",
+   "label": "breaking",
+   "categories": [
+    "change_behavior"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "packages/d3fc-extent/rollup.config.js",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "SAP/fundamental-ngx@848bffe366",
+   "label": "breaking",
+   "categories": [
+    "change_behavior"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": true,
+   "files": [
+    {
+     "file": "libs/core/src/lib/switch/switch.component.ts",
+     "status": "ok",
+     "error": null,
+     "conflicts": [
+      {
+       "type": "breaking_change",
+       "category": "attribute_removed",
+       "severity": "medium",
+       "class_name": "SwitchComponent",
+       "member": "optionalText"
+      },
+      {
+       "type": "new_feature",
+       "category": "attribute_added",
+       "severity": "info",
+       "class_name": "SwitchComponent",
+       "member": "activeText"
+      },
+      {
+       "type": "new_feature",
+       "category": "attribute_added",
+       "severity": "info",
+       "class_name": "SwitchComponent",
+       "member": "inactiveText"
+      },
+      {
+       "type": "new_feature",
+       "category": null,
+       "severity": "low",
+       "class_name": "SwitchComponent",
+       "member": "activeText"
+      },
+      {
+       "type": "new_feature",
+       "category": null,
+       "severity": "low",
+       "class_name": "SwitchComponent",
+       "member": "inactiveText"
+      }
+     ],
+     "flagged": true
+    }
+   ]
+  },
+  {
+   "id": "pnpm/pnpm@83dab10b6a",
+   "label": "breaking",
+   "categories": [
+    "change_behavior"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "src/index.ts",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "automattic/mongoose@d175226d7a",
+   "label": "breaking",
+   "categories": [
+    "change_behavior"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "lib/services/setDefaultsOnInsert.js",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "panva/node-oidc-provider@6afaf3139c",
+   "label": "breaking",
+   "categories": [
+    "remove method"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "lib/models/mixins/is_sender_constrained.js",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "coinbase/rest-hooks@957187071b",
+   "label": "breaking",
+   "categories": [
+    "rename method"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": true,
+   "files": [
+    {
+     "file": "packages/rest/src/SimpleResource.ts",
+     "status": "ok",
+     "error": null,
+     "conflicts": [
+      {
+       "type": "new_feature",
+       "category": "method_added",
+       "severity": "info",
+       "class_name": "SimpleResource",
+       "member": "useFetchInit"
+      },
+      {
+       "type": "new_feature",
+       "category": "method_added",
+       "severity": "info",
+       "class_name": "SimpleResource",
+       "member": "fetchOptionsPlugin"
+      },
+      {
+       "type": "renamed",
+       "category": null,
+       "severity": "medium",
+       "class_name": "SimpleResource",
+       "member": "getFetchInit"
+      },
+      {
+       "type": "new_feature",
+       "category": null,
+       "severity": "low",
+       "class_name": "SimpleResource",
+       "member": "fetchOptionsPlugin"
+      },
+      {
+       "type": "refactoring",
+       "category": null,
+       "severity": "low",
+       "class_name": "SimpleResource",
+       "member": "getFetchOptions"
+      },
+      {
+       "type": "refactoring",
+       "category": null,
+       "severity": "low",
+       "class_name": "SimpleResource",
+       "member": "getFetchInit"
+      },
+      {
+       "type": "new_feature",
+       "category": null,
+       "severity": "low",
+       "class_name": "SimpleResource",
+       "member": "useFetchInit"
+      }
+     ],
+     "flagged": true
+    }
+   ]
+  },
+  {
+   "id": "automattic/mongoose@9b5663fc7c",
+   "label": "breaking",
+   "categories": [
+    "change_signature"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "lib/connection.js",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "nodkz/mongodb-memory-server@e5993727c6",
+   "label": "breaking",
+   "categories": [
+    "change_signature"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "packages/mongodb-memory-server-core/src/util/MongoInstance.ts",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "reactivex/rxjs@d39f8309c3",
+   "label": "breaking",
+   "categories": [
+    "change_behavior"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": true,
+   "files": [
+    {
+     "file": "src/internal/observable/pairs.ts",
+     "status": "ok",
+     "error": null,
+     "conflicts": [
+      {
+       "type": "breaking_change",
+       "category": "method_removed",
+       "severity": "high",
+       "class_name": "<module>",
+       "member": "dispatch"
+      },
+      {
+       "type": "breaking_change",
+       "category": null,
+       "severity": "high",
+       "class_name": "<module>",
+       "member": "dispatch"
+      }
+     ],
+     "flagged": true
+    }
+   ]
+  },
+  {
+   "id": "nodkz/mongodb-memory-server@7861a6faaf",
+   "label": "breaking",
+   "categories": [
+    "change_behavior"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "packages/mongodb-memory-server-core/src/MongoMemoryServer.ts",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "thi-ng/umbrella@4b0eec6335",
+   "label": "breaking",
+   "categories": [
+    "remove method"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 2,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "packages/transducers/src/iter/choices.ts",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "nodkz/mongodb-memory-server@6ebafbd762",
+   "label": "breaking",
+   "categories": [
+    "remove method"
+   ],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": true,
+   "files": [
+    {
+     "file": "packages/mongodb-memory-server-core/src/MongoMemoryReplSet.ts",
+     "status": "ok",
+     "error": null,
+     "conflicts": [
+      {
+       "type": "breaking_change",
+       "category": "method_removed",
+       "severity": "high",
+       "class_name": "MongoMemoryReplSet",
+       "member": "getDbName"
+      }
+     ],
+     "flagged": true
+    }
+   ]
+  },
+  {
+   "id": "gajus/slonik@f00b9de3ab",
+   "label": "clean",
+   "categories": [],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "src/binders/bindPool.js",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "gajus/mightyql@193cb3f0e5",
+   "label": "clean",
+   "categories": [],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "src/routines/executeQuery.ts",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "IgniteUI/igniteui-cli@13fa07502a",
+   "label": "clean",
+   "categories": [],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "lib/Util.ts",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "kuzzleio/kuzzle@e78ca48c8c",
+   "label": "clean",
+   "categories": [],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "lib/api/core/models/requestObject.js",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  },
+  {
+   "id": "contentful/contentful-import@79b40fdf23",
+   "label": "clean",
+   "categories": [],
+   "files_checked": 1,
+   "files_error": 0,
+   "llm_calls": 1,
+   "checked": true,
+   "flagged": false,
+   "files": [
+    {
+     "file": "lib/run-contentful-import.js",
+     "status": "ok",
+     "error": null,
+     "conflicts": [],
+     "flagged": false
+    }
+   ]
+  }
+ ]
+}

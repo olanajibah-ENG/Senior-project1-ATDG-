@@ -1,0 +1,43 @@
+{
+  "case_id": "case_20",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "ifempty",
+    "ordered",
+    "spliterator",
+    "streamex",
+    "t",
+    "values"
+  ],
+  "metrics": {
+    "TP": [
+      "ifempty",
+      "ordered",
+      "spliterator",
+      "streamex",
+      "t",
+      "values"
+    ],
+    "FP": [
+      "ifempty",
+      "ordered",
+      "spliterator",
+      "values"
+    ],
+    "FN": [
+      "final",
+      "null",
+      "public",
+      "spliterators"
+    ],
+    "precision": 0.6,
+    "recall": 0.6,
+    "f1": 0.6,
+    "hallucination_rate": 0.4,
+    "counts": {
+      "tp": 6,
+      "fp": 4,
+      "fn": 4
+    }
+  }
+}

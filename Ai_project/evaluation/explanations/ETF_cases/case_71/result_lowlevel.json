@@ -1,0 +1,33 @@
+{
+  "case_id": "case_71",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "class",
+    "clearcache",
+    "commercenotificationtemplateimpl",
+    "entitycache",
+    "findercache"
+  ],
+  "metrics": {
+    "TP": [
+      "class",
+      "clearcache",
+      "commercenotificationtemplateimpl",
+      "entitycache",
+      "findercache"
+    ],
+    "FP": [
+      "class"
+    ],
+    "FN": [],
+    "precision": 0.8333,
+    "recall": 1.0,
+    "f1": 0.9091,
+    "hallucination_rate": 0.1667,
+    "counts": {
+      "tp": 5,
+      "fp": 1,
+      "fn": 0
+    }
+  }
+}

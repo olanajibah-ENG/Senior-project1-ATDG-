@@ -1,0 +1,328 @@
+{
+  "case_id": "case_30",
+  "source": "CodeSumEval",
+  "model_name": "llama3_8b",
+  "scope": "method",
+  "row_index": 29,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "add",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "find",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "find",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "createsetfromproperty",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "null",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "matcher",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "add",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "find",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "find",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "createsetfromproperty",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "null",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "matcher",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "pattern",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": [
+      {
+        "entity": "pattern",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ]
+  },
+  "original_summary": "\r\nHere is the summary of the Java code:\r\n\r\n**Inputs and outputs of the method:**\r\n\r\n* Input: A string `property` which is expected to be a string containing a set of properties separated by semicolons.\r\n* Output: A `HashSet` of strings containing the extracted properties.\r\n\r\n**Business purpose:**\r\n\r\nThe method `createSetFromProperty` is designed to extract a set of properties from a given string input. The input string is expected to contain a set of properties separated by semicolons, and the method returns a `HashSet` containing these properties.\r\n\r\n**Detailed functional summary of the method:**\r\n\r\nThe method starts by creating an empty `HashSet` called `properties`. It then checks if the input `property` is not null and not equal to the string \"null\". If this condition is true, it proce"
+}

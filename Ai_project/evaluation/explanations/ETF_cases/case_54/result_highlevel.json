@@ -1,0 +1,32 @@
+{
+  "case_id": "case_54",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "string",
+    "toast"
+  ],
+  "metrics": {
+    "TP": [
+      "string",
+      "toast"
+    ],
+    "FP": [
+      "toast"
+    ],
+    "FN": [
+      "length_short",
+      "maketext",
+      "r",
+      "wings_facebook__error_facebook_app"
+    ],
+    "precision": 0.6667,
+    "recall": 0.3333,
+    "f1": 0.4444,
+    "hallucination_rate": 0.3333,
+    "counts": {
+      "tp": 2,
+      "fp": 1,
+      "fn": 4
+    }
+  }
+}

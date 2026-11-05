@@ -1,0 +1,106 @@
+{
+  "case_id": "case_80",
+  "source": "CodeSumEval",
+  "model_name": "codellama_7b",
+  "scope": "method",
+  "row_index": 79,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getframelength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "values",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getframelength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n\r\n1. Inputs and outputs of the method:\r\n* Inputs: None\r\n* Outputs: An integer representing the length of the ID3v2 frame\r\n2. Business purpose:\r\n* The purpose of this method is to calculate the length of the ID3v2 frame.\r\n3. Detailed functional summary of the method:\r\n* The method starts by initializing a local variable `length` to 0.\r\n* It then obtains an iterator over the values in the current instance of the `ID3v2Frame` class using the `values()` method.\r\n* It then iterates over the values using the `while` loop and for each value, it adds the length of the current frame to the `length` variable using the `getFrameLength()` method.\r\n* Finally, the method returns the `length` variable, which represents the total length of the ID3v2 frame.\r\n\r\n\r\n\r\n"
+}

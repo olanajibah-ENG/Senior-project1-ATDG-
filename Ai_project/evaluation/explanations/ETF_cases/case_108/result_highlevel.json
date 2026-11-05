@@ -1,0 +1,40 @@
+{
+  "case_id": "case_108",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "boolean",
+    "compressionexception",
+    "connection",
+    "h2headerfield",
+    "header",
+    "istrailerfield",
+    "te",
+    "trailers"
+  ],
+  "metrics": {
+    "TP": [
+      "boolean",
+      "compressionexception",
+      "connection",
+      "h2headerfield",
+      "header",
+      "istrailerfield",
+      "te",
+      "trailers"
+    ],
+    "FP": [
+      "connection",
+      "te"
+    ],
+    "FN": [],
+    "precision": 0.8,
+    "recall": 1.0,
+    "f1": 0.8889,
+    "hallucination_rate": 0.2,
+    "counts": {
+      "tp": 8,
+      "fp": 2,
+      "fn": 0
+    }
+  }
+}

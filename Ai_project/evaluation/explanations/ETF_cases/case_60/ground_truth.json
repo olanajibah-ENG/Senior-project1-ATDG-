@@ -1,0 +1,126 @@
+{
+  "case_id": "case_60",
+  "source": "CodeSumEval",
+  "model_name": "mistral_7b",
+  "scope": "method",
+  "row_index": 59,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "processevent",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injectionhandler",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bufferedbyteoutputstream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bufferedbyteoutputstream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalbyteswritten",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalbytestransferred",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalwritten",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "processevent",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injectionhandler",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bufferedbyteoutputstream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bufferedbyteoutputstream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalbyteswritten",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalbytestransferred",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalwritten",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkerror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs:\r\n- This method does not take any explicit inputs. However, it implicitly relies on the state of the underlying `BufferedByteOutputstream` instance that this method belongs to.\r\n\r\n2. Business Purpose:\r\nThe purpose of the `flush()` method is to ensure that all the buffered data in the `BufferedByteOutputstream` is written to the underlying output stream. This method also handles any errors that might occur during the flushing process.\r\n\r\n3. Functional Summary:\r\n\r\na. The method starts by checking if the stream has been closed using the `checkError()` method.\r\n\r\nb. It then calculates the total number of bytes that have been written to the buffer using the `totalWritten()` method.\r\n\r\nc. The method unblocks any reads from the buffer to allow data to be read from the stream.\r\n\r\nd. It"
+}

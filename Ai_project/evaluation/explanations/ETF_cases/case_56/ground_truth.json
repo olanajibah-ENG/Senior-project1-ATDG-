@@ -1,0 +1,157 @@
+{
+  "case_id": "case_56",
+  "source": "CodeSumEval",
+  "model_name": "codellama_7b",
+  "scope": "method",
+  "row_index": 55,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "wings_facebook__error_facebook_app",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mcontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mcontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "r",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "maketext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length_short",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "show",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "wings_facebook__error_facebook_app",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mcontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mcontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "r",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "maketext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length_short",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "show",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "toast",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ]
+  },
+  "original_summary": "\r\n\r\n1. Inputs and outputs of the method:\r\n* Inputs:\r\n\t+ `mContext`: a reference to the context of the app\r\n\t+ `R.string.wings_facebook__error_facebook_app`: a string resource ID for the error message\r\n* Outputs:\r\n\t+ A toast message with the error message\r\n2. Business purpose:\r\nThe method is used to display an error message to the user when the Facebook app is not installed or not running on the device. The error message is retrieved from the string resource file.\r\n3. Detailed functional summary of the method:\r\nThe method first retrieves the error message from the string resource file using the `mContext.getString()` method. It then creates a toast message using the `Toast.makeText()` method and displays it to the user using the `show()` method. The toast message is displayed for a short pe"
+}

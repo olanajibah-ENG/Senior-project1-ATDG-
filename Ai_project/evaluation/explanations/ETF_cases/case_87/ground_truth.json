@@ -1,0 +1,288 @@
+{
+  "case_id": "case_87",
+  "source": "CodeSumEval",
+  "model_name": "codellama_7b",
+  "scope": "method",
+  "row_index": 86,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "systemmain",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systeminitializer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injector",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injector",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injector",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injector",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systemmain",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "config",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "systeminitializer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "guice",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injector",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injector",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injector",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injector",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "class",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "class",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": [
+      {
+        "entity": "systemmain",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ]
+  },
+  "original_summary": "\r\n\r\n1. Inputs and outputs of the method:\r\n\r\n* Input: `Properties config` - a Java Properties object that contains the configuration for the system.\r\n* Output: `SystemMain` - an instance of the `SystemMain` class, which is the main entry point of the system.\r\n2. Business purpose:\r\n\r\n* The method is used to create an instance of the `SystemMain` class, which is the main entry point of the system.\r\n* The method takes a `Properties` object as input, which contains the configuration for the system.\r\n* The method uses Guice to create an injector, which is used to create instances of the `SystemMain` class.\r\n3. Detailed functional summary of the method:\r\n\r\n* The method first creates a new Guice injector using the `SystemInitializer` class, which is used to configure the system.\r\n* The method then"
+}

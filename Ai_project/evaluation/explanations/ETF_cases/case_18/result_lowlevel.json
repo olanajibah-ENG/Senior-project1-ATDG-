@@ -1,0 +1,41 @@
+{
+  "case_id": "case_18",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "ifempty",
+    "spliterator",
+    "spliterators",
+    "stream",
+    "streamex",
+    "t",
+    "values",
+    "varargs"
+  ],
+  "metrics": {
+    "TP": [
+      "ifempty",
+      "spliterator",
+      "spliterators",
+      "stream",
+      "streamex",
+      "t",
+      "values",
+      "varargs"
+    ],
+    "FP": [
+      "ifempty",
+      "stream",
+      "varargs"
+    ],
+    "FN": [],
+    "precision": 0.7273,
+    "recall": 1.0,
+    "f1": 0.8421,
+    "hallucination_rate": 0.2727,
+    "counts": {
+      "tp": 8,
+      "fp": 3,
+      "fn": 0
+    }
+  }
+}

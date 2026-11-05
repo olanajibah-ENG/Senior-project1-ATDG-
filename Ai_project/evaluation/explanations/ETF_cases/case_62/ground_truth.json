@@ -1,0 +1,237 @@
+{
+  "case_id": "case_62",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_34b",
+  "scope": "method",
+  "row_index": 61,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "underlyingoutputstream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injectionhandler",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "writethread",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ioexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ioexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalbytestransferred",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "bufferedbyteoutput",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "underlyingoutputstream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "injectionhandler",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "writethread",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ioexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ioexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "totalbytestransferred",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "flush",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "stream",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "buffer",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "bufferedbyteoutput",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\nThis Java method is named \"flush\" and it is defined within the class \"BufferedByteOutput\". It is declared as public, which means it can be accessed from any other class. The method throws an IOException, which means that if an error occurs during the execution of the method, it will be caught and handled by the calling code.\r\n\r\nInputs and outputs of the method:\r\nThe method takes no inputs, but it does have outputs. The output of this method is the flushing of the buffer.\r\n\r\nBusiness purpose:\r\nThe purpose of this method is to flush the buffer, which means to clear out any data that has been stored in the buffer and write it to the underlying output stream. This is useful when you want to ensure that all the data that has been written to the buffer is actually written to the output stream."
+}

@@ -1,0 +1,31 @@
+{
+  "case_id": "case_33",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "hashset",
+    "null",
+    "property",
+    "string"
+  ],
+  "metrics": {
+    "TP": [
+      "hashset",
+      "null",
+      "property",
+      "string"
+    ],
+    "FP": [],
+    "FN": [
+      "properties"
+    ],
+    "precision": 1.0,
+    "recall": 0.8,
+    "f1": 0.8889,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 1
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "case_id": "case_25",
+  "source": "CodeSumEval",
+  "model_name": "mistral_7b",
+  "scope": "method",
+  "row_index": 24,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "setcurrentbusinessdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "e",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "datecalculator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "startdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "setcurrentbusinessdate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs:\r\n- E type object named 'startDate' representing the new start date to be set.\r\n\r\n2. Outputs:\r\n- An instance of DateCalculator class of generic type E, which is the current object itself after the new start date has been set.\r\n\r\n3. Business Purpose:\r\nThis method sets the start date of the DateCalculator instance and updates the current business date accordingly.\r\n\r\n4. Detailed Functional Summary:\r\n- The method is annotated with @Override, indicating that it is overriding a method from a superclass.\r\n- It takes a single argument 'startDate' of generic type E.\r\n- The method sets the instance variable 'startDate' to the value of the argument using 'this.startDate = startDate;'.\r\n- The method then calls another method 'setCurrentBusinessDate(startDate)' to update the current busine"
+}

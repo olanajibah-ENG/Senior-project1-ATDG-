@@ -1,0 +1,116 @@
+{
+  "case_id": "case_120",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_34b",
+  "scope": "method",
+  "row_index": 119,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamwaittimeoutexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamwaittimeoutexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamwaittimeoutexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failedcount",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "performretry",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getexhaustedretriesexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "maxretries",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "status",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamwaittimeoutexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamwaittimeoutexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "streamwaittimeoutexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failedcount",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "performretry",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getexhaustedretriesexception",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "maxretries",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n**Inputs and outputs of the method:**\r\n\r\n**Inputs:**\r\n- `status`: A `Status` object that represents the status of an operation.\r\n\r\n**Outputs:**\r\n- This method does not return any value. It either throws an exception or logs a message and returns.\r\n\r\n**Business purpose:**\r\nThis method is responsible for handling a timeout error that occurs when making a remote procedure call (RPC). It checks if the error is caused by a `StreamWaitTimeoutException` and, if so, it performs the necessary actions to handle the timeout.\r\n\r\n**Detailed functional summary of the method:**\r\n1. It first checks if the `status` object indicates that a `StreamWaitTimeoutException` has occurred. If not, it logs an error message and returns.\r\n2. If a `StreamWaitTimeoutException` is detected, it cancels the existing RPC "
+}

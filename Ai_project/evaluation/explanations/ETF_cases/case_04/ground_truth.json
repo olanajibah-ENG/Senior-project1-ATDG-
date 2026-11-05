@@ -1,0 +1,131 @@
+{
+  "case_id": "case_04",
+  "source": "CodeSumEval (ETF)",
+  "model_name": "ibm_granite_20b",
+  "scope": "method",
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a string parameter \"name\" and returns a rowbuilder object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method returns the rowbuilder object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method returns the rowbuilder object."
+      },
+      {
+        "entity": "_offset",
+        "verdict": "INCORRECT",
+        "sentence": "the _offset variable is used to keep track of the length of the columns."
+      },
+      {
+        "entity": "_offset",
+        "verdict": "CORRECT",
+        "sentence": "the _offset variable is incremented by the length of the column."
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a string parameter \"name\" and returns a rowbuilder object."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a string parameter \"name\" and returns a rowbuilder object."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "the purpose of this method is to create a new columnint16 object with the given name and add it to the list of columns."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "the method creates a new columnint16 object with the given name and adds it to the list of columns."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the purpose of this method is to create a new columnint16 object with the given name and add it to the list of columns."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the method creates a new columnint16 object with the given name and adds it to the list of columns."
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a string parameter \"name\" and returns a rowbuilder object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method returns the rowbuilder object."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "finally, the method returns the rowbuilder object."
+      },
+      {
+        "entity": "_offset",
+        "verdict": "CORRECT",
+        "sentence": "the _offset variable is incremented by the length of the column."
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a string parameter \"name\" and returns a rowbuilder object."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a string parameter \"name\" and returns a rowbuilder object."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "the purpose of this method is to create a new columnint16 object with the given name and add it to the list of columns."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "the method creates a new columnint16 object with the given name and adds it to the list of columns."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the purpose of this method is to create a new columnint16 object with the given name and add it to the list of columns."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "the method creates a new columnint16 object with the given name and adds it to the list of columns."
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "_offset",
+        "verdict": "INCORRECT",
+        "sentence": "the _offset variable is used to keep track of the length of the columns."
+      }
+    ],
+    "irrelevant_entities": []
+  },
+  "stats": {
+    "n_all": 11,
+    "n_correct": 10,
+    "n_incorrect": 1,
+    "n_irrelevant": 0
+  }
+}

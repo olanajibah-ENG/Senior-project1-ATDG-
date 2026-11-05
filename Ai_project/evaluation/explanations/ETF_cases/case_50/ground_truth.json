@@ -1,0 +1,237 @@
+{
+  "case_id": "case_50",
+  "source": "CodeSumEval",
+  "model_name": "codellama_34b",
+  "scope": "method",
+  "row_index": 49,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "iv",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n\r\n1. Inputs and outputs of the method:\r\n\t* The method takes two long arguments: label and index.\r\n\t* The method does not have any return value.\r\n2. Business purpose:\r\n\t* The method appears to be computing an initialization vector (IV) for encryption or decryption purposes.\r\n\t* The IV is derived from a master salt and a key ID, which is computed based on the label and index inputs.\r\n\t* The method also appears to be using a key derivation rate to compute the key ID.\r\n3. Detailed functional summary of the method:\r\n\t* The method starts by declaring a long variable called key_id.\r\n\t* If the key derivation rate is 0, the method sets the key_id to the label left-shifted by 48 bits.\r\n\t* Otherwise, the method sets the key_id to the label left-shifted by 48 bits ORed with the index divided by the "
+}

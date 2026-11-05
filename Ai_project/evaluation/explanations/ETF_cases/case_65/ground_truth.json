@@ -1,0 +1,166 @@
+{
+  "case_id": "case_65",
+  "source": "CodeSumEval",
+  "model_name": "llama3_8b",
+  "scope": "method",
+  "row_index": 64,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getkeyset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "get",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getkeyset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logproperties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "get",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\nHere is a detailed summary of the Java code:\r\n\r\n**Inputs and Outputs of the Method:**\r\n\r\n* Input:\r\n\t+ `logger`: an instance of the `Logger` class, which is used to log messages.\r\n\t+ `comment`: a `String` that provides a comment or description for the log entry.\r\n* Output:\r\n\t+ The method does not return any value. It simply logs messages to the console or a log file, depending on the configuration of the `Logger` instance.\r\n\r\n**Business Purpose:**\r\n\r\nThe purpose of this method is to log the properties of an object or a system, along with a comment or description. This is often used for debugging or auditing purposes, to track the state of an application or system at a particular point in time.\r\n\r\n**Detailed Functional Summary of the Method:**\r\n\r\nThe `logProperties` method takes two inputs"
+}

@@ -1,0 +1,116 @@
+{
+  "case_id": "case_68",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_20b",
+  "scope": "method",
+  "row_index": 67,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs and outputs of the method:\r\n- The method takes in two parameters: a Logger object and a String object called \"comment\".\r\n- The method does not return anything.\r\n\r\n2. Business purpose:\r\n- The purpose of this method is to log the properties of an object.\r\n\r\n3. Detailed functional summary of the method:\r\n- The method starts by logging the \"comment\" using the info level of the Logger object.\r\n- Then, it iterates through the key set of the object using a for-each loop.\r\n- For each key, it logs the key-value pair using the info level of the Logger object.\r\n\r\n\r\n\r\n"
+}

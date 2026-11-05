@@ -1,0 +1,39 @@
+{
+  "case_id": "case_64",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "buffer",
+    "flush",
+    "injectionhandler",
+    "ioexception",
+    "processevent",
+    "totalwritten",
+    "underlyingoutputstream"
+  ],
+  "metrics": {
+    "TP": [
+      "buffer",
+      "flush",
+      "injectionhandler",
+      "ioexception",
+      "processevent",
+      "totalwritten",
+      "underlyingoutputstream"
+    ],
+    "FP": [],
+    "FN": [
+      "blockreads",
+      "bufferedbyteinputoutput",
+      "unblockreads"
+    ],
+    "precision": 1.0,
+    "recall": 0.7,
+    "f1": 0.8235,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 3
+    }
+  }
+}

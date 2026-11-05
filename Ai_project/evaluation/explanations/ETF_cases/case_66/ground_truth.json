@@ -1,0 +1,297 @@
+{
+  "case_id": "case_66",
+  "source": "CodeSumEval",
+  "model_name": "llama3_70b",
+  "scope": "method",
+  "row_index": 65,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getkeyset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "get",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "void",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getkeyset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "get",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "string",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ]
+  },
+  "original_summary": "\r\nHere is a detailed summary of the Java code:\r\n\r\n**1. Inputs and Outputs of the Method:**\r\n\r\n* **Inputs:**\r\n\t+ `logger`: an object of type `Logger`, which is used to log messages.\r\n\t+ `comment`: a `String` parameter that provides a comment or description to be logged.\r\n* **Outputs:**\r\n\t+ None (the method returns `void` and does not produce any output values).\r\n\r\n**2. Business Purpose:**\r\n\r\nThe business purpose of this method is to log properties or configuration settings along with a provided comment. The method is designed to provide a way to log key-value pairs of properties, along with a descriptive comment, to a logging system.\r\n\r\n**3. Detailed Functional Summary of the Method:**\r\n\r\nHere's a step-by-step breakdown of what the method does:\r\n\r\n1. The method takes two input parameters: `"
+}

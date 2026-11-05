@@ -1,0 +1,247 @@
+{
+  "case_id": "case_94",
+  "source": "CodeSumEval",
+  "model_name": "codellama_7b",
+  "scope": "method",
+  "row_index": 93,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "duration",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkargument",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checknotnull",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "duration",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "this",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checkargument",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "swimmembershipprotocolconfig",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "checknotnull",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "duration",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "failuretimeout",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ]
+  },
+  "original_summary": "\r\n\r\n1. Inputs and outputs of the method:\r\n\t* Input: `failureTimeout` of type `Duration`\r\n\t* Output: `this` of type `SwimMembershipProtocolConfig`\r\n2. Business purpose:\r\n\t* The method sets the `failureTimeout` property of the `SwimMembershipProtocolConfig` object.\r\n\t* The `failureTimeout` property specifies the maximum amount of time that a node can be unavailable before it is considered failed.\r\n3. Detailed functional summary of the method:\r\n\t* The method first checks that the `failureTimeout` parameter is not null using the `checkNotNull` method.\r\n\t* If the `failureTimeout` parameter is null, the method throws a `NullPointerException`.\r\n\t* The method then checks that the `failureTimeout` parameter is a positive duration using the `checkArgument` method.\r\n\t* If the `failureTimeout` paramet"
+}

@@ -1,0 +1,348 @@
+{
+  "case_id": "case_46",
+  "source": "CodeSumEval",
+  "model_name": "mistral_7b",
+  "scope": "method",
+  "row_index": 45,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "computeiv",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "computeiv",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "label",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "key_id",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "index",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mastersalt",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "keyderivationrate",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "key_id",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "long",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "computeiv",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "computeiv",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "ivstore",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": [
+      {
+        "entity": "iv",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "iv",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ]
+  },
+  "original_summary": "\r\n1. Inputs:\r\n- `label`: a long integer representing a label or identifier.\r\n- `index`: a long integer representing an index.\r\n\r\n2. Outputs:\r\n- `ivStore`: an array of bytes that represents the Initialization Vector (IV) for encryption.\r\n\r\n3. Business Purpose:\r\nThe `computeIv` method is responsible for computing the Initialization Vector (IV) for encryption based on a given label and index. The IV is used in various encryption algorithms, such as AES, to ensure the confidentiality and integrity of the encrypted data.\r\n\r\n4. Functional Summary:\r\nThe method begins by initializing a long integer `key_id`. If the `keyDerivationRate` is zero, the `key_id` is set to the left-shifted label (label << 48). Otherwise, the `key_id` is calculated as the combination of the left-shifted label and the inde"
+}

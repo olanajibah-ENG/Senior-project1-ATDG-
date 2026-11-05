@@ -1,0 +1,33 @@
+{
+  "case_id": "case_77",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "getframelength",
+    "id3v2frame",
+    "it",
+    "iterator",
+    "length"
+  ],
+  "metrics": {
+    "TP": [
+      "getframelength",
+      "id3v2frame",
+      "it",
+      "iterator",
+      "length"
+    ],
+    "FP": [
+      "length"
+    ],
+    "FN": [],
+    "precision": 0.8333,
+    "recall": 1.0,
+    "f1": 0.9091,
+    "hallucination_rate": 0.1667,
+    "counts": {
+      "tp": 5,
+      "fp": 1,
+      "fn": 0
+    }
+  }
+}

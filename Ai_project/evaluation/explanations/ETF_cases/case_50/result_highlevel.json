@@ -1,0 +1,35 @@
+{
+  "case_id": "case_50",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "index",
+    "iv",
+    "ivstore",
+    "key_id",
+    "label",
+    "long"
+  ],
+  "metrics": {
+    "TP": [
+      "index",
+      "iv",
+      "ivstore",
+      "key_id",
+      "label",
+      "long"
+    ],
+    "FP": [
+      "iv"
+    ],
+    "FN": [],
+    "precision": 0.8571,
+    "recall": 1.0,
+    "f1": 0.9231,
+    "hallucination_rate": 0.1429,
+    "counts": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 0
+    }
+  }
+}

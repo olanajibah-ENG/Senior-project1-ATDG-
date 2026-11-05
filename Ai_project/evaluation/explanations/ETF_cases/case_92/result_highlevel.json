@@ -1,0 +1,27 @@
+{
+  "case_id": "case_92",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "duration",
+    "failuretimeout",
+    "swimmembershipprotocolconfig"
+  ],
+  "metrics": {
+    "TP": [
+      "duration",
+      "failuretimeout",
+      "swimmembershipprotocolconfig"
+    ],
+    "FP": [],
+    "FN": [],
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    }
+  }
+}

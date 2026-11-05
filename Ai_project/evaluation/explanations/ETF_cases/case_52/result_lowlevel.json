@@ -1,0 +1,46 @@
+{
+  "case_id": "case_52",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "length_short",
+    "maketext",
+    "mcontext",
+    "r",
+    "show",
+    "showfacebookapperror",
+    "string",
+    "toast",
+    "wings_facebook__error_facebook_app"
+  ],
+  "metrics": {
+    "TP": [
+      "length_short",
+      "maketext",
+      "mcontext",
+      "r",
+      "show",
+      "showfacebookapperror",
+      "string",
+      "toast",
+      "wings_facebook__error_facebook_app"
+    ],
+    "FP": [
+      "mcontext",
+      "string",
+      "toast",
+      "wings_facebook__error_facebook_app"
+    ],
+    "FN": [
+      "getstring"
+    ],
+    "precision": 0.6923,
+    "recall": 0.9,
+    "f1": 0.7826,
+    "hallucination_rate": 0.3077,
+    "counts": {
+      "tp": 9,
+      "fp": 4,
+      "fn": 1
+    }
+  }
+}

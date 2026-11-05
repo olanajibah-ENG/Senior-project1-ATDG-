@@ -1,0 +1,29 @@
+{
+  "case_id": "case_27",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "e",
+    "setcurrentbusinessdate",
+    "startdate"
+  ],
+  "metrics": {
+    "TP": [
+      "e",
+      "setcurrentbusinessdate",
+      "startdate"
+    ],
+    "FP": [],
+    "FN": [
+      "datecalculator"
+    ],
+    "precision": 1.0,
+    "recall": 0.75,
+    "f1": 0.8571,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 1
+    }
+  }
+}

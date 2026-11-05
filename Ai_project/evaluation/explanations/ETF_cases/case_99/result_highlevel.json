@@ -1,0 +1,32 @@
+{
+  "case_id": "case_99",
+  "exp_type": "HighLevel",
+  "predicted_entities": [
+    "keywords",
+    "list",
+    "moduleelement",
+    "string"
+  ],
+  "metrics": {
+    "TP": [
+      "keywords",
+      "list",
+      "moduleelement",
+      "string"
+    ],
+    "FP": [
+      "list",
+      "string"
+    ],
+    "FN": [],
+    "precision": 0.6667,
+    "recall": 1.0,
+    "f1": 0.8,
+    "hallucination_rate": 0.3333,
+    "counts": {
+      "tp": 4,
+      "fp": 2,
+      "fn": 0
+    }
+  }
+}

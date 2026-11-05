@@ -1,0 +1,49 @@
+{
+  "case_id": "case_118",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "e",
+    "failedcount",
+    "finalizestats",
+    "getexhaustedretriesexception",
+    "getrpcmetrics",
+    "markfailure",
+    "maxretries",
+    "performretry",
+    "resetstatusbasedbackoff",
+    "rpc",
+    "rpctimercontext",
+    "status",
+    "streamwaittimeoutexception",
+    "void"
+  ],
+  "metrics": {
+    "TP": [
+      "e",
+      "failedcount",
+      "finalizestats",
+      "getexhaustedretriesexception",
+      "getrpcmetrics",
+      "markfailure",
+      "maxretries",
+      "performretry",
+      "resetstatusbasedbackoff",
+      "rpc",
+      "rpctimercontext",
+      "status",
+      "streamwaittimeoutexception",
+      "void"
+    ],
+    "FP": [],
+    "FN": [],
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "hallucination_rate": 0.0,
+    "counts": {
+      "tp": 14,
+      "fp": 0,
+      "fn": 0
+    }
+  }
+}

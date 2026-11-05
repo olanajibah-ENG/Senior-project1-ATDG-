@@ -1,0 +1,146 @@
+{
+  "case_id": "case_53",
+  "source": "CodeSumEval",
+  "model_name": "mistral_7b",
+  "scope": "method",
+  "row_index": 52,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mcontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "maketext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length_short",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "showfacebookapperror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "showfacebookapperror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "show",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "context",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "context",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "toast",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "mcontext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "maketext",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length_short",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "showfacebookapperror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "showfacebookapperror",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "show",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "context",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "context",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs:\r\n- mContext: An instance of the Context object, which provides access to the system services and resources of an Android application.\r\n\r\n2. Outputs:\r\n- Displays a short toast message with the title \"wings\\_facebook\\_error\\_facebook\\_app\" from the string resources of the application, which is assumed to be an error message related to Facebook app.\r\n\r\n3. Business Purpose:\r\nThe `showFacebookAppError()` method is designed to display a toast message to the user when an error occurs while using the Facebook app within the application.\r\n\r\n4. Functional Summary:\r\nThe method `showFacebookAppError()` is a private method, which means it can only be accessed within the class it is defined. It takes no arguments and does not return any value. When this method is called, it creates a new `T"
+}

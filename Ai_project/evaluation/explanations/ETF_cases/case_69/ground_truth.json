@@ -1,0 +1,146 @@
+{
+  "case_id": "case_69",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_34b",
+  "scope": "method",
+  "row_index": 68,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "getkeyset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "get",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "getkeyset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "get",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "comment",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "info",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "logger",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs and outputs of the method:\r\n\r\nInputs:\r\n- logger: an instance of the Logger class, which is used for logging messages.\r\n- comment: a String that represents a comment to be logged.\r\n\r\nOutputs:\r\n- None. The method logs messages using the provided logger.\r\n\r\n2. Business purpose:\r\n\r\nThe method is used to log properties of an object. It takes a logger and a comment as inputs, and logs the comment along with the key-value pairs of the object's properties.\r\n\r\n3. Detailed functional summary of the method:\r\n\r\nThe method first logs the provided comment using the logger's info method. Then, it iterates over the set of keys returned by the getKeySet() method. For each key, it retrieves the corresponding value using the get(key) method and logs the key-value pair using the logger's info meth"
+}

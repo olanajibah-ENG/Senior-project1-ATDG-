@@ -1,0 +1,36 @@
+{
+  "case_id": "case_19",
+  "exp_type": "LowLevel",
+  "predicted_entities": [
+    "ifempty",
+    "spliterator",
+    "spliterators",
+    "stream",
+    "streamex",
+    "values"
+  ],
+  "metrics": {
+    "TP": [
+      "ifempty",
+      "spliterator",
+      "spliterators",
+      "stream",
+      "streamex",
+      "values"
+    ],
+    "FP": [
+      "stream",
+      "values"
+    ],
+    "FN": [],
+    "precision": 0.75,
+    "recall": 1.0,
+    "f1": 0.8571,
+    "hallucination_rate": 0.25,
+    "counts": {
+      "tp": 6,
+      "fp": 2,
+      "fn": 0
+    }
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "case_id": "case_03",
+  "source": "CodeSumEval (ETF)",
+  "model_name": "mistral_7b",
+  "scope": "method",
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "- a string \"name\" which represents the name of the new column to be added."
+      },
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "it creates a new columnint16 object with the given name and size (16 bits), updates the offset value to accommodate the "
+      },
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "- create a new columnint16 object with the given name and size (16 bits)."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "- an instance of rowbuilder object, which is the current object itself, as this method returns the rowbuilder object for"
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "- return the current rowbuilder object for method chaining."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "- a string \"name\" which represents the name of the new column to be added."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "it creates a new columnint16 object with the given name and size (16 bits), updates the offset value to accommodate the "
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "- create a new columnint16 object with the given name and size (16 bits)."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "- add the new columnint16 object to the _columns list."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "this method is used to add a new column of data type int16 (16-bit integer) to the existing data structure."
+      },
+      {
+        "entity": "_columns",
+        "verdict": "CORRECT",
+        "sentence": "it creates a new columnint16 object with the given name and size (16 bits), updates the offset value to accommodate the "
+      },
+      {
+        "entity": "_columns",
+        "verdict": "CORRECT",
+        "sentence": "- add the new columnint16 object to the _columns list."
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": "- a string \"name\" which represents the name of the new column to be added."
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "- an instance of rowbuilder object, which is the current object itself, as this method returns the rowbuilder object for"
+      },
+      {
+        "entity": "rowbuilder",
+        "verdict": "CORRECT",
+        "sentence": "- return the current rowbuilder object for method chaining."
+      },
+      {
+        "entity": "name",
+        "verdict": "CORRECT",
+        "sentence": "- a string \"name\" which represents the name of the new column to be added."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "it creates a new columnint16 object with the given name and size (16 bits), updates the offset value to accommodate the "
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "- create a new columnint16 object with the given name and size (16 bits)."
+      },
+      {
+        "entity": "columnint16",
+        "verdict": "CORRECT",
+        "sentence": "- add the new columnint16 object to the _columns list."
+      },
+      {
+        "entity": "int16",
+        "verdict": "CORRECT",
+        "sentence": "this method is used to add a new column of data type int16 (16-bit integer) to the existing data structure."
+      },
+      {
+        "entity": "_columns",
+        "verdict": "CORRECT",
+        "sentence": "it creates a new columnint16 object with the given name and size (16 bits), updates the offset value to accommodate the "
+      },
+      {
+        "entity": "_columns",
+        "verdict": "CORRECT",
+        "sentence": "- add the new columnint16 object to the _columns list."
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "it creates a new columnint16 object with the given name and size (16 bits), updates the offset value to accommodate the "
+      },
+      {
+        "entity": "name",
+        "verdict": "IRRELEVANT",
+        "sentence": "- create a new columnint16 object with the given name and size (16 bits)."
+      }
+    ]
+  },
+  "stats": {
+    "n_all": 12,
+    "n_correct": 10,
+    "n_incorrect": 0,
+    "n_irrelevant": 2
+  }
+}

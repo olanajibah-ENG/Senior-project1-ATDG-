@@ -1,0 +1,186 @@
+{
+  "case_id": "case_78",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_20b",
+  "scope": "method",
+  "row_index": 77,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "getframelength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "getframelength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs and outputs of the method:\r\n- The method takes no inputs.\r\n- The method returns an integer value, which represents the length of the ID3v2 tag.\r\n\r\n2. Business purpose:\r\n- The purpose of this method is to calculate the total length of all the frames within an ID3v2 tag.\r\n\r\n3. Detailed functional summary of the method:\r\n- The method initializes a variable called \"length\" to 0.\r\n- It then creates an iterator called \"it\" to iterate over the values of the tag.\r\n- Inside the while loop, it retrieves each frame from the iterator and casts it to an ID3v2Frame object.\r\n- It calls the getFrameLength() method on the frame object to get the length of the frame.\r\n- The length of each frame is added to the \"length\" variable.\r\n- Once all the frames have been processed, the method returns the "
+}

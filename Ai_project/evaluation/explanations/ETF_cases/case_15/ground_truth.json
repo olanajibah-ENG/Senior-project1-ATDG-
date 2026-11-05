@@ -1,0 +1,281 @@
+{
+  "case_id": "case_15",
+  "source": "CodeSumEval (ETF)",
+  "model_name": "codellama_34b",
+  "scope": "method",
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "result",
+        "verdict": "CORRECT",
+        "sentence": "the method iterates over the health checks, executes each one that matches the filter, and adds the result to a `sortedm"
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "if the filter matches, the method executes the health check by calling the `execute` method on the health check object."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "the method allows the caller to specify which health checks should be executed by using a filter object."
+      },
+      {
+        "entity": "matches",
+        "verdict": "IRRELEVANT",
+        "sentence": "the method iterates over the health checks, executes each one that matches the filter, and adds the result to a `sortedm"
+      },
+      {
+        "entity": "matches",
+        "verdict": "CORRECT",
+        "sentence": "for each health check, the method checks if the filter matches the health check by calling the `matches` method on the f"
+      },
+      {
+        "entity": "result",
+        "verdict": "CORRECT",
+        "sentence": "the method returns a `sortedmap` object, where the keys are strings representing the names of the health checks, and the"
+      },
+      {
+        "entity": "result",
+        "verdict": "IRRELEVANT",
+        "sentence": "the result of the health check is then added to the `sortedmap` object."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the method returns a `sortedmap` object, where the keys are strings representing the names of the health checks, and the"
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the `sortedmap` object is unmodifiable, meaning that it cannot be modified after it is returned by the method."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the method iterates over the health checks, executes each one that matches the filter, and adds the result to a `sortedm"
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the method then returns the `sortedmap` object, which contains the results of the health checks."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the method begins by creating a new `sortedmap` object, which is used to store the results of the health checks."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the result of the health check is then added to the `sortedmap` object."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "after all health checks have been executed, the method returns the `sortedmap` object, which contains the results of the"
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the `sortedmap` object is unmodifiable, meaning that it cannot be modified after it is returned by the method."
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "the method returns a `sortedmap` object, where the keys are strings representing the names of the health checks, and the"
+      },
+      {
+        "entity": "healthcheckfilter",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a single input parameter, `filter`, which is an instance of the `healthcheckfilter` class."
+      },
+      {
+        "entity": "execute",
+        "verdict": "IRRELEVANT",
+        "sentence": "the business purpose of this method is to execute a set of health checks on a system or application, and return the resu"
+      },
+      {
+        "entity": "execute",
+        "verdict": "CORRECT",
+        "sentence": "if the filter matches, the method executes the health check by calling the `execute` method on the health check object."
+      },
+      {
+        "entity": "execute",
+        "verdict": "IRRELEVANT",
+        "sentence": "overall, the method provides a way to execute a set of health checks on a system or application, and return the results "
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "the method then iterates over the health checks, which are stored in a map called `healthchecks`."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a single input parameter, `filter`, which is an instance of the `healthcheckfilter` class."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a filter as input, which allows the caller to specify which health checks should be executed."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "the method iterates over the health checks, executes each one that matches the filter, and adds the result to a `sortedm"
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "for each health check, the method checks if the filter matches the health check by calling the `matches` method on the f"
+      },
+      {
+        "entity": "matches",
+        "verdict": "IRRELEVANT",
+        "sentence": "if the filter matches, the method executes the health check by calling the `execute` method on the health check object."
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "result",
+        "verdict": "CORRECT",
+        "sentence": "the method iterates over the health checks, executes each one that matches the filter, and adds the result to a `sortedm"
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "if the filter matches, the method executes the health check by calling the `execute` method on the health check object."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "the method allows the caller to specify which health checks should be executed by using a filter object."
+      },
+      {
+        "entity": "matches",
+        "verdict": "CORRECT",
+        "sentence": "for each health check, the method checks if the filter matches the health check by calling the `matches` method on the f"
+      },
+      {
+        "entity": "result",
+        "verdict": "CORRECT",
+        "sentence": "the method returns a `sortedmap` object, where the keys are strings representing the names of the health checks, and the"
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the method returns a `sortedmap` object, where the keys are strings representing the names of the health checks, and the"
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the `sortedmap` object is unmodifiable, meaning that it cannot be modified after it is returned by the method."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the method iterates over the health checks, executes each one that matches the filter, and adds the result to a `sortedm"
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the method then returns the `sortedmap` object, which contains the results of the health checks."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the method begins by creating a new `sortedmap` object, which is used to store the results of the health checks."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the result of the health check is then added to the `sortedmap` object."
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "after all health checks have been executed, the method returns the `sortedmap` object, which contains the results of the"
+      },
+      {
+        "entity": "sortedmap",
+        "verdict": "CORRECT",
+        "sentence": "the `sortedmap` object is unmodifiable, meaning that it cannot be modified after it is returned by the method."
+      },
+      {
+        "entity": "healthcheck",
+        "verdict": "CORRECT",
+        "sentence": "the method returns a `sortedmap` object, where the keys are strings representing the names of the health checks, and the"
+      },
+      {
+        "entity": "healthcheckfilter",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a single input parameter, `filter`, which is an instance of the `healthcheckfilter` class."
+      },
+      {
+        "entity": "execute",
+        "verdict": "CORRECT",
+        "sentence": "if the filter matches, the method executes the health check by calling the `execute` method on the health check object."
+      },
+      {
+        "entity": "healthchecks",
+        "verdict": "CORRECT",
+        "sentence": "the method then iterates over the health checks, which are stored in a map called `healthchecks`."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a single input parameter, `filter`, which is an instance of the `healthcheckfilter` class."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "the method takes a filter as input, which allows the caller to specify which health checks should be executed."
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "the method iterates over the health checks, executes each one that matches the filter, and adds the result to a `sortedm"
+      },
+      {
+        "entity": "filter",
+        "verdict": "CORRECT",
+        "sentence": "for each health check, the method checks if the filter matches the health check by calling the `matches` method on the f"
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "matches",
+        "verdict": "IRRELEVANT",
+        "sentence": "the method iterates over the health checks, executes each one that matches the filter, and adds the result to a `sortedm"
+      },
+      {
+        "entity": "result",
+        "verdict": "IRRELEVANT",
+        "sentence": "the result of the health check is then added to the `sortedmap` object."
+      },
+      {
+        "entity": "execute",
+        "verdict": "IRRELEVANT",
+        "sentence": "the business purpose of this method is to execute a set of health checks on a system or application, and return the resu"
+      },
+      {
+        "entity": "execute",
+        "verdict": "IRRELEVANT",
+        "sentence": "overall, the method provides a way to execute a set of health checks on a system or application, and return the results "
+      },
+      {
+        "entity": "matches",
+        "verdict": "IRRELEVANT",
+        "sentence": "if the filter matches, the method executes the health check by calling the `execute` method on the health check object."
+      }
+    ]
+  },
+  "stats": {
+    "n_all": 26,
+    "n_correct": 21,
+    "n_incorrect": 0,
+    "n_irrelevant": 5
+  }
+}

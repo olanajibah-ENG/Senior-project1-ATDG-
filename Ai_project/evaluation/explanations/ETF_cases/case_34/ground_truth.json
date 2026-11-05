@@ -1,0 +1,257 @@
+{
+  "case_id": "case_34",
+  "source": "CodeSumEval",
+  "model_name": "ibm_granite_34b",
+  "scope": "method",
+  "row_index": 33,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "string",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "null",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "matcher",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "null",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "matcher",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "properties",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "hashset",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [
+      {
+        "entity": "string",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "string",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "property",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "pattern",
+        "verdict": "INCORRECT",
+        "sentence": ""
+      }
+    ],
+    "irrelevant_entities": []
+  },
+  "original_summary": "\r\n1. Inputs and outputs of the method:\r\n\r\n- Input: A string property that contains a list of key-value pairs separated by semicolons.\r\n- Output: A HashSet of strings containing the keys from the input property.\r\n\r\n2. Business purpose:\r\n\r\nThe method is designed to extract the keys from a property string that contains a list of key-value pairs separated by semicolons. The keys are then added to a HashSet and returned as the output.\r\n\r\n3. Detailed functional summary of the method:\r\n\r\nThe method first checks if the input property is not null and not equal to the string \"null\". If the condition is met, it proceeds to create a HashSet called \"properties\" to store the extracted keys.\r\n\r\nThe method then defines a regular expression pattern to match the key-value pairs in the property string. The p"
+}

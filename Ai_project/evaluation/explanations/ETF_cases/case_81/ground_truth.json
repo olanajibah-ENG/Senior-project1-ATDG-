@@ -1,0 +1,197 @@
+{
+  "case_id": "case_81",
+  "source": "CodeSumEval",
+  "model_name": "codellama_34b",
+  "scope": "method",
+  "row_index": 80,
+  "ground_truth": {
+    "all_entities": [
+      {
+        "entity": "next",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "next",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "iterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getlength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getframelength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "correct_entities": [
+      {
+        "entity": "iterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "iterator",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getlength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "length",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "getframelength",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "id3v2frame",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      },
+      {
+        "entity": "value",
+        "verdict": "CORRECT",
+        "sentence": ""
+      }
+    ],
+    "incorrect_entities": [],
+    "irrelevant_entities": [
+      {
+        "entity": "next",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "next",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      },
+      {
+        "entity": "it",
+        "verdict": "IRRELEVANT",
+        "sentence": ""
+      }
+    ]
+  },
+  "original_summary": "\r\n\r\n1. Inputs and outputs of the method:\r\n\r\nThe method `getLength()` takes no inputs.\r\n\r\nThe method returns an integer value representing the total length of all the frames in the ID3v2 tag.\r\n\r\n\r\n\r\n2. Business purpose:\r\n\r\nThe business purpose of this method is to provide a way to calculate the total length of all the frames in an ID3v2 tag. This information can be used to determine the overall size of the tag, which can be useful for various purposes such as file management, data analysis, and tag validation.\r\n\r\n\r\n\r\n3. Detailed functional summary of the method:\r\n\r\nThe method starts by initializing a variable `length` to 0.\r\n\r\nNext, it creates an iterator `it` to iterate over the values in the ID3v2 tag.\r\n\r\nThe method then enters a loop that continues as long as there are more values to ite"
+}
