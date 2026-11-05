@@ -25,7 +25,7 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 # في الإنتاج: يجب تعيين المتغيرات في .env
 if DEBUG:
     # Development environment - use free test key
-    OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
+    OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")  # المفتاح بـ .env بس، مش بالكود
     SERVICE_API_KEY = os.environ.get('AI_SERVICE_KEY', "test-service-key")
     SECRET_KEY = os.environ.get('AI_DJANGO_SECRET_KEY', 'django-insecure-test-key-for-development-only')
 else:
