@@ -34,3 +34,6 @@ Ai_project/evaluation/paper_sets/cascade_balanced/
 Ai_project/evaluation/paper_sets/cascade_realistic/
 Ai_project/evaluation/paper_sets/cascade_dev/
 Ai_project/evaluation/paper_sets/cascade_test/
+
+# أداة خارجية كبيرة (178MB)، بتنزل من https://github.com/tsantalis/RefactoringMiner/releases
+RefactoringMiner/
